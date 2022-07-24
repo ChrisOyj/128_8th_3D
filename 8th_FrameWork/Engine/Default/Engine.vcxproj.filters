@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99. Default">
+      <UniqueIdentifier>{cb6a9258-5301-4a07-ba1b-c2597d0d50a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. System">
+      <UniqueIdentifier>{cc6446ea-8c65-4cae-9697-5f0991b620a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Headers">
+      <UniqueIdentifier>{331c8a71-9354-4222-b9b6-9962459ae29f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton">
+      <UniqueIdentifier>{75a91938-5d92-437c-9ebc-79f66dc9581f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility">
+      <UniqueIdentifier>{5260487f-db8c-4b31-a9ed-b279ed3d3dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\01. GameInstance">
+      <UniqueIdentifier>{1aa3cdee-314c-4213-b201-1e1fe3b4a402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design">
+      <UniqueIdentifier>{91d06d70-638f-4657-85ef-754677458258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\02. GameObject">
+      <UniqueIdentifier>{297cfa56-e69e-41ed-825d-48f419a6d836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component">
+      <UniqueIdentifier>{6637dc74-7e83-4a5a-94fa-10a7c310ef46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\01. Level">
+      <UniqueIdentifier>{ac36c8ac-c38e-4e3e-943b-a6413ada35ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\02. GameObject\01. Camera">
+      <UniqueIdentifier>{2ae2ffa9-41a9-4c43-91d8-158b1e949eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\02. GameObject\02.">
+      <UniqueIdentifier>{a6bca858-7b53-4dab-9eaa-da469ab8551c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\01. Event_Manager">
+      <UniqueIdentifier>{91e21850-57b7-496d-998f-639e07401456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\02. Level_Manager">
+      <UniqueIdentifier>{5123944f-d68f-4860-98df-2658667ce4fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\03. Object_Manager">
+      <UniqueIdentifier>{7240ad73-aa5b-47c6-a052-39776272fa54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\01. Transform">
+      <UniqueIdentifier>{e1a2b844-ca2d-43fe-8800-61b873118232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\02. Collider">
+      <UniqueIdentifier>{6c62bb8a-af46-44a4-b8ee-f9a057e099bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. System\01. Graphic_Device">
+      <UniqueIdentifier>{b7a95def-0b35-485c-8d06-dc9c4f0a1687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. System\02. Input_Device">
+      <UniqueIdentifier>{d10b0fa4-f8f1-4b1b-b90d-8b66bd75b2c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. System\03. Sound_Device">
+      <UniqueIdentifier>{fcf09471-6eac-4b37-a03b-6d020ddeb3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\04. Camera_Manager">
+      <UniqueIdentifier>{06691aff-a4f8-4b11-96b7-589e7f3f7a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\03. Renderer">
+      <UniqueIdentifier>{8d352d13-4baf-44c0-89e1-c32dd0717024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\03. Renderer\Shader">
+      <UniqueIdentifier>{50b28529-ce3e-4a2f-96fa-6ada97249b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\04. Behave">
+      <UniqueIdentifier>{58962f7f-4c20-46c3-9588-263a2866de0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\05. Physics">
+      <UniqueIdentifier>{3f1af19d-571b-4546-9532-dd0b9e743a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\06. Scriptable">
+      <UniqueIdentifier>{70eccc67-4c1b-45e5-ba38-6e1bb2cbd688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\05. Collision_Manager">
+      <UniqueIdentifier>{1945d471-bf13-4e97-bafa-f192bf1d356a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\06. Time_Manager">
+      <UniqueIdentifier>{0dc73030-2d0f-4eff-8441-452b8a1f2826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\07. Key_Manager">
+      <UniqueIdentifier>{286f5cf3-344d-4951-86ce-aa25b193e56c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\08. Render_Manager">
+      <UniqueIdentifier>{a44ce416-39dc-4deb-bc3e-9acf369a2c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager">
+      <UniqueIdentifier>{e0aabb65-1b9c-4275-b5f6-f2f5760327ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\07. ParticleSystem">
+      <UniqueIdentifier>{300b2661-3eb0-43d1-b21e-67dd6bda4ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\10. Load_Manager">
+      <UniqueIdentifier>{4da872d0-f138-4ba3-8770-9fe96d0ed352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\11. Picking_Manager">
+      <UniqueIdentifier>{35b98b04-673a-400f-8b75-a88c8b0e9f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\12. Prototype_Manager">
+      <UniqueIdentifier>{434d4893-568b-424c-a5e0-7d028ad78f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\13. ZFrustum">
+      <UniqueIdentifier>{beb9960c-ad9a-4a05-a9ad-84051aa45ef1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Private\Texture.cpp" />
+    <ClCompile Include="..\Private\Camera.cpp">
+      <Filter>03. Utility\02. GameObject\01. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Collider.cpp">
+      <Filter>03. Utility\03. Component\02. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera_Manager.cpp">
+      <Filter>02. Singleton\02. Design\04. Camera_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Collision_Manager.cpp">
+      <Filter>02. Singleton\02. Design\05. Collision_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Component.cpp">
+      <Filter>03. Utility\03. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Event_Manager.cpp">
+      <Filter>02. Singleton\02. Design\01. Event_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameInstance.cpp">
+      <Filter>02. Singleton\01. GameInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameObject.cpp">
+      <Filter>03. Utility\02. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Graphic_Device.cpp">
+      <Filter>01. System\01. Graphic_Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Input_Device.cpp">
+      <Filter>01. System\02. Input_Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Key_Manager.cpp">
+      <Filter>02. Singleton\02. Design\07. Key_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_Manager.cpp">
+      <Filter>02. Singleton\02. Design\02. Level_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level.cpp">
+      <Filter>03. Utility\01. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Object_Manager.cpp">
+      <Filter>02. Singleton\02. Design\03. Object_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Load_Manager.cpp">
+      <Filter>02. Singleton\02. Design\10. Load_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle.cpp">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Cube.cpp">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Default.cpp">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Pop.cpp">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ParticleSystem.cpp">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Physics.cpp">
+      <Filter>03. Utility\03. Component\05. Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Picking_Manager.cpp">
+      <Filter>02. Singleton\02. Design\11. Picking_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Prototype_Manager.cpp">
+      <Filter>02. Singleton\02. Design\12. Prototype_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Render_Manager.cpp">
+      <Filter>02. Singleton\02. Design\08. Render_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Renderer.cpp">
+      <Filter>03. Utility\03. Component\03. Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Time_Manager.cpp">
+      <Filter>02. Singleton\02. Design\06. Time_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sound_Device.cpp">
+      <Filter>01. System\03. Sound_Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Transform.cpp">
+      <Filter>03. Utility\03. Component\01. Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ZFrustum.cpp">
+      <Filter>02. Singleton\02. Design\13. ZFrustum</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Public\Texture.h" />
+    <ClInclude Include="..\Public\Engine_Defines.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Enum.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Function.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Functor.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Macro.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Struct.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Typedef.h">
+      <Filter>00. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Camera.h">
+      <Filter>03. Utility\02. GameObject\01. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Collider.h">
+      <Filter>03. Utility\03. Component\02. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Camera_Manager.h">
+      <Filter>02. Singleton\02. Design\04. Camera_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Collision_Manager.h">
+      <Filter>02. Singleton\02. Design\05. Collision_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Component.h">
+      <Filter>03. Utility\03. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Event_Manager.h">
+      <Filter>02. Singleton\02. Design\01. Event_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameInstance.h">
+      <Filter>02. Singleton\01. GameInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameObject.h">
+      <Filter>03. Utility\02. GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Graphic_Device.h">
+      <Filter>01. System\01. Graphic_Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Input_Device.h">
+      <Filter>01. System\02. Input_Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Key_Manager.h">
+      <Filter>02. Singleton\02. Design\07. Key_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_Manager.h">
+      <Filter>02. Singleton\02. Design\02. Level_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level.h">
+      <Filter>03. Utility\01. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Object_Manager.h">
+      <Filter>02. Singleton\02. Design\03. Object_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Load_Manager.h">
+      <Filter>02. Singleton\02. Design\10. Load_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle.h">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Cube.h">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Default.h">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Pop.h">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ParticleSystem.h">
+      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Physics.h">
+      <Filter>03. Utility\03. Component\05. Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Picking_Manager.h">
+      <Filter>02. Singleton\02. Design\11. Picking_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Prototype_Manager.h">
+      <Filter>02. Singleton\02. Design\12. Prototype_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Render_Manager.h">
+      <Filter>02. Singleton\02. Design\08. Render_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Renderer.h">
+      <Filter>03. Utility\03. Component\03. Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Time_Manager.h">
+      <Filter>02. Singleton\02. Design\06. Time_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Sound_Device.h">
+      <Filter>01. System\03. Sound_Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Transform.h">
+      <Filter>03. Utility\03. Component\01. Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ZFrustum.h">
+      <Filter>02. Singleton\02. Design\13. ZFrustum</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

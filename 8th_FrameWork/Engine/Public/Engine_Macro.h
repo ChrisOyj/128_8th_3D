@@ -1,0 +1,77 @@
+#pragma once
+
+#ifdef ENGINE_EXPORTS
+#define ENGINE_DLL _declspec(dllexport)
+#else
+#define ENGINE_DLL _declspec(dllimport)
+#endif
+
+// =========My Macro=========
+
+#define	GAMEINSTANCE CGameInstance::Get_Instance()
+
+#define DEVICE	CGameInstance::Get_Instance()->Get_Device()
+
+#define	HASHCODE(type)	typeid(type).hash_code()
+
+#define DECLARE_PROTOTYPE(type)		public:																\
+									virtual type* Clone() {return new type(*this);}						\
+									friend class CPrototype_Manager;									\
+									private:															\
+									static type*	Create_Prototype()									\
+									{																	\
+										type*	pObj = new type;										\
+										if (FAILED(pObj->Initialize_Prototype()))						\
+										{																\
+											MSG_BOX("Failed to Initialize_Prototype");					\
+											return nullptr;												\
+										}																\
+										return pObj;													\
+									}
+
+#define MATRIX_NOSCALE				0x001
+#define MATRIX_NOTURN				0x002
+#define MATRIX_IDENTITY			    0x004
+#define MARTIX_NOTRANS				0x008
+
+#define MATRIX_DEFAULT				0x00f
+
+#define GET_CLONE(type)				CPrototype_Manager::Get_Instance()->Get_Clone<type>()
+
+
+// ==========================
+
+#define DT	CGameInstance::Get_Instance()->Get_DT()
+#define fDT	(float)CGameInstance::Get_Instance()->Get_DT()
+
+#define KEY(key, state) CGameInstance::Get_Instance()->Get_KeyState(KEY::key) == KEY_STATE::state
+#define MOUSE_MOVE(mousemove) CGameInstance::Get_Instance()->Get_DIMouseMoveState(mousemove)
+
+/* Event_Manager */
+#define CREATE(GameObject) CGameInstance::Get_Instance()->Create_GameObject(GameObject);
+#define DELETE(GameObject) CGameInstance::Get_Instance()->Delete_GameObject(GameObject);
+#define ENABLE(GameObject) CGameInstance::Get_Instance()->Enable_GameObject(GameObject)
+#define DISABLE(GameObject) CGameInstance::Get_Instance()->Disable_GameObject(GameObject)
+#define CREATE_STATIC(GameObject, hashcode) CGameInstance::Get_Instance()->Create_StaticObject(GameObject, hashcode);
+#define CHANGE_LEVEL(iLevelID, pLevel) CGameInstance::Get_Instance()->Change_Level(iLevelID, pLevel);
+
+#define		MIN_STR			64
+#define		MAX_STR			256
+
+#define MSG_BOX(MESSAGE) MessageBox(0, TEXT(MESSAGE), TEXT("System Error"), MB_OK)
+
+
+#define BEGIN(NAMESPACE) namespace NAMESPACE { 
+#define END }
+
+
+#define NO_COPY(ClassName)								\
+ClassName(const ClassName&) = delete;					\
+ClassName& operator=(const ClassName&) = delete;
+
+#define DECLARE_SINGLETON(type) public:								\
+									NO_COPY(type)					\
+									static type* Get_Instance() {	\
+										static type mgr;			\
+										return &mgr;				\
+									}
