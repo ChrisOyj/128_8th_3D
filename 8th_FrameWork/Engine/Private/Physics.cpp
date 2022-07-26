@@ -24,7 +24,7 @@ CPhysics * CPhysics::Create( )
 
 	if (FAILED(pPhysics->Initialize()))
 	{
-		MSG_BOX("FAILED to Initialize : CPhysics");
+		Call_MsgBox(L"FAILED to Initialize : CPhysics");
 		return nullptr;
 	}
 
@@ -66,13 +66,13 @@ void CPhysics::Late_Tick()
 {
 }
 
-void CPhysics::Turn(const _float3 & vTurnDir, const _float & fTurnSpeed)
+void CPhysics::Turn(const _float4 & vTurnDir, const _float & fTurnSpeed)
 {
 	CTransform*	pTransform = m_pOwner->Get_Transform();
 
-	_float3		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
-	_float3		vUp = pTransform->Get_MyWorld(WORLD_UP);
-	_float3		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
+	_float4		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
+	_float4		vUp = pTransform->Get_MyWorld(WORLD_UP);
+	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
 
 	_float4x4	RotationMatrix;
 	D3DXMatrixRotationAxis(&RotationMatrix, &vTurnDir, fTurnSpeed * fDT);
@@ -95,7 +95,7 @@ void CPhysics::Move()
 	if (m_tPhysics.fSpeed == 0.f)
 		return;
 
-	_float3 vPos = m_pOwner->Get_Transform()->Get_MyWorld(WORLD_POS);
+	_float4 vPos = m_pOwner->Get_Transform()->Get_MyWorld(WORLD_POS);
 	vPos += m_tPhysics.fSpeed * m_tPhysics.vDir * fDT;
 	m_pOwner->Get_Transform()->Set_World(WORLD_POS, vPos);
 }
@@ -127,9 +127,9 @@ void CPhysics::Turn()
 
 	CTransform*	pTransform = m_pOwner->Get_Transform();
 
-	_float3		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
-	_float3		vUp = pTransform->Get_MyWorld(WORLD_UP);
-	_float3		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
+	_float4		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
+	_float4		vUp = pTransform->Get_MyWorld(WORLD_UP);
+	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
 
 	_float4x4	RotationMatrix;
 	D3DXMatrixRotationAxis(&RotationMatrix, &m_tPhysics.vTurnDir, m_tPhysics.fTurnSpeed * fDT);

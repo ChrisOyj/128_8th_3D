@@ -4,8 +4,8 @@
 BEGIN(Engine)
 
 class CLevel;
-class CLoad_Manager final
-	: public CManager
+
+class CLoad_Manager
 {
 	DECLARE_SINGLETON(CLoad_Manager);
 

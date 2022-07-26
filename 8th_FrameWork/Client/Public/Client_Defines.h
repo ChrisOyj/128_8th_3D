@@ -8,14 +8,14 @@ extern HINSTANCE	g_hInst;
 
 namespace Client
 {
-	static _float3	Get_MousePos(void)
+	static _float4	Get_MousePos(void)
 	{
 		POINT pt{};
 
 		GetCursorPos(&pt);
 		ScreenToClient(g_hWnd, &pt);
 
-		return _float3(float(pt.x), float(pt.y), 0.f);
+		return _float4(float(pt.x), float(pt.y), 0.f);
 	}
 
 	static const unsigned int g_iWinCX = 1280;

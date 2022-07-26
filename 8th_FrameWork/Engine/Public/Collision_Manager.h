@@ -17,7 +17,6 @@ union COLLIDER_ID
 };
 
 class CCollision_Manager
-	: public CManager
 {
 	DECLARE_SINGLETON(CCollision_Manager)
 
@@ -30,25 +29,32 @@ public:
 	void		Tick();
 	HRESULT		Render();
 
-private:
-	/* Only Collider class can access this*/
-	friend class CCollider;
-	void Add_Collider(CCollider* pCollider);
+public:
+	HRESULT	Regist_Collider(CCollider* pCollider, const _uint& _iGroupIndex);
+	HRESULT Check_Group(const _uint& _eLeft, const _uint& _eRight);
 
 private:
-	void CheckGroup(COL_TYPE _eLeft, COL_TYPE _eRight);
-	void Collider_GroupUpdate(COL_TYPE _eLeft, COL_TYPE _eRight);
-	bool IsCollision(CCollider* _pLeft, CCollider* _pRight);
-	bool IsOBBCollision(CCollider* _pLeft, CCollider* _pRight);
-	bool IsSphereCollision(CCollider* _pLeft, CCollider* _pRight);
+	list<CCollider*>	m_pColliderList[COL_END];
 
-
-private:
-	list<CCollider*>	m_ColliderList[(_uint)COL_TYPE::LAST];
-
-	_uint m_arrCheck[(_uint)COL_TYPE::LAST];
-
+	_uint m_arrCheck[COL_END];
 	map<_ulonglong, bool> m_mapColInfo;
+
+private:
+	void Collider_GroupUpdate(const _uint& _eLeft, const _uint& _eRight);
+	_bool Is_Collision(CCollider* _pLeft, CCollider* _pRight);
+	_bool Is_OBBCollision(CCollider* _pLeft, CCollider* _pRight);
+	_bool Is_SphereCollision(CCollider* _pLeft, CCollider* _pRight);
+	_bool Is_OBBtoSphereCollision(CCollider* _pOBB, CCollider* _pSphere);
+	_bool Check_BeforeOBB(CCollider* _pLeft, CCollider* _pRight);
+
+private:
+	HRESULT	Is_InIndex(const _uint& iIdx);
+	_float4	Compute_ColPosition(CCollider* _pLeft, CCollider* _pRight);
+
+	map<_ulonglong, bool>::iterator	Find_PrevColInfo(const _uint& _iLeftID, const _uint& _iRightID);
+
+
+
 };
 
 

@@ -47,8 +47,8 @@ CParticleSystem::~CParticleSystem()
 CParticleSystem * CParticleSystem::Create(
 	CGameObject * pOwner, const _tchar * pTextureFilePath, 
 	PARTICLE_PASS_TYPE ePassType, PARTICLE_TYPE eParticleType,
-	_float3 vRandomRange_ParticlesPos, _float3 vRandomRange_ParticlesDir, 
-	_float3 vRandomRange_ParticlesScale, _float4 vRandomRange_ParticlesColor
+	_float4 vRandomRange_ParticlesPos, _float4 vRandomRange_ParticlesDir, 
+	_float4 vRandomRange_ParticlesScale, _float4 vRandomRange_ParticlesColor
 	, _float fRandomRange_ParticlesSpeed, _float fRandomRange_ParticlesFadeOutSpeed)
 {
 
@@ -77,7 +77,7 @@ CParticleSystem * CParticleSystem::Create(
 
 	if (FAILED(pParticleSystem->Initialize()))
 	{
-		MSG_BOX("FAILED to Initialize : CParticleSystem");
+		Call_MsgBox(L"FAILED to Initialize : CParticleSystem");
 		delete pParticleSystem;
 		return nullptr;
 	}
@@ -88,7 +88,7 @@ CParticleSystem * CParticleSystem::Create(
 }
 
 void CParticleSystem::Start_ParticleSystem(
-	_float3 vParticlesPos, _float3 vParticlesDir, _float3 vParticlesScale,
+	_float4 vParticlesPos, _float4 vParticlesDir, _float4 vParticlesScale,
 	_float4 vParticlesColor, _float fParticleGenerationCycle, _float fParticleGenerationTime,
 	_uint iParticleGenerationCnt, _float fParticleInitSpeed, _float fParticleChangeSpeed,
 	_float fParticleFadeOutSpeed, _uint iMaxParticleCnt)
@@ -124,12 +124,12 @@ HRESULT CParticleSystem::Initialize()
 	{
 	case PARTICLE_DEFAULT:
 	case PARTICLE_POP:
-		if (!(m_pMesh = CMesh_Rect::Create(D3DCOLOR_XRGB(0, 0, 0), _float3(1.f, 1.f, 1.f))))
+		if (!(m_pMesh = CMesh_Rect::Create(D3DCOLOR_XRGB(0, 0, 0), _float4(1.f, 1.f, 1.f))))
 			return E_FAIL;
 		break;
 
 	case PARTICLE_CUBE:
-		if (!(m_pMesh = CMesh_Cube::Create(D3DCOLOR_XRGB(0,0,0), _float3(1.f, 1.f, 1.f))))
+		if (!(m_pMesh = CMesh_Cube::Create(D3DCOLOR_XRGB(0,0,0), _float4(1.f, 1.f, 1.f))))
 			return E_FAIL;
 		break;
 
@@ -223,7 +223,7 @@ void CParticleSystem::Create_Particles()
 		{
 			pNewParticle = m_pParticles_Collection.front();
 			m_pParticles_Collection.pop_front();
-			_float3 vPos, vDir;
+			_float4 vPos, vDir;
 			vPos = RandomRange(m_vParticlesPos, m_vRandomRange_ParticlesPos);
 			vDir = RandomRange(m_vParticlesDir, m_vRandomRange_ParticlesDir);
 			pNewParticle->Recycle(vPos, vDir);
@@ -232,7 +232,7 @@ void CParticleSystem::Create_Particles()
 		{
 
 			/* SetUp Particle */
-			_float3 vPos, vDir, vScale;
+			_float4 vPos, vDir, vScale;
 			_float4 vColor;
 			_float fFadeOutSpeed, fSpeed;
 
@@ -298,7 +298,7 @@ void CParticleSystem::Update_Particles()
 	if (m_pParticles.empty())
 		return;
 
-	_float3 vCamPos = CCamera_Manager::Get_Instance()->Get_ViewPos();
+	_float4 vCamPos = CCamera_Manager::Get_Instance()->Get_ViewPos();
 
 	for (auto iter = m_pParticles.begin(); iter != m_pParticles.end();)
 	{
@@ -332,9 +332,9 @@ void CParticleSystem::Collect_Particles()
 
 }
 
-_float3 CParticleSystem::RandomRange(const _float3 & vStandard, const _float3 & vRandomRange)
+_float4 CParticleSystem::RandomRange(const _float4 & vStandard, const _float4 & vRandomRange)
 {
-	_float3 vResult = vStandard;
+	_float4 vResult = vStandard;
 	vResult.x += frandom(vRandomRange.x * -1.f, vRandomRange.x);
 	vResult.y += frandom(vRandomRange.y * -1.f, vRandomRange.y);
 	vResult.z += frandom(vRandomRange.z * -1.f, vRandomRange.z);

@@ -26,7 +26,7 @@ CTransform * CTransform::Create()
 
 	if (FAILED(pTransform->Initialize()))
 	{
-		MSG_BOX("FAILED to Initialize : CTransform");
+		Call_MsgBox(L"FAILED to Initialize : CTransform");
 		return nullptr;
 	}
 
@@ -39,16 +39,16 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 
 	if (matrixFlag & MATRIX_NOSCALE)
 	{
-		(*((_float3*)&WorldMat.m[WORLD_RIGHT])).Normalize();
-		(*((_float3*)&WorldMat.m[WORLD_UP])).Normalize();
-		(*((_float3*)&WorldMat.m[WORLD_LOOK])).Normalize();
+		(*((_float4*)&WorldMat.r[WORLD_RIGHT])).Normalize();
+		(*((_float4*)&WorldMat.r[WORLD_UP])).Normalize();
+		(*((_float4*)&WorldMat.r[WORLD_LOOK])).Normalize();
 	}
 
 	if (matrixFlag & MATRIX_NOTURN)
 	{
-		(*((_float3*)&WorldMat.m[WORLD_RIGHT])) = _float3(1.f, 0.f, 0.f);
-		(*((_float3*)&WorldMat.m[WORLD_UP])) = _float3(0.f, 1.f, 0.f);
-		(*((_float3*)&WorldMat.m[WORLD_LOOK])) = _float3(0.f, 0.f, 1.f);
+		(*((_float4*)&WorldMat.r[WORLD_RIGHT])) = _float4(1.f, 0.f, 0.f);
+		(*((_float4*)&WorldMat.r[WORLD_UP])) = _float4(0.f, 1.f, 0.f);
+		(*((_float4*)&WorldMat.r[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
 	}
 
 	if (matrixFlag & MATRIX_IDENTITY)
@@ -60,28 +60,28 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 }
 
 
-_float3 CTransform::Get_World(WORLD eType)
+_float4 CTransform::Get_World(WORLD eType)
 {
-	_float3 vResult = *((_float3*)&m_tTransform.matWorld.m[eType]);
+	_float4 vResult = *((_float4*)&m_tTransform.matWorld.r[eType]);
 
-	return (eType == WORLD_POS) ? vResult : vResult.Normalize();
+	return vResult;
 }
 
-_float3 CTransform::Get_MyWorld(WORLD eType)
+_float4 CTransform::Get_MyWorld(WORLD eType)
 {
-	_float3 vResult = *((_float3*)&m_tTransform.matMyWorld.m[eType]);
+	_float4 vResult = *((_float4*)&m_tTransform.matMyWorld.r[eType]);
 
-	return (eType == WORLD_POS) ? vResult : vResult.Normalize();
+	return vResult;
 }
 
-void CTransform::Set_World(WORLD eType, const _float3 & vCol)
+void CTransform::Set_World(WORLD eType, const _float4 & vCol)
 {
-	*((_float3*)&m_tTransform.matMyWorld.m[eType]) = vCol;
+	*((_float4*)&m_tTransform.matMyWorld.r[eType]) = vCol;
 }
 
-void CTransform::Set_RealWorld(WORLD eType, const _float3 & vCol)
+void CTransform::Set_RealWorld(WORLD eType, const _float4 & vCol)
 {
-	*((_float3*)&m_tTransform.matWorld.m[eType]) = vCol;
+	*((_float4*)&m_tTransform.matWorld.r[eType]) = vCol;
 
 }
 
@@ -90,21 +90,21 @@ void CTransform::Set_MyMatrix(_float4x4 matWorld)
 	m_tTransform.matMyWorld = matWorld;
 }
 
-void CTransform::Set_Look(const _float3& vLook)
+void CTransform::Set_Look(const _float4& vLook)
 {
 	
 
-	_float3 _vLook = vLook;
+	_float4 _vLook = vLook;
 	Set_World(WORLD_LOOK, _vLook.Normalize());
 
-	_float3 vUp = { 0.f, 1.f, 0.f };
+	_float4 vUp = { 0.f, 1.f, 0.f };
 	if ((vLook.y < 1.1f && vLook.y > 0.9f) ||
 		(vLook.y > -1.1f && vLook.y < -0.9f)
 		)
-		vUp = _float3(0.f, 0.f, 1.f);
+		vUp = _float4(0.f, 0.f, 1.f);
 
 	vUp.Normalize();
-	_float3 vRight = vUp.Cross(vLook);
+	_float4 vRight = vUp.Cross(vLook);
 	Set_World(WORLD_RIGHT, vRight.Normalize());
 	
 	vUp = _vLook.Cross(vRight);
@@ -114,9 +114,9 @@ void CTransform::Set_Look(const _float3& vLook)
 void CTransform::Set_Rect()
 {
 
-	_float3	vRight;
-	_float3 vUp;
-	_float3	vLook;
+	_float4	vRight;
+	_float4 vUp;
+	_float4	vLook;
 
 	vRight = Get_World(WORLD_RIGHT);
 	vUp =	Get_World(WORLD_UP);
@@ -127,15 +127,19 @@ void CTransform::Set_Rect()
 	Set_World(WORLD_LOOK,	vLook * -1);
 }
 
-void	CTransform::Set_Scale(const _float3& vScale)
+void	CTransform::Set_Scale(const _float4& vScale)
 {
 	m_tTransform.vScale = vScale;
+
+	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_RIGHT])).Normalize() *= m_tTransform.vScale.x;
+	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_UP])).Normalize() *= m_tTransform.vScale.y;
+	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_LOOK])).Normalize() *= m_tTransform.vScale.z;
 }
 
 
 void CTransform::Set_Y(const _float& fY)
 {
-	m_tTransform.matMyWorld._42 = fY;
+	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_POS])).y *= m_tTransform.vScale.z;
 }
 
 
@@ -151,21 +155,22 @@ HRESULT CTransform::Initialize()
 
 void CTransform::Tick()
 {
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_RIGHT])).Normalize();
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_UP])).Normalize();
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_LOOK])).Normalize();
 }
 
 void CTransform::Late_Tick()
 {
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_RIGHT])) *= m_tTransform.vScale.x;
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_UP])) *= m_tTransform.vScale.y;
-	(*((_float3*)&m_tTransform.matMyWorld.m[WORLD_LOOK])) *= m_tTransform.vScale.z;
-
 	Make_WorldMatrix();
 }
 
 void CTransform::Release()
+{
+}
+
+void CTransform::OnEnable()
+{
+}
+
+void CTransform::OnDisable()
 {
 }
 

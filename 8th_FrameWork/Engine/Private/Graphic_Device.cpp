@@ -10,7 +10,7 @@ CGraphic_Device::~CGraphic_Device()
 	Release();
 }
 
-HRESULT CGraphic_Device::Ready_Graphic_Device(HWND hWnd, GRAPHICDESC::WINMODE WinMode, _uint iWinCX, _uint iWinCY, ID3D11Device** ppDeviceOut, ID3D11DeviceContext** ppDeviceContextOut)
+HRESULT CGraphic_Device::Ready_Graphic_Device(const GRAPHICDESC& GraphicDesc)
 {
 	_uint		iFlag = 0;
 
@@ -23,13 +23,13 @@ HRESULT CGraphic_Device::Ready_Graphic_Device(HWND hWnd, GRAPHICDESC::WINMODE Wi
 	if (FAILED(D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, iFlag, nullptr, 0, D3D11_SDK_VERSION, &m_pDevice, &FeatureLV, &m_pDeviceContext)))
 		return E_FAIL;
 
-	if (FAILED(Ready_SwapChain(hWnd, WinMode, iWinCX, iWinCY)))
+	if (FAILED(Ready_SwapChain(GraphicDesc.hWnd, GraphicDesc.WinMode, GraphicDesc.iWinCX, GraphicDesc.iWinCY)))
 		return E_FAIL;
 
 	if (FAILED(Ready_BackBufferRenderTargetView()))
 		return E_FAIL;
 
-	if (FAILED(Ready_DepthStencilRenderTargetView(iWinCX, iWinCY)))
+	if (FAILED(Ready_DepthStencilRenderTargetView(GraphicDesc.iWinCX, GraphicDesc.iWinCY)))
 		return E_FAIL;
 
 	/* ÀåÄ¡¿¡ ¹ÙÀÎµåÇØ³õÀ» ·»´õÅ¸°Ùµé°ú µª½º½ºÅÙ½Çºä¸¦ ¼ÂÆÃÇÑ´Ù. */
@@ -39,18 +39,12 @@ HRESULT CGraphic_Device::Ready_Graphic_Device(HWND hWnd, GRAPHICDESC::WINMODE Wi
 	ZeroMemory(&ViewPortDesc, sizeof(D3D11_VIEWPORT));
 	ViewPortDesc.TopLeftX = 0;
 	ViewPortDesc.TopLeftY = 0;
-	ViewPortDesc.Width = iWinCX;
-	ViewPortDesc.Height = iWinCY;
+	ViewPortDesc.Width = GraphicDesc.iWinCX;
+	ViewPortDesc.Height = GraphicDesc.iWinCY;
 	ViewPortDesc.MinDepth = 0.f;
 	ViewPortDesc.MaxDepth = 1.f;
 
 	m_pDeviceContext->RSSetViewports(1, &ViewPortDesc);
-
-	*ppDeviceOut = m_pDevice;
-	*ppDeviceContextOut = m_pDeviceContext;
-
-	Safe_AddRef(m_pDevice);
-	Safe_AddRef(m_pDeviceContext);
 
 	return S_OK;
 }
@@ -192,31 +186,31 @@ HRESULT CGraphic_Device::Release()
 {
 	if (0 != Safe_Release(m_pSwapChain))
 	{
-		MSG_BOX("Failed To Release : SwapChain");
+		Call_MsgBox(L"Failed To Release : SwapChain");
 		return E_FAIL;
 	}
 
 	if (0 != Safe_Release(m_pDepthStencilView))
 	{
-		MSG_BOX("Failed To Release : DSV");
+		Call_MsgBox(L"Failed To Release : DSV");
 		return E_FAIL;
 	}
 
 	if (0 != Safe_Release(m_pBackBufferRTV))
 	{
-		MSG_BOX("Failed To Release : RTV");
+		Call_MsgBox(L"Failed To Release : RTV");
 		return E_FAIL;
 	}
 
 	if (0 != Safe_Release(m_pDeviceContext))
 	{
-		MSG_BOX("Failed To Release : DeviceContext");
+		Call_MsgBox(L"Failed To Release : DeviceContext");
 		return E_FAIL;
 	}
 
 	if (0 != Safe_Release(m_pDevice))
 	{
-		MSG_BOX("Failed To Release : Device");
+		Call_MsgBox(L"Failed To Release : Device");
 		return E_FAIL;
 	}
 }

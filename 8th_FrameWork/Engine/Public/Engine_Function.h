@@ -23,6 +23,14 @@ namespace Engine
 		return disx(gen);
 	}
 
+	static void Call_MsgBox(const _tchar* strMessage)
+	{
+#ifdef _DEBUG
+		MessageBox(0, strMessage, TEXT("System Error"), MB_OK);
+#endif // DEBUG
+
+	}
+
 	template<typename T>
 	void Safe_Delete(T& Temp)
 	{

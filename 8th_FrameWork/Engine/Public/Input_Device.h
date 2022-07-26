@@ -6,7 +6,6 @@ class CInput_Device
 {
 	DECLARE_SINGLETON(CInput_Device)
 	
-
 private:
 	CInput_Device();
 	~CInput_Device();

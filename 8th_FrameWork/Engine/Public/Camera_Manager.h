@@ -5,8 +5,7 @@ BEGIN(Engine)
 
 class CCamera;
 
-class ENGINE_DLL CCamera_Manager final
-	: public CManager
+class CCamera_Manager
 {
 	DECLARE_SINGLETON(CCamera_Manager);
 
@@ -23,12 +22,11 @@ public:
 	_float4x4	Get_OrthoProj() { return m_matOrthoProj; }
 
 	CCamera* Get_CurCam() { return m_pCurCam; }
-	_float3 Get_ViewPos();
+	_float4 Get_ViewPos();
 
 public:
 	HRESULT	Initialize(const GRAPHICDESC& GraphicDesc);
-	void	Tick();
-	void	Late_Tick();
+	void	Make_ViewProj();
 	
 public:
 	CCamera*	Change_Camera(wstring strKey);
@@ -39,16 +37,14 @@ private:
 	PROJ_TRANSFORM			m_tProj;
 	_float					m_fAspect = 0.f;
 
-
 	CCamera*				m_pCurCam = nullptr;
-	map<wstring, CCamera*>	m_mapCam;
+	map<_hashcode, CCamera*>	m_mapCam;
 
 private:
 	_float4x4										m_matOrthoView;
 	_float4x4										m_matOrthoProj;
 
 private:
-	void	SetUp_Camera();
 	void	Make_ViewMatrix();
 	void	Make_ProjMatrix();
 };

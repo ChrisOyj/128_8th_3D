@@ -3,8 +3,7 @@
 
 BEGIN(Engine)
 
-class CTime_Manager final
-	: public CManager
+class CTime_Manager
 {
 	DECLARE_SINGLETON(CTime_Manager);
 private:
@@ -12,7 +11,8 @@ private:
 	~CTime_Manager();
 
 public:
-	double	Get_DT(bool bReal) { return (bReal) ? m_dDT : m_dDT * m_dTimeSpeed; };
+	_double	Get_DT(_bool bReal) { return (bReal) ? m_dDT : m_dDT * m_dTimeSpeed; };
+	void	Set_FPSUpdateTime(_double dTime) { m_dFPSUpdateTime = dTime; }
 
 public:
 	HRESULT	Initialize(HWND hWnd);
@@ -25,6 +25,7 @@ private:
 	LARGE_INTEGER	m_llPrevCount = {};
 	LARGE_INTEGER	m_llFrequency = {};
 
+	_double			m_dFPSUpdateTime = 1.;
 	_double			m_dDT = 0.;
 	_double			m_dTimeSpeed = 1.;
 	_double			m_dAcc = 0.; 

@@ -52,7 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     if (FAILED(CMainApp::Get_Instance()->Initialize()))
     {
-        MSG_BOX("Failed to Initialize : CMainApp");
+        Call_MsgBox(L"Failed to Initialize : CMainApp");
         return FALSE;
     }
 

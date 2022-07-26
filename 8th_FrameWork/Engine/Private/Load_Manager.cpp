@@ -20,7 +20,7 @@ unsigned int APIENTRY LoadingMain(void* pArg)
 
 	HRESULT hr = 0;
 	if (FAILED(pLoadingMgr->Start_Loading()))
-		MSG_BOX("Failed to Start_Loading : CLoad_Manager");
+		Call_MsgBox(L"Failed to Start_Loading : CLoad_Manager");
 
 	LeaveCriticalSection(&CS);
 
@@ -43,7 +43,7 @@ HRESULT CLoad_Manager::Load_Level(CLevel * pLevel)
 HRESULT CLoad_Manager::Start_Loading()
 {
 	/* 로딩중 화면이랑, 로딩바 객체 생성부터 해놔서 돌리고, */
-
+	m_pLoadLevel->Enter();
 	/* 이곳에 파일 읽고, 객체 생성하는 코드 작성 */
 
 	/* 다 생성되면 로딩중 화면이랑 로딩바 객체 지우야함 */

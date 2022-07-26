@@ -34,9 +34,6 @@
     <Filter Include="03. Utility\02. GameObject\01. Camera">
       <UniqueIdentifier>{2ae2ffa9-41a9-4c43-91d8-158b1e949eff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Utility\02. GameObject\02.">
-      <UniqueIdentifier>{a6bca858-7b53-4dab-9eaa-da469ab8551c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Singleton\02. Design\01. Event_Manager">
       <UniqueIdentifier>{91e21850-57b7-496d-998f-639e07401456}</UniqueIdentifier>
     </Filter>
@@ -108,6 +105,12 @@
     </Filter>
     <Filter Include="02. Singleton\02. Design\13. ZFrustum">
       <UniqueIdentifier>{beb9960c-ad9a-4a05-a9ad-84051aa45ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\02. Collider\Collider_Sphere">
+      <UniqueIdentifier>{6d345af7-2fa5-4bee-9937-6e49373e84d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Utility\03. Component\02. Collider\Collider_Box">
+      <UniqueIdentifier>{dce2a0f3-5aaf-4c9c-9672-be494310c08f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +201,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\ZFrustum.cpp">
       <Filter>02. Singleton\02. Design\13. ZFrustum</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CCollider_Sphere.cpp">
+      <Filter>03. Utility\03. Component\02. Collider\Collider_Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCollider_Box.cpp">
+      <Filter>03. Utility\03. Component\02. Collider\Collider_Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +318,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\ZFrustum.h">
       <Filter>02. Singleton\02. Design\13. ZFrustum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCollider_Sphere.h">
+      <Filter>03. Utility\03. Component\02. Collider\Collider_Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCollider_Box.h">
+      <Filter>03. Utility\03. Component\02. Collider\Collider_Box</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

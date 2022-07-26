@@ -16,7 +16,7 @@ public:
 	ID3D11DeviceContext*	Get_DeviceContext(void) { return m_pDeviceContext; }
 
 public:
-	HRESULT Ready_Graphic_Device(HWND hWnd, GRAPHICDESC::WINMODE WinMode, _uint iWinCX, _uint iWinCY, ID3D11Device** ppDeviceOut, ID3D11DeviceContext** ppDeviceContextOut);
+	HRESULT Ready_Graphic_Device(const GRAPHICDESC& GraphicDesc);
 	HRESULT Clear_BackBuffer_View(_float4 vClearColor);
 	HRESULT Clear_DepthStencil_View();
 	HRESULT Present();

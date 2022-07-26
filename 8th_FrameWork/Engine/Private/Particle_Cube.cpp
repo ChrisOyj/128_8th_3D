@@ -18,7 +18,7 @@ CParticle_Cube * CParticle_Cube::Create(CParticleSystem * pSystem)
 	return pParticle;
 }
 
-void CParticle_Cube::SetUp(_float3 vPos, _float3 vDir, _float3 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower, _float fTurnSpeed)
+void CParticle_Cube::SetUp(_float4 vPos, _float4 vDir, _float4 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower, _float fTurnSpeed)
 {
 	__super::SetUp(vPos, vDir, vScale, vColor, fSpeed, fChangeSpeed, fFadeOutSpeed);
 	m_fOriginY = vPos.y;
@@ -26,15 +26,15 @@ void CParticle_Cube::SetUp(_float3 vPos, _float3 vDir, _float3 vScale, _float4 v
 	m_fTurnSpeed = fTurnSpeed;
 	m_fOriginTurnSpeed = fTurnSpeed;
 
-	(*((_float3*)&m_matWorld.m[WORLD_LOOK])) = vDir;
+	(*((_float4*)&m_matWorld.m[WORLD_LOOK])) = vDir;
 
-	_float3 _vLook = vDir;
-	_float3 vUp = { 0.f, 1.f, 0.f };
-	_float3 vRight = vUp.Cross(_vLook);
-	(*((_float3*)&m_matWorld.m[WORLD_RIGHT])) = vRight;
+	_float4 _vLook = vDir;
+	_float4 vUp = { 0.f, 1.f, 0.f };
+	_float4 vRight = vUp.Cross(_vLook);
+	(*((_float4*)&m_matWorld.m[WORLD_RIGHT])) = vRight;
 
 	vUp = _vLook.Cross(vRight);
-	(*((_float3*)&m_matWorld.m[WORLD_UP])) = vUp;
+	(*((_float4*)&m_matWorld.m[WORLD_UP])) = vUp;
 }
 
 _bool CParticle_Cube::Tick(const _float & fTimeDelta)
@@ -68,9 +68,9 @@ _bool CParticle_Cube::Tick(const _float & fTimeDelta)
 	}
 	
 
-	_float3		vRight = (*((_float3*)&m_matWorld.m[WORLD_RIGHT]));
-	_float3		vUp = (*((_float3*)&m_matWorld.m[WORLD_UP]));
-	_float3		vLook = (*((_float3*)&m_matWorld.m[WORLD_LOOK]));
+	_float4		vRight = (*((_float4*)&m_matWorld.m[WORLD_RIGHT]));
+	_float4		vUp = (*((_float4*)&m_matWorld.m[WORLD_UP]));
+	_float4		vLook = (*((_float4*)&m_matWorld.m[WORLD_LOOK]));
 
 	_float4x4	RotationMatrix;
 	D3DXMatrixRotationAxis(&RotationMatrix, &vRight, m_fTurnSpeed * fTimeDelta);
@@ -79,9 +79,9 @@ _bool CParticle_Cube::Tick(const _float & fTimeDelta)
 	vUp.Multiply(RotationMatrix, true);
 	vLook.Multiply(RotationMatrix, true);
 
-	(*((_float3*)&m_matWorld.m[WORLD_RIGHT])) = vRight;
-	(*((_float3*)&m_matWorld.m[WORLD_UP])) = vUp;
-	(*((_float3*)&m_matWorld.m[WORLD_LOOK])) = vLook;
+	(*((_float4*)&m_matWorld.m[WORLD_RIGHT])) = vRight;
+	(*((_float4*)&m_matWorld.m[WORLD_UP])) = vUp;
+	(*((_float4*)&m_matWorld.m[WORLD_LOOK])) = vLook;
 
 
 
@@ -93,8 +93,8 @@ _bool CParticle_Cube::Tick(const _float & fTimeDelta)
 
 void CParticle_Cube::Make_WorldMatrix()
 {
-	(*(_float3*)(&m_matWorld.m[0])).Normalize() *= m_vScale.x;
-	(*(_float3*)(&m_matWorld.m[1])).Normalize() *= m_vScale.y;
-	(*(_float3*)(&m_matWorld.m[2])).Normalize() *= m_vScale.z;
-	*(_float3*)(&m_matWorld.m[3]) = m_vPos;
+	(*(_float4*)(&m_matWorld.m[0])).Normalize() *= m_vScale.x;
+	(*(_float4*)(&m_matWorld.m[1])).Normalize() *= m_vScale.y;
+	(*(_float4*)(&m_matWorld.m[2])).Normalize() *= m_vScale.z;
+	*(_float4*)(&m_matWorld.m[3]) = m_vPos;
 }

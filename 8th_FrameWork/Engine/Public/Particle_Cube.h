@@ -13,11 +13,11 @@ private:
 
 public:
 	static CParticle_Cube*	Create(CParticleSystem* pSystem);
-	virtual void	SetUp(_float3 vPos, _float3 vDir, _float3 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower, _float fTurnSpeed);
+	virtual void	SetUp(_float4 vPos, _float4 vDir, _float4 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower, _float fTurnSpeed);
 
 
 public:
-	virtual void	Recycle(const _float3& vPos, const _float3& vDir) {
+	virtual void	Recycle(const _float4& vPos, const _float4& vDir) {
 		m_vPos = vPos;
 		m_vDir = vDir;
 		m_vColor.w = 1.f;

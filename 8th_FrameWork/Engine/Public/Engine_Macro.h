@@ -23,7 +23,7 @@
 										type*	pObj = new type;										\
 										if (FAILED(pObj->Initialize_Prototype()))						\
 										{																\
-											MSG_BOX("Failed to Initialize_Prototype");					\
+											Call_MsgBox(L"Failed to Initialize_Prototype");					\
 											return nullptr;												\
 										}																\
 										return pObj;													\
@@ -36,7 +36,8 @@
 
 #define MATRIX_DEFAULT				0x00f
 
-#define GET_CLONE(type)				CPrototype_Manager::Get_Instance()->Get_Clone<type>()
+#define CLONE_GAMEOBJECT(type)				CPrototype_Manager::Get_Instance()->Clone_GameObject<type>()
+#define CLONE_COMPONENT(type)				CPrototype_Manager::Get_Instance()->Clone_Component<type>()
 
 
 // ==========================
@@ -57,9 +58,6 @@
 
 #define		MIN_STR			64
 #define		MAX_STR			256
-
-#define MSG_BOX(MESSAGE) MessageBox(0, TEXT(MESSAGE), TEXT("System Error"), MB_OK)
-
 
 #define BEGIN(NAMESPACE) namespace NAMESPACE { 
 #define END }

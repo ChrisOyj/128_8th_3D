@@ -46,16 +46,16 @@ void CTime_Manager::Tick()
 void CTime_Manager::Render()
 {
 	++m_iCallCount;
-	m_dAcc += m_dDT; // DT가 dAcc에 누적되는 중
+	m_dAcc += m_dDT;
 
-	if (1 <= m_dAcc) { // 1초가 지난 시점
+	if (m_dFPSUpdateTime <= m_dAcc) {
 
 		m_iFPS = m_iCallCount;
 		m_dAcc = 0.;
 		m_iCallCount = 0;
 
 		wchar_t szBuffer[255] = {};
-		swprintf_s(szBuffer, L"SR                                                            FPS : %d,  DT : %f", m_iFPS, m_dDT);
+		swprintf_s(szBuffer, L"Naruto Shinobi Striker (오용준 모작)                                        FPS : %d,  DT : %f", m_iFPS, m_dDT);
 		SetWindowText(m_hWnd, szBuffer);
 
 	}

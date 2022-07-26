@@ -18,7 +18,7 @@ CParticle_Pop * CParticle_Pop::Create(CParticleSystem * pSystem)
 	return pParticle;
 }
 
-void CParticle_Pop::SetUp(_float3 vPos, _float3 vDir, _float3 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower)
+void CParticle_Pop::SetUp(_float4 vPos, _float4 vDir, _float4 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed, _float fJumpPower)
 {
 	__super::SetUp(vPos, vDir, vScale, vColor, fSpeed, fChangeSpeed, fFadeOutSpeed);
 	m_fOriginY = vPos.y;

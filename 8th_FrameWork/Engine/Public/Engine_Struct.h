@@ -5,7 +5,7 @@ namespace Engine
 #pragma region TRANSFORM
 	typedef struct tag_Transform
 	{
-		_float3		vScale;
+		_float4		vScale;
 		_float4x4		matMyWorld;
 		_float4x4		matWorld;
 
@@ -13,9 +13,9 @@ namespace Engine
 
 	typedef struct tag_View_Transform
 	{
-		_float3		vEye;
-		_float3		vLookAt;
-		_float3		vUp;
+		_float4		vEye;
+		_float4		vLookAt;
+		_float4		vUp;
 
 		_float4x4		matView; // ºä Çà·Ä 
 
@@ -36,7 +36,7 @@ namespace Engine
 #pragma region VERTEX
 	typedef struct tag_Vertex_Texture
 	{
-		_float3	vPosition;
+		_float4	vPosition;
 		_float2	vTexUV;
 
 	}VERTEX_TEX;
@@ -44,13 +44,13 @@ namespace Engine
 
 	//typedef		struct tag_Vertex_Normal
 	//{
-	//	_float3 vPosition;
-	//	_float3 vNormal;
+	//	_float4 vPosition;
+	//	_float4 vNormal;
 
 	//	void Set_Normal(const tag_Vertex_Normal& Adj1, const tag_Vertex_Normal& Adj2)
 	//	{
-	//		_float3 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
-	//		_float3 u, v;
+	//		_float4 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
+	//		_float4 u, v;
 
 	//		u = AdjVec1 - vPosition;
 	//		v = AdjVec2 - vPosition;
@@ -72,8 +72,8 @@ namespace Engine
 
 	//typedef struct tag_Vertex_Normal_Tex
 	//{
-	//	_float3 vPosition;
-	//	_float3 vNormal;
+	//	_float4 vPosition;
+	//	_float4 vNormal;
 	//	_float2	vTexUV;
 
 	//	tag_Vertex_Normal_Tex()
@@ -87,8 +87,8 @@ namespace Engine
 
 	//	void Set_Normal(const tag_Vertex_Normal_Tex& Adj1, const tag_Vertex_Normal_Tex& Adj2)
 	//	{
-	//		_float3 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
-	//		_float3 u, v;
+	//		_float4 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
+	//		_float4 u, v;
 
 	//		u = AdjVec1 - vPosition;
 	//		v = AdjVec2 - vPosition;
@@ -102,11 +102,11 @@ namespace Engine
 
 	//typedef struct tag_Vertex_CubeMap
 	//{
-	//	_float3 vPosition;
-	//	_float3 vNormal;
-	//	_float3	vTexUV;
+	//	_float4 vPosition;
+	//	_float4 vNormal;
+	//	_float4	vTexUV;
 
-	//	tag_Vertex_CubeMap(const _float3& vPos)
+	//	tag_Vertex_CubeMap(const _float4& vPos)
 	//		: vPosition(vPos)
 	//		, vTexUV(vPos)
 	//	{
@@ -115,8 +115,8 @@ namespace Engine
 
 	//	void Set_Normal(const tag_Vertex_CubeMap& Adj1, const tag_Vertex_CubeMap& Adj2)
 	//	{
-	//		_float3 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
-	//		_float3 u, v;
+	//		_float4 AdjVec1(Adj1.vPosition), AdjVec2(Adj2.vPosition);
+	//		_float4 u, v;
 
 	//		u = AdjVec1 - vPosition;
 	//		v = AdjVec2 - vPosition;
@@ -135,10 +135,17 @@ namespace Engine
 		enum WINMODE { MODE_FULL, MODE_WIN, MODE_END };
 
 		unsigned int iWinCX, iWinCY;
-		HWND	hWnd;
-		WINMODE	isWindowMode;
+		HWND		hWnd;
+		HINSTANCE	hInst;
+		WINMODE		WinMode;
 	}GRAPHICDESC;
 
+
+	typedef struct tag_SoundDesc
+	{
+		unsigned int iChannelNumbers[CH_GROUP_END];
+
+	}SOUNDDESC;
 
 	struct _uint3
 	{

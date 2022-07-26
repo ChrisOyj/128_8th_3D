@@ -28,226 +28,333 @@ namespace Engine
 
 	typedef XMFLOAT2					_float2;
 	typedef XMFLOAT3					_float3;
-	typedef XMFLOAT4					_float4;
-	typedef XMFLOAT4X4					_float4x4;
+
+	typedef struct XMMATRIX_DERIVED : public XMMATRIX
+	{
+		XMMATRIX_DERIVED& operator = (const XMMATRIX& matrix)
+		{
+			memcpy(this, &matrix, sizeof(XMMATRIX));
+			return *this;
+		}
+
+		XMMATRIX_DERIVED operator * (const XMMATRIX& matrix)
+		{
+			XMMATRIX_DERIVED	matResult = *this * matrix;
+			return matResult;
+		}
+
+		XMMATRIX_DERIVED& operator *= (const XMMATRIX& matrix)
+		{
+			return *this *= matrix;
+		}
+
+		XMMATRIX_DERIVED& Inverse()
+		{
+			return *this = XMMatrixInverse(nullptr, *this);
+		}
+
+		XMMATRIX_DERIVED& Identity()
+		{
+			return *this = XMMatrixIdentity();
+		}
+
+		XMMATRIX_DERIVED& Transpose()
+		{
+			return *this = XMMatrixTranspose(*this);
+		}
 
 
+	}_float4x4;
 
 
-	//typedef struct XMFLOAT4X4_DERIVED : public XMFLOAT4X4
-	//{
-	//	XMFLOAT4X4_DERIVED& operator = (const XMFLOAT4X4& matrix)
-	//	{
-	//		memcpy(this, &matrix, sizeof(XMFLOAT4X4));
-	//		return *this;
-	//	}
+	typedef struct XMFLOAT4_DERIVED : public XMFLOAT4
+	{
+		XMFLOAT4_DERIVED()
+			: XMFLOAT4()
+		{}
 
-	//	XMFLOAT4X4_DERIVED()
-	//	{
-	//		*this = XMMatrixMultiply();
-	//	}
+		XMFLOAT4_DERIVED(const _float _x,
+			const _float _y,
+			const _float _z,
+			const _float _w = 1.f)
+			: XMFLOAT4(x, y, z, w)
+		{}
 
-	//	
-
-	//	XMFLOAT4X4_DERIVED	operator * (const XMFLOAT4X4& matrix)
-	//	{
-	//		XMFLOAT4X4_DERIVED matResult;
-	//		XMFLOAT4X4	matTemp = *this;
-
-	//		matResult = matTemp * matrix;
+		XMFLOAT4_DERIVED& operator = (const XMFLOAT4& _other)
+		{
+			x = _other.x;
+			y = _other.z;
+			z = _other.z;
+			w = _other.w;
 
 
-	//		return matResult;
-	//	}
+			return *this;
+		}
 
-	//	XMFLOAT4X4_DERIVED&	Identity()
-	//	{
-	//		XMFLOAT4X4Identity(this);
-	//		return *this;
-	//	}
-	//	XMFLOAT4X4_DERIVED&	Inverse()
-	//	{
-	//		XMFLOAT4X4Inverse(this, nullptr, this);
-	//		return *this;
-	//	}
-
-	//	XMFLOAT4X4_DERIVED	Transpose()
-	//	{
-	//		XMFLOAT4X4_DERIVED	mat;
-	//		XMFLOAT4X4Transpose(&mat, this);
-	//		return mat;
-	//	}
-
-	//}_float4x4;
-
-	//typedef struct XMFLOAT3_DERIVED : public XMFLOAT3
-	//{
-	//	XMFLOAT3_DERIVED()
-	//	{}
-
-	//	XMFLOAT3_DERIVED(_float _x, _float _y, _float _z)
-	//		: XMFLOAT3(_x, _y, _z)
-	//	{}
-
-	//	XMFLOAT3_DERIVED&	operator = (const XMFLOAT3& vec3)
-	//	{
-	//		memcpy(this, &vec3, sizeof(XMFLOAT3));
-	//		return *this;
-	//	}
-
-	//	XMFLOAT3_DERIVED	operator + (const XMFLOAT3_DERIVED& vec3)
-	//	{
-	//		return XMFLOAT3_DERIVED(x + vec3.x, y + vec3.y, z + vec3.z);
-	//	}
-
-	//	XMFLOAT3_DERIVED	operator - (const XMFLOAT3_DERIVED& vec3)
-	//	{
-	//		return XMFLOAT3_DERIVED(x - vec3.x, y - vec3.y, z - vec3.z);
-	//	}
-
-	//	XMFLOAT3_DERIVED&	operator -= (const XMFLOAT3_DERIVED& vec3)
-	//	{
-	//		x -= vec3.x;
-	//		y -= vec3.y;
-	//		z -= vec3.z;
-
-	//		return *this;
-	//	}
-
-	//	XMFLOAT3_DERIVED&	operator -= (const float& _f)
-	//	{
-	//		x -= _f;
-	//		y -= _f;
-	//		z -= _f;
-
-	//		return *this;
-	//	}
-
-	//	/*XMFLOAT3_DERIVED&	operator += (const float& _f)
-	//	{
-	//		x += _f;
-	//		y += _f;
-	//		z += _f;
-
-	//		return *this;
-	//	}*/
-
-	//	XMFLOAT3_DERIVED	operator * (const float& _f)
-	//	{
-	//		return XMFLOAT3_DERIVED(x * _f, y * _f, z * _f);
-	//	}
-
-	//	XMFLOAT3_DERIVED&	operator *= (const float& _f)
-	//	{
-	//		x *= _f;
-	//		y *= _f;
-	//		z *= _f;
-
-	//		return *this;
-	//	}
-
-	//	bool operator == (const float& _f)
-	//	{
-	//		if (x == _f && y == _f && z == _f)
-	//			return true;
-
-	//		return false;
-	//	}
-
-	//	bool operator != (const float& _f)
-	//	{
-	//		return !(*this == _f);
-	//	}
-
-	//	_float  Length() {
-	//		return XMVector3Length((XMVECTOR)(*this));
-	//	}
-
-	//	XMFLOAT3_DERIVED&  Normalize() {
-	//		XMVector3NormalizeEst(*this);
-	//		return *this;
-	//	}
-
-	//	_float Dot(const XMFLOAT3_DERIVED& _other)
-	//	{
-	//		return D3DXVec3Dot(this, &_other);
-	//	}
-
-	//	XMFLOAT3_DERIVED& Cross(const XMFLOAT3_DERIVED& _other)
-	//	{
-	//		D3DXVec3Cross(this, this, &_other);
-	//		return *this;
-	//	}
-
-	//	XMFLOAT3_DERIVED& Multiply(const XMFLOAT4X4_DERIVED& _float4x4, bool bNormal = false)
-	//	{
-	//		if (bNormal)
-	//		{
-	//			D3DXVec3TransformNormal(this, this, &_float4x4);
-	//		}
-	//		else
-	//		{
-	//			D3DXVec3TransformCoord(this, this, &_float4x4);
-	//		}
-
-	//		return *this;
-	//	}
-
-	//}_float3;
-
-	//typedef struct D3DXVECTOR4_DERIVED : public D3DXVECTOR4
-	//{
-	//	D3DXVECTOR4_DERIVED()
-	//	{}
-
-	//	D3DXVECTOR4_DERIVED(_float _x, _float _y, _float _z, _float _w)
-	//		: D3DXVECTOR4(_x, _y, _z, _w)
-	//	{}
+		XMFLOAT4_DERIVED& operator = (const _float& _f)
+		{
+			x = _f;
+			y = _f;
+			z = _f;
 
 
+			return *this;
+		}
 
-	//	_float  Length() {
-	//		return D3DXVec4Length(this);
-	//	}
+		XMFLOAT4_DERIVED operator + (const XMFLOAT4& _other)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x + _other.x;
+			vOutput.y = y + _other.y;
+			vOutput.z = z + _other.z;
+			vOutput.w = w;
 
-	//	D3DXVECTOR4_DERIVED&  Normalize() {
-	//		D3DXVec4Normalize(this, this);
-	//		return *this;
-	//	}
+			return vOutput;
+		}
 
-	//	_float Dot(const D3DXVECTOR4_DERIVED& _other)
-	//	{
-	//		return D3DXVec4Dot(this, &_other);
-	//	}
+		XMFLOAT4_DERIVED operator + (const _float& _f)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x + _f;
+			vOutput.y = y + _f;
+			vOutput.z = z + _f;
+			vOutput.w = w;
 
-	//	D3DXVECTOR4_DERIVED& Cross(const D3DXVECTOR4_DERIVED& V1, const D3DXVECTOR4_DERIVED& V2)
-	//	{
-	//		D3DXVec4Cross(this, this, &V1, &V2);
-	//		return *this;
-	//	}
+			return vOutput;
+		}
 
-	//	D3DXVECTOR4_DERIVED& Multiply(const XMFLOAT4X4_DERIVED& _float4x4)
-	//	{
-	//		D3DXVec4Transform(this, this, &_float4x4);
+		XMFLOAT4_DERIVED operator - (const XMFLOAT4& _other)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x - _other.x;
+			vOutput.y = y - _other.y;
+			vOutput.z = z - _other.z;
+			vOutput.w = w;
 
-	//		return *this;
-	//	}
+			return vOutput;
+		}
 
-	//	D3DXVECTOR4_DERIVED	operator * (const XMFLOAT4X4_DERIVED& _float4x4)
-	//	{
-	//		D3DXVECTOR4_DERIVED vResult;
-	//		D3DXVec4Transform(&vResult, this, &_float4x4);
-	//		return vResult;
-	//	}
+		XMFLOAT4_DERIVED operator - (const _float& _f)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x - _f;
+			vOutput.y = y - _f;
+			vOutput.z = z - _f;
+			vOutput.w = w;
 
-	//	D3DXVECTOR4_DERIVED	operator *= (const XMFLOAT4X4_DERIVED& _float4x4)
-	//	{
-	//		D3DXVec4Transform(this, this, &_float4x4);
-	//		return *this;
-	//	}
+			return vOutput;
+		}
 
-	//}_float4;
+		XMFLOAT4_DERIVED operator * (const XMFLOAT4& _other)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x * _other.x;
+			vOutput.y = y * _other.y;
+			vOutput.z = z * _other.z;
+			vOutput.w = w;
+
+			return vOutput;
+		}
+
+		XMFLOAT4_DERIVED operator * (const _float& _f)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x * _f;
+			vOutput.y = y * _f;
+			vOutput.z = z * _f;
+			vOutput.w = w;
+
+			return vOutput;
+		}
+
+		XMFLOAT4_DERIVED operator / (const XMFLOAT4& _other)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x / _other.x;
+			vOutput.y = y / _other.y;
+			vOutput.z = z / _other.z;
+			vOutput.w = w;
+
+			return vOutput;
+		}
+
+		XMFLOAT4_DERIVED operator / (const _float& _f)
+		{
+			XMFLOAT4_DERIVED	vOutput;
+			vOutput.x = x / _f;
+			vOutput.y = y / _f;
+			vOutput.z = z / _f;
+			vOutput.w = w;
+
+			return vOutput;
+		}
+
+		XMFLOAT4_DERIVED& operator += (const XMFLOAT4& _other)
+		{
+			x += _other.x;
+			y += _other.y;
+			z += _other.z;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator += (const _float& _f)
+		{
+			x += _f;
+			y += _f;
+			z += _f;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator -= (const XMFLOAT4& _other)
+		{
+			x -= _other.x;
+			y -= _other.y;
+			z -= _other.z;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator -= (const _float& _f)
+		{
+			x -= _f;
+			y -= _f;
+			z -= _f;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator *= (const XMFLOAT4& _other)
+		{
+			x *= _other.x;
+			y *= _other.y;
+			z *= _other.z;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator *= (const _float& _f)
+		{
+			x *= _f;
+			y *= _f;
+			z *= _f;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator /= (const XMFLOAT4& _other)
+		{
+			x /= _other.x;
+			y /= _other.y;
+			z /= _other.z;
+
+			return *this;
+		}
+
+		XMFLOAT4_DERIVED& operator /= (const _float& _f)
+		{
+			x /= _f;
+			y /= _f;
+			z /= _f;
+
+			return *this;
+		}
+
+		_bool operator == (const XMFLOAT4& _other)
+		{
+			if (x == _other.x &&
+				y == _other.y &&
+				z == _other.z &&
+				w == _other.w)
+				return true;
+
+			return false;
+		}
+
+		_bool operator != (const XMFLOAT4& _other)
+		{
+			return !(*this == _other);
+		}
+
+		/* transform */
+		XMFLOAT4_DERIVED operator * (const XMMATRIX& _otherMatrix)
+		{
+			XMVECTOR	vec = { x, y, z, w };
+
+			XMVECTOR	vTransform = XMVector4Transform(vec, _otherMatrix);
+
+			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vTransform.m128_f32[0],
+				vTransform.m128_f32[1],
+				vTransform.m128_f32[2],
+				vTransform.m128_f32[3]);
+
+			return vResult;
+		}
+
+		XMFLOAT4_DERIVED& operator *= (const XMMATRIX& _otherMatrix)
+		{
+			XMVECTOR	vec = { x, y, z, w };
+
+			XMVECTOR	vTransform = XMVector4Transform(vec, _otherMatrix);
+
+			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vTransform.m128_f32[0],
+				vTransform.m128_f32[1],
+				vTransform.m128_f32[2],
+				vTransform.m128_f32[3]);
+
+			return *this = vResult;
+		}
 
 
-	
+		_float Length()
+		{
+			FXMVECTOR	vec = { x, y, z, w };
+
+			return XMVector4Length(vec).m128_f32[0];
+		}
+
+		_float	Dot(const XMFLOAT4& _other)
+		{
+			FXMVECTOR	Myvec = { x, y, z, w };
+			FXMVECTOR	Othervec = { _other.x, _other.y, _other.z, w };
+
+			return XMVector4Dot(Myvec, Othervec).m128_f32[0];
+		}
+
+		XMFLOAT4_DERIVED	Cross(const XMFLOAT4& _other)
+		{
+			FXMVECTOR	Myvec = { x, y, z, 0.f };
+			FXMVECTOR	Othervec = { _other.x, _other.y, _other.z, 0.f };
+			FXMVECTOR	vCross = XMVector3Cross(Myvec, Othervec);
+
+			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vCross.m128_f32[0],
+				vCross.m128_f32[1],
+				vCross.m128_f32[2],
+				0.f);
+
+			return vResult;
+		}
+
+		XMFLOAT4_DERIVED& Normalize()
+		{
+			FXMVECTOR	Myvec = { x, y, z, w };
+
+			FXMVECTOR	vNormalize = XMVector4Normalize(Myvec);
+
+			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vNormalize.m128_f32[0],
+				vNormalize.m128_f32[1],
+				vNormalize.m128_f32[2],
+				0.f);
+
+			return *this = vResult;
+		}
+
+		FXMVECTOR	XMVector()
+		{
+			FXMVECTOR	Myvec = { x, y, z, w };
+			return Myvec;
+		}
+
+	}_float4;
 }

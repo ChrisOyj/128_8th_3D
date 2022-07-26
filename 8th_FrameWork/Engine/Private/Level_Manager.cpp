@@ -14,46 +14,54 @@ CLevel_Manager::~CLevel_Manager()
 	Release();
 }
 
+HRESULT CLevel_Manager::Add_Level(CLevel* pLevel)
+{
+	m_arrLevels.push_back(pLevel);
+
+	return S_OK;
+}
+
 void CLevel_Manager::Tick()
 {
-	m_pCurrentLevel->Tick();
+	m_arrLevels[m_iCurrentLevelID]->Tick();
 }
 
 void CLevel_Manager::Late_Tick()
 {
-	m_pCurrentLevel->Late_Tick();
+	m_arrLevels[m_iCurrentLevelID]->Late_Tick();
 }
 
 HRESULT CLevel_Manager::Render()
 {
-	if (FAILED(m_pCurrentLevel->Render()))
+	if (FAILED(m_arrLevels[m_iCurrentLevelID]->Render()))
+	{
+		Call_MsgBox(L"Failed to Render : CLevel_Manager");
 		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
-HRESULT CLevel_Manager::Open_Level(_uint iLevelID, CLevel * pLevel)
+HRESULT CLevel_Manager::Open_Level(const _uint& iLevelID)
 {
 	/* 이전레벨에서 사용한 자원들을 모두 소거한다. */
-	if (m_pCurrentLevel)
+	if (m_iCurrentLevelID != 0)
 	{
-		m_pCurrentLevel->Exit();
-		m_pCurrentLevel->Destory_Instance();
-		CObject_Manager::Get_Instance()->Delete_Objects();
+		m_arrLevels[m_iCurrentLevelID]->Exit();
+		CObject_Manager::Get_Instance()->Delete_All();
 		CPrototype_Manager::Get_Instance()->Clear();
 	}
 
-	m_pCurrentLevel = pLevel;
 	m_iCurrentLevelID = iLevelID;
-
-	m_pCurrentLevel->Enter();
-
-	//CLoad_Manager::Get_Instance()->Load_Level(m_pCurrentLevel);
+	CLoad_Manager::Get_Instance()->Load_Level(m_arrLevels[m_iCurrentLevelID]);
 
 	return S_OK;
 }
 
 void CLevel_Manager::Release()
 {
-	if (m_pCurrentLevel)
-		m_pCurrentLevel->Destory_Instance();
+	for (size_t i = 0; i < m_arrLevels.size(); ++i)
+		delete m_arrLevels[i];
+
+	m_arrLevels.clear();
 }

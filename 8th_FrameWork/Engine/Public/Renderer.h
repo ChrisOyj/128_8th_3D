@@ -12,14 +12,18 @@ protected:
 	virtual ~CRenderer();
 
 public:
-	void		Set_RenderGroup(RENDERGROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }
+	void		Set_RenderGroup(RENDER_ID	eRenderGroup) { m_eRenderGroup = eRenderGroup; }
+	_float4		Get_WorldPosition();
+	_float4		Get_FinalPos() {return m_vFinalPos};
 
 public:
 	virtual void Late_Tick() override;
 	virtual HRESULT		Render() PURE;
 
 protected:
-	RENDERGROUP				m_eRenderGroup;
+	RENDER_ID				m_eRenderGroup;
+	_float4					m_vOffsetPos;
+	_float4					m_vFinalPos;
 
 protected:
 	friend class CGameObject;

@@ -10,7 +10,7 @@ enum class KEY
 	DOWN,
 	NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7, NUM8, NUM9, NUM0,
 	F1, F2, F3, F4, F5, F6, F7, F8, F9,
-	Q, W, E, R, T, Y, U, I, O, P,
+	Q, W, E, R, T, Y, U, I, O, P, 
 	A, S, D, F, G, H, J, K, L,
 	Z, X, C, V, B, N, M,
 	ALT,
@@ -36,10 +36,10 @@ enum class KEY_STATE {
 
 
 
-class CKey_Manager final
-	: public CManager
+class CKey_Manager
 {
 	DECLARE_SINGLETON(CKey_Manager);
+
 private:
 	CKey_Manager();
 	~CKey_Manager();

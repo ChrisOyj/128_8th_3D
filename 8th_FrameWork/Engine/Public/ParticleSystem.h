@@ -37,14 +37,14 @@ private:
 public:
 	static	CParticleSystem*	Create(
 		CGameObject* pOwner, const _tchar* pTextureFilePath,
-		PARTICLE_PASS_TYPE	ePassType, PARTICLE_TYPE eParticleType, _float3	vRandomRange_ParticlesPos,
-		_float3	vRandomRange_ParticlesDir, _float3 vRandomRange_ParticlesScale, _float4	vRandomRange_ParticlesColor
+		PARTICLE_PASS_TYPE	ePassType, PARTICLE_TYPE eParticleType, _float4	vRandomRange_ParticlesPos,
+		_float4	vRandomRange_ParticlesDir, _float4 vRandomRange_ParticlesScale, _float4	vRandomRange_ParticlesColor
 		, _float fRandomRange_ParticlesSpeed, _float fRandomRange_ParticlesFadeOutSpeed
 		);
 
 public:
 	void	Start_ParticleSystem(
-		_float3	vParticlesPos, _float3 vParticlesDir, _float3 vParticlesScale, _float4 vParticlesColor,
+		_float4	vParticlesPos, _float4 vParticlesDir, _float4 vParticlesScale, _float4 vParticlesColor,
 		_float fParticleGenerationCycle, _float fParticleGenerationTime, _uint iParticleGenerationCnt,
 		_float fParticleInitSpeed, _float fParticleChangeSpeed, _float fParticleFadeOutSpeed, _uint iMaxParticleCnt
 	);
@@ -82,14 +82,14 @@ private:
 	/* Particle Detail */
 	PARTICLE_TYPE	m_eParticle_Type	= PARTICLE_END;
 
-	_float3					m_vParticlesPos;
-	_float3					m_vParticlesDir;
-	_float3					m_vParticlesScale;
+	_float4					m_vParticlesPos;
+	_float4					m_vParticlesDir;
+	_float4					m_vParticlesScale;
 	_float4					m_vParticlesColor;
 
-	_float3					m_vRandomRange_ParticlesPos;
-	_float3					m_vRandomRange_ParticlesDir;
-	_float3					m_vRandomRange_ParticlesScale;
+	_float4					m_vRandomRange_ParticlesPos;
+	_float4					m_vRandomRange_ParticlesDir;
+	_float4					m_vRandomRange_ParticlesScale;
 	_float4					m_vRandomRange_ParticlesColor;
 	_float					m_fRandomRange_ParticlesSpeed;
 	_float					m_fRandomRange_ParticlesFadeOutSpeed;
@@ -124,7 +124,7 @@ private:
 	void Update_Particles();
 	void Collect_Particles();
 
-	_float3 RandomRange(const _float3& vStandard, const _float3& vRandomRange);
+	_float4 RandomRange(const _float4& vStandard, const _float4& vRandomRange);
 	_float4 RandomRange(const _float4& vStandard, const _float4& vRandomRange);
 
 private:

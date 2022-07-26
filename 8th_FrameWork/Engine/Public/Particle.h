@@ -15,12 +15,12 @@ protected:
 public:
 	_float4x4	Get_WorldMatrix() { return m_matWorld; }
 	_float4 Get_Color() { return m_vColor; }
-	_float3 Get_Pos() { return m_vPos; }
+	_float4 Get_Pos() { return m_vPos; }
 	
 
 public:
-	virtual void	SetUp(_float3 vPos, _float3 vDir, _float3 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed);
-	virtual void	Recycle(const _float3& vPos, const _float3& vDir) {
+	virtual void	SetUp(_float4 vPos, _float4 vDir, _float4 vScale, _float4 vColor, _float fSpeed, _float fChangeSpeed, _float fFadeOutSpeed);
+	virtual void	Recycle(const _float4& vPos, const _float4& vDir) {
 		m_vPos = vPos;
 		m_vDir = vDir;
 		m_vDir.Normalize();
@@ -35,9 +35,9 @@ protected:
 	_float4x4	m_matWorld;
 	CParticleSystem*	m_pSystem = nullptr;
 
-	_float3		m_vPos;
-	_float3		m_vDir;
-	_float3		m_vScale;
+	_float4		m_vPos;
+	_float4		m_vDir;
+	_float4		m_vScale;
 	_float4		m_vColor;
 	_float		m_fSpeed;
 	_float		m_fOriginSpeed;

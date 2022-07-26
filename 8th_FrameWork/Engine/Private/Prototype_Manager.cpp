@@ -1,5 +1,6 @@
 #include "Prototype_Manager.h"
-#include "Obj.h"
+#include "GameObject.h"
+#include "Component.h"
 
 CPrototype_Manager::CPrototype_Manager()
 {
@@ -10,35 +11,66 @@ CPrototype_Manager::~CPrototype_Manager()
 	Release();
 }
 
-CObj * CPrototype_Manager::Get_Clone(_hashcode hashcode)
+CGameObject* CPrototype_Manager::Clone_GameObject(_hashcode hashcode)
 {
-	CObj*	pPrototype = Find_Prototype(hashcode);
+	CGameObject* pPrototype = Find_GameObject_Prototype(hashcode);
 
 	if (!pPrototype)
 	{
-		MSG_BOX("failed to find Prototype : CPrototype_Manager");
+		Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
 		return nullptr;
 	}
 
 	return pPrototype->Clone();
 }
 
-CObj * CPrototype_Manager::Find_Prototype(_hashcode hashcode)
+CComponent* CPrototype_Manager::Clone_Component(_hashcode hashcode)
 {
-	auto iter = m_Prototypes.find(hashcode);
+	CComponent* pPrototype = Find_Component_Prototype(hashcode);
 
-	if (iter == m_Prototypes.end())
+	if (!pPrototype)
+	{
+		Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
+		return nullptr;
+	}
+
+	return pPrototype->Clone();
+}
+
+CGameObject* CPrototype_Manager::Find_GameObject_Prototype(_hashcode hashcode)
+{
+	auto iter = m_GameObject_Prototypes.find(hashcode);
+
+	if (iter == m_GameObject_Prototypes.end())
 		return nullptr;
 
 	return iter->second;
 }
 
+CComponent* CPrototype_Manager::Find_Component_Prototype(_hashcode hashcode)
+{
+	auto iter = m_Component_Prototypes.find(hashcode);
+
+	if (iter == m_Component_Prototypes.end())
+		return nullptr;
+
+	return iter->second;
+}
+
+
 void CPrototype_Manager::Release()
 {
-	for (auto iter = m_Prototypes.begin(); iter != m_Prototypes.end(); ++iter)
+	for (auto iter = m_GameObject_Prototypes.begin(); iter != m_GameObject_Prototypes.end(); ++iter)
 	{
-		iter->second->Destory_Instance();
+		delete iter->second;
 	}
 
-	m_Prototypes.clear();
+	m_GameObject_Prototypes.clear();
+
+	for (auto iter = m_Component_Prototypes.begin(); iter != m_Component_Prototypes.end(); ++iter)
+	{
+		delete iter->second;
+	}
+
+	m_Component_Prototypes.clear();
 }

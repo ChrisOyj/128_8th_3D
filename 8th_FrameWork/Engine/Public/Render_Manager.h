@@ -8,7 +8,7 @@ BEGIN(Engine)
 class CRenderer;
 class CMeshRenderer;
 
-class ENGINE_DLL CRender_Manager final : public CManager
+class ENGINE_DLL CRender_Manager
 {
 	DECLARE_SINGLETON(CRender_Manager);
 
@@ -17,22 +17,19 @@ private:
 	virtual ~CRender_Manager() = default;
 
 public:
-	void		Set_CurLightDir(_float3 vLightDir);
-
-public:
-	HRESULT		Add_Renderer(RENDERGROUP eGroup, CRenderer* pRenderer);
+	HRESULT		Add_Renderer(RENDER_ID eGroup, CRenderer* pRenderer);
 
 public:
 	HRESULT		Render();
 
 private:
 	list<CRenderer*>							m_Renderers[RENDER_END];
-	list<pair<_float, CMeshRenderer*>>			m_AlphaRenderers;
+	list<pair<_float, CRenderer*>>				m_pAlphaRenderers;
 
 	
 
 private:
-	HRESULT		Render_Group(RENDERGROUP eGroup);
+	HRESULT		Render_Group(RENDER_ID eGroup);
 	void		Sort_AlphaList();
 
 	

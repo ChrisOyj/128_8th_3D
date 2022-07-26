@@ -3,11 +3,7 @@
 #include "Transform.h"
 #include "GameInstance.h"
 #include "Physics.h"
-
-#include "MeshRenderer.h"
 #include "Collider.h"
-
-#include "Mesh.h"
 #include "ParticleSystem.h"
 
 #pragma region Constructor, Destructor
@@ -50,7 +46,7 @@ CGameObject * CGameObject::Get_RootParent()
 	}
 }
 
-void CGameObject::Set_Enable(bool bEnable)
+void CGameObject::Set_Enable(_bool bEnable)
 {
 	if (m_bEnable == bEnable)
 		return;
@@ -62,7 +58,6 @@ void CGameObject::Set_Enable(bool bEnable)
 void CGameObject::Tick()
 {
 	//============ My Update ==============
-	My_Tick();
 
 	for (auto& elem : m_pComponents)
 		elem->Tick();
@@ -72,7 +67,7 @@ void CGameObject::Tick()
 	//=============== Children's Update ==============
 	for (auto& elem : m_pChildren)
 	{
-		if (elem->IsValid())
+		if (elem->Is_Valid())
 			elem->Tick();
 	}
 	//==============================================
@@ -81,11 +76,20 @@ void CGameObject::Tick()
 void CGameObject::Late_Tick()
 {
 	//============ My Update ==============
-	My_LateTick();
-	My_TimerTick();
+	for (auto iter = m_pComponents.begin(); iter != m_pComponents.end();)
+	{
+		CComponent* pComponent = *iter;
 
-	for (auto& elem : m_pComponents)
-		elem->Late_Tick();
+		if (pComponent->Is_Dead())
+			iter = m_pComponents.erase(iter);
+		else
+		{
+			if (!pComponent->Is_Disable())
+				pComponent->Late_Tick();
+
+			++iter;
+		}
+	}
 	//======================================
 
 	//=============== Children's Update ==============
@@ -94,17 +98,18 @@ void CGameObject::Late_Tick()
 		//if Instance is dead, get rid of it from list m_pChildren
 		CGameObject* pChild = *iter;
 
-		if (pChild->IsDead())
+		if (pChild->Is_Dead())
 			iter = m_pChildren.erase(iter);
 		else
 		{
-			if (!pChild->IsDisable())
+			if (!pChild->Is_Disable())
 				pChild->Late_Tick();
 
 			++iter;
 		}
 	}
 	//==============================================
+	My_TimerTick();
 
 }
 #pragma endregion
@@ -168,113 +173,63 @@ void CGameObject::Add_Timer(const _float & fTime, const _uint & iEventNum, _bool
 	m_TimerEvents.push_back(tTimerEvent);
 }
 
-HRESULT CGameObject::SetUp_Transform(_float3 vScale, _byte parentFlag)
-{
-	m_pTransform->Set_Scale(vScale);
-	m_pTransform->Set_ParentFlag(parentFlag);
-
-	return S_OK;
-}
-
-HRESULT CGameObject::SetUp_Collider(_float3 vSize, COL_TYPE eColType, _float3 vOffsetPos, bool bSphere)
-{
-	CCollider* pCollider = CCollider::Create(vSize, eColType, vOffsetPos, bSphere);
-
-	if (!pCollider)
-		return E_FAIL;
-
-	Add_Component(pCollider);
-
-	return S_OK;
-}
-
-CMeshRenderer* CGameObject::SetUp_Renderer(PASS_TYPE eType, const MESH_TYPE& eMeshType,
-	const D3DXCOLOR& DiffuseColor, RENDERGROUP eGroup, const _float3& vSize, const _float3& vOffsetPos)
-{
-	CMeshRenderer* pRenderer = CMeshRenderer::Create(this, eType, eMeshType, DiffuseColor, eGroup, vSize, vOffsetPos);
-
-	if (!pRenderer)
-		return nullptr;
-
-	Add_Component(pRenderer);
-
-	return pRenderer;
-}
-
-CMeshRenderer* CGameObject::SetUp_Renderer(PASS_TYPE eType, CMesh * pMesh, RENDERGROUP eGroup, const _float3& vOffsetPos)
-{
-	CMeshRenderer* pRenderer = CMeshRenderer::Create(this, eType, pMesh, eGroup, vOffsetPos);
-
-	if (!pRenderer)
-		return nullptr;
-
-	Add_Component(pRenderer);
-
-	return pRenderer;
-}
-
-HRESULT CGameObject::SetUp_Renderer_Texture(TEX_TYPE eType, const _tchar * pFilePath, const _uint & iNumTextures)
-{
-	CMeshRenderer* pRenderer = Get_Component<CMeshRenderer>();
-
-	if (!pRenderer)
-		return E_FAIL;
-
-	if (FAILED(pRenderer->Bake_Texture(eType, pFilePath, iNumTextures)))
-		return E_FAIL;
-
-	return S_OK;
-}
-
-HRESULT CGameObject::SetUp_Renderer_Texture(CMeshRenderer * pRenderer, TEX_TYPE eType, const _tchar * pFilePath, const _uint & iNumTextures)
-{
-
-	if (FAILED(pRenderer->Bake_Texture(eType, pFilePath, iNumTextures)))
-		return E_FAIL;
-
-	return S_OK;
-}
-
-HRESULT CGameObject::SetUp_Physics()
-{
-	CPhysics* pPhysics = CPhysics::Create();
-
-	if (!pPhysics)
-		return E_FAIL;
-
-	Add_Component(pPhysics);
-
-	return S_OK;
-}
-
-CParticleSystem* CGameObject::SetUp_ParticleSystem(const _tchar * pTextureFilePath, PARTICLE_PASS_TYPE ePassType,
-	PARTICLE_TYPE eParticleType, _float3 vRandomRange_ParticlesPos,
-	_float3 vRandomRange_ParticlesDir, _float3 vRandomRange_ParticlesScale, _float4 vRandomRange_ParticlesColor
-	,_float fRandomRange_ParticlesSpeed, _float fRandomRange_ParticlesFadeOutSpeed)
-{
-
-	CParticleSystem*	pParticleSystem = CParticleSystem::Create(this, pTextureFilePath, ePassType,
-		eParticleType, vRandomRange_ParticlesPos, vRandomRange_ParticlesDir,
-		vRandomRange_ParticlesScale, vRandomRange_ParticlesColor, fRandomRange_ParticlesSpeed, fRandomRange_ParticlesFadeOutSpeed);
-
-	if (!pParticleSystem)
-		return nullptr;
-
-	Add_Component(pParticleSystem);
-
-
-	return pParticleSystem;
-}
-
 void CGameObject::Release()
 {
 	for (auto iter = m_pComponents.begin(); iter != m_pComponents.end(); ++iter)
-		(*iter)->Destory_Instance();
+		delete (*iter);
 
 	m_pComponents.clear();
 
 	for (auto iter = m_pChildren.begin(); iter != m_pChildren.end(); ++iter)
-		(*iter)->Destory_Instance();
+		delete (*iter);
 
 	m_pChildren.clear();
+}
+
+void CGameObject::Call_CollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint)
+{
+	for (auto& pChild : m_pChildren)
+		pChild->OnCollisionEnter(pGameObject, iColType, vColPoint);
+}
+
+void CGameObject::Call_CollisionStay(CGameObject* pGameObject, const _uint& iColType)
+{
+	for (auto& pChild : m_pChildren)
+		pChild->OnCollisionStay(pGameObject, iColType);
+}
+
+void CGameObject::Call_CollisionExit(CGameObject* pGameObject, const _uint& iColType)
+{
+	for (auto& pChild : m_pChildren)
+		pChild->OnCollisionExit(pGameObject, iColType);
+}
+
+void CGameObject::Call_PickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal)
+{
+	for (auto& pChild : m_pChildren)
+		pChild->Call_PickingEvent(vPickedPos, vPickedNormal);
+}
+
+void CGameObject::Call_TimerEvent(const _uint& iEventNum)
+{
+	for (auto& pChild : m_pChildren)
+		pChild->Call_TimerEvent(iEventNum);
+}
+
+void CGameObject::Call_Enable()
+{
+	for (auto& pChild : m_pChildren)
+		pChild->Set_Enable(true);
+
+	for (auto& pComponent : m_pComponents)
+		pComponent->Set_Enable(true);
+}
+
+void CGameObject::Call_Disable()
+{
+	for (auto& pChild : m_pChildren)
+		pChild->Set_Enable(false);
+
+	for (auto& pComponent : m_pComponents)
+		pComponent->Set_Enable(false);
 }
