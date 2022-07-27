@@ -4,21 +4,23 @@
 #include "GameObject.h"
 #include "Transform.h"
 
+#include "Collision_Manager.h"
 #include "Prototype_Manager.h"
 
-_uint CCollider::g_iNextID = 0;
+_uint	CCollider::g_iNextID = 0;
+
 
 CCollider::CCollider()
 	: m_iID(g_iNextID++)
 {
 	//ZeroMemory(&m_tObbInfo, sizeof(OBBINFO));
 }
+
 CCollider::CCollider(const CCollider& origin)
 	: CComponent(origin)
 	, m_iID(g_iNextID++)
 {
 }
-
 
 CCollider::~CCollider()
 {

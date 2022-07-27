@@ -80,10 +80,11 @@ CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 		return nullptr;
 	}
 
+
 	if (m_pCurCam)
-		DISABLE(m_pCurCam);
+		DISABLE_GAMEOBJECT(m_pCurCam);
 	
-	ENABLE(iter->second);
+	ENABLE_GAMEOBJECT(iter->second);
 	m_pCurCam = iter->second;
 	Make_ViewMatrix();
 	Make_ProjMatrix();
@@ -94,7 +95,7 @@ CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 void CCamera_Manager::Add_Camera(wstring strKey, CCamera * pCamera)
 {
 	m_mapCam.emplace(HASHCODE(strKey), pCamera);
-	DISABLE(pCamera);
+	DISABLE_GAMEOBJECT(pCamera);
 }
 
 void CCamera_Manager::Make_ViewMatrix()

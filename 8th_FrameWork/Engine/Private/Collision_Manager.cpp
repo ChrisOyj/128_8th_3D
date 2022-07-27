@@ -162,7 +162,7 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 	list<CCollider*>& LeftList = m_pColliderList[_eLeft];
 	list<CCollider*>& RightList = m_pColliderList[_eRight];
 
-	map<_ulonglong, bool>::iterator iter;
+	map<_ulonglong, _bool>::iterator iter;
 
 	for (auto LeftIter = LeftList.begin(); LeftIter != LeftList.end(); ++LeftIter)
 	{
@@ -228,15 +228,15 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 
 bool CCollision_Manager::Is_Collision(CCollider* _pLeft, CCollider* _pRight)
 {
-	if (_pLeft->Get_ColType() == COL_SPHERE && _pRight->Get_ColType() == COL_SPHERE)
+	if (_pLeft->Get_ColType() == CT_SPHERE && _pRight->Get_ColType() == CT_SPHERE)
 	{
 		return Is_SphereCollision(_pLeft, _pRight);
 	}
-	else if (_pLeft->Get_ColType() == COL_SPHERE && _pRight->Get_ColType() == COL_BOX)
+	else if (_pLeft->Get_ColType() == CT_SPHERE && _pRight->Get_ColType() == CT_BOX)
 	{
 		return Is_OBBtoSphereCollision(_pRight, _pLeft);
 	}
-	else if (_pLeft->Get_ColType() == COL_BOX && _pRight->Get_ColType() == COL_SPHERE)
+	else if (_pLeft->Get_ColType() == CT_BOX && _pRight->Get_ColType() == CT_SPHERE)
 	{
 		return Is_OBBtoSphereCollision(_pLeft, _pRight);
 	}

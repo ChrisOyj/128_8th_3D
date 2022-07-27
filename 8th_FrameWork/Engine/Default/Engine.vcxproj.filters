@@ -163,15 +163,6 @@
     <ClCompile Include="..\Private\Particle.cpp">
       <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Particle_Cube.cpp">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Particle_Default.cpp">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Particle_Pop.cpp">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\ParticleSystem.cpp">
       <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
     </ClCompile>
@@ -278,15 +269,6 @@
       <Filter>02. Singleton\02. Design\10. Load_Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Particle.h">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Particle_Cube.h">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Particle_Default.h">
-      <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Particle_Pop.h">
       <Filter>03. Utility\03. Component\07. ParticleSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\ParticleSystem.h">

@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "Client.h"
-#include "MainApp.h"
+#include "../Public/MainApp.h"
 
 #define MAX_LOADSTRING 100
 

@@ -14,11 +14,29 @@ CLevel_Manager::~CLevel_Manager()
 	Release();
 }
 
+HRESULT CLevel_Manager::Reserve_Level(const _uint& iLevelSize)
+{
+	m_arrLevels.reserve(iLevelSize);
+	
+	for (_uint i = 0; i < iLevelSize; ++i)
+		m_arrLevels.push_back(nullptr);
+
+	return S_OK;
+}
+
 HRESULT CLevel_Manager::Add_Level(CLevel* pLevel)
 {
 	m_arrLevels.push_back(pLevel);
 
 	return S_OK;
+}
+
+_bool CLevel_Manager::Is_AllLevelsReady()
+{
+	if (m_arrLevels.back() == nullptr)
+		return false;
+
+	return true;
 }
 
 void CLevel_Manager::Tick()

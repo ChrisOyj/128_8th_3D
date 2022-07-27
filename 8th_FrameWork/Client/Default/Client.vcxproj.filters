@@ -13,12 +13,18 @@
     <Filter Include="99. Default">
       <UniqueIdentifier>{2cca241f-8c9f-450d-b985-eb6cc299ca45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Module">
+      <UniqueIdentifier>{3a1e0950-c04f-4e31-b459-23f0ecae319d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Module\00. Functor">
+      <UniqueIdentifier>{38c211c4-91bd-4027-8676-a7f2b2c6986d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Level\01. Level_Default">
+      <UniqueIdentifier>{e0d5f43e-865c-4723-ad7a-4a1407ef5e12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
-      <Filter>99. Default</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
       <Filter>99. Default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -39,6 +45,21 @@
     <ClInclude Include="..\Public\MainApp.h">
       <Filter>01. MainApp</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99. Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Client_Macro.h">
+      <Filter>00. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Client_Struct.h">
+      <Filter>00. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Functor.h">
+      <Filter>03. Module\00. Functor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Default.h">
+      <Filter>02. Level\01. Level_Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -54,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\MainApp.cpp">
       <Filter>01. MainApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Functor.cpp">
+      <Filter>03. Module\00. Functor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Default.cpp">
+      <Filter>02. Level\01. Level_Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

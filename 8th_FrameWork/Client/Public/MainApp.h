@@ -7,7 +7,7 @@ END
 
 BEGIN(Client)
 //class CGameInstance;
-class CMainApp final
+class CMainApp
 {
 	DECLARE_SINGLETON(CMainApp)
 
@@ -25,6 +25,8 @@ private:
 private:
 	HRESULT Render();
 	void	Release();
+	HRESULT	SetUp_Engine();
+	HRESULT	SetUp_Levels();
 };
 
 END

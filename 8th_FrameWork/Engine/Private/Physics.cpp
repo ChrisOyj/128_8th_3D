@@ -17,7 +17,7 @@ CPhysics::~CPhysics()
 
 CPhysics * CPhysics::Create( )
 {
-	CPhysics* pPhysics = GET_CLONE(CPhysics);
+	CPhysics* pPhysics = CLONE_COMPONENT(CPhysics);
 	
 	if (!pPhysics)
 		return nullptr;
@@ -35,7 +35,6 @@ CPhysics * CPhysics::Create( )
 void CPhysics::Set_Jump(const _float& fJumpPower)
 {
 	m_tPhysics.bAir = true;
-	m_tPhysics.bOnBuilding = false;
 	m_tPhysics.fAcc = 0.f;
 	m_tPhysics.fOriginY = m_pOwner->Get_Transform()->Get_MyWorld(WORLD_POS).y;
 
@@ -66,24 +65,12 @@ void CPhysics::Late_Tick()
 {
 }
 
-void CPhysics::Turn(const _float4 & vTurnDir, const _float & fTurnSpeed)
+void CPhysics::OnEnable()
 {
-	CTransform*	pTransform = m_pOwner->Get_Transform();
+}
 
-	_float4		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
-	_float4		vUp = pTransform->Get_MyWorld(WORLD_UP);
-	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
-
-	_float4x4	RotationMatrix;
-	D3DXMatrixRotationAxis(&RotationMatrix, &vTurnDir, fTurnSpeed * fDT);
-
-	vRight.Multiply(RotationMatrix, true);
-	vUp.Multiply(RotationMatrix, true);
-	vLook.Multiply(RotationMatrix, true);
-
-	pTransform->Set_World(WORLD_RIGHT, vRight);
-	pTransform->Set_World(WORLD_UP, vUp);
-	pTransform->Set_World(WORLD_LOOK, vLook);
+void CPhysics::OnDisable()
+{
 }
 
 void CPhysics::Release()
@@ -96,7 +83,7 @@ void CPhysics::Move()
 		return;
 
 	_float4 vPos = m_pOwner->Get_Transform()->Get_MyWorld(WORLD_POS);
-	vPos += m_tPhysics.fSpeed * m_tPhysics.vDir * fDT;
+	vPos += m_tPhysics.vDir * m_tPhysics.fSpeed * fDT;
 	m_pOwner->Get_Transform()->Set_World(WORLD_POS, vPos);
 }
 
@@ -122,21 +109,21 @@ void CPhysics::Free_Fall()
 
 void CPhysics::Turn()
 {
-	if (m_tPhysics.vTurnDir == 0.f)
+	if (m_tPhysics.vTurnDir.Is_Zero())
 		return;
 
 	CTransform*	pTransform = m_pOwner->Get_Transform();
 
-	_float4		vRight = pTransform->Get_MyWorld(WORLD_RIGHT);
-	_float4		vUp = pTransform->Get_MyWorld(WORLD_UP);
-	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK);
-
+	_float4		vRight = pTransform->Get_MyWorld(WORLD_RIGHT).Normalize();
+	_float4		vUp = pTransform->Get_MyWorld(WORLD_UP).Normalize();
+	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK).Normalize();
+	
 	_float4x4	RotationMatrix;
-	D3DXMatrixRotationAxis(&RotationMatrix, &m_tPhysics.vTurnDir, m_tPhysics.fTurnSpeed * fDT);
+	RotationMatrix = XMMatrixRotationAxis(m_tPhysics.vTurnDir.XMVector(), m_tPhysics.fTurnSpeed * fDT);
 
-	vRight.Multiply(RotationMatrix, true);
-	vUp.Multiply(RotationMatrix, true);
-	vLook.Multiply(RotationMatrix, true);
+	vRight *= RotationMatrix;
+	vUp *= RotationMatrix;
+	vLook *= RotationMatrix;
 
 	pTransform->Set_World(WORLD_RIGHT, vRight);
 	pTransform->Set_World(WORLD_UP, vUp);

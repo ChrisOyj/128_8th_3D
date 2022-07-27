@@ -4,6 +4,10 @@ CComponent::CComponent( )
 {
 }
 
+CComponent::~CComponent()
+{
+}
+
 void CComponent::Set_Enable(_bool bEnable)
 {
 	if (m_bEnable == bEnable)

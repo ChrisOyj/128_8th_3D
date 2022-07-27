@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "GameInstance.h"
 #include "Renderer.h"
+#include "Camera_Manager.h"
 
 CRender_Manager::CRender_Manager()
 {
@@ -28,7 +29,7 @@ HRESULT CRender_Manager::Add_Renderer(RENDER_ID eGroup, CRenderer* pRenderer)
 
 HRESULT CRender_Manager::Render()
 {
-
+	return S_OK;
 }
 
 HRESULT CRender_Manager::Render_Group(RENDER_ID eGroup)
@@ -53,5 +54,5 @@ void CRender_Manager::Sort_AlphaList()
 		elem.first = fDistance;
 	}
 
-	m_pAlphaRenderers.sort(greater<pair<_float, CMeshRenderer*>>());
+	m_pAlphaRenderers.sort(greater<pair<_float, CRenderer*>>());
 }

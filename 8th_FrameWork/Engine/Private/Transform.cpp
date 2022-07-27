@@ -19,7 +19,7 @@ CTransform::~CTransform()
 
 CTransform * CTransform::Create()
 {
-	CTransform* pTransform = GET_CLONE(CTransform);
+	CTransform* pTransform = CLONE_COMPONENT(CTransform);
 	
 	if (!pTransform)
 		return nullptr;

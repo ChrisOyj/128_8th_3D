@@ -1,5 +1,18 @@
 #include "..\Public\GameInstance.h"
 
+#include "Graphic_Device.h"
+#include "Level_Manager.h"
+#include "Object_Manager.h"
+#include "Render_Manager.h"
+#include "Event_Manager.h"
+#include "Time_Manager.h"
+#include "Key_Manager.h"
+#include "Camera_Manager.h"
+#include "Collision_Manager.h"
+#include "ZFrustum.h"
+#include "Sound_Device.h"
+#include "Input_Device.h"
+#include "Picking_Manager.h"
 
 #define MGR(type) type::Get_Instance()
 
@@ -174,8 +187,23 @@ void CGameInstance::Set_ChannelVolume(CHANNEL_GROUP eID, const _uint& iChannelIn
 	MGR(CSound_Device)->Set_ChannelVolume(eID, iChannelIndex, fVolume);
 }
 
+HRESULT CGameInstance::Reserve_Level(const _uint& iLevelSize)
+{
+	return MGR(CLevel_Manager)->Reserve_Level(iLevelSize);
+}
 
-_double CGameInstance::Get_DT(bool bReal)
+HRESULT CGameInstance::Add_Level(CLevel* pLevel)
+{
+	return MGR(CLevel_Manager)->Add_Level(pLevel);
+}
+
+_bool CGameInstance::Is_AllLevelsReady()
+{
+	return MGR(CLevel_Manager)->Is_AllLevelsReady();
+}
+
+
+_double CGameInstance::Get_DT(_bool bReal)
 {
 	return MGR(CTime_Manager)->Get_DT(bReal);
 }

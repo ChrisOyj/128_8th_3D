@@ -39,8 +39,8 @@ HRESULT CGraphic_Device::Ready_Graphic_Device(const GRAPHICDESC& GraphicDesc)
 	ZeroMemory(&ViewPortDesc, sizeof(D3D11_VIEWPORT));
 	ViewPortDesc.TopLeftX = 0;
 	ViewPortDesc.TopLeftY = 0;
-	ViewPortDesc.Width = GraphicDesc.iWinCX;
-	ViewPortDesc.Height = GraphicDesc.iWinCY;
+	ViewPortDesc.Width = (_float)GraphicDesc.iWinCX;
+	ViewPortDesc.Height = (_float)GraphicDesc.iWinCY;
 	ViewPortDesc.MinDepth = 0.f;
 	ViewPortDesc.MaxDepth = 1.f;
 
@@ -213,4 +213,6 @@ HRESULT CGraphic_Device::Release()
 		Call_MsgBox(L"Failed To Release : Device");
 		return E_FAIL;
 	}
+
+	return S_OK;
 }

@@ -2,6 +2,7 @@
 
 #include "GameInstance.h"
 #include "Transform.h"
+#include "Camera_Manager.h"
 #include "GameObject.h"
 
 #include "Renderer.h"

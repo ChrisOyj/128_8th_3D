@@ -2,6 +2,8 @@
 #include "GameInstance.h"
 #include "GameObject.h"
 
+#include "Render_Manager.h"
+
 CRenderer::CRenderer()
 	: m_eRenderGroup(RENDER_END)
 {
@@ -17,6 +19,11 @@ CRenderer::CRenderer(const CRenderer& _origin)
 CRenderer::~CRenderer()
 {
 	Release();
+}
+
+_float4 CRenderer::Get_WorldPosition()
+{
+	return _float4();
 }
 
 void CRenderer::Late_Tick()

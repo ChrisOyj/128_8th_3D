@@ -1,6 +1,7 @@
 #include "..\Public\Time_Manager.h"
 
 #include "GameInstance.h"
+#include "Key_Manager.h"
 
 CTime_Manager::CTime_Manager()
 {
