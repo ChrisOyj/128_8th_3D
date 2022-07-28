@@ -2,9 +2,9 @@
 #include "GameObject.h"
 
 #include "GameInstance.h"
-#include "Prototype_Manager.h"
 
-CTransform::CTransform()
+CTransform::CTransform(CGameObject* pOwner)
+	: CComponent(pOwner)
 {
 	ZeroMemory(&m_tTransform, sizeof(TRANSFORM));
 	m_tTransform.vScale = { 1.f, 1.f, 1.f };
@@ -17,20 +17,9 @@ CTransform::~CTransform()
 {
 }
 
-CTransform * CTransform::Create()
+CTransform* CTransform::Create(CGameObject* pOwner)
 {
-	CTransform* pTransform = CLONE_COMPONENT(CTransform);
-	
-	if (!pTransform)
-		return nullptr;
-
-	if (FAILED(pTransform->Initialize()))
-	{
-		Call_MsgBox(L"FAILED to Initialize : CTransform");
-		return nullptr;
-	}
-
-	return pTransform;
+	return new CTransform(pOwner);
 }
 
 _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
@@ -51,7 +40,7 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 		(*((_float4*)&WorldMat.r[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
 	}
 
-	if (matrixFlag & MATRIX_IDENTITY)
+	if (matrixFlag & MATRIX_TYPEENTITY)
 	{
 		WorldMat.Identity();
 	}

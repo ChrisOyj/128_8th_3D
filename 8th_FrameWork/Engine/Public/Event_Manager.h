@@ -16,17 +16,17 @@ private:
 	virtual ~CEvent_Manager();
 
 private:
-	enum EVENT_ID { EVENT_DELETE_OBJECT, EVENT_CREATE_OBJECT, EVENT_DELETE_COMPONENT, EVENT_CREATE_COMPONENT,
+	enum EVENT_TYPE { EVENT_DELETE_OBJECT, EVENT_CREATE_OBJECT, EVENT_DELETE_COMPONENT, EVENT_CREATE_COMPONENT,
 		EVENT_CREATE_STATIC, EVENT_CHANGE_LEVEL, EVENT_DISABLE_OBJECT, EVENT_ENABLE_OBJECT, EVENT_DISABLE_COMPONENT, EVENT_ENABLE_COMPONENT,
 		EVENT_END};
 
 	typedef struct tag_Event_Info
 	{
-		EVENT_ID		eEven;
+		EVENT_TYPE		eEven;
 		DWORD_PTR		lParam;
 		DWORD_PTR		wParam;
 
-		tag_Event_Info(EVENT_ID _eEven, DWORD_PTR _lParam, DWORD_PTR _wParam)
+		tag_Event_Info(EVENT_TYPE _eEven, DWORD_PTR _lParam, DWORD_PTR _wParam)
 			: eEven(_eEven)
 			, lParam(_lParam)
 			, wParam(_wParam)
@@ -49,11 +49,11 @@ public:
 	void	Disable_Component(CComponent* pComponent);
 	void	Enable_Component(CComponent* pComponent);
 
-	void	Create_StaticObject(CGameObject* pGameObject, _hashcode hashcode);
-	void	Change_Level(_uint iLevelID);
+	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
+	void	Change_Level(CLevel* pLevel);
 
 private:
-	void	Add_Event(const EVENT_ID& eEven, const DWORD_PTR& lParam = 0, const DWORD_PTR& wParam = 0);
+	void	Add_Event(const EVENT_TYPE& eEven, const DWORD_PTR& lParam = 0, const DWORD_PTR& wParam = 0);
 	void	Execute(const EVENT& tEvent);
 
 private:

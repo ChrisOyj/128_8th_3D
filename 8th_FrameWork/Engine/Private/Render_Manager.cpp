@@ -10,7 +10,7 @@ CRender_Manager::CRender_Manager()
 {
 }
 
-HRESULT CRender_Manager::Add_Renderer(RENDER_ID eGroup, CRenderer* pRenderer)
+HRESULT CRender_Manager::Add_Renderer(RENDER_GROUP eGroup, CRenderer* pRenderer)
 {
 	if (eGroup >= RENDER_END ||
 		nullptr == pRenderer)
@@ -32,7 +32,7 @@ HRESULT CRender_Manager::Render()
 	return S_OK;
 }
 
-HRESULT CRender_Manager::Render_Group(RENDER_ID eGroup)
+HRESULT CRender_Manager::Render_Group(RENDER_GROUP eGroup)
 {
 	for (auto& elem : m_Renderers[eGroup])
 		if (FAILED(elem->Render()))

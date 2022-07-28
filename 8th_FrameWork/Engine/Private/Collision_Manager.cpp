@@ -91,7 +91,7 @@ HRESULT CCollision_Manager::Is_InIndex(const _uint& iIdx)
 {
 	if (iIdx < 0 || iIdx >= COL_END)
 	{
-		Call_MsgBox(L"Out of Range in COL_ID : CCollision_Manager ");
+		Call_MsgBox(L"Out of Range in COL_TYPE : CCollision_Manager ");
 		return E_FAIL;
 	}
 
@@ -109,8 +109,8 @@ map<_ulonglong, bool>::iterator CCollision_Manager::Find_PrevColInfo(const _uint
 	map<_ulonglong, bool>::iterator iter;
 
 	COLLIDER_ID ID;
-	ID.Left_id = _iLeftID;		// 4바이트
-	ID.Right_id = _iRightID;		// 4바이트
+	ID.Left_ID = _iLeftID;		// 4바이트
+	ID.Right_ID = _iRightID;		// 4바이트
 												//합쳐서 나온 8바이트는 절대 안겹침.
 
 	iter = m_mapColInfo.find(ID.ID);

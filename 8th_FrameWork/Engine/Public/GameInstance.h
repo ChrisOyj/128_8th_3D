@@ -21,8 +21,8 @@ private:
 	~CGameInstance();
 
 public: /*Get, Set*/
-	ID3D11Device*			Get_Device();
-	ID3D11DeviceContext*	Get_DeviceContext();
+	ComPtr<ID3D11Device>		Get_Device();
+	ComPtr<ID3D11DeviceContext>	Get_DeviceContext();
 
 public:
 	HRESULT Initialize_Engine(const GRAPHICDESC& GraphicDesc, const SOUNDDESC& SoundDesc);
@@ -47,16 +47,17 @@ public: /* For. Sound_Device */
 	void		Set_ChannelVolume(CHANNEL_GROUP eID, _float fVolume);
 	void		Set_ChannelVolume(CHANNEL_GROUP eID, const _uint& iChannelIndex, _float fVolume);
 
-public:	/* For. Level_Manager */
-	HRESULT	Reserve_Level(const _uint& iLevelSize);
-	HRESULT	Add_Level(CLevel* pLevel);
-	_bool	Is_AllLevelsReady();
-
 public: /* For. Time_Manager */
-	_double		Get_DT(_bool bReal = false);
+	_double		Get_DT();
 
 public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);
+
+public:	/* For. Object_Manager */
+	CGameObject* Get_StaticObj(const _uint& iKeyValue);
+	list<CGameObject*>& Get_ObjGroup(const _uint& iGroupIdx);
+
+
 
 public: /* For. Camera_Manager */
 	void		Add_Camera(wstring strKey, CCamera* pCamera);
@@ -77,8 +78,15 @@ public: /* For. Event_Manager */
 	void	Disable_Component(CComponent* pComponent);
 	void	Enable_Component(CComponent* pComponent);
 
-	void	Create_StaticObject(CGameObject* pGameObject, _hashcode hashcode);
-	void	Change_Level(_uint iLevelID);
+	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
+	void	Change_Level(CLevel* pLevel);
+
+public: /* For. Prototype_Manager */
+	CGameObject* Clone_GameObject(const _uint& _iID);
+	CComponent* Clone_Component(const _uint& _iID);
+
+	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
+	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
 
 private:
 	HRESULT	Initialize();

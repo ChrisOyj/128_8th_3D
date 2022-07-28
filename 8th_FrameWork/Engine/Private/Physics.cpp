@@ -5,7 +5,8 @@
 #include "GameInstance.h"
 #include "Prototype_Manager.h"
 
-CPhysics::CPhysics()
+CPhysics::CPhysics(CGameObject* pOwner)
+	: CComponent(pOwner)
 {
 	ZeroMemory(&m_tPhysics, sizeof(PHYSICS));
 }
@@ -15,19 +16,9 @@ CPhysics::~CPhysics()
 {
 }
 
-CPhysics * CPhysics::Create( )
+CPhysics * CPhysics::Create(CGameObject* pOwner)
 {
-	CPhysics* pPhysics = CLONE_COMPONENT(CPhysics);
-	
-	if (!pPhysics)
-		return nullptr;
-
-	if (FAILED(pPhysics->Initialize()))
-	{
-		Call_MsgBox(L"FAILED to Initialize : CPhysics");
-		return nullptr;
-	}
-
+	CPhysics* pPhysics = new CPhysics(pOwner);
 
 	return pPhysics;
 }

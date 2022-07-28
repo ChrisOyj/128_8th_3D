@@ -4,6 +4,8 @@
 #include "GameInstance.h"
 #include "CLevel_Default.h"
 
+#include "Loading_Manager.h"
+
 CMainApp::CMainApp()
 	: m_pGameInstance(CGameInstance::Get_Instance())
 {
@@ -19,12 +21,11 @@ HRESULT CMainApp::Initialize()
 	if (nullptr == m_pGameInstance)
 		return E_FAIL;
 
-	if (
-		FAILED(SetUp_Engine()) ||
-		FAILED(SetUp_Levels())
-		)
+	if (FAILED(SetUp_Engine()))
 		return E_FAIL;
 
+	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -46,6 +47,8 @@ HRESULT CMainApp::Render()
 {
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
+
+
 
 	return S_OK;
 }
@@ -80,19 +83,5 @@ HRESULT CMainApp::SetUp_Engine()
 
 HRESULT CMainApp::SetUp_Levels()
 {
-	CGameInstance::Get_Instance()->Reserve_Level(LEVEL_END);
-
-	CLevel* pLevel = CLevel_Default::Create(L"");
-	CGameInstance::Get_Instance()->Add_Level(pLevel);
-
-
-
-
-	if (false == CGameInstance::Get_Instance()->Is_AllLevelsReady())
-		return E_FAIL;
-
-
-	m_pGameInstance->Change_Level(LEVEL_LOGO);
-
 	return S_OK;
 }

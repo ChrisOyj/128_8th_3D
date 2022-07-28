@@ -13,6 +13,7 @@
 #include "Sound_Device.h"
 #include "Input_Device.h"
 #include "Picking_Manager.h"
+#include "Prototype_Manager.h"
 
 #define MGR(type) type::Get_Instance()
 
@@ -25,12 +26,12 @@ CGameInstance::~CGameInstance()
 	Release();
 }
 
-ID3D11Device*	CGameInstance::Get_Device()
+ComPtr<ID3D11Device>	CGameInstance::Get_Device()
 {
 	return MGR(CGraphic_Device)->Get_Device();
 }
 
-ID3D11DeviceContext* CGameInstance::Get_DeviceContext()
+ComPtr<ID3D11DeviceContext> CGameInstance::Get_DeviceContext()
 {
 	return MGR(CGraphic_Device)->Get_DeviceContext();
 }
@@ -187,30 +188,24 @@ void CGameInstance::Set_ChannelVolume(CHANNEL_GROUP eID, const _uint& iChannelIn
 	MGR(CSound_Device)->Set_ChannelVolume(eID, iChannelIndex, fVolume);
 }
 
-HRESULT CGameInstance::Reserve_Level(const _uint& iLevelSize)
+_double CGameInstance::Get_DT()
 {
-	return MGR(CLevel_Manager)->Reserve_Level(iLevelSize);
-}
-
-HRESULT CGameInstance::Add_Level(CLevel* pLevel)
-{
-	return MGR(CLevel_Manager)->Add_Level(pLevel);
-}
-
-_bool CGameInstance::Is_AllLevelsReady()
-{
-	return MGR(CLevel_Manager)->Is_AllLevelsReady();
-}
-
-
-_double CGameInstance::Get_DT(_bool bReal)
-{
-	return MGR(CTime_Manager)->Get_DT(bReal);
+	return MGR(CTime_Manager)->Get_DT();
 }
 
 KEY_STATE CGameInstance::Get_KeyState(KEY _key)
 {
 	return MGR(CKey_Manager)->Get_KeyState(_key);
+}
+
+CGameObject* CGameInstance::Get_StaticObj(const _uint& iKeyValue)
+{
+	return MGR(CObject_Manager)->Get_StaticObj(iKeyValue);
+}
+
+list<CGameObject*>& CGameInstance::Get_ObjGroup(const _uint& iGroupIdx)
+{
+	return MGR(CObject_Manager)->Get_ObjGroup(iGroupIdx);
 }
 
 void CGameInstance::Add_Camera(wstring strKey, CCamera * pCamera)
@@ -277,12 +272,32 @@ void CGameInstance::Enable_Component(CComponent* pComponent)
 
 }
 
-void CGameInstance::Create_StaticObject(CGameObject * pGameObject, _hashcode hashcode)
+void CGameInstance::Create_StaticObject(CGameObject * pGameObject, const _uint& iObjectID)
 {
-	MGR(CEvent_Manager)->Create_StaticObject(pGameObject, hashcode);
+	MGR(CEvent_Manager)->Create_StaticObject(pGameObject, iObjectID);
 }
 
-void CGameInstance::Change_Level(_uint iLevelID)
+void CGameInstance::Change_Level(CLevel* pLevel)
 {
-	MGR(CEvent_Manager)->Change_Level(iLevelID);
+	MGR(CEvent_Manager)->Change_Level(pLevel);
+}
+
+CGameObject* CGameInstance::Clone_GameObject(const _uint& _iID)
+{
+	return MGR(CPrototype_Manager)->Clone_GameObject(_iID);
+}
+
+CComponent* CGameInstance::Clone_Component(const _uint& _iID)
+{
+	return MGR(CPrototype_Manager)->Clone_Component(_iID);
+}
+
+HRESULT CGameInstance::Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject)
+{
+	return MGR(CPrototype_Manager)->Add_GameObject_Prototype(_iID, pGameObject);
+}
+
+HRESULT CGameInstance::Add_Component_Prototype(const _uint& _iID, CComponent* pComponent)
+{
+	return MGR(CPrototype_Manager)->Add_Component_Prototype(_iID, pComponent);
 }

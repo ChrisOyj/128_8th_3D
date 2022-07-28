@@ -1,6 +1,14 @@
 #pragma once
 namespace Client
 {
+	enum PROTOTYPE_ID_TYPE
+	{
+		ID_LEVEL,
+		ID_GAMEOBJECT,
+		ID_COMPONENT,
+		ID_END
+	};
+
 	enum CHANNEL_CLIENT
 	{
 		CHANNEL_BGM,
@@ -11,12 +19,17 @@ namespace Client
 		CHANNEL_END = CH_GROUP_END
 	};
 
-	enum GROUP_ID_CLIENT
+	enum OBJ_GROUP_CLIENT
 	{
-		GROUPID_END = GR_END
+		GROUP_STATIC,
+		GROUP_ENEMY,
+		GROUP_DECORATION,
+		GROUP_PROP,
+
+		GROUP_END = GR_END
 	};
 
-	enum LEVEL_ID_CLIENT
+	enum LEVEL_TYPE_CLIENT
 	{
 		LEVEL_LOGO,
 		LEVEL_MAINMENU,

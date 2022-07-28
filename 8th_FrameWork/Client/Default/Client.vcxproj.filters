@@ -7,20 +7,65 @@
     <Filter Include="01. MainApp">
       <UniqueIdentifier>{d33d1112-27ac-4863-8d1a-000ce3248c36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Level">
-      <UniqueIdentifier>{4024bbdb-c656-4a43-bb70-c99eb58d9c76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="99. Default">
       <UniqueIdentifier>{2cca241f-8c9f-450d-b985-eb6cc299ca45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Module">
+    <Filter Include="02. Design">
+      <UniqueIdentifier>{87686f36-0aff-4697-ac5b-7471e27f27d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module">
       <UniqueIdentifier>{3a1e0950-c04f-4e31-b459-23f0ecae319d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Module\00. Functor">
+    <Filter Include="04. Module\00. Functor">
       <UniqueIdentifier>{38c211c4-91bd-4027-8676-a7f2b2c6986d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Level\01. Level_Default">
+    <Filter Include="04. Module\01. Utility">
+      <UniqueIdentifier>{9f9b5dab-e6d0-40d6-ac81-1007a6b63467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module\01. Utility\Utility_Json">
+      <UniqueIdentifier>{7cb4f949-8cd1-461e-a24e-40a2e09bff27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances">
+      <UniqueIdentifier>{f9a7ca65-19b2-4707-8baf-8704fbfefdd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject">
+      <UniqueIdentifier>{fcc28956-43c8-4d1e-ab30-d5f4892f07d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level">
+      <UniqueIdentifier>{4024bbdb-c656-4a43-bb70-c99eb58d9c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\01. Level_Default">
       <UniqueIdentifier>{e0d5f43e-865c-4723-ad7a-4a1407ef5e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component">
+      <UniqueIdentifier>{97a9d4be-a63d-419b-84aa-7f691c038efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI">
+      <UniqueIdentifier>{2af18f2f-4a48-4919-8cee-dbbc2b2d1574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Simple_Image">
+      <UniqueIdentifier>{674ee092-13e8-4de8-ba20-9e74ade304ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\02. Unit">
+      <UniqueIdentifier>{5ace4eb0-2e8b-4956-9a87-e813c988962b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\01. Loading_Manager">
+      <UniqueIdentifier>{4f731315-f33d-4843-8fd4-2bd76f8c123e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\01. Loading_Manager\Level_Data">
+      <UniqueIdentifier>{4240e4ca-983d-4f21-8947-aae6b59042cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\02. Abstract_Factory">
+      <UniqueIdentifier>{91a7f978-fd46-42d9-be06-33f6f15a84c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\02. Abstract_Factory\Prototype_Factory">
+      <UniqueIdentifier>{0ce59ebf-4f5b-4e74-a1f0-e4cca01f6db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\02. Abstract_Factory\Component_Factory">
+      <UniqueIdentifier>{4f4e95c7-ac4f-4a95-b0db-ca91705434c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\02. Abstract_Factory\GameObject_Factory">
+      <UniqueIdentifier>{dd11ef68-6669-4e71-badb-f4c37280e699}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,10 +100,28 @@
       <Filter>00. Header</Filter>
     </ClInclude>
     <ClInclude Include="..\public\Functor.h">
-      <Filter>03. Module\00. Functor</Filter>
+      <Filter>04. Module\00. Functor</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CLevel_Default.h">
-      <Filter>02. Level\01. Level_Default</Filter>
+      <Filter>03. Instances\01. Level\01. Level_Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CUtility_Json.h">
+      <Filter>04. Module\01. Utility\Utility_Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CSimple_Image.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Simple_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Loading_Manager.h">
+      <Filter>02. Design\01. Loading_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CPrototype_Factory.h">
+      <Filter>02. Design\02. Abstract_Factory\Prototype_Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CComponent_Factory.h">
+      <Filter>02. Design\02. Abstract_Factory\Component_Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGameObject_Factory.h">
+      <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,10 +140,31 @@
       <Filter>01. MainApp</Filter>
     </ClCompile>
     <ClCompile Include="..\private\Functor.cpp">
-      <Filter>03. Module\00. Functor</Filter>
+      <Filter>04. Module\00. Functor</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CLevel_Default.cpp">
-      <Filter>02. Level\01. Level_Default</Filter>
+      <Filter>03. Instances\01. Level\01. Level_Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CUtility_Json.cpp">
+      <Filter>04. Module\01. Utility\Utility_Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CSimple_Image.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Simple_Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Loading_Manager.cpp">
+      <Filter>02. Design\01. Loading_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CPrototype_Factory.cpp">
+      <Filter>02. Design\02. Abstract_Factory\Prototype_Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CComponent_Factory.cpp">
+      <Filter>02. Design\02. Abstract_Factory\Component_Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99. Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGameObject_Factory.cpp">
+      <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

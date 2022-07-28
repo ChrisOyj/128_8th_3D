@@ -4,6 +4,15 @@
 
 BEGIN(Client)
 
+struct GameObejctData
+{
+	_uint	iPrototypeID = 0;
+	OBJ_GROUP_CLIENT	eGroupType = GROUP_END;
+	_float4 vStartPosition;
+	_float4 vStartLook;
+};
+
+
 class CLevel_Default
 	: public CLevel
 {
@@ -12,14 +21,21 @@ private:
 	virtual ~CLevel_Default();
 
 public:
-	static CLevel_Default* Create(const _tchar* strFilePath);
+	static CLevel_Default* Create(LEVEL_TYPE_CLIENT	eLevelID);
 
 public:
 	// CLevel을(를) 통해 상속됨
-	virtual void Enter() override;
+	virtual HRESULT Enter() override;
 	virtual void Tick() override;
+	virtual void Late_Tick() override;
 	virtual HRESULT Render() override;
-	virtual void Exit() override;
+	virtual HRESULT Exit() override;
+
+private:
+	list<GameObejctData>	m_tGameObjectDataList;
+
+private:
+	HRESULT				Create_GameObjectInLevel(const GameObejctData& tData);
 };
 
 END

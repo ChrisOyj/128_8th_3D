@@ -3,6 +3,8 @@
 
 BEGIN(Engine)
 
+class CGameObject;
+
 typedef struct tag_OBBInfo
 {
 	_float4 vOffsetPos;
@@ -65,17 +67,17 @@ typedef struct tag_OBBInfo
 #pragma endregion
 }COL_INFO_BOX;
 
-class CCollider_Box final
+class ENGINE_DLL CCollider_Box final
 	: public CCollider
 {
 	DECLARE_PROTOTYPE(CCollider_Box)
 
 private:
-	CCollider_Box();
+	CCollider_Box(CGameObject* pOwner);
 	virtual ~CCollider_Box();
 
 public:
-	static	CCollider_Box* Create(_float4 vSize, const _uint& iColIndex, _float4 vOffsetPos);
+	static	CCollider_Box* Create(CGameObject* pOwner, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos);
 
 public:
 	COL_INFO_BOX& Get_ColInfo() { return m_tColInfo; }

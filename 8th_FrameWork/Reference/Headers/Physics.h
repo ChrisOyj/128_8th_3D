@@ -7,15 +7,15 @@ typedef struct tag_Physics
 {
 	_float4	vDir;
 	_float4 vTurnDir;
-	_float	fSpeed;
-	_float	fTurnSpeed;
+	_float	fSpeed = 0.f;
+	_float	fTurnSpeed = 0.f;
 
-	_bool	bAir;
-	_float	fJumpPower;		// JumpPower for Cal
-	_float	fAcc;
-	_float	fPlusAcc;
-	_float	fGravity;
-	_float	fOriginY;
+	_bool	bAir = false;
+	_float	fJumpPower = 0.f;		// JumpPower for Cal
+	_float	fAcc = 0.f;
+	_float	fPlusAcc = 0.f;
+	_float	fGravity = 0.f;
+	_float	fOriginY = 0.f;
 
 }PHYSICS;
 
@@ -25,11 +25,11 @@ class ENGINE_DLL CPhysics final
 	DECLARE_PROTOTYPE(CPhysics)
 
 private:
-	CPhysics();
+	CPhysics(CGameObject* pOwner);
 	virtual ~CPhysics();
 
 public:
-	static	CPhysics*	Create();
+	static	CPhysics*	Create(CGameObject* pOwner);
 
 public:
 	PHYSICS&	Get_Physics() { return m_tPhysics; }

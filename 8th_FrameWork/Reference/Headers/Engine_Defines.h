@@ -34,6 +34,8 @@ using namespace DirectX;
 #include "fmod.h"
 #include "fmod.hpp"
 
+#include <wrl.h>
+using namespace Microsoft::WRL;
 using namespace std;
 
 
@@ -54,7 +56,7 @@ using namespace std;
 #ifndef DBG_NEW 
 
 #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
-#define new DBG_NEW 
+//#define new DBG_NEW 
 
 #endif
 

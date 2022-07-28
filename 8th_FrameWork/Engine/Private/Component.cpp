@@ -1,6 +1,8 @@
 #include "..\Public\Component.h"
+#include "GameObject.h"
 
-CComponent::CComponent( )
+CComponent::CComponent(CGameObject* pOwner)
+	: m_pOwner(pOwner)
 {
 }
 

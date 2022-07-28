@@ -11,9 +11,8 @@ class ENGINE_DLL CComponent abstract
 	friend class CGameObject;
 	friend class CPrototype_Manager;
 
-
 protected:
-	CComponent();
+	CComponent(CGameObject* pOwner);
 	virtual ~CComponent();
 
 public:
@@ -21,7 +20,7 @@ public:
 
 public:
 	CGameObject*	Get_Owner() { return m_pOwner; }
-	void	Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
+	void			Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
 
 	_bool				Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
 	_bool				Is_Dead() { return !m_bAlive; }
@@ -34,6 +33,7 @@ public:
 
 protected:
 	CGameObject*	m_pOwner = nullptr;
+	_uint			m_iID = 0;
 
 protected:
 	virtual	HRESULT	Initialize_Prototype() PURE;

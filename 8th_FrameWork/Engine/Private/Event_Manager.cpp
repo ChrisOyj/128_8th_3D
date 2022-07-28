@@ -6,7 +6,6 @@
 
 #include "Object_Manager.h"
 #include "Level_Manager.h"
-#include "Load_Manager.h"
 
 CEvent_Manager::CEvent_Manager()
 {
@@ -91,18 +90,18 @@ void CEvent_Manager::Enable_Component(CComponent* pComponent)
 	Add_Event(EVENT_ENABLE_COMPONENT, (DWORD_PTR)pComponent);
 }
 
-void CEvent_Manager::Create_StaticObject(CGameObject * pGameObject, _hashcode hashcode)
+void CEvent_Manager::Create_StaticObject(CGameObject * pGameObject, const _uint& iObjectID)
 {
-	Add_Event(EVENT_CREATE_STATIC, (DWORD_PTR)pGameObject, (DWORD_PTR)hashcode);
+	Add_Event(EVENT_CREATE_STATIC, (DWORD_PTR)pGameObject, (DWORD_PTR)iObjectID);
 
 }
 
-void CEvent_Manager::Change_Level(_uint iLevelID)
+void CEvent_Manager::Change_Level(CLevel* pLevel)
 {
-	Add_Event(EVENT_CHANGE_LEVEL, (DWORD_PTR)iLevelID);
+	Add_Event(EVENT_CHANGE_LEVEL, (DWORD_PTR)pLevel);
 }
 
-void CEvent_Manager::Add_Event(const EVENT_ID & eEven, const DWORD_PTR & lParam, const DWORD_PTR & wParam)
+void CEvent_Manager::Add_Event(const EVENT_TYPE & eEven, const DWORD_PTR & lParam, const DWORD_PTR & wParam)
 {
 	m_vecEvent.push_back(EVENT(eEven, lParam, wParam));
 }
@@ -136,8 +135,8 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 	case EVENT_CREATE_STATIC:
 	{
 		CGameObject* pGameObject = (CGameObject*)(tEvent.lParam);
-		_hashcode	hashcode = static_cast<_hashcode>(tEvent.wParam);
-		CObject_Manager::Get_Instance()->Add_StaticObject(pGameObject, hashcode);
+		_uint	iObjectID = static_cast<_uint>(tEvent.wParam);
+		CObject_Manager::Get_Instance()->Add_StaticObject(pGameObject, iObjectID);
 		pGameObject->Start_Components();
 
 	}
@@ -217,8 +216,8 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 
 	case EVENT_CHANGE_LEVEL:
 	{
-		_uint	iLevelID = static_cast<_uint>(tEvent.lParam);
-		CLevel_Manager::Get_Instance()->Open_Level(iLevelID);
+		CLevel*	pLevel = (CLevel*)(tEvent.lParam);
+		CLevel_Manager::Get_Instance()->Enter_Level(pLevel);
 	}
 	break;
 

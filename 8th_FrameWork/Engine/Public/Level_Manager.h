@@ -14,22 +14,16 @@ private:
 	virtual ~CLevel_Manager();
 
 public:
-	HRESULT	Reserve_Level(const _uint& iLevelSize);
-	HRESULT	Add_Level(CLevel* pLevel);
-	_bool	Is_AllLevelsReady();
-
-public:
 	void	Tick();
 	void	Late_Tick();
 	HRESULT	Render();
 
 private:
-	vector<CLevel*>			m_arrLevels;
-	_uint					m_iCurrentLevelID = 0;
+	CLevel*					m_pCurrentLevel = nullptr;
 
 private:
 	friend class CEvent_Manager;
-	HRESULT Open_Level(const _uint& iLevelID);
+	HRESULT Enter_Level(CLevel* pLevel);
 	void	Release();
 };
 

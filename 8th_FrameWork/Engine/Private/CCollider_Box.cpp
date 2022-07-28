@@ -4,7 +4,8 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-CCollider_Box::CCollider_Box()
+CCollider_Box::CCollider_Box(CGameObject* pOwner)
+	: CCollider(pOwner)
 {
 }
 
@@ -12,9 +13,9 @@ CCollider_Box::~CCollider_Box()
 {
 }
 
-CCollider_Box* CCollider_Box::Create(_float4 vSize, const _uint& iColIndex, _float4 vOffsetPos)
+CCollider_Box* CCollider_Box::Create(CGameObject* pOwner, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos)
 {
-	CCollider_Box* pCollider = CLONE_COMPONENT(CCollider_Box);
+	CCollider_Box* pCollider = new CCollider_Box(pOwner);
 
 	if (!pCollider)
 		return nullptr;
@@ -22,12 +23,6 @@ CCollider_Box* CCollider_Box::Create(_float4 vSize, const _uint& iColIndex, _flo
 	pCollider->Set_ColIndex(iColIndex);
 	pCollider->m_tColInfo = COL_INFO_BOX(vSize, vOffsetPos);
 	pCollider->m_eColType = CT_BOX;
-
-	if (FAILED(pCollider->Initialize()))
-	{
-		Call_MsgBox(L"FAILED to Initialize : CCollider_Box");
-		return nullptr;
-	}
 
 	return pCollider;
 }

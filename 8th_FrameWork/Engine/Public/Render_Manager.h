@@ -17,7 +17,7 @@ private:
 	virtual ~CRender_Manager() = default;
 
 public:
-	HRESULT		Add_Renderer(RENDER_ID eGroup, CRenderer* pRenderer);
+	HRESULT		Add_Renderer(RENDER_GROUP eGroup, CRenderer* pRenderer);
 
 public:
 	HRESULT		Render();
@@ -29,7 +29,7 @@ private:
 	
 
 private:
-	HRESULT		Render_Group(RENDER_ID eGroup);
+	HRESULT		Render_Group(RENDER_GROUP eGroup);
 	void		Sort_AlphaList();
 
 	

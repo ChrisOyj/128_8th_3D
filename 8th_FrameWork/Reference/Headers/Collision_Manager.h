@@ -9,8 +9,8 @@ union COLLIDER_ID
 {
 	struct
 	{
-		_uint Left_id;
-		_uint Right_id;
+		_uint Left_ID;
+		_uint Right_ID;
 	};
 	_ulonglong ID;
 

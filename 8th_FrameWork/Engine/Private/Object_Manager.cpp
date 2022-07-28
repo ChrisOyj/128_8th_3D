@@ -10,6 +10,18 @@ CObject_Manager::~CObject_Manager()
 	Release();
 }
 
+CGameObject* CObject_Manager::Get_StaticObj(const _uint& iKeyValue)
+{
+	auto iter = m_mapStaticObj.find(iKeyValue);
+	if (iter == m_mapStaticObj.end())
+	{
+		Call_MsgBox(L"Failed to find StaticObj : CObject_Manager");
+		return nullptr;
+	}
+
+	return iter->second;
+}
+
 void CObject_Manager::Tick()
 {
 	for (auto& elem : m_mapStaticObj)

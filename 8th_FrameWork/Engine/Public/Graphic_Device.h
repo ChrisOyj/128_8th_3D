@@ -12,8 +12,8 @@ private:
 	~CGraphic_Device();
 
 public:
-	ID3D11Device*			Get_Device(void) { return m_pDevice; }
-	ID3D11DeviceContext*	Get_DeviceContext(void) { return m_pDeviceContext; }
+	ComPtr<ID3D11Device>			Get_Device(void) { return m_pDevice; }
+	ComPtr<ID3D11DeviceContext>		Get_DeviceContext(void) { return m_pDeviceContext; }
 
 public:
 	HRESULT Ready_Graphic_Device(const GRAPHICDESC& GraphicDesc);
@@ -27,13 +27,13 @@ public:
 private:
 	HWND					m_mainhWnd = NULL;
 
-	ID3D11Device*			m_pDevice = nullptr;
-	ID3D11DeviceContext*	m_pDeviceContext = nullptr;
-	IDXGISwapChain*			m_pSwapChain = nullptr;
+	ComPtr<ID3D11Device>			m_pDevice;
+	ComPtr<ID3D11DeviceContext>		m_pDeviceContext;
+	ComPtr<IDXGISwapChain>			m_pSwapChain;
 
 	// ShaderResourceView
-	ID3D11RenderTargetView* m_pBackBufferRTV = nullptr;
-	ID3D11DepthStencilView* m_pDepthStencilView = nullptr;
+	ComPtr<ID3D11RenderTargetView> m_pBackBufferRTV;
+	ComPtr<ID3D11DepthStencilView> m_pDepthStencilView;
 
 private:
 	HRESULT Ready_SwapChain(HWND hWnd, GRAPHICDESC::WINMODE WinMode, _uint iWinCX, _uint iWinCY);

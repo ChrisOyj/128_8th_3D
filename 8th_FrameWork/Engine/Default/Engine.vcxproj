@@ -125,7 +125,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ThirdPartyLib/;../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Effects11d.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib</AdditionalDependencies>
+      <AdditionalDependencies>Effects11d.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTKd.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>
@@ -148,7 +148,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ThirdPartyLib/;../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Effects11.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib</AdditionalDependencies>
+      <AdditionalDependencies>Effects11.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTK.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>
@@ -170,7 +170,6 @@
     <ClCompile Include="..\Private\Key_Manager.cpp" />
     <ClCompile Include="..\Private\Level.cpp" />
     <ClCompile Include="..\Private\Level_Manager.cpp" />
-    <ClCompile Include="..\Private\Load_Manager.cpp" />
     <ClCompile Include="..\Private\Object_Manager.cpp" />
     <ClCompile Include="..\Private\Particle.cpp" />
     <ClCompile Include="..\Private\ParticleSystem.cpp" />
@@ -208,7 +207,6 @@
     <ClInclude Include="..\Public\Key_Manager.h" />
     <ClInclude Include="..\Public\Level.h" />
     <ClInclude Include="..\Public\Level_Manager.h" />
-    <ClInclude Include="..\Public\Load_Manager.h" />
     <ClInclude Include="..\Public\Object_Manager.h" />
     <ClInclude Include="..\Public\Particle.h" />
     <ClInclude Include="..\Public\ParticleSystem.h" />

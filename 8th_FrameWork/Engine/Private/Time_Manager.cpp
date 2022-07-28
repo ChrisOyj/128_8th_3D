@@ -35,13 +35,6 @@ void CTime_Manager::Tick()
 //
 //#endif
 
-	if (KEY(F3, TAP))
-	{
-		if (m_dTimeSpeed == 1.)
-			m_dTimeSpeed = 0.3;
-		else
-			m_dTimeSpeed = 1.;
-	}
 	
 }
 void CTime_Manager::Render()

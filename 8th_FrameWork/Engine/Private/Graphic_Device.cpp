@@ -33,7 +33,7 @@ HRESULT CGraphic_Device::Ready_Graphic_Device(const GRAPHICDESC& GraphicDesc)
 		return E_FAIL;
 
 	/* 장치에 바인드해놓을 렌더타겟들과 뎁스스텐실뷰를 셋팅한다. */
-	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBufferRTV, m_pDepthStencilView);
+	m_pDeviceContext->OMSetRenderTargets(1, m_pBackBufferRTV.GetAddressOf(), m_pDepthStencilView.Get());
 
 	D3D11_VIEWPORT			ViewPortDesc;
 	ZeroMemory(&ViewPortDesc, sizeof(D3D11_VIEWPORT));
@@ -55,7 +55,7 @@ HRESULT CGraphic_Device::Clear_BackBuffer_View(_float4 vClearColor)
 		return E_FAIL;
 
 	/* 백버퍼를 초기화하낟.  */
-	m_pDeviceContext->ClearRenderTargetView(m_pBackBufferRTV, (_float*)&vClearColor);
+	m_pDeviceContext->ClearRenderTargetView(m_pBackBufferRTV.Get(), (_float*)&vClearColor);
 
 
 
@@ -68,7 +68,7 @@ HRESULT CGraphic_Device::Clear_DepthStencil_View()
 	if (nullptr == m_pDeviceContext)
 		return E_FAIL;
 
-	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
 	return S_OK;
 }
@@ -112,7 +112,7 @@ HRESULT CGraphic_Device::Ready_SwapChain(HWND hWnd, GRAPHICDESC::WINMODE eWinMod
 	SwapChain.Windowed = eWinMode;
 	SwapChain.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
-	if (FAILED(pFactory->CreateSwapChain(m_pDevice, &SwapChain, &m_pSwapChain)))
+	if (FAILED(pFactory->CreateSwapChain(m_pDevice.Get(), &SwapChain, m_pSwapChain.GetAddressOf())))
 		return E_FAIL;
 
 	Safe_Release(pFactory);
@@ -172,7 +172,7 @@ HRESULT CGraphic_Device::Ready_DepthStencilRenderTargetView(_uint iWinCX, _uint 
 	/* ShaderResource */
 	/* DepthStencil */
 
-	if (FAILED(m_pDevice->CreateDepthStencilView(pDepthStencilTexture, nullptr, &m_pDepthStencilView)))
+	if (FAILED(m_pDevice->CreateDepthStencilView(pDepthStencilTexture, nullptr, m_pDepthStencilView.GetAddressOf())))
 		return E_FAIL;
 
 	Safe_Release(pDepthStencilTexture);
@@ -184,35 +184,11 @@ HRESULT CGraphic_Device::Ready_DepthStencilRenderTargetView(_uint iWinCX, _uint 
 
 HRESULT CGraphic_Device::Release()
 {
-	if (0 != Safe_Release(m_pSwapChain))
-	{
-		Call_MsgBox(L"Failed To Release : SwapChain");
-		return E_FAIL;
-	}
-
-	if (0 != Safe_Release(m_pDepthStencilView))
-	{
-		Call_MsgBox(L"Failed To Release : DSV");
-		return E_FAIL;
-	}
-
-	if (0 != Safe_Release(m_pBackBufferRTV))
-	{
-		Call_MsgBox(L"Failed To Release : RTV");
-		return E_FAIL;
-	}
-
-	if (0 != Safe_Release(m_pDeviceContext))
-	{
-		Call_MsgBox(L"Failed To Release : DeviceContext");
-		return E_FAIL;
-	}
-
-	if (0 != Safe_Release(m_pDevice))
-	{
-		Call_MsgBox(L"Failed To Release : Device");
-		return E_FAIL;
-	}
+	m_pSwapChain.Reset();
+	m_pBackBufferRTV.Reset();
+	m_pDepthStencilView.Reset();
+	m_pDeviceContext.Reset();
+	m_pDevice.Reset();
 
 	return S_OK;
 }

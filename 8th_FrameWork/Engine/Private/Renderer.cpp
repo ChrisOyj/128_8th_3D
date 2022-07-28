@@ -4,8 +4,10 @@
 
 #include "Render_Manager.h"
 
-CRenderer::CRenderer()
-	: m_eRenderGroup(RENDER_END)
+
+CRenderer::CRenderer(CGameObject* pOwner)
+	: CComponent(pOwner)
+	, m_eRenderGroup(RENDER_END)
 {
 }
 

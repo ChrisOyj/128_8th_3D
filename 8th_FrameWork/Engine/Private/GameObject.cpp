@@ -8,11 +8,7 @@
 #pragma region Constructor, Destructor
 CGameObject::CGameObject()
 {
-	/* GameObject must needs a Transform Component. */
-
-	m_pTransform = CTransform::Create();
-
-	Add_Component(m_pTransform);
+	m_pTransform = CTransform::Create(this);
 }
 
 CGameObject::CGameObject(const CGameObject & Prototype)
