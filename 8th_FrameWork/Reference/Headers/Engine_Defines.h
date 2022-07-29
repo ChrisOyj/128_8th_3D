@@ -11,6 +11,9 @@
 #include <DirectXMath.h>
 
 #include <Effects11/d3dx11effect.h>
+#include <DirectXTK/DDSTextureLoader.h>
+#include <DirectXTK/WICTextureLoader.h>
+
 #include <d3dcompiler.h>
 
 using namespace DirectX;
@@ -38,6 +41,7 @@ using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace std;
 
+#include <Delegate/Delegate.h>
 
 #include "Engine_Enum.h"
 #include "Engine_Typedef.h"
@@ -63,6 +67,7 @@ using namespace std;
 #endif // _DEBUG
 
 using namespace Engine;
+
 
 
 

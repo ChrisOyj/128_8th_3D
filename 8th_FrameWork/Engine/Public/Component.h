@@ -26,21 +26,29 @@ public:
 	_bool				Is_Dead() { return !m_bAlive; }
 	_bool				Is_Disable() { return !m_bEnable; }
 
+
 public:
-	virtual void	Start() {}
+	virtual	HRESULT	Initialize_Prototype() PURE;
+	virtual	HRESULT	Initialize() PURE;
+	virtual void	Start() { OnEnable(); }
 	virtual void	Tick() PURE;
 	virtual void	Late_Tick() PURE;
 
-protected:
-	CGameObject*	m_pOwner = nullptr;
-	_uint			m_iID = 0;
+public:
+	virtual void		OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint) {}
+	virtual void		OnCollisionStay(CGameObject* pGameObject, const _uint& iColType) {}
+	virtual void		OnCollisionExit(CGameObject* pGameObject, const _uint& iColType) {}
+
+	virtual void		OnPickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal = { 0.f,0.f,0.f }) {}
+	virtual void		OnTimerEvent(const _uint& iEventNum) {}
 
 protected:
-	virtual	HRESULT	Initialize_Prototype() PURE;
-	virtual	HRESULT	Initialize() PURE;
-	
-	virtual	void	OnEnable() PURE;
-	virtual	void	OnDisable() PURE;
+	CGameObject*	m_pOwner = nullptr;
+	_uint			m_iGroupID = 0;
+
+protected:
+	virtual	void	OnEnable();
+	virtual	void	OnDisable();
 
 	virtual	void	Release() PURE;
 

@@ -67,6 +67,9 @@
     <Filter Include="02. Design\02. Abstract_Factory\GameObject_Factory">
       <UniqueIdentifier>{dd11ef68-6669-4e71-badb-f4c37280e699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. ShaderFiles">
+      <UniqueIdentifier>{7e4a1fbd-7abb-4df9-8f71-7a882dc91bcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -123,6 +126,9 @@
     <ClInclude Include="..\public\CGameObject_Factory.h">
       <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CUI.h">
+      <Filter>03. Instances\02. GameObject\01. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -166,10 +172,18 @@
     <ClCompile Include="..\private\CGameObject_Factory.cpp">
       <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\CUI.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
       <Filter>99. Default</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTex.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

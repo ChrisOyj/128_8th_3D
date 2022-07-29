@@ -54,57 +54,57 @@ void CGameObject::Tick()
 {
 	//============ My Update ==============
 
-	for (auto& elem : m_pComponents)
-		elem->Tick();
+	//for (auto& elem : m_pComponents)
+		//elem->Tick();
 	//======================================
 
 
 	//=============== Children's Update ==============
-	for (auto& elem : m_pChildren)
-	{
-		if (elem->Is_Valid())
-			elem->Tick();
-	}
+	//for (auto& elem : m_pChildren)
+	//{
+	//	if (elem->Is_Valid())
+	//		elem->Tick();
+	//}
 	//==============================================
 }
 
 void CGameObject::Late_Tick()
 {
-	//============ My Update ==============
-	for (auto iter = m_pComponents.begin(); iter != m_pComponents.end();)
-	{
-		CComponent* pComponent = *iter;
+	////============ My Update ==============
+	//for (auto iter = m_pComponents.begin(); iter != m_pComponents.end();)
+	//{
+	//	CComponent* pComponent = *iter;
 
-		if (pComponent->Is_Dead())
-			iter = m_pComponents.erase(iter);
-		else
-		{
-			if (!pComponent->Is_Disable())
-				pComponent->Late_Tick();
+	//	if (pComponent->Is_Dead())
+	//		iter = m_pComponents.erase(iter);
+	//	else
+	//	{
+	//		if (!pComponent->Is_Disable())
+	//			pComponent->Late_Tick();
 
-			++iter;
-		}
-	}
-	//======================================
+	//		++iter;
+	//	}
+	//}
+	////======================================
 
-	//=============== Children's Update ==============
-	for (auto iter = m_pChildren.begin(); iter != m_pChildren.end();)
-	{
-		//if Instance is dead, get rid of it from list m_pChildren
-		CGameObject* pChild = *iter;
+	////=============== Children's Update ==============
+	//for (auto iter = m_pChildren.begin(); iter != m_pChildren.end();)
+	//{
+	//	//if Instance is dead, get rid of it from list m_pChildren
+	//	CGameObject* pChild = *iter;
 
-		if (pChild->Is_Dead())
-			iter = m_pChildren.erase(iter);
-		else
-		{
-			if (!pChild->Is_Disable())
-				pChild->Late_Tick();
+	//	if (pChild->Is_Dead())
+	//		iter = m_pChildren.erase(iter);
+	//	else
+	//	{
+	//		if (!pChild->Is_Disable())
+	//			pChild->Late_Tick();
 
-			++iter;
-		}
-	}
-	//==============================================
-	My_TimerTick();
+	//		++iter;
+	//	}
+	//}
+	////==============================================
+	//My_TimerTick();
 
 }
 #pragma endregion
@@ -130,42 +130,14 @@ void CGameObject::Start_Components()
 		pChild->Start_Components();
 }
 
-void CGameObject::My_TimerTick()
+void CGameObject::OnEnable()
 {
-	for (auto TimerIter = m_TimerEvents.begin(); TimerIter != m_TimerEvents.end();)
-	{
-		TimerIter->fCurTime -= fDT;
-
-		if (TimerIter->fCurTime <= 0.f)
-		{
-			OnTimerEvent(TimerIter->iEventNum);
-
-			if (TimerIter->bLoop)
-			{
-				TimerIter->fCurTime = TimerIter->fOriginTime;
-				++TimerIter;
-				continue;
-			}
-			else
-			{
-				TimerIter = m_TimerEvents.erase(TimerIter);
-				continue;
-			}
-		}
-
-		++TimerIter;
-	}
+	Call_Enable();
 }
 
-void CGameObject::Add_Timer(const _float & fTime, const _uint & iEventNum, _bool bLoop)
+void CGameObject::OnDisable()
 {
-	TIMER_EVENT	tTimerEvent;
-	tTimerEvent.fOriginTime = fTime;
-	tTimerEvent.fCurTime = tTimerEvent.fOriginTime;
-	tTimerEvent.iEventNum = iEventNum;
-	tTimerEvent.bLoop = bLoop;
-
-	m_TimerEvents.push_back(tTimerEvent);
+	Call_Disable();
 }
 
 void CGameObject::Release()
@@ -179,36 +151,6 @@ void CGameObject::Release()
 		delete (*iter);
 
 	m_pChildren.clear();
-}
-
-void CGameObject::Call_CollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint)
-{
-	for (auto& pChild : m_pChildren)
-		pChild->OnCollisionEnter(pGameObject, iColType, vColPoint);
-}
-
-void CGameObject::Call_CollisionStay(CGameObject* pGameObject, const _uint& iColType)
-{
-	for (auto& pChild : m_pChildren)
-		pChild->OnCollisionStay(pGameObject, iColType);
-}
-
-void CGameObject::Call_CollisionExit(CGameObject* pGameObject, const _uint& iColType)
-{
-	for (auto& pChild : m_pChildren)
-		pChild->OnCollisionExit(pGameObject, iColType);
-}
-
-void CGameObject::Call_PickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal)
-{
-	for (auto& pChild : m_pChildren)
-		pChild->Call_PickingEvent(vPickedPos, vPickedNormal);
-}
-
-void CGameObject::Call_TimerEvent(const _uint& iEventNum)
-{
-	for (auto& pChild : m_pChildren)
-		pChild->Call_TimerEvent(iEventNum);
 }
 
 void CGameObject::Call_Enable()
@@ -227,4 +169,13 @@ void CGameObject::Call_Disable()
 
 	for (auto& pComponent : m_pComponents)
 		pComponent->Set_Enable(false);
+}
+
+void CGameObject::Call_Dead()
+{
+	for (auto& pChild : m_pChildren)
+		pChild->Set_Dead();
+
+	for (auto& pComponent : m_pComponents)
+		pComponent->Set_Dead();
 }

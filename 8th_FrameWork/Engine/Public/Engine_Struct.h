@@ -34,12 +34,50 @@ namespace Engine
 #pragma endregion 
 
 #pragma region VERTEX
-	typedef struct tag_Vertex_Texture
+	typedef struct tagLineIndices32
 	{
-		_float4	vPosition;
-		_float2	vTexUV;
+		unsigned long _1, _2;
+	}LINEINDICES32;
 
-	}VERTEX_TEX;
+	typedef struct tagLineIndices16
+	{
+		unsigned short _1, _2;
+	}LINEINDICES16;
+
+	typedef struct tagFaceIndices32
+	{
+		unsigned long _1, _2, _3;
+	}FACEINDICES32;
+
+	typedef struct tagFaceIndices16
+	{
+		unsigned short _1, _2, _3;
+	}FACEINDICES16;
+
+
+	typedef struct tagVertex_Texture
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vTexUV;
+	}VTXTEX;
+
+	typedef struct ENGINE_DLL tagVertex_Texture_Declaration
+	{
+		static const unsigned int		iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXTEX_DECLARATION;
+
+	typedef struct tagVertex_Cube_Texture
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT3		vTexUV;
+	}VTXCUBETEX;
+
+	typedef struct ENGINE_DLL tagVertex_Cube_Texture_Declaration
+	{
+		static const unsigned int		iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXCUBETEX_DECLARATION;
 
 
 	//typedef		struct tag_Vertex_Normal

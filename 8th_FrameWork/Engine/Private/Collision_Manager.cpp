@@ -38,8 +38,7 @@ void CCollision_Manager::Tick()
 	{
 		for (auto iter = m_pColliderList[i].begin(); iter != m_pColliderList[i].end();)
 		{
-			if ((*iter)->Is_Dead() ||
-				(*iter)->Get_Owner()->Get_RootParent()->Is_Dead())
+			if (!(*iter)->Is_Valid())
 			{
 				iter = m_pColliderList[i].erase(iter);
 				++iter;
@@ -184,8 +183,8 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 			{
 				if (!(*LeftIter)->Is_Valid() || !(*RightIter)->Is_Valid()) // 둘중 하나가 유효하지 않을 경우
 				{
-					pLeftOwner->OnCollisionExit(pRightOwner, _eRight);
-					pRightOwner->OnCollisionExit(pLeftOwner, _eLeft);
+					pLeftOwner->CallBack_CollisionExit(pRightOwner, _eRight);
+					pRightOwner->CallBack_CollisionExit(pLeftOwner, _eLeft);
 
 					iter->second = false;
 				}
@@ -193,13 +192,13 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 				{
 					if (Is_Collision((*LeftIter), (*RightIter))) // true면 stay
 					{
-						pLeftOwner->OnCollisionStay(pRightOwner, _eRight);
-						pRightOwner->OnCollisionStay(pLeftOwner, _eLeft);
+						pLeftOwner->CallBack_CollisionStay(pRightOwner, _eRight);
+						pRightOwner->CallBack_CollisionStay(pLeftOwner, _eLeft);
 					}
 					else
 					{
-						pLeftOwner->OnCollisionExit(pRightOwner, _eRight);
-						pRightOwner->OnCollisionExit(pLeftOwner, _eLeft);
+						pLeftOwner->CallBack_CollisionExit(pRightOwner, _eRight);
+						pRightOwner->CallBack_CollisionExit(pLeftOwner, _eLeft);
 
 						iter->second = false;
 					}
@@ -215,8 +214,8 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 					{
 						_float4 vColPosition = Compute_ColPosition((*LeftIter), (*RightIter));
 
-						pLeftOwner->OnCollisionEnter(pRightOwner, _eRight, vColPosition);
-						pRightOwner->OnCollisionEnter(pLeftOwner, _eLeft, vColPosition);
+						pLeftOwner->CallBack_CollisionEnter(pRightOwner, _eRight, vColPosition);
+						pRightOwner->CallBack_CollisionEnter(pLeftOwner, _eLeft, vColPosition);
 
 						iter->second = true;
 					}

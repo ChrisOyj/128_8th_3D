@@ -3,11 +3,13 @@
 
 #include "GameInstance.h"
 
+#include "CShader.h"
+
 CTransform::CTransform(CGameObject* pOwner)
 	: CComponent(pOwner)
 {
 	ZeroMemory(&m_tTransform, sizeof(TRANSFORM));
-	m_tTransform.vScale = { 1.f, 1.f, 1.f };
+	m_tTransform.vScale = _float4(1.f, 1.f, 1.f, 1.f);
 	m_tTransform.matMyWorld.Identity();
 	m_tTransform.matWorld.Identity();
 }
@@ -19,7 +21,16 @@ CTransform::~CTransform()
 
 CTransform* CTransform::Create(CGameObject* pOwner)
 {
-	return new CTransform(pOwner);
+	CTransform* pTransform = new CTransform(pOwner);
+
+	if (FAILED(pTransform->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pTransform);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CTransform");
+		return nullptr;
+	}
+
+	return pTransform;
 }
 
 _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
@@ -28,16 +39,16 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 
 	if (matrixFlag & MATRIX_NOSCALE)
 	{
-		(*((_float4*)&WorldMat.r[WORLD_RIGHT])).Normalize();
-		(*((_float4*)&WorldMat.r[WORLD_UP])).Normalize();
-		(*((_float4*)&WorldMat.r[WORLD_LOOK])).Normalize();
+		(*((_float4*)&WorldMat.m[WORLD_RIGHT])).Normalize();
+		(*((_float4*)&WorldMat.m[WORLD_UP])).Normalize();
+		(*((_float4*)&WorldMat.m[WORLD_LOOK])).Normalize();
 	}
 
 	if (matrixFlag & MATRIX_NOTURN)
 	{
-		(*((_float4*)&WorldMat.r[WORLD_RIGHT])) = _float4(1.f, 0.f, 0.f);
-		(*((_float4*)&WorldMat.r[WORLD_UP])) = _float4(0.f, 1.f, 0.f);
-		(*((_float4*)&WorldMat.r[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
+		(*((_float4*)&WorldMat.m[WORLD_RIGHT])) = _float4(1.f, 0.f, 0.f);
+		(*((_float4*)&WorldMat.m[WORLD_UP])) = _float4(0.f, 1.f, 0.f);
+		(*((_float4*)&WorldMat.m[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
 	}
 
 	if (matrixFlag & MATRIX_TYPEENTITY)
@@ -51,26 +62,26 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 
 _float4 CTransform::Get_World(WORLD eType)
 {
-	_float4 vResult = *((_float4*)&m_tTransform.matWorld.r[eType]);
+	_float4 vResult = *((_float4*)&m_tTransform.matWorld.m[eType]);
 
 	return vResult;
 }
 
 _float4 CTransform::Get_MyWorld(WORLD eType)
 {
-	_float4 vResult = *((_float4*)&m_tTransform.matMyWorld.r[eType]);
+	_float4 vResult = *((_float4*)&m_tTransform.matMyWorld.m[eType]);
 
 	return vResult;
 }
 
 void CTransform::Set_World(WORLD eType, const _float4 & vCol)
 {
-	*((_float4*)&m_tTransform.matMyWorld.r[eType]) = vCol;
+	*((_float4*)&m_tTransform.matMyWorld.m[eType]) = vCol;
 }
 
 void CTransform::Set_RealWorld(WORLD eType, const _float4 & vCol)
 {
-	*((_float4*)&m_tTransform.matWorld.r[eType]) = vCol;
+	*((_float4*)&m_tTransform.matWorld.m[eType]) = vCol;
 
 }
 
@@ -120,15 +131,26 @@ void	CTransform::Set_Scale(const _float4& vScale)
 {
 	m_tTransform.vScale = vScale;
 
-	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_RIGHT])).Normalize() *= m_tTransform.vScale.x;
-	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_UP])).Normalize() *= m_tTransform.vScale.y;
-	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_LOOK])).Normalize() *= m_tTransform.vScale.z;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_RIGHT])).Normalize() *= m_tTransform.vScale.x;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_UP])).Normalize() *= m_tTransform.vScale.y;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_LOOK])).Normalize() *= m_tTransform.vScale.z;
 }
 
 
 void CTransform::Set_Y(const _float& fY)
 {
-	(*((_float4*)&m_tTransform.matMyWorld.r[WORLD_POS])).y *= m_tTransform.vScale.z;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_POS])).y *= m_tTransform.vScale.z;
+}
+
+void CTransform::Set_ShaderResource(CShader* pShader, const char* pConstantName)
+{
+	_float4x4		WorldMatrixTP = m_tTransform.matWorld;
+	WorldMatrixTP.Transpose();
+	pShader->Set_RawValue(pConstantName, &WorldMatrixTP, sizeof(_float4x4));
+}
+
+void CTransform::OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint)
+{
 }
 
 
@@ -140,6 +162,21 @@ HRESULT CTransform::Initialize_Prototype()
 HRESULT CTransform::Initialize()
 {
 	return S_OK;
+}
+
+void CTransform::Start()
+{
+	__super::Start();
+
+	m_pOwner->CallBack_CollisionEnter += 
+		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
+
+
+	CShader* pShader = m_pOwner->Get_Component<CShader>();
+
+	pShader->CallBack_SetRawValues +=
+		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
+
 }
 
 void CTransform::Tick()
@@ -161,6 +198,8 @@ void CTransform::OnEnable()
 
 void CTransform::OnDisable()
 {
+	//pShader->CallBack_SetRawValues -= bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
+
 }
 
 void CTransform::Make_WorldMatrix()

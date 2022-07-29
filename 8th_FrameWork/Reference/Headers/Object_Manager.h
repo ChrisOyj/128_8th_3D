@@ -29,8 +29,6 @@ private:
 	map<_uint, CGameObject*>									m_mapStaticObj;
 	list<CGameObject*>											m_pGameObjects[GR_END];
 
-	
-
 private:
 	friend class CEvent_Manager;
 

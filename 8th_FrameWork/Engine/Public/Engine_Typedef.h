@@ -29,45 +29,63 @@ namespace Engine
 	typedef XMFLOAT2					_float2;
 	typedef XMFLOAT3					_float3;
 
-	typedef struct XMMATRIX_DERIVED : public XMMATRIX
+
+	typedef struct XMFLOAT4X4_DERIVED : public XMFLOAT4X4
 	{
-		XMMATRIX_DERIVED& operator = (const XMMATRIX& matrix)
+		XMFLOAT4X4_DERIVED()
+			: XMFLOAT4X4()
+		{}
+
+		XMMATRIX XMLoad()
 		{
-			memcpy(this, &matrix, sizeof(XMMATRIX));
+			return XMLoadFloat4x4(this);
+		}
+
+		XMFLOAT4X4_DERIVED& operator = (const XMFLOAT4X4& _matrix)
+		{
+			XMMATRIX	matrix = XMLoadFloat4x4(&_matrix);
+			*this = matrix;
+
 			return *this;
 		}
 
-		XMMATRIX_DERIVED operator * (const XMMATRIX& matrix)
+		XMFLOAT4X4_DERIVED& operator = (FXMMATRIX _matrix)
 		{
-			XMMATRIX	matResult = XMMatrixMultiply(*this, matrix);
-			XMMATRIX_DERIVED	matTemp;
+			XMStoreFloat4x4(this, _matrix);
 
-			memcpy(&matTemp, &matResult, sizeof(XMMATRIX));
+			return *this;
+		}
+
+		XMFLOAT4X4_DERIVED operator * (const XMFLOAT4X4& matrix)
+		{
+			XMMATRIX	matResult = XMMatrixMultiply(XMLoad(), XMLoadFloat4x4(&matrix));
+			XMFLOAT4X4_DERIVED	matTemp;
+			matTemp = matResult;
 
 			return matTemp;
 		}
 
-		XMMATRIX_DERIVED& operator *= (const XMMATRIX& matrix)
+		XMFLOAT4X4_DERIVED& operator *= (const XMFLOAT4X4& matrix)
 		{
-			XMMATRIX	matResult = XMMatrixMultiply(*this, matrix);
-			memcpy(this, &matResult, sizeof(XMMATRIX));
+			XMMATRIX	matResult = XMMatrixMultiply(XMLoad(), XMLoadFloat4x4(&matrix));
+			*this = matResult;
 
 			return *this;
 		}
 
-		XMMATRIX_DERIVED& Inverse()
+		XMFLOAT4X4_DERIVED& Inverse()
 		{
-			return *this = XMMatrixInverse(nullptr, *this);
+			return *this = XMMatrixInverse(nullptr, XMLoad());
 		}
 
-		XMMATRIX_DERIVED& Identity()
+		XMFLOAT4X4_DERIVED& Identity()
 		{
 			return *this = XMMatrixIdentity();
 		}
 
-		XMMATRIX_DERIVED& Transpose()
+		XMFLOAT4X4_DERIVED& Transpose()
 		{
-			return *this = XMMatrixTranspose(*this);
+			return *this = XMMatrixTranspose(XMLoad());
 		}
 
 
@@ -80,21 +98,24 @@ namespace Engine
 			: XMFLOAT4()
 		{}
 
-		XMFLOAT4_DERIVED(const _float _x,
-			const _float _y,
-			const _float _z,
-			const _float _w = 1.f)
+		XMFLOAT4_DERIVED(const _float& _x,
+			const _float& _y,
+			const _float& _z,
+			const _float& _w = 1.f)
 			: XMFLOAT4(x, y, z, w)
 		{}
 
 		XMFLOAT4_DERIVED& operator = (const XMFLOAT4& _other)
 		{
-			x = _other.x;
-			y = _other.z;
-			z = _other.z;
-			w = _other.w;
+			XMVECTOR	vector = XMLoadFloat4(&_other);
+			*this = vector;
 
+			return *this;
+		}
 
+		XMFLOAT4_DERIVED& operator = (FXMVECTOR _vector)
+		{
+			XMStoreFloat4(this, _vector);
 			return *this;
 		}
 
@@ -111,10 +132,8 @@ namespace Engine
 		XMFLOAT4_DERIVED operator + (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
-			vOutput.x = x + _other.x;
-			vOutput.y = y + _other.y;
-			vOutput.z = z + _other.z;
-			vOutput.w = w;
+
+			vOutput = XMLoad() + XMLoadFloat4(&_other);
 
 			return vOutput;
 		}
@@ -133,10 +152,8 @@ namespace Engine
 		XMFLOAT4_DERIVED operator - (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
-			vOutput.x = x - _other.x;
-			vOutput.y = y - _other.y;
-			vOutput.z = z - _other.z;
-			vOutput.w = w;
+
+			vOutput = XMLoad() - XMLoadFloat4(&_other);
 
 			return vOutput;
 		}
@@ -155,10 +172,9 @@ namespace Engine
 		XMFLOAT4_DERIVED operator * (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
-			vOutput.x = x * _other.x;
-			vOutput.y = y * _other.y;
-			vOutput.z = z * _other.z;
-			vOutput.w = w;
+
+			vOutput = XMLoad() * XMLoadFloat4(&_other);
+
 
 			return vOutput;
 		}
@@ -177,10 +193,9 @@ namespace Engine
 		XMFLOAT4_DERIVED operator / (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
-			vOutput.x = x / _other.x;
-			vOutput.y = y / _other.y;
-			vOutput.z = z / _other.z;
-			vOutput.w = w;
+
+			vOutput = XMLoad() / XMLoadFloat4(&_other);
+
 
 			return vOutput;
 		}
@@ -198,9 +213,7 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator += (const XMFLOAT4& _other)
 		{
-			x += _other.x;
-			y += _other.y;
-			z += _other.z;
+			*this = XMLoad() + XMLoadFloat4(&_other);
 
 			return *this;
 		}
@@ -216,9 +229,7 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator -= (const XMFLOAT4& _other)
 		{
-			x -= _other.x;
-			y -= _other.y;
-			z -= _other.z;
+			*this = XMLoad() - XMLoadFloat4(&_other);
 
 			return *this;
 		}
@@ -234,9 +245,7 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator *= (const XMFLOAT4& _other)
 		{
-			x *= _other.x;
-			y *= _other.y;
-			z *= _other.z;
+			*this = XMLoad() * XMLoadFloat4(&_other);
 
 			return *this;
 		}
@@ -252,9 +261,7 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator /= (const XMFLOAT4& _other)
 		{
-			x /= _other.x;
-			y /= _other.y;
-			z /= _other.z;
+			*this = XMLoad() / XMLoadFloat4(&_other);
 
 			return *this;
 		}
@@ -285,30 +292,28 @@ namespace Engine
 		}
 
 		/* transform */
-		XMFLOAT4_DERIVED operator * (const XMMATRIX& _otherMatrix)
+		XMFLOAT4_DERIVED operator * (const XMFLOAT4X4& _otherMatrix)
 		{
-			XMVECTOR	vec = { x, y, z, w };
+			FXMVECTOR	vec = XMLoad();
 
-			XMVECTOR	vTransform = XMVector4Transform(vec, _otherMatrix);
+			XMVECTOR	vTransform = XMVector4Transform(vec, XMLoadFloat4x4(&_otherMatrix));
 
-			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vTransform.m128_f32[0],
-				vTransform.m128_f32[1],
-				vTransform.m128_f32[2],
-				vTransform.m128_f32[3]);
+			XMFLOAT4_DERIVED	vResult;
+
+			XMStoreFloat4(&vResult, vTransform);
 
 			return vResult;
 		}
 
-		XMFLOAT4_DERIVED& operator *= (const XMMATRIX& _otherMatrix)
+		XMFLOAT4_DERIVED& operator *= (const XMFLOAT4X4& _otherMatrix)
 		{
-			XMVECTOR	vec = { x, y, z, w };
+			XMVECTOR	vec = XMLoad();
 
-			XMVECTOR	vTransform = XMVector4Transform(vec, _otherMatrix);
+			XMVECTOR	vTransform = XMVector4Transform(vec, XMLoadFloat4x4(&_otherMatrix));
 
-			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vTransform.m128_f32[0],
-				vTransform.m128_f32[1],
-				vTransform.m128_f32[2],
-				vTransform.m128_f32[3]);
+			XMFLOAT4_DERIVED	vResult;
+
+			XMStoreFloat4(&vResult, vTransform);
 
 			return *this = vResult;
 		}
@@ -316,51 +321,48 @@ namespace Engine
 
 		_float Length()
 		{
-			FXMVECTOR	vec = { x, y, z, w };
+			FXMVECTOR	vec = XMLoad();
 
 			return XMVector4Length(vec).m128_f32[0];
 		}
 
 		_float	Dot(const XMFLOAT4& _other)
 		{
-			FXMVECTOR	Myvec = { x, y, z, w };
-			FXMVECTOR	Othervec = { _other.x, _other.y, _other.z, w };
+			FXMVECTOR	Myvec = XMLoad();
+			FXMVECTOR	Othervec = XMLoadFloat4(&_other);
 
 			return XMVector4Dot(Myvec, Othervec).m128_f32[0];
 		}
 
 		XMFLOAT4_DERIVED	Cross(const XMFLOAT4& _other)
 		{
-			FXMVECTOR	Myvec = { x, y, z, 0.f };
-			FXMVECTOR	Othervec = { _other.x, _other.y, _other.z, 0.f };
+			FXMVECTOR	Myvec = XMLoad();
+			FXMVECTOR	Othervec = XMLoadFloat4(&_other);
 			FXMVECTOR	vCross = XMVector3Cross(Myvec, Othervec);
 
-			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vCross.m128_f32[0],
-				vCross.m128_f32[1],
-				vCross.m128_f32[2],
-				0.f);
+			XMFLOAT4_DERIVED	vResult;
+
+			XMStoreFloat4(&vResult, vCross);
 
 			return vResult;
 		}
 
 		XMFLOAT4_DERIVED& Normalize()
 		{
-			FXMVECTOR	Myvec = { x, y, z, w };
+			FXMVECTOR	Myvec = XMLoad();
 
 			FXMVECTOR	vNormalize = XMVector4Normalize(Myvec);
 
-			XMFLOAT4_DERIVED	vResult = XMFLOAT4_DERIVED(vNormalize.m128_f32[0],
-				vNormalize.m128_f32[1],
-				vNormalize.m128_f32[2],
-				0.f);
+			XMFLOAT4_DERIVED	vResult;
+
+			XMStoreFloat4(&vResult, vNormalize);
 
 			return *this = vResult;
 		}
 
-		FXMVECTOR	XMVector()
+		XMVECTOR	XMLoad()
 		{
-			FXMVECTOR	Myvec = { x, y, z, w };
-			return Myvec;
+			return XMLoadFloat4(this);
 		}
 
 		_bool		Is_Zero()

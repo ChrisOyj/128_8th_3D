@@ -22,6 +22,14 @@ CComponent* CComponent_Factory::Create(const _uint& iID, CGameObject* pOwner)
 		pComponent = Create_PrototypeFromJson(iID, pOwner);
 	}
 
+	pComponent->Set_Owner(pOwner);
+
+	if (FAILED(pComponent->Initialize()))
+	{
+		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
+		return nullptr;
+	}
+
 	return pComponent;
 }
 
@@ -100,6 +108,8 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json, CGame
 	default:
 		break;
 	}
+
+	
 
 	return pComponent;
 }

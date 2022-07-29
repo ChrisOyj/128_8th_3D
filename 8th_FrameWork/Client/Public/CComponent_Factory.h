@@ -4,6 +4,7 @@
 BEGIN(Engine)
 class CTransform;
 class CComponent;
+class CGameObject;
 END
 
 BEGIN(Client)

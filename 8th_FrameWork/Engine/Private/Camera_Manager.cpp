@@ -21,18 +21,18 @@ _float4x4 CCamera_Manager::Get_BillBoard()
 	_float4x4	matBillBoard = m_tView.matView;
 	matBillBoard.Inverse();
 	
-	*((_float4*)&matBillBoard.r[WORLD_POS]) = _float4(0.f, 0.f, 0.f);
+	*((_float4*)&matBillBoard.m[WORLD_POS]) = _float4(0.f, 0.f, 0.f);
 
-	_float4 InverseLook = *((_float4*)&matBillBoard.r[WORLD_LOOK]) * 1.f;
+	_float4 InverseLook = *((_float4*)&matBillBoard.m[WORLD_LOOK]) * 1.f;
 
-	*((_float4*)&matBillBoard.r[WORLD_LOOK]) = InverseLook;
+	*((_float4*)&matBillBoard.m[WORLD_LOOK]) = InverseLook;
 
 	_float4 vUp = { 0.f, 1.f, 0.f };
 	_float4 vRight = vUp.Cross(InverseLook);
-	*((_float4*)&matBillBoard.r[WORLD_RIGHT]) = vRight;
+	*((_float4*)&matBillBoard.m[WORLD_RIGHT]) = vRight;
 
 	vUp = InverseLook.Cross(vRight);
-	*((_float4*)&matBillBoard.r[WORLD_UP]) = vUp;
+	*((_float4*)&matBillBoard.m[WORLD_UP]) = vUp;
 
 
 	return matBillBoard;
@@ -55,7 +55,7 @@ HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)
 		m_fAspect,
 		1.f, 1000.0f);
 
-	m_tView.matView = XMMatrixLookAtLH(Pos.XMVector(), ZeroVector.XMVector(), m_tView.vUp.XMVector());
+	m_tView.matView = XMMatrixLookAtLH(Pos.XMLoad(), ZeroVector.XMLoad(), m_tView.vUp.XMLoad());
 
 	m_matOrthoProj = XMMatrixOrthographicLH((_float)GraphicDesc.iWinCX, (_float)GraphicDesc.iWinCY, 0.0f, 1.f);
 

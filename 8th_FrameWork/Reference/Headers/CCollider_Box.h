@@ -18,31 +18,31 @@ typedef struct tag_OBBInfo
 #pragma region Functions
 	tag_OBBInfo()
 	{
-		vFinalPos = { 0, 0, 0 };
-		ObbSize = { 0, 0, 0 };
-		LocalAxis[0] = { 1, 0, 0 };
-		LocalAxis[1] = { 0, 1, 0 };
-		LocalAxis[2] = { 0, 0, 1 };
+		vFinalPos = _float4(0.f, 0.f, 0.f);
+		ObbSize = _float4(0.f, 0.f, 0.f);
+		LocalAxis[0] = _float4(1.f, 0.f, 0.f);
+		LocalAxis[1] = _float4(0.f, 1.f, 0.f);
+		LocalAxis[2] = _float4(0.f, 0.f, 1.f);
 	}
 	tag_OBBInfo(const _float4& size, const _float4& _vOffsetPos)
 	{
 		ObbSize = size;
 		vOffsetPos = _vOffsetPos;
-		LocalAxis[0] = { 1, 0, 0 };
-		LocalAxis[1] = { 0, 1, 0 };
-		LocalAxis[2] = { 0, 0, 1 };
+		LocalAxis[0] = _float4(1.f, 0.f, 0.f);
+		LocalAxis[1] = _float4(0.f, 1.f, 0.f);
+		LocalAxis[2] = _float4(0.f, 0.f, 1.f);
 
 		//0-3 -> z > 0, 반시계
-		vLocalVertex[0] = { vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) };
-		vLocalVertex[1] = { vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) };
-		vLocalVertex[2] = { vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) };
-		vLocalVertex[3] = { vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) };
+		vLocalVertex[0] = _float4( vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) );
+		vLocalVertex[1] = _float4( vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) );
+		vLocalVertex[2] = _float4( vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) );
+		vLocalVertex[3] = _float4( vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z - (ObbSize.z * 0.5f) );
 
 		//4-7 -> z < 0, 시계(축 반전시 반시계)
-		vLocalVertex[4] = { vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) };
-		vLocalVertex[5] = { vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) };
-		vLocalVertex[6] = { vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) };
-		vLocalVertex[7] = { vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) };
+		vLocalVertex[4] = _float4( vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) );
+		vLocalVertex[5] = _float4( vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y + (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) );
+		vLocalVertex[6] = _float4( vOffsetPos.x + (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) );
+		vLocalVertex[7] = _float4( vOffsetPos.x - (ObbSize.x * 0.5f), vOffsetPos.y - (ObbSize.y * 0.5f), vOffsetPos.z + (ObbSize.z * 0.5f) );
 	}
 
 	//void Set_float4x4(_float4x4* pmatTrans)

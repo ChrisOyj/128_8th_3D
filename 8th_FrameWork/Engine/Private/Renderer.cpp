@@ -4,16 +4,27 @@
 
 #include "Render_Manager.h"
 
+#include "Transform.h"
 
-CRenderer::CRenderer(CGameObject* pOwner)
+#include "CShader.h"
+#include "Texture.h"
+#include "CMesh.h"
+
+CRenderer::CRenderer(CGameObject* pOwner, CShader* pShader, CMesh* pMesh, CTexture* pTexture)
 	: CComponent(pOwner)
 	, m_eRenderGroup(RENDER_END)
+	, m_pShaderCom(pShader)
+	, m_pMeshCom(pMesh)
+	, m_pTextureCom(pTexture)
 {
 }
 
 CRenderer::CRenderer(const CRenderer& _origin)
 	: CComponent(_origin)
 	, m_eRenderGroup(_origin.m_eRenderGroup)
+	, m_iCurPass(_origin.m_iCurPass)
+	, m_vOffsetPos(_origin.m_vOffsetPos)
+	, m_vFinalPos(_origin.m_vFinalPos)
 {
 }
 
@@ -23,9 +34,25 @@ CRenderer::~CRenderer()
 	Release();
 }
 
+CRenderer* CRenderer::Create(CGameObject* pOwner, const _uint& iCurPass, CShader* pShader, CMesh* pMesh, CTexture* pTexture)
+{
+	CRenderer* pRenderer = new CRenderer(pOwner, pShader, pMesh, pTexture);
+
+	pRenderer->m_iCurPass = iCurPass;
+
+	if (FAILED(pRenderer->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pRenderer);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CRenderer");
+		return nullptr;
+	}
+
+	return pRenderer;
+}
+
 _float4 CRenderer::Get_WorldPosition()
 {
-	return _float4();
+	return m_pOwner->Get_Transform()->Get_World(WORLD_POS);
 }
 
 void CRenderer::Late_Tick()
@@ -33,6 +60,38 @@ void CRenderer::Late_Tick()
 	CRender_Manager::Get_Instance()->Add_Renderer(m_eRenderGroup, this);
 }
 
+HRESULT CRenderer::Render()
+{
+	if (FAILED(m_pShaderCom->SetUp_ShaderResources(m_iCurPass, m_pTextureCom)))
+		return E_FAIL;
+
+	if (FAILED(m_pMeshCom->Render()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
 void CRenderer::Release()
+{
+}
+
+HRESULT CRenderer::Initialize_Prototype()
+{
+	if (!m_pMeshCom || !m_pShaderCom || !m_pTextureCom)
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CRenderer::Initialize()
+{
+	m_pShaderCom = m_pOwner->Get_Component<CShader>();
+	m_pMeshCom = m_pOwner->Get_Component<CMesh>();
+	m_pTextureCom = m_pOwner->Get_Component<CTexture>();
+
+	return S_OK;
+}
+
+void CRenderer::Tick()
 {
 }

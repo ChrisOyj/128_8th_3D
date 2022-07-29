@@ -20,6 +20,13 @@ CPhysics * CPhysics::Create(CGameObject* pOwner)
 {
 	CPhysics* pPhysics = new CPhysics(pOwner);
 
+	if (FAILED(pPhysics->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pPhysics);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CPhysics");
+		return nullptr;
+	}
+
 	return pPhysics;
 }
 
@@ -110,7 +117,7 @@ void CPhysics::Turn()
 	_float4		vLook = pTransform->Get_MyWorld(WORLD_LOOK).Normalize();
 	
 	_float4x4	RotationMatrix;
-	RotationMatrix = XMMatrixRotationAxis(m_tPhysics.vTurnDir.XMVector(), m_tPhysics.fTurnSpeed * fDT);
+	RotationMatrix = XMMatrixRotationAxis(m_tPhysics.vTurnDir.XMLoad(), m_tPhysics.fTurnSpeed * fDT);
 
 	vRight *= RotationMatrix;
 	vUp *= RotationMatrix;

@@ -59,7 +59,17 @@
 #define		MIN_STR			64
 #define		MAX_STR			256
 
+#define		ToRadian(fAngle)	XMConvertToRadians(fAngle)
+
 #define		MAX_VERTEX_ELEMENT			65
+
+// ====================== Shader Flag ============================
+
+#define		SH_DEFAULT		0
+#define		SH_BLUR			0x001
+#define		SH_CARTOON		0x002
+#define		SH_OUTLINE		0x004
+#define		SH_GLOW			0x008
 
 #define BEGIN(NAMESPACE) namespace NAMESPACE { 
 #define END }

@@ -41,6 +41,7 @@ HRESULT CCollider::Initialize()
 
 void CCollider::Start()
 {
+	__super::Start();
 	CCollision_Manager::Get_Instance()->Regist_Collider(this, m_iColIndex);
 }
 
@@ -59,8 +60,14 @@ void CCollider::Release()
 
 void CCollider::OnEnable()
 {
+	__super::OnEnable();
+
+	CCollision_Manager::Get_Instance()->Regist_Collider(this, m_iColIndex);
+
 }
 
 void CCollider::OnDisable()
 {
+	__super::OnDisable();
+
 }

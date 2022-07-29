@@ -19,7 +19,7 @@ public:
 	static CTransform* Create(CGameObject* pOwner);
 
 public:
-	const TRANSFORM&	Get_Transform()		{ return m_tTransform; }
+	const TRANSFORM&	Get_Transform()		{ return m_tTransform;}
 	_float4x4			Get_WorldMatrix(const _byte& matrixFlag = 0);
 	_float4				Get_World(WORLD eType);
 	_float4				Get_MyWorld(WORLD eType);
@@ -36,9 +36,16 @@ public:
 	void				Set_ParentFlag(_byte parentFlag)			{ m_cParentFlag = parentFlag; }
 
 public:
+	void				Set_ShaderResource(class CShader* pShader, const char* pConstantName);
+
+public:
+	virtual void		OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint) override;
+
+public:
 	// CComponent을(를) 통해 상속됨
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize() override;
+	virtual void Start() override;
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
 	virtual void Release() override;

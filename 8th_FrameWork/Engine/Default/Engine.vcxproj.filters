@@ -112,6 +112,18 @@
     <Filter Include="03. Instances\03. Component\09. Shader">
       <UniqueIdentifier>{50b28529-ce3e-4a2f-96fa-6ada97249b20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\03. Component\10. Mesh">
+      <UniqueIdentifier>{e5fd6e9c-067a-4676-a977-55d9288eb138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\10. Component_Manager">
+      <UniqueIdentifier>{159da6d8-808a-4c34-a99d-42035c86aff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\11. Timer">
+      <UniqueIdentifier>{343830c4-41cd-4de6-bc54-1f6c2c145bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\10. Mesh\Mesh_Rect">
+      <UniqueIdentifier>{ca1db4c8-936b-401a-bb37-0d2ef3511ba2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Camera.cpp">
@@ -197,6 +209,24 @@
     </ClCompile>
     <ClCompile Include="..\Private\Texture.cpp">
       <Filter>03. Instances\03. Component\08. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Engine_Struct.cpp">
+      <Filter>00. Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CShader.cpp">
+      <Filter>03. Instances\03. Component\09. Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CComponent_Manager.cpp">
+      <Filter>02. Singleton\02. Design\10. Component_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CMesh.cpp">
+      <Filter>03. Instances\03. Component\10. Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTimer.cpp">
+      <Filter>03. Instances\03. Component\11. Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CMesh_Rect.cpp">
+      <Filter>03. Instances\03. Component\10. Mesh\Mesh_Rect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +334,24 @@
     </ClInclude>
     <ClInclude Include="..\Public\Texture.h">
       <Filter>03. Instances\03. Component\08. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CShader.h">
+      <Filter>03. Instances\03. Component\09. Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CComponent_Manager.h">
+      <Filter>02. Singleton\02. Design\10. Component_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CMesh.h">
+      <Filter>03. Instances\03. Component\10. Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTimer.h">
+      <Filter>03. Instances\03. Component\11. Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CMesh_Rect.h">
+      <Filter>03. Instances\03. Component\10. Mesh\Mesh_Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Delegate\Delegate.h">
+      <Filter>99. Default</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

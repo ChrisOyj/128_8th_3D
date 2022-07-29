@@ -77,6 +77,12 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 	if (FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_COMPONENT_LIST])))
 		return nullptr;
 
+	if (FAILED(pGameObject->Initialize()))
+	{
+		Call_MsgBox_Index(L"Failed to Initialize : CComponent_Enum ->", eGameObjectType);
+		return nullptr;
+	}
+
 
 	return pGameObject;
 }

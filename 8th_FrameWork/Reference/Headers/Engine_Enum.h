@@ -19,6 +19,12 @@ namespace Engine
 		COL_END = 32
 	};
 
+	enum COM_GROUP
+	{
+		COM_GROUP_DEFAULT,
+		COM_GROUP_END = 32
+	};
+
 #pragma region CHANNEL_ENUM
 
 	enum CHANNEL_GROUP

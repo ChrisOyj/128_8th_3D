@@ -25,6 +25,13 @@ CCollider_Sphere* CCollider_Sphere::Create(CGameObject* pOwner, _float fRadius, 
 	pCollider->m_tColInfo.fRadius = fRadius;
 	pCollider->m_eColType = CT_SPHERE;
 
+	if (FAILED(pCollider->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pCollider);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CCollider_Sphere");
+		return nullptr;
+	}
+
 	return pCollider;
 }
 

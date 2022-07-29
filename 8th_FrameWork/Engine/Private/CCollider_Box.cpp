@@ -24,6 +24,13 @@ CCollider_Box* CCollider_Box::Create(CGameObject* pOwner, _float4 vSize, const _
 	pCollider->m_tColInfo = COL_INFO_BOX(vSize, vOffsetPos);
 	pCollider->m_eColType = CT_BOX;
 
+	if (FAILED(pCollider->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pCollider);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CCollider_Box");
+		return nullptr;
+	}
+
 	return pCollider;
 }
 

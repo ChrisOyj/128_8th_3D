@@ -81,7 +81,7 @@ _bool CPicking_Manager::Is_3DPicked(CRenderer* pRenderer, _float4*	pOut, _float4
 
 	_float4x4 WorldMatrix = pRenderer->Get_Owner()->Get_Transform()->Get_WorldMatrix();
 
-	*(_float4*)(&WorldMatrix.r[WORLD_POS]) = vRendererPos;
+	*(_float4*)(&WorldMatrix.m[WORLD_POS]) = vRendererPos;
 
 	WorldMatrix.Inverse();
 
@@ -173,7 +173,7 @@ void CPicking_Manager::Picking()
 
 		if (Is_3DPicked(pRenderer, &vPickedPos, &vPickedNormal))
 		{
-			pRenderer->Get_Owner()->OnPickingEvent(vPickedPos, vPickedNormal);
+			pRenderer->Get_Owner()->CallBack_PickingEvent(vPickedPos, vPickedNormal);
 			break;
 		}
 	}

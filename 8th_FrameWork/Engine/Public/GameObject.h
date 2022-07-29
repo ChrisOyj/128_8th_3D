@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine_Defines.h"
 
+
 BEGIN(Engine)
 
 class CComponent;
@@ -11,17 +12,6 @@ class CParticleSystem;
 class CMeshRenderer;
 enum MESH_TYPE;
 enum PASS_TYPE;
-
-typedef struct tag_TimerEventInfo
-{
-	_uint iEventNum;
-	_float fOriginTime;
-	_float fCurTime;
-	_bool	bLoop;
-
-}TIMER_EVENT;
-
-
 
 class ENGINE_DLL CGameObject abstract
 {
@@ -61,7 +51,6 @@ public:/*Get, Set*/
 	CCollider*			Get_Collider() { return m_pCollider; }
 	list<CGameObject*>&	Get_Children() { return m_pChildren; }
 
-
 	void				Set_Parent(CGameObject* pParent) { m_pParent = pParent; }
 	void				Set_Enable(_bool bEnable);
 
@@ -72,39 +61,30 @@ public:/*Get, Set*/
 #pragma endregion
 
 public:
+	virtual	HRESULT	Initialize_Prototype() PURE;
+	virtual	HRESULT	Initialize() PURE;
 	virtual void	Tick();
 	virtual void	Late_Tick();
 
 public:
 	void			Add_Component(CComponent* pComponent);
 	void			Add_Child(CGameObject* pChild);
-
-public:
-	void		Add_Timer(const _float&	fTime, const _uint& iEventNum, _bool bLoop = false);
-
-#pragma region Message_Event
-public: /* Collision Event */
-	virtual void		OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint) {}
-	virtual void		OnCollisionStay(CGameObject* pGameObject, const _uint& iColType) {}
-	virtual void		OnCollisionExit(CGameObject* pGameObject, const _uint& iColType) {}
-
-	virtual void		OnPickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal = { 0.f,0.f,0.f }) {}
-	virtual void		OnTimerEvent(const _uint& iEventNum) {}
-
-	void				Call_CollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint);
-	void				Call_CollisionStay(CGameObject* pGameObject, const _uint& iColType);
-	void				Call_CollisionExit(CGameObject* pGameObject, const _uint& iColType);
-
-	void				Call_PickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal);
-	void				Call_TimerEvent(const _uint& iEventNum);
-
-	void				Call_Enable();
-	void				Call_Disable();
-#pragma endregion
-
-public:
 	void			Start_Components();
 
+#pragma region Message_Event
+
+public:
+	CDelegate<CGameObject*, const _uint&, _float4>	CallBack_CollisionEnter;
+	CDelegate<CGameObject*, const _uint&>			CallBack_CollisionStay;
+	CDelegate<CGameObject*, const _uint&>			CallBack_CollisionExit;
+	CDelegate<const _float4&, const _float4&>		CallBack_PickingEvent;
+	CDelegate<const _uint&>							CallBack_TimerEvent;
+
+public: /* Event */
+	void				Call_Enable();
+	void				Call_Disable();
+	void				Call_Dead();
+#pragma endregion
 
 protected:
 	CTransform*				m_pTransform = nullptr;
@@ -112,19 +92,19 @@ protected:
 	CGameObject*			m_pParent = nullptr;
 
 	list<CGameObject*>		m_pChildren;
-	list<TIMER_EVENT>		m_TimerEvents;
 	list<CComponent*>		m_pComponents;
 
+
 protected:
-	virtual	HRESULT	Initialize_Prototype() PURE;
-	virtual	HRESULT	Initialize() PURE;
 	// These will be called by Set_Enable Func.
-	virtual	void	OnEnable() PURE;
-	virtual	void	OnDisable() PURE;
+	virtual	void	OnEnable();
+	virtual	void	OnDisable();
 
 private:
 	_bool				m_bEnable = true;
 	_bool				m_bAlive = true;
+
+	
 
 private:
 	virtual void		Release();
@@ -133,7 +113,6 @@ private:
 	/* Only Event_Manager can set this dead. */
 	friend class CEvent_Manager;
 	void	Set_Dead() { m_bAlive = false; }
-	void	My_TimerTick();
 };
 
 END
