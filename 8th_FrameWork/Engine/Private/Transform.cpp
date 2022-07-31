@@ -5,13 +5,11 @@
 
 #include "CShader.h"
 
-CTransform::CTransform(CGameObject* pOwner)
-	: CComponent(pOwner)
+CTransform::CTransform(_uint iGroupID)
+	: CComponent(iGroupID)
 {
 	ZeroMemory(&m_tTransform, sizeof(TRANSFORM));
-	m_tTransform.vScale = _float4(1.f, 1.f, 1.f, 1.f);
-	m_tTransform.matMyWorld.Identity();
-	m_tTransform.matWorld.Identity();
+	
 }
 
 
@@ -19,9 +17,9 @@ CTransform::~CTransform()
 {
 }
 
-CTransform* CTransform::Create(CGameObject* pOwner)
+CTransform* CTransform::Create(_uint iGroupID)
 {
-	CTransform* pTransform = new CTransform(pOwner);
+	CTransform* pTransform = new CTransform(iGroupID);
 
 	if (FAILED(pTransform->Initialize_Prototype()))
 	{
@@ -156,6 +154,10 @@ void CTransform::OnCollisionEnter(CGameObject* pGameObject, const _uint& iColTyp
 
 HRESULT CTransform::Initialize_Prototype()
 {
+	m_tTransform.vScale = _float4(1.f, 1.f, 1.f, 1.f);
+	m_tTransform.matMyWorld.Identity();
+	m_tTransform.matWorld.Identity();
+
 	return S_OK;
 }
 
@@ -168,10 +170,6 @@ void CTransform::Start()
 {
 	__super::Start();
 
-	m_pOwner->CallBack_CollisionEnter += 
-		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
-
-
 	CShader* pShader = m_pOwner->Get_Component<CShader>();
 
 	pShader->CallBack_SetRawValues +=
@@ -181,6 +179,8 @@ void CTransform::Start()
 
 void CTransform::Tick()
 {
+	m_pOwner->CallBack_CollisionEnter +=
+		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
 }
 
 void CTransform::Late_Tick()

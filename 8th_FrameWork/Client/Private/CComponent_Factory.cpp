@@ -19,7 +19,7 @@ CComponent* CComponent_Factory::Create(const _uint& iID, CGameObject* pOwner)
 
 	if (!pComponent)
 	{
-		pComponent = Create_PrototypeFromJson(iID, pOwner);
+		pComponent = Create_PrototypeFromJson(iID);
 	}
 
 	pComponent->Set_Owner(pOwner);
@@ -45,7 +45,7 @@ CTransform* CComponent_Factory::Create_Transform(const _uint& iID)
 	return pTransform;
 }
 
-CComponent* CComponent_Factory::Create_PrototypeFromJson(const _uint& iComponentID, CGameObject* pOwner)
+CComponent* CComponent_Factory::Create_PrototypeFromJson(const _uint& iComponentID)
 {
 	if (!Safe_CheckID(iComponentID, ID_COMPONENT))
 	{
@@ -59,7 +59,7 @@ CComponent* CComponent_Factory::Create_PrototypeFromJson(const _uint& iComponent
 
 	json ComponentJson = CUtility_Json::Load_Json(CUtility_Json::Complete_Path(iComponentID));
 
-	pComponent = Create_InstanceFromJson(ComponentJson, pOwner);
+	pComponent = Create_InstanceFromJson(ComponentJson);
 
 	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(iComponentID, pComponent)))
 		return nullptr;
@@ -68,7 +68,7 @@ CComponent* CComponent_Factory::Create_PrototypeFromJson(const _uint& iComponent
 	return pComponent->Clone();
 }
 
-CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json, CGameObject* pOwner)
+CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 {
 	COMPONENT_TYPE	eComponentID = _json[JSON_COMPONENT_TYPE];
 
@@ -77,7 +77,7 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json, CGame
 	switch (eComponentID)
 	{
 	case Client::COM_TRANSFORM:
-		pComponent = CTransform::Create(pOwner);
+		pComponent = CTransform::Create();
 		break;
 
 	case Client::COM_COLLIDER:
@@ -85,7 +85,7 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json, CGame
 		json ColliderJson = _json[JSON_COLLIDER_INFO];
 		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(ColliderJson, "vOffsetPos");
 
-		pComponent = CCollider_Sphere::Create(pOwner, ColliderJson["fRadius"], ColliderJson["iColIndex"], vOffsetPos);
+		pComponent = CCollider_Sphere::Create(ColliderJson["fRadius"], ColliderJson["iColIndex"], vOffsetPos);
 	}
 
 	break;

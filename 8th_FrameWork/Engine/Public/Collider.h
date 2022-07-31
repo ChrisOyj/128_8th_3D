@@ -9,7 +9,7 @@ class ENGINE_DLL CCollider abstract
 	: public CComponent
 {
 protected:
-	CCollider(CGameObject* pOwner);
+	CCollider(_uint iGroupID);
 	CCollider(const CCollider& origin);
 	virtual ~CCollider();
 

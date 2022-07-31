@@ -14,6 +14,7 @@
 #include "Input_Device.h"
 #include "Picking_Manager.h"
 #include "Prototype_Manager.h"
+#include "CComponent_Manager.h"
 
 #define MGR(type) type::Get_Instance()
 
@@ -87,9 +88,11 @@ HRESULT CGameInstance::Tick_Engine( )
 	/* Object */
 	MGR(CLevel_Manager)->Tick();
 	MGR(CObject_Manager)->Tick();
+	MGR(CComponent_Manager)->Tick();
 
-	MGR(CObject_Manager)->Late_Tick();
 	MGR(CLevel_Manager)->Late_Tick();
+	MGR(CObject_Manager)->Late_Tick();
+	MGR(CComponent_Manager)->Late_Tick();
 
 	/* ViewProj */
 	MGR(CCamera_Manager)->Make_ViewProj();
@@ -98,7 +101,7 @@ HRESULT CGameInstance::Tick_Engine( )
 	//MGR(CZFrustum)->Make_Plane(MGR(CCamera_Manager)->Get_ViewProj());
 
 	/* Other Events */
-	MGR(CPicking_Manager)->Execute_Picking();
+	//MGR(CPicking_Manager)->Execute_Picking();
 	MGR(CCollision_Manager)->Tick();
 
 

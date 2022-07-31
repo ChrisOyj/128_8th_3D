@@ -10,12 +10,9 @@
 #include "Texture.h"
 #include "CMesh.h"
 
-CRenderer::CRenderer(CGameObject* pOwner, CShader* pShader, CMesh* pMesh, CTexture* pTexture)
-	: CComponent(pOwner)
+CRenderer::CRenderer(_uint iGroupID)
+	: CComponent(iGroupID)
 	, m_eRenderGroup(RENDER_END)
-	, m_pShaderCom(pShader)
-	, m_pMeshCom(pMesh)
-	, m_pTextureCom(pTexture)
 {
 }
 
@@ -34,9 +31,9 @@ CRenderer::~CRenderer()
 	Release();
 }
 
-CRenderer* CRenderer::Create(CGameObject* pOwner, const _uint& iCurPass, CShader* pShader, CMesh* pMesh, CTexture* pTexture)
+CRenderer* CRenderer::Create(_uint iGroupID, const _uint& iCurPass)
 {
-	CRenderer* pRenderer = new CRenderer(pOwner, pShader, pMesh, pTexture);
+	CRenderer* pRenderer = new CRenderer(iGroupID);
 
 	pRenderer->m_iCurPass = iCurPass;
 
@@ -85,9 +82,9 @@ HRESULT CRenderer::Initialize_Prototype()
 
 HRESULT CRenderer::Initialize()
 {
-	m_pShaderCom = m_pOwner->Get_Component<CShader>();
-	m_pMeshCom = m_pOwner->Get_Component<CMesh>();
-	m_pTextureCom = m_pOwner->Get_Component<CTexture>();
+	m_pShaderCom = m_pOwner->Get_Component<CShader>()[0];
+	m_pMeshCom = m_pOwner->Get_Component<CMesh>()[0];
+	m_pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
 
 	return S_OK;
 }

@@ -10,8 +10,8 @@
 _uint	CCollider::g_iNextID = 0;
 
 
-CCollider::CCollider(CGameObject* pOwner)
-	: CComponent(pOwner)
+CCollider::CCollider(_uint iGroupID)
+	: CComponent(iGroupID)
 	, m_iID(g_iNextID++)
 {
 	//ZeroMemory(&m_tObbInfo, sizeof(OBBINFO));

@@ -8,7 +8,7 @@
 #pragma region Constructor, Destructor
 CGameObject::CGameObject()
 {
-	m_pTransform = CTransform::Create(this);
+	m_pTransform = CTransform::Create(0);
 }
 
 CGameObject::CGameObject(const CGameObject & Prototype)
@@ -52,6 +52,11 @@ void CGameObject::Set_Enable(_bool bEnable)
 #pragma region Tick, Late_Tick
 void CGameObject::Tick()
 {
+	CallBack_CollisionEnter.Clear();
+	CallBack_CollisionExit.Clear();
+	CallBack_CollisionStay.Clear();
+	CallBack_TimerEvent.Clear();
+	CallBack_PickingEvent.Clear();
 	//============ My Update ==============
 
 	//for (auto& elem : m_pComponents)

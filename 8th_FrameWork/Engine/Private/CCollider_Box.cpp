@@ -4,8 +4,8 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-CCollider_Box::CCollider_Box(CGameObject* pOwner)
-	: CCollider(pOwner)
+CCollider_Box::CCollider_Box(_uint iGroupID)
+	: CCollider(iGroupID)
 {
 }
 
@@ -13,9 +13,9 @@ CCollider_Box::~CCollider_Box()
 {
 }
 
-CCollider_Box* CCollider_Box::Create(CGameObject* pOwner, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos)
+CCollider_Box* CCollider_Box::Create(_uint iGroupID, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos)
 {
-	CCollider_Box* pCollider = new CCollider_Box(pOwner);
+	CCollider_Box* pCollider = new CCollider_Box(iGroupID);
 
 	if (!pCollider)
 		return nullptr;

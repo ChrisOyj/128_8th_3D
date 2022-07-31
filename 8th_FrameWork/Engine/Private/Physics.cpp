@@ -5,8 +5,8 @@
 #include "GameInstance.h"
 #include "Prototype_Manager.h"
 
-CPhysics::CPhysics(CGameObject* pOwner)
-	: CComponent(pOwner)
+CPhysics::CPhysics(_uint iGroupID)
+	: CComponent(iGroupID)
 {
 	ZeroMemory(&m_tPhysics, sizeof(PHYSICS));
 }
@@ -16,9 +16,9 @@ CPhysics::~CPhysics()
 {
 }
 
-CPhysics * CPhysics::Create(CGameObject* pOwner)
+CPhysics * CPhysics::Create(_uint iGroupID)
 {
-	CPhysics* pPhysics = new CPhysics(pOwner);
+	CPhysics* pPhysics = new CPhysics(iGroupID);
 
 	if (FAILED(pPhysics->Initialize_Prototype()))
 	{

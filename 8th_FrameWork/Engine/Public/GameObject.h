@@ -28,23 +28,25 @@ public:
 
 #pragma region GET, SET
 public:/*Get, Set*/
-	template<typename COMPONENT>
-	COMPONENT*			Get_Component()
+	template<typename T>
+	vector<T*>			Get_Component()
 	{
-		COMPONENT* pComponent = nullptr;
+		vector<T*> vecComponents = nullptr;
+
 		for (auto& elem : m_pComponents)
 		{
-			pComponent = dynamic_cast<COMPONENT*>(elem);
+			T* pComponent = dynamic_cast<T*>(elem);
 
 			if (pComponent)
-				break;
+				vecComponents.push_back(pComponent);
 		}
 
-		if (!pComponent)
+		if (vecComponents.empty())
 			Call_MsgBox(L"Failed to Find Component : CGameObject");
 
-		return pComponent;
+		return vecComponents;
 	}
+
 	CGameObject*		Get_Parent() { return m_pParent; }
 	CGameObject*		Get_RootParent();
 	CTransform*			Get_Transform() { return m_pTransform; }

@@ -28,8 +28,8 @@ public:
 	static CTransform* Create_Transform(const _uint& iID);
 
 private:
-	static CComponent* Create_PrototypeFromJson(const _uint& iComponentID, CGameObject* pOwner);
-	static CComponent* Create_InstanceFromJson(const json& _json, CGameObject* pOwner);
+	static CComponent* Create_PrototypeFromJson(const _uint& iComponentID);
+	static CComponent* Create_InstanceFromJson(const json& _json);
 };
 
 END

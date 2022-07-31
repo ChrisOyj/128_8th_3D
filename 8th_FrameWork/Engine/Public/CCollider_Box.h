@@ -73,11 +73,11 @@ class ENGINE_DLL CCollider_Box final
 	DECLARE_PROTOTYPE(CCollider_Box)
 
 private:
-	CCollider_Box(CGameObject* pOwner);
+	CCollider_Box(_uint iGroupID);
 	virtual ~CCollider_Box();
 
 public:
-	static	CCollider_Box* Create(CGameObject* pOwner, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos);
+	static	CCollider_Box* Create(_uint iGroupID, _float4 vSize, const _uint& iColIndex, _float4 vOffsetPos);
 
 public:
 	COL_INFO_BOX& Get_ColInfo() { return m_tColInfo; }

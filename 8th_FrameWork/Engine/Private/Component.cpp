@@ -3,8 +3,8 @@
 
 #include "CComponent_Manager.h"
 
-CComponent::CComponent(CGameObject* pOwner)
-	: m_pOwner(pOwner)
+CComponent::CComponent(_uint iGroupID)
+	: m_iGroupID(iGroupID)
 {
 }
 

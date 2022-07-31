@@ -12,11 +12,11 @@ class ENGINE_DLL CTransform final
 	DECLARE_PROTOTYPE(CTransform);
 
 private:
-	CTransform(CGameObject* pOwner);
+	CTransform(_uint iGroupID);
 	virtual ~CTransform();
 
 public:
-	static CTransform* Create(CGameObject* pOwner);
+	static CTransform* Create(_uint iGroupID);
 
 public:
 	const TRANSFORM&	Get_Transform()		{ return m_tTransform;}
