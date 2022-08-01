@@ -6,8 +6,7 @@ class CMesh abstract
 	: public CComponent
 {
 protected:
-	CMesh(CGameObject* pOwner);
-	CMesh(const CMesh& _origin);
+	CMesh(_uint iGroupIdx);
 	virtual ~CMesh();
 
 public:
@@ -28,8 +27,8 @@ protected:
 	D3D11_SUBRESOURCE_DATA			m_SubResourceData;
 
 protected:
-	ID3D11Buffer* m_pVB = nullptr;
-	ID3D11Buffer* m_pIB = nullptr;
+	ComPtr<ID3D11Buffer> m_pVB = nullptr;
+	ComPtr<ID3D11Buffer> m_pIB = nullptr;
 	_uint							m_iStride = 0;
 	_uint							m_iNumVertices = 0;
 	_uint							m_iNumPrimitive = 0;
@@ -38,6 +37,10 @@ protected:
 	_uint							m_iNumVertexBuffers = 0;
 	DXGI_FORMAT						m_eIndexFormat;
 	D3D11_PRIMITIVE_TOPOLOGY		m_eToplogy;
+
+protected:
+	HRESULT Create_VertexBuffer();
+	HRESULT Create_IndexBuffer();
 
 };
 END

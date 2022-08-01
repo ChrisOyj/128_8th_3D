@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "GameInstance.h"
 #include "Renderer.h"
+
 #include "Camera_Manager.h"
 
 CRender_Manager::CRender_Manager()
@@ -29,6 +30,23 @@ HRESULT CRender_Manager::Add_Renderer(RENDER_GROUP eGroup, CRenderer* pRenderer)
 
 HRESULT CRender_Manager::Render()
 {
+	Sort_AlphaList();
+
+	CCamera_Manager::Get_Instance()->SetUp_ShaderResources();
+
+	for (_uint i = RENDER_PRIORITY; i < RENDER_UI; ++i)
+	{
+		if (FAILED(Render_Group((RENDER_GROUP)i)))
+			return E_FAIL;
+	}
+
+	/* UI */
+
+	CCamera_Manager::Get_Instance()->SetUp_ShaderResources(true);
+
+	if (FAILED(Render_Group(RENDER_UI)))
+		return E_FAIL;
+
 	return S_OK;
 }
 

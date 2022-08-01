@@ -36,7 +36,7 @@ HRESULT CLevel_Manager::Render()
 HRESULT CLevel_Manager::Enter_Level(CLevel* pLevel)
 {
 	//delete m_pCurrentLevel;
-	SAFE_DELETE(m_pCurrentLevel);
+	//SAFE_DELETE(m_pCurrentLevel);
 	m_pCurrentLevel = pLevel;
 
 	return S_OK;
@@ -44,5 +44,5 @@ HRESULT CLevel_Manager::Enter_Level(CLevel* pLevel)
 
 void CLevel_Manager::Release()
 {
-	SAFE_DELETE(m_pCurrentLevel);
+	//SAFE_DELETE(m_pCurrentLevel);
 }

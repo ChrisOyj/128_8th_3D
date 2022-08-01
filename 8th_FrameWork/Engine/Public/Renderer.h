@@ -18,7 +18,7 @@ protected:
 	virtual ~CRenderer();
 
 public:
-	static CRenderer* Create(_uint iGroupID, const _uint& iCurPass);
+	static CRenderer* Create(_uint iGroupID, const _uint& iCurPass, const _float4& vOffsetPos);
 
 public:
 	void		Set_RenderGroup(RENDER_GROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }

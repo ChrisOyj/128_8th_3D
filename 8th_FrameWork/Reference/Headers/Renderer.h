@@ -13,12 +13,12 @@ class ENGINE_DLL CRenderer
 	DECLARE_PROTOTYPE(CRenderer);
 
 protected:
-	CRenderer(CGameObject* pOwner, CShader* pShader, CMesh* pMesh, CTexture* pTexture);
+	CRenderer(_uint iGroupID);
 	CRenderer(const CRenderer& _origin);
 	virtual ~CRenderer();
 
 public:
-	static CRenderer* Create(CGameObject* pOwner, const _uint& iCurPass, CShader* pShader, CMesh* pMesh, CTexture* pTexture);
+	static CRenderer* Create(_uint iGroupID, const _uint& iCurPass, const _float4& vOffsetPos);
 
 public:
 	void		Set_RenderGroup(RENDER_GROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }

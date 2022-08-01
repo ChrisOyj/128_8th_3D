@@ -22,7 +22,7 @@ public:
 	void	Late_Tick();
 
 public:
-	void	Delete_All();
+	void	Delete_AllObjects();
 	void	Delete_Objects(const _uint& iGroupIdx);
 
 private:

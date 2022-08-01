@@ -5,8 +5,8 @@
 
 #include "Renderer.h"
 
-CTexture::CTexture(CGameObject* pOwner)
-	: CComponent(pOwner)
+CTexture::CTexture(_uint iGroupIdx)
+	: CComponent(iGroupIdx)
 {
 }
 
@@ -19,9 +19,9 @@ CTexture::~CTexture()
 {
 	
 }
-CTexture* CTexture::Create(CGameObject* pOwner, const _tchar* pTextureFilePath, const _uint& iNumTextures)
+CTexture* CTexture::Create(_uint iGroupIdx, const _tchar* pTextureFilePath, const _uint& iNumTextures)
 {
-	CTexture* pTexture = new CTexture(pOwner);
+	CTexture* pTexture = new CTexture(iGroupIdx);
 
 	if (FAILED(pTexture->SetUp_Textures(pTextureFilePath, iNumTextures)))
 	{

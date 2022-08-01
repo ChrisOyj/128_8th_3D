@@ -50,7 +50,7 @@
 #define ENABLE_GAMEOBJECT(GameObject) CGameInstance::Get_Instance()->Enable_GameObject(GameObject)
 #define DISABLE_GAMEOBJECT(GameObject) CGameInstance::Get_Instance()->Disable_GameObject(GameObject)
 #define CREATE_STATIC(GameObject, hashcode) CGameInstance::Get_Instance()->Create_StaticObject(GameObject, hashcode)
-#define CHANGE_LEVEL(iLevelID, pLevel) CGameInstance::Get_Instance()->Change_Level(iLevelID, pLevel)
+#define CHANGE_LEVEL(pLevel) CGameInstance::Get_Instance()->Change_Level(pLevel)
 #define CREATE_COMPONENT(Component, GameObject) CGameInstance::Get_Instance()->Create_Component(Component, GameObject)
 #define DELETE_COMPONENT(Component, GameObject) CGameInstance::Get_Instance()->Delete_Component(Component, GameObject)
 #define ENABLE_COMPONENT(Component) CGameInstance::Get_Instance()->Enable_Component(Component)

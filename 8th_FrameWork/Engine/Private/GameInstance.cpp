@@ -87,11 +87,11 @@ HRESULT CGameInstance::Tick_Engine( )
 
 	/* Object */
 	MGR(CLevel_Manager)->Tick();
-	MGR(CObject_Manager)->Tick();
+	//MGR(CObject_Manager)->Tick();
 	MGR(CComponent_Manager)->Tick();
 
 	MGR(CLevel_Manager)->Late_Tick();
-	MGR(CObject_Manager)->Late_Tick();
+	//MGR(CObject_Manager)->Late_Tick();
 	MGR(CComponent_Manager)->Late_Tick();
 
 	/* ViewProj */
@@ -128,6 +128,21 @@ HRESULT CGameInstance::Initialize()
 
 void CGameInstance::Release()
 {
+}
+
+HRESULT CGameInstance::Clear_BackBuffer_View(_float4 vClearColor)
+{
+	return MGR(CGraphic_Device)->Clear_BackBuffer_View(vClearColor);
+}
+
+HRESULT CGameInstance::Clear_DepthStencil_View()
+{
+	return MGR(CGraphic_Device)->Clear_DepthStencil_View();
+}
+
+HRESULT CGameInstance::Present()
+{
+	return MGR(CGraphic_Device)->Present();
 }
 
 _long CGameInstance::Get_DIMouseMoveState(MOUSEMOVE eMouseMove)
@@ -209,6 +224,11 @@ CGameObject* CGameInstance::Get_StaticObj(const _uint& iKeyValue)
 list<CGameObject*>& CGameInstance::Get_ObjGroup(const _uint& iGroupIdx)
 {
 	return MGR(CObject_Manager)->Get_ObjGroup(iGroupIdx);
+}
+
+void CGameInstance::Delete_Objects(const _uint& iGroupIdx)
+{
+	return MGR(CObject_Manager)->Delete_Objects(iGroupIdx);
 }
 
 void CGameInstance::Add_Camera(wstring strKey, CCamera * pCamera)

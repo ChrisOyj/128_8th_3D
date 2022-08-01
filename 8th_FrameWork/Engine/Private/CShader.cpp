@@ -8,8 +8,10 @@
 #include "Texture.h"
 #include "Transform.h"
 
-CShader::CShader(CGameObject* pOwner)
-	: CComponent(pOwner)
+#include "CShader_Manager.h"
+
+CShader::CShader(_uint iGroupIdx)
+	: CComponent(iGroupIdx)
 {
 }
 
@@ -20,9 +22,9 @@ CShader::CShader(const CShader& rhs)
 {
 }
 
-CShader* CShader::Create(CGameObject* pOwner, const _tchar* pShaderFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
+CShader* CShader::Create(_uint iGroupIdx, const _tchar* pShaderFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
 {
-	CShader* pInstance = new CShader(pOwner);
+	CShader* pInstance = new CShader(iGroupIdx);
 
 	if (FAILED(pInstance->SetUp_Shader(pShaderFilePath, pElements, iNumElement)))
 	{
@@ -54,6 +56,8 @@ HRESULT CShader::SetUp_ShaderResources(const _uint& iPassIndex, CTexture* pTextu
 
 HRESULT CShader::Initialize_Prototype()
 {
+	CShader_Manager::Get_Instance()->Add_Effect(m_pEffect);
+
 
 	return S_OK;
 }

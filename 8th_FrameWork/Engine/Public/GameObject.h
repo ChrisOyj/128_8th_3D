@@ -31,7 +31,7 @@ public:/*Get, Set*/
 	template<typename T>
 	vector<T*>			Get_Component()
 	{
-		vector<T*> vecComponents = nullptr;
+		vector<T*> vecComponents;
 
 		for (auto& elem : m_pComponents)
 		{
@@ -52,9 +52,11 @@ public:/*Get, Set*/
 	CTransform*			Get_Transform() { return m_pTransform; }
 	CCollider*			Get_Collider() { return m_pCollider; }
 	list<CGameObject*>&	Get_Children() { return m_pChildren; }
+	_uint				Get_ID() { return m_iID; }
 
 	void				Set_Parent(CGameObject* pParent) { m_pParent = pParent; }
 	void				Set_Enable(_bool bEnable);
+	void				Set_ID(const _uint& iID) { m_iID = iID; }
 
 	/* Is_Valid : Check the Instance is okay to update. */
 	_bool			Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
@@ -96,6 +98,7 @@ protected:
 	list<CGameObject*>		m_pChildren;
 	list<CComponent*>		m_pComponents;
 
+	_uint					m_iID = 0;
 
 protected:
 	// These will be called by Set_Enable Func.

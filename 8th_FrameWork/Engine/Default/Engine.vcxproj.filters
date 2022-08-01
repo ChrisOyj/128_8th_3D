@@ -124,6 +124,9 @@
     <Filter Include="03. Instances\03. Component\10. Mesh\Mesh_Rect">
       <UniqueIdentifier>{ca1db4c8-936b-401a-bb37-0d2ef3511ba2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Singleton\02. Design\14. Shader_Manager">
+      <UniqueIdentifier>{9d593c2a-d90b-4a46-94cb-ee9c74c6fc7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Camera.cpp">
@@ -227,6 +230,12 @@
     </ClCompile>
     <ClCompile Include="..\private\CMesh_Rect.cpp">
       <Filter>03. Instances\03. Component\10. Mesh\Mesh_Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScriptable.cpp">
+      <Filter>03. Instances\03. Component\06. Scriptable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CShader_Manager.cpp">
+      <Filter>02. Singleton\02. Design\14. Shader_Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +361,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\Delegate\Delegate.h">
       <Filter>99. Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CScriptable.h">
+      <Filter>03. Instances\03. Component\06. Scriptable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CShader_Manager.h">
+      <Filter>02. Singleton\02. Design\14. Shader_Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

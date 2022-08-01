@@ -6,6 +6,8 @@
 
 #include "Loading_Manager.h"
 
+#include "CCamera_Free.h"
+
 CMainApp::CMainApp()
 	: m_pGameInstance(CGameInstance::Get_Instance())
 {
@@ -27,16 +29,17 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
 		return E_FAIL;
 
+	if (FAILED(SetUp_Statics()))
+		return E_FAIL;
+
 	return S_OK;
 }
 
 HRESULT CMainApp::Progress()
 {
-	m_pGameInstance->Tick_Engine();
+	if (FAILED(m_pGameInstance->Tick_Engine()))
+		return E_FAIL;
 
-	//============
-	//Render
-	//============
 	if (FAILED(Render()))
 		return E_FAIL;
 
@@ -45,9 +48,14 @@ HRESULT CMainApp::Progress()
 
 HRESULT CMainApp::Render()
 {
+	m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f));
+	m_pGameInstance->Clear_DepthStencil_View();
+
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
 
+	if (FAILED(m_pGameInstance->Present()))
+		return E_FAIL;
 
 
 	return S_OK;
@@ -83,5 +91,16 @@ HRESULT CMainApp::SetUp_Engine()
 
 HRESULT CMainApp::SetUp_Levels()
 {
+	return S_OK;
+}
+
+HRESULT CMainApp::SetUp_Statics()
+{
+	/* Free Camera */
+	CCamera_Free* pFreeCam = CCamera_Free::Create();
+	CREATE_STATIC(pFreeCam, pFreeCam->Get_ID());
+	CGameInstance::Get_Instance()->Add_Camera(L"Free", pFreeCam);
+	CGameInstance::Get_Instance()->Change_Camera(L"Free");
+
 	return S_OK;
 }

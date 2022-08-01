@@ -12,12 +12,12 @@ class ENGINE_DLL CTexture
 	DECLARE_PROTOTYPE(CTexture);
 
 private:
-	CTexture(CGameObject* pOwner);
+	CTexture(_uint iGroupIdx);
 	CTexture(const CTexture& _origin);
 	virtual ~CTexture();
 
 public:
-	static CTexture* Create(CGameObject* pOwner, const _tchar* pTextureFilePath, const _uint& iNumTextures);
+	static CTexture* Create(_uint iGroupIdx, const _tchar* pTextureFilePath, const _uint& iNumTextures);
 
 public:
 	void	Set_CurTextureIndex(const _uint& iIndex) { m_iCurTextureIndex = iIndex; }

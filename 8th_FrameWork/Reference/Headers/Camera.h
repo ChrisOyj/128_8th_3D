@@ -14,7 +14,7 @@ public:
 	const PROJ_TRANSFORM& Get_Proj() { return m_tProj; }
 
 	// CGameObject을(를) 통해 상속됨
-private:
+protected:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual void OnEnable() override;
 	virtual void OnDisable() override;

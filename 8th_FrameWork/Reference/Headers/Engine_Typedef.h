@@ -102,7 +102,7 @@ namespace Engine
 			const _float& _y,
 			const _float& _z,
 			const _float& _w = 1.f)
-			: XMFLOAT4(x, y, z, w)
+			: XMFLOAT4(_x, _y, _z, _w)
 		{}
 
 		XMFLOAT4_DERIVED& operator = (const XMFLOAT4& _other)

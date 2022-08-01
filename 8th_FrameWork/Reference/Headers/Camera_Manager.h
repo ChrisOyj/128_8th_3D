@@ -25,6 +25,9 @@ public:
 	_float4 Get_ViewPos();
 
 public:
+	HRESULT	SetUp_ShaderResources(_bool Ortho = false);
+
+public:
 	HRESULT	Initialize(const GRAPHICDESC& GraphicDesc);
 	void	Make_ViewProj();
 	

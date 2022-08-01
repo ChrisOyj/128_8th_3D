@@ -28,31 +28,35 @@ public:
 
 #pragma region GET, SET
 public:/*Get, Set*/
-	template<typename COMPONENT>
-	COMPONENT*			Get_Component()
+	template<typename T>
+	vector<T*>			Get_Component()
 	{
-		COMPONENT* pComponent = nullptr;
+		vector<T*> vecComponents;
+
 		for (auto& elem : m_pComponents)
 		{
-			pComponent = dynamic_cast<COMPONENT*>(elem);
+			T* pComponent = dynamic_cast<T*>(elem);
 
 			if (pComponent)
-				break;
+				vecComponents.push_back(pComponent);
 		}
 
-		if (!pComponent)
+		if (vecComponents.empty())
 			Call_MsgBox(L"Failed to Find Component : CGameObject");
 
-		return pComponent;
+		return vecComponents;
 	}
+
 	CGameObject*		Get_Parent() { return m_pParent; }
 	CGameObject*		Get_RootParent();
 	CTransform*			Get_Transform() { return m_pTransform; }
 	CCollider*			Get_Collider() { return m_pCollider; }
 	list<CGameObject*>&	Get_Children() { return m_pChildren; }
+	_uint				Get_ID() { return m_iID; }
 
 	void				Set_Parent(CGameObject* pParent) { m_pParent = pParent; }
 	void				Set_Enable(_bool bEnable);
+	void				Set_ID(const _uint& iID) { m_iID = iID; }
 
 	/* Is_Valid : Check the Instance is okay to update. */
 	_bool			Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
@@ -94,6 +98,7 @@ protected:
 	list<CGameObject*>		m_pChildren;
 	list<CComponent*>		m_pComponents;
 
+	_uint					m_iID = 0;
 
 protected:
 	// These will be called by Set_Enable Func.

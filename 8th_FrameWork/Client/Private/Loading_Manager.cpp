@@ -2,6 +2,8 @@
 #include "Loading_Manager.h"
 
 #include "CLevel_Default.h"
+#include "CLevel_Unity.h"
+#include "GameInstance.h"
 
 CLoading_Manager::CLoading_Manager()
 {
@@ -31,7 +33,9 @@ unsigned int APIENTRY LoadingMain(void* pArg)
 
 HRESULT CLoading_Manager::Initialize()
 {
-	for (_uint i = 0; i < LEVEL_END; ++i)
+	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
+
+	/*for (_uint i = LEVEL_LOGO; i < LEVEL_END; ++i)
 	{
 		m_arrLevels[i] = CLevel_Default::Create((LEVEL_TYPE_CLIENT)i);
 
@@ -39,15 +43,23 @@ HRESULT CLoading_Manager::Initialize()
 		{
 			Call_MsgBox_Index(L"Failed to Create Level : CLoading_Manager", i);
 			return E_FAIL;
-
 		}
-	}
+	}*/
+
+	Load_Level(LEVEL_UNITY);
 
 	return S_OK;
 }
 
 HRESULT CLoading_Manager::Load_Level(LEVEL_TYPE_CLIENT	eLevelID)
 {
+	/* Delete all Objects except Statics */
+
+	for (_uint i = 0; i < GR_END; ++i)
+	{
+		CGameInstance::Get_Instance()->Delete_Objects(i);
+	}
+
 	m_eLoadID = eLevelID;
 	InitializeCriticalSection(&m_CriticalSection);
 
@@ -68,11 +80,21 @@ HRESULT CLoading_Manager::Start_Loading()
 
 	/* 다 생성되면 로딩중 화면이랑 로딩바 객체 지우야함 */
 
-
+	CHANGE_LEVEL(m_arrLevels[m_eLoadID]);
+	Finish_LoadingThread();
 	return S_OK;
 }
 
 void CLoading_Manager::Release()
+{
+	for (_uint i = 0; i < LEVEL_LOGO; ++i)
+	{
+		m_arrLevels[i]->Destroy_Instance();
+		m_arrLevels[i] = nullptr;
+	}
+}
+
+void CLoading_Manager::Finish_LoadingThread()
 {
 	WaitForSingleObject(m_hThread, INFINITE);
 	DeleteCriticalSection(&m_CriticalSection);

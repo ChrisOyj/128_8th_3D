@@ -16,11 +16,11 @@ class ENGINE_DLL CCollider_Sphere final
 	DECLARE_PROTOTYPE(CCollider_Sphere);
 
 private:
-	CCollider_Sphere(CGameObject* pOwner);
+	CCollider_Sphere(_uint iGroupID);
 	virtual ~CCollider_Sphere();
 
 public:
-	static	CCollider_Sphere* Create(CGameObject* pOwner, _float fRadius, const _uint& iColIndex, _float4 vOffsetPos);
+	static	CCollider_Sphere* Create(_uint iGroupID, _float fRadius, const _uint& iColIndex, _float4 vOffsetPos);
 
 public:
 	COL_INFO_SPHERE& Get_ColInfo() { return m_tColInfo; }

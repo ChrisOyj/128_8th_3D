@@ -31,11 +31,12 @@ CRenderer::~CRenderer()
 	Release();
 }
 
-CRenderer* CRenderer::Create(_uint iGroupID, const _uint& iCurPass)
+CRenderer* CRenderer::Create(_uint iGroupID, const _uint& iCurPass, const _float4& vOffsetPos)
 {
 	CRenderer* pRenderer = new CRenderer(iGroupID);
 
 	pRenderer->m_iCurPass = iCurPass;
+	pRenderer->m_vOffsetPos = vOffsetPos;
 
 	if (FAILED(pRenderer->Initialize_Prototype()))
 	{
@@ -74,8 +75,7 @@ void CRenderer::Release()
 
 HRESULT CRenderer::Initialize_Prototype()
 {
-	if (!m_pMeshCom || !m_pShaderCom || !m_pTextureCom)
-		return E_FAIL;
+	
 
 	return S_OK;
 }
@@ -85,6 +85,9 @@ HRESULT CRenderer::Initialize()
 	m_pShaderCom = m_pOwner->Get_Component<CShader>()[0];
 	m_pMeshCom = m_pOwner->Get_Component<CMesh>()[0];
 	m_pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+
+	if (!m_pMeshCom || !m_pShaderCom || !m_pTextureCom)
+		return E_FAIL;
 
 	return S_OK;
 }

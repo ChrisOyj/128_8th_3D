@@ -10,4 +10,22 @@
 #define COLOR_BROWN		_float4(0.4f, 0.2f, 0.1f, 1.0f)
 
 
+#define	DECLARE_GAMEOBJECT(classname) public:\
+static classname* Create() \
+{ \
+classname* pInstance = new classname(); \
+if (FAILED(pInstance->Initialize_Prototype()))\
+{\
+	string text = "Failed to Initialize_Prototype : ";\
+	text += typeid(classname).name();\
+	wstring wText;\
+	wText.assign(text.begin(), text.end());\
+	Call_MsgBox(wText.c_str());\
+	delete pInstance;\
+	pInstance = nullptr;\
+}\
+return pInstance;\
+}\
+
+
 

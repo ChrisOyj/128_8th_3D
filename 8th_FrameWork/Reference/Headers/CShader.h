@@ -19,12 +19,12 @@ public:
 	}PASSDESC;
 
 private:
-	CShader(CGameObject* pOwner);
+	CShader(_uint iGroupIdx);
 	CShader(const CShader& _origin);
 	virtual ~CShader() = default;
 
 public:
-	static CShader* Create(CGameObject* pOwner, const _tchar* pShaderFilePath,
+	static CShader* Create(_uint iGroupIdx, const _tchar* pShaderFilePath,
 		const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 public:

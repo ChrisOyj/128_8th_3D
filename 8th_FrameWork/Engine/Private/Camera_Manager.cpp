@@ -5,6 +5,8 @@
 
 #include "Camera.h"
 
+#include "CShader_Manager.h"
+
 CCamera_Manager::CCamera_Manager()
 {
 	ZeroMemory(&m_tView, sizeof(VIEW_TRANSFORM));
@@ -43,10 +45,31 @@ _float4 CCamera_Manager::Get_ViewPos()
 	return m_pCurCam->Get_Transform()->Get_World(WORLD_POS);
 }
 
+HRESULT CCamera_Manager::SetUp_ShaderResources(_bool Ortho)
+{
+	_float4x4	matView, matProj;
+
+	if (Ortho)
+	{
+		matView = m_matOrthoView;
+		matProj = m_matOrthoProj;
+	}
+	else
+	{
+		matView = m_tView.matView;
+		matProj = m_tProj.matProj;
+	}
+
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(0, "g_viewMatrix", (void*)(&matView), sizeof(_float4x4))))
+		return E_FAIL;
+
+	return CShader_Manager::Get_Instance()->Set_RawValue(0, "g_projMatrix", (void*)(&matProj), sizeof(_float4x4));
+}
+
 HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)
 {
-	_float4 Pos(0.f, 0.f, -5.f);
-	_float4 ZeroVector(0.f, 0.f, 0.f);
+	_float4 Pos = _float4(0.f, 0.f, -5.f);
+	_float4 ZeroVector = _float4(0.f, 0.f, 0.f);
 	m_tView.vUp =  _float4(0.0f, 1.0f, 0.0f, 0.f);
 
 	m_fAspect = (_float)GraphicDesc.iWinCX / (_float)GraphicDesc.iWinCY;

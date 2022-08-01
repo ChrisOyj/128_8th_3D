@@ -76,10 +76,10 @@ HRESULT CMesh_Rect::Initialize_Prototype()
 
 
 
-	return S_OK;;
+	return S_OK;
 }
 
 HRESULT CMesh_Rect::Initialize()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }

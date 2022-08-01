@@ -12,7 +12,7 @@ class ENGINE_DLL CComponent abstract
 	friend class CPrototype_Manager;
 
 protected:
-	CComponent(CGameObject* pOwner);
+	CComponent(_uint iGroupID);
 	virtual ~CComponent();
 
 public:
@@ -21,6 +21,7 @@ public:
 public:
 	CGameObject*	Get_Owner() { return m_pOwner; }
 	void			Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
+	void			Set_GroupID(const _uint& iGroupID) { m_iGroupID = iGroupID; }
 
 	_bool				Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
 	_bool				Is_Dead() { return !m_bAlive; }

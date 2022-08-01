@@ -30,7 +30,7 @@ CLevel_Default* CLevel_Default::Create(LEVEL_TYPE_CLIENT	eLevelID)
     {
         json    GameObjectDataJson = LevelJson["GameObjects"][i];
         GameObejctData  tData;
-        tData.iPrototypeID = GameObjectDataJson["GameObject_TYPE"];
+        tData.iPrototypeID = GameObjectDataJson["GameObject_ID"];
         tData.eGroupType = GameObjectDataJson["eGroupType"];
         tData.vStartPosition = CUtility_Json::Get_VectorFromJson(GameObjectDataJson, "vStartPosition");
         tData.vStartLook = CUtility_Json::Get_VectorFromJson(GameObjectDataJson, "vStartLook");

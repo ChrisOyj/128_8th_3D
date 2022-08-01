@@ -70,6 +70,21 @@
     <Filter Include="05. ShaderFiles">
       <UniqueIdentifier>{7e4a1fbd-7abb-4df9-8f71-7a882dc91bcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable">
+      <UniqueIdentifier>{de33774c-a19d-4592-aa2d-d3f122a51d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_FreeCam">
+      <UniqueIdentifier>{bdb3f120-a30f-47b6-b6fa-8f85abad82f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\03. Camera">
+      <UniqueIdentifier>{a7c876e7-acb8-4078-985c-9d806694ba93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Free">
+      <UniqueIdentifier>{3a78cade-5ede-4357-b853-72beb4c76d23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\00. Level_Unity">
+      <UniqueIdentifier>{74da3066-0c94-411f-9ab2-a8fa523e4cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -129,6 +144,15 @@
     <ClInclude Include="..\public\CUI.h">
       <Filter>03. Instances\02. GameObject\01. UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CScript_Freecam.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FreeCam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCamera_Free.h">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Unity.h">
+      <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -174,6 +198,15 @@
     </ClCompile>
     <ClCompile Include="..\private\CUI.cpp">
       <Filter>03. Instances\02. GameObject\01. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScript_Freecam.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FreeCam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCamera_Free.cpp">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Free</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevel_Unity.cpp">
+      <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

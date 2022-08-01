@@ -41,6 +41,7 @@ private:
 
 private:
 	void		Release();
+	void		Finish_LoadingThread();
 
 };
 

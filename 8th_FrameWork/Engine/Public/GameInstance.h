@@ -31,6 +31,9 @@ public:
 	void	Release();
 
 public: /* For. Graphic_Device */
+	HRESULT Clear_BackBuffer_View(_float4 vClearColor);
+	HRESULT Clear_DepthStencil_View();
+	HRESULT Present();
 
 public: /* For. Input_Device */
 	_long	Get_DIMouseMoveState(MOUSEMOVE eMouseMove);
@@ -54,8 +57,9 @@ public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);
 
 public:	/* For. Object_Manager */
-	CGameObject* Get_StaticObj(const _uint& iKeyValue);
-	list<CGameObject*>& Get_ObjGroup(const _uint& iGroupIdx);
+	CGameObject*			Get_StaticObj(const _uint& iKeyValue);
+	list<CGameObject*>&		Get_ObjGroup(const _uint& iGroupIdx);
+	void					Delete_Objects(const _uint& iGroupIdx);
 
 
 

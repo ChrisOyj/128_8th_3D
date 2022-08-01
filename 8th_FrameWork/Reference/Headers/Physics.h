@@ -25,11 +25,11 @@ class ENGINE_DLL CPhysics final
 	DECLARE_PROTOTYPE(CPhysics)
 
 private:
-	CPhysics(CGameObject* pOwner);
+	CPhysics(_uint iGroupID);
 	virtual ~CPhysics();
 
 public:
-	static	CPhysics*	Create(CGameObject* pOwner);
+	static	CPhysics*	Create(_uint iGroupID);
 
 public:
 	PHYSICS&	Get_Physics() { return m_tPhysics; }

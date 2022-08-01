@@ -148,12 +148,12 @@ void CGameObject::OnDisable()
 void CGameObject::Release()
 {
 	for (auto iter = m_pComponents.begin(); iter != m_pComponents.end(); ++iter)
-		delete (*iter);
+		SAFE_DELETE(*iter);
 
 	m_pComponents.clear();
 
 	for (auto iter = m_pChildren.begin(); iter != m_pChildren.end(); ++iter)
-		delete (*iter);
+		SAFE_DELETE(*iter);
 
 	m_pChildren.clear();
 }

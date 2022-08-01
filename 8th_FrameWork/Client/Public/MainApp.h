@@ -27,6 +27,7 @@ private:
 	void	Release();
 	HRESULT	SetUp_Engine();
 	HRESULT	SetUp_Levels();
+	HRESULT	SetUp_Statics();
 };
 
 END

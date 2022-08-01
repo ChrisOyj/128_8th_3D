@@ -90,8 +90,6 @@ void CTransform::Set_MyMatrix(_float4x4 matWorld)
 
 void CTransform::Set_Look(const _float4& vLook)
 {
-	
-
 	_float4 _vLook = vLook;
 	Set_World(WORLD_LOOK, _vLook.Normalize());
 
@@ -170,10 +168,7 @@ void CTransform::Start()
 {
 	__super::Start();
 
-	CShader* pShader = m_pOwner->Get_Component<CShader>();
-
-	pShader->CallBack_SetRawValues +=
-		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
+	
 
 }
 
@@ -194,12 +189,28 @@ void CTransform::Release()
 
 void CTransform::OnEnable()
 {
+	__super::OnEnable();
+
+	m_pOwner->CallBack_CollisionEnter +=
+		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
+
+	CShader* pShader = m_pOwner->Get_Component<CShader>()[0];
+
+	pShader->CallBack_SetRawValues +=
+		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
 }
 
 void CTransform::OnDisable()
 {
 	//pShader->CallBack_SetRawValues -= bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
 
+	m_pOwner->CallBack_CollisionEnter -=
+		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
+
+	CShader* pShader = m_pOwner->Get_Component<CShader>()[0];
+
+	pShader->CallBack_SetRawValues -=
+		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
 }
 
 void CTransform::Make_WorldMatrix()

@@ -120,6 +120,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../Public/</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,7 +166,9 @@
     <ClCompile Include="..\Private\Collider.cpp" />
     <ClCompile Include="..\Private\Collision_Manager.cpp" />
     <ClCompile Include="..\Private\Component.cpp" />
+    <ClCompile Include="..\private\CScriptable.cpp" />
     <ClCompile Include="..\private\CShader.cpp" />
+    <ClCompile Include="..\private\CShader_Manager.cpp" />
     <ClCompile Include="..\private\CTimer.cpp" />
     <ClCompile Include="..\Private\Engine_Struct.cpp" />
     <ClCompile Include="..\Private\Event_Manager.cpp" />
@@ -201,7 +204,9 @@
     <ClInclude Include="..\Public\Collider.h" />
     <ClInclude Include="..\Public\Collision_Manager.h" />
     <ClInclude Include="..\Public\Component.h" />
+    <ClInclude Include="..\public\CScriptable.h" />
     <ClInclude Include="..\public\CShader.h" />
+    <ClInclude Include="..\public\CShader_Manager.h" />
     <ClInclude Include="..\public\CTimer.h" />
     <ClInclude Include="..\Public\Delegate\Delegate.h" />
     <ClInclude Include="..\Public\Engine_Defines.h" />

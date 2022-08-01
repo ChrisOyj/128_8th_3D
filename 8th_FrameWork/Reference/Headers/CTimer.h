@@ -18,11 +18,11 @@ class ENGINE_DLL CTimer final
 	DECLARE_PROTOTYPE(CTimer)
 
 private:
-	CTimer(CGameObject * pOwner);
+	CTimer(_uint iGroupID);
 	virtual ~CTimer();
 
 public:
-	static	CTimer* Create(CGameObject* pOwner);
+	static	CTimer* Create(_uint iGroupID);
 
 public:
 	void	Add_Timer(const _float& fTime, const _uint& iEventNum, _bool bLoop = false);

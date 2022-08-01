@@ -14,7 +14,7 @@
 
 #define JSON_GAMEOBJECT_TYPE	"GameObject_Type"
 #define JSON_GAMEOBJECT_COMPONENT_LIST	"Component_List"
-#define JSON_GAMEOBJECT_Children_LIST	"Children_List"
+#define JSON_GAMEOBJECT_CHILDREN_LIST	"Children_List"
 
 CGameObject* CGameObject_Factory::Create(const _uint& iID)
 {
@@ -74,7 +74,7 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 	if (FAILED(Add_ComponentsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_COMPONENT_LIST])))
 		return nullptr;
 
-	if (FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_COMPONENT_LIST])))
+	if (FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_CHILDREN_LIST])))
 		return nullptr;
 
 	if (FAILED(pGameObject->Initialize()))

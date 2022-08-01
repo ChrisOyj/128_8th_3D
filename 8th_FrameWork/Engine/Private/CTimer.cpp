@@ -3,8 +3,8 @@
 
 #include "GameObject.h"
 
-CTimer::CTimer(CGameObject* pOwner)
-	: CComponent(pOwner)
+CTimer::CTimer(_uint iGroupID)
+	: CComponent(iGroupID)
 {
 }
 
@@ -12,9 +12,9 @@ CTimer::~CTimer()
 {
 }
 
-CTimer* CTimer::Create(CGameObject* pOwner)
+CTimer* CTimer::Create(_uint iGroupID)
 {
-	CTimer* pTimer = new CTimer(pOwner);
+	CTimer* pTimer = new CTimer(iGroupID);
 
 	if (FAILED(pTimer->Initialize_Prototype()))
 	{

@@ -77,17 +77,17 @@ void CObject_Manager::Late_Tick()
 
 
 
-void CObject_Manager::Delete_All()
+void CObject_Manager::Delete_AllObjects()
 {
 	for (auto& elem : m_mapStaticObj)
-		delete elem.second;
+		SAFE_DELETE(elem.second);
 
 	m_mapStaticObj.clear();
 
 	for (_uint i = 0; i < GR_END; ++i)
 	{
 		for (auto& elem : m_pGameObjects[i])
-			delete elem;
+			SAFE_DELETE(elem);
 
 		m_pGameObjects[i].clear();
 	}
@@ -96,12 +96,12 @@ void CObject_Manager::Delete_All()
 void CObject_Manager::Delete_Objects(const _uint& iGroupIdx)
 {
 	for (auto& elem : m_pGameObjects[iGroupIdx])
-		delete elem;
+		SAFE_DELETE(elem);
 
 	m_pGameObjects[iGroupIdx].clear();
 }
 
 void CObject_Manager::Release()
 {
-	Delete_All();
+	Delete_AllObjects();
 }
