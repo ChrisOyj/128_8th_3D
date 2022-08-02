@@ -90,7 +90,7 @@ HRESULT CLevel_Default::Create_GameObjectInLevel(const GameObejctData& tData)
         return E_FAIL;
     }
 
-    pGameObject = CGameObject_Factory::Create(tData.iPrototypeID);
+    pGameObject = CGameObject_Factory::Create_FromJson(tData.iPrototypeID);
 
     if (!pGameObject)
     {

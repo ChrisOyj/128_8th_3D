@@ -41,8 +41,8 @@ public:/*Get, Set*/
 				vecComponents.push_back(pComponent);
 		}
 
-		if (vecComponents.empty())
-			Call_MsgBox(L"Failed to Find Component : CGameObject");
+		//if (vecComponents.empty())
+			//Call_MsgBox(L"Failed to Find Component : CGameObject");
 
 		return vecComponents;
 	}
@@ -118,6 +118,7 @@ private:
 	/* Only Event_Manager can set this dead. */
 	friend class CEvent_Manager;
 	void	Set_Dead() { m_bAlive = false; }
+	void	Destroy_Instance() { delete this; }
 };
 
 END

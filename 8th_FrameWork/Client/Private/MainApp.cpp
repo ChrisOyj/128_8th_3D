@@ -8,8 +8,9 @@
 
 #include "CCamera_Free.h"
 
+#include "CGameObject_Factory.h"
+
 CMainApp::CMainApp()
-	: m_pGameInstance(CGameInstance::Get_Instance())
 {
 }
 
@@ -20,6 +21,8 @@ CMainApp::~CMainApp()
 
 HRESULT CMainApp::Initialize()
 {
+	m_pGameInstance = CGameInstance::Get_Instance();
+
 	if (nullptr == m_pGameInstance)
 		return E_FAIL;
 
@@ -98,8 +101,12 @@ HRESULT CMainApp::SetUp_Statics()
 {
 	/* Free Camera */
 	CCamera_Free* pFreeCam = CCamera_Free::Create();
-	CREATE_STATIC(pFreeCam, pFreeCam->Get_ID());
-	CGameInstance::Get_Instance()->Add_Camera(L"Free", pFreeCam);
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(pFreeCam->Get_ID(), pFreeCam);
+
+	CGameObject* pFreeCamClone = CGameObject_Factory::Create_FromPrototype(pFreeCam->Get_ID());
+
+	CREATE_STATIC(pFreeCamClone, pFreeCamClone->Get_ID());
+	CGameInstance::Get_Instance()->Add_Camera(L"Free", (CCamera_Free*)pFreeCam);
 	CGameInstance::Get_Instance()->Change_Camera(L"Free");
 
 	return S_OK;

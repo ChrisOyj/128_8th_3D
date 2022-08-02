@@ -23,9 +23,8 @@ enum COMPONENT_TYPE
 class CComponent_Factory
 {
 public:
-	static CComponent* Create(const _uint& iID, CGameObject* pOwner);
-
-	static CTransform* Create_Transform(const _uint& iID);
+	static CComponent* Create_FromJson(const _uint& iID, CGameObject* pOwner);
+	static CComponent* Create_FromPrototype(const _uint& iID, CGameObject* pOwner);
 
 private:
 	static CComponent* Create_PrototypeFromJson(const _uint& iComponentID);

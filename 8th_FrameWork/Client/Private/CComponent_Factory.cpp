@@ -19,13 +19,13 @@
 #define JSON_TEXTURE_INFO	"Texture_Info"
 #define JSON_MESH_INFO		"Mesh_Info"
 
-CComponent* CComponent_Factory::Create(const _uint& iID, CGameObject* pOwner)
+CComponent* CComponent_Factory::Create_FromJson(const _uint& iID, CGameObject* pOwner)
 {
 	CComponent* pComponent = CLONE_COMPONENT(iID);
 
 	if (!pComponent)
 	{
-		pComponent = Create_PrototypeFromJson(iID);
+		pComponent = Create_PrototypeFromJson(iID)->Clone();
 
 		if (!pComponent)
 			return nullptr;
@@ -42,16 +42,24 @@ CComponent* CComponent_Factory::Create(const _uint& iID, CGameObject* pOwner)
 	return pComponent;
 }
 
-CTransform* CComponent_Factory::Create_Transform(const _uint& iID)
+CComponent* CComponent_Factory::Create_FromPrototype(const _uint& iID, CGameObject* pOwner)
 {
 	CComponent* pComponent = CLONE_COMPONENT(iID);
 
 	if (!pComponent)
+	{
 		return nullptr;
+	}
 
-	CTransform* pTransform = dynamic_cast<CTransform*>(pComponent);
+	pComponent->Set_Owner(pOwner);
 
-	return pTransform;
+	if (FAILED(pComponent->Initialize()))
+	{
+		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
+		return nullptr;
+	}
+
+	return pComponent;
 }
 
 CComponent* CComponent_Factory::Create_PrototypeFromJson(const _uint& iComponentID)

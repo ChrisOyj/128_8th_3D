@@ -13,10 +13,14 @@ CLoading_Manager::CLoading_Manager()
 CLoading_Manager::~CLoading_Manager()
 {
 	Release();
+	DeleteCriticalSection(&m_CriticalSection);
+	CloseHandle(m_hThread);
 }
 
 unsigned int APIENTRY LoadingMain(void* pArg)
 {
+	CoInitializeEx(nullptr, 0);
+
 	CLoading_Manager*		pLoadingMgr = (CLoading_Manager*)pArg;
 	CRITICAL_SECTION	CS = pLoadingMgr->Get_CS();
 	EnterCriticalSection(&CS);
@@ -92,6 +96,8 @@ void CLoading_Manager::Release()
 		m_arrLevels[i]->Destroy_Instance();
 		m_arrLevels[i] = nullptr;
 	}
+	
+	//Finish_LoadingThread();
 }
 
 void CLoading_Manager::Finish_LoadingThread()

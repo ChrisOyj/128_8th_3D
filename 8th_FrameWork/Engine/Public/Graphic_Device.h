@@ -29,6 +29,7 @@ private:
 
 	ComPtr<ID3D11Device>			m_pDevice;
 	ComPtr<ID3D11DeviceContext>		m_pDeviceContext;
+	ComPtr<ID3D11DeviceContext>		m_pDeviceContext2;
 	ComPtr<IDXGISwapChain>			m_pSwapChain;
 
 	// ShaderResourceView

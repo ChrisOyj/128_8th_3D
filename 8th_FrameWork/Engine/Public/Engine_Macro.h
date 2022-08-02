@@ -12,6 +12,12 @@
 		Instance = nullptr;\
 		}\
 
+#define	SAFE_DESTROY(Instance) if (Instance)\
+		{\
+		Instance->Destroy_Instance();\
+		Instance = nullptr;\
+		}\
+
 // =========My Macro=========
 
 #define	GAMEINSTANCE CGameInstance::Get_Instance()
@@ -84,4 +90,7 @@ ClassName& operator=(const ClassName&) = delete;
 									static type* Get_Instance() {	\
 										static type mgr;			\
 										return &mgr;				\
-									}
+									}								\
+									//void	Destroy_Instance()		\
+
+									

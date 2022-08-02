@@ -34,7 +34,7 @@ void CEvent_Manager::Tick()
 	for (size_t i = 0; i < m_vecDeadObjects.size(); ++i)
 	{
 		if (nullptr != m_vecDeadObjects[i])
-			delete m_vecDeadObjects[i];
+			m_vecDeadObjects[i]->Destroy_Instance();
 	}
 
 	m_vecDeadObjects.clear();

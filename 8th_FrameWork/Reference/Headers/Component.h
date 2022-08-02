@@ -60,6 +60,8 @@ private:
 private:
 	void	Set_Dead() { m_bAlive = false; }
 	void	Set_Enable(_bool bEnable);
+	void	Destroy_Instance() { delete this; }
+
 
 };
 

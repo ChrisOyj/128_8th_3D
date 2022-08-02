@@ -91,14 +91,14 @@ void CPrototype_Manager::Release()
 {
 	for (auto iter = m_GameObject_Prototypes.begin(); iter != m_GameObject_Prototypes.end(); ++iter)
 	{
-		delete iter->second;
+		SAFE_DESTROY(iter->second);
 	}
 
 	m_GameObject_Prototypes.clear();
 
 	for (auto iter = m_Component_Prototypes.begin(); iter != m_Component_Prototypes.end(); ++iter)
 	{
-		delete iter->second;
+		SAFE_DESTROY(iter->second);
 	}
 
 	m_Component_Prototypes.clear();

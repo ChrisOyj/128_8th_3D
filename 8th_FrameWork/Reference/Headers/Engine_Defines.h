@@ -9,6 +9,7 @@
 
 #include <d3d11.h>
 #include <DirectXMath.h>
+#include <dxgidebug.h>
 
 #include <Effects11/d3dx11effect.h>
 #include <DirectXTK/DDSTextureLoader.h>

@@ -49,12 +49,12 @@ HRESULT CGameInstance::Initialize_Engine(const GRAPHICDESC& GraphicDesc, const S
 	if (FAILED(MGR(CKey_Manager)->Initialize(GraphicDesc.hWnd)))
 		return E_FAIL;
 
-	if (FAILED(MGR(CInput_Device)->Initialize(GraphicDesc.hInst, GraphicDesc.hWnd)))
-		return E_FAIL;
+	//if (FAILED(MGR(CInput_Device)->Initialize(GraphicDesc.hInst, GraphicDesc.hWnd)))
+		//return E_FAIL;
 
 	/* FMOD */
-	if (FAILED(MGR(CSound_Device)->Initialize(SoundDesc)))
-		return E_FAIL;
+	//if (FAILED(MGR(CSound_Device)->Initialize(SoundDesc)))
+		//return E_FAIL;
 
 	/* Time Manager */
 	if (FAILED(MGR(CTime_Manager)->Initialize(GraphicDesc.hWnd)))
@@ -83,11 +83,11 @@ HRESULT CGameInstance::Tick_Engine( )
 	/* Time, Key */
 	MGR(CTime_Manager)->Tick();
 	MGR(CKey_Manager)->Tick();
-	MGR(CInput_Device)->SetUp_DeviceStates();
+//	MGR(CInput_Device)->SetUp_DeviceStates();
 
 	/* Object */
 	MGR(CLevel_Manager)->Tick();
-	//MGR(CObject_Manager)->Tick();
+	MGR(CObject_Manager)->Tick();
 	MGR(CComponent_Manager)->Tick();
 
 	MGR(CLevel_Manager)->Late_Tick();
@@ -128,6 +128,7 @@ HRESULT CGameInstance::Initialize()
 
 void CGameInstance::Release()
 {
+	MGR(CSound_Device)->Release();
 }
 
 HRESULT CGameInstance::Clear_BackBuffer_View(_float4 vClearColor)

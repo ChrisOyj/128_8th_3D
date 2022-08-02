@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Client.h"
 #include "../Public/MainApp.h"
+#include <dxgidebug.h>
 
 #define MAX_LOADSTRING 100
 
@@ -18,6 +19,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+void                D3D11LeakFinder();
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -77,9 +79,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             if (FAILED(CMainApp::Get_Instance()->Progress()))
                 break;
         }
-
-
     }
+
+#ifdef _DEBUG
+    D3D11LeakFinder();
+#endif
 
     return (int)msg.wParam;
 }
@@ -213,3 +217,22 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+#ifdef _DEBUG
+void D3D11LeakFinder()
+{
+    HMODULE dxgidebugdll = GetModuleHandleW(L"dxgidebug.dll");
+    decltype(&DXGIGetDebugInterface) GetDebugInterface = 
+        reinterpret_cast<decltype(&DXGIGetDebugInterface)>(GetProcAddress(dxgidebugdll, "DXGIGetDebugInterface"));
+
+    IDXGIDebug* debug;
+
+    GetDebugInterface(IID_PPV_ARGS(&debug));
+
+    OutputDebugStringW(L"▽▽▽▽▽▽▽▽▽▽ Direct3D Object ref count 메모리 누수 체크 ▽▽▽▽▽▽▽▽▽▽▽\r\n");
+    debug->ReportLiveObjects(DXGI_DEBUG_D3D11, DXGI_DEBUG_RLO_DETAIL);
+    OutputDebugStringW(L"△△△△△△△△△△ 반환되지 않은 IUnknown 객체가 있을경우 위에 나타납니다. △△△△△△△△△△△△\r\n");
+
+    debug->Release();
+}
+#endif

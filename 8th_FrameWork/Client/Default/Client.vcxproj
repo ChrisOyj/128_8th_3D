@@ -175,6 +175,7 @@
     <ClInclude Include="..\public\CPrototype_Factory.h" />
     <ClInclude Include="..\public\CScript_Freecam.h" />
     <ClInclude Include="..\public\CSimple_Image.h" />
+    <ClInclude Include="..\public\CTestObj.h" />
     <ClInclude Include="..\public\CUI.h" />
     <ClInclude Include="..\Public\CUtility_Json.h" />
     <ClInclude Include="..\public\CLevel_Default.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="CLevel_Unity.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="CTestObj.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>

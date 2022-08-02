@@ -19,7 +19,8 @@ enum GAMEOBJECT_TYPE
 class CGameObject_Factory
 {
 public:
-	static CGameObject* Create(const _uint& iID);
+	static CGameObject* Create_FromPrototype(const _uint& iID);
+	static CGameObject* Create_FromJson(const _uint& iID);
 
 private:
 	static CGameObject* Create_PrototypeFromJson(const _uint& iGameObjectID);

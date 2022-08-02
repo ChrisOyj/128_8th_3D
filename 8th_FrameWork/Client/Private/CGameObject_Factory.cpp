@@ -16,13 +16,35 @@
 #define JSON_GAMEOBJECT_COMPONENT_LIST	"Component_List"
 #define JSON_GAMEOBJECT_CHILDREN_LIST	"Children_List"
 
-CGameObject* CGameObject_Factory::Create(const _uint& iID)
+CGameObject* CGameObject_Factory::Create_FromJson(const _uint& iID)
 {
 	CGameObject* pGameObject = CLONE_GAMEOBJECT(iID);
 
 	if (!pGameObject)
 	{
-		pGameObject = Create_PrototypeFromJson(iID);
+		pGameObject = Create_PrototypeFromJson(iID)->Clone();
+	}
+
+	if (FAILED(pGameObject->Initialize()))
+	{
+		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
+		return nullptr;
+	}
+
+	return pGameObject;
+}
+
+CGameObject* CGameObject_Factory::Create_FromPrototype(const _uint& iID)
+{
+	CGameObject* pGameObject = CLONE_GAMEOBJECT(iID);
+
+	if (!pGameObject)
+		return nullptr;
+
+	if (FAILED(pGameObject->Initialize()))
+	{
+		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
+		return nullptr;
 	}
 
 	return pGameObject;
@@ -77,9 +99,9 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 	if (FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_CHILDREN_LIST])))
 		return nullptr;
 
-	if (FAILED(pGameObject->Initialize()))
+	if (FAILED(pGameObject->Initialize_Prototype()))
 	{
-		Call_MsgBox_Index(L"Failed to Initialize : CComponent_Enum ->", eGameObjectType);
+		Call_MsgBox_Index(L"Failed to Initialize_Prototype : CComponent_Enum ->", eGameObjectType);
 		return nullptr;
 	}
 
@@ -96,7 +118,7 @@ HRESULT CGameObject_Factory::Add_ComponentsToGameObject(CGameObject* pGameObject
 		if (!Safe_CheckID(iComponentID, ID_COMPONENT))
 			return E_FAIL;
 
-		CComponent* pComponent = CComponent_Factory::Create(iComponentID, pGameObject);
+		CComponent* pComponent = CComponent_Factory::Create_FromJson(iComponentID, pGameObject);
 
 		if (!pComponent)
 			return E_FAIL;
@@ -117,7 +139,7 @@ HRESULT CGameObject_Factory::Add_ChildrenObjectsToGameObject(CGameObject* pGameO
 		if (!Safe_CheckID(iGameObjectID, ID_GAMEOBJECT))
 			return E_FAIL;
 
-		CGameObject* pChild = CGameObject_Factory::Create(iGameObjectID);
+		CGameObject* pChild = CGameObject_Factory::Create_FromJson(iGameObjectID);
 
 		if (!pChild)
 			return E_FAIL;

@@ -9,6 +9,7 @@
 CGameObject::CGameObject()
 {
 	m_pTransform = CTransform::Create(0);
+	Add_Component(m_pTransform);
 }
 
 CGameObject::CGameObject(const CGameObject & Prototype)

@@ -85,6 +85,9 @@
     <Filter Include="03. Instances\01. Level\00. Level_Unity">
       <UniqueIdentifier>{74da3066-0c94-411f-9ab2-a8fa523e4cf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\02. GameObject\04. Test">
+      <UniqueIdentifier>{9aa0c8e1-ea45-4c12-b082-e4ab7c2d1148}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -153,6 +156,9 @@
     <ClInclude Include="..\public\CLevel_Unity.h">
       <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CTestObj.h">
+      <Filter>03. Instances\02. GameObject\04. Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -207,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="CLevel_Unity.cpp">
       <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestObj.cpp">
+      <Filter>03. Instances\02. GameObject\04. Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
