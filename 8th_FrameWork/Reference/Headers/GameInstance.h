@@ -1,5 +1,21 @@
 #pragma once
 #include "Engine_Defines.h"
+#include "Graphic_Device.h"
+#include "Level_Manager.h"
+#include "Object_Manager.h"
+#include "Render_Manager.h"
+#include "Event_Manager.h"
+#include "Time_Manager.h"
+#include "Key_Manager.h"
+#include "Camera_Manager.h"
+#include "Collision_Manager.h"
+#include "ZFrustum.h"
+#include "Sound_Device.h"
+#include "Input_Device.h"
+#include "Picking_Manager.h"
+#include "Prototype_Manager.h"
+#include "CComponent_Manager.h"
+#include "CShader_Manager.h"
 
 //매니져 매니저..
 
@@ -91,6 +107,23 @@ public: /* For. Prototype_Manager */
 
 	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
 	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
+
+private:
+	CEvent_Manager* m_pEventManager = nullptr;
+	CLevel_Manager* m_pLevelManager = nullptr;
+	CObject_Manager* m_pObjectManager = nullptr;
+	CCamera_Manager* m_pCameraManager = nullptr;
+	CCollision_Manager* m_pCollisionManager = nullptr;
+	CTime_Manager* m_pTimeManager = nullptr;
+	CKey_Manager* m_pKeyManager = nullptr;
+	CRender_Manager* m_pRenderManager = nullptr;
+	CComponent_Manager* m_pComponentManager = nullptr;
+	CPicking_Manager* m_pPickingManager = nullptr;
+	CPrototype_Manager* m_pPrototypeManager = nullptr;
+	CShader_Manager* m_pShaderManager = nullptr;
+	CGraphic_Device* m_pGraphicDevice = nullptr;
+	CInput_Device* m_pInputDevice = nullptr;
+	CSound_Device* m_pSoundDevice = nullptr;
 
 private:
 	HRESULT	Initialize();

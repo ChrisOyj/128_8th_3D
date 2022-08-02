@@ -1,6 +1,9 @@
 #include "Object_Manager.h"
 #include "GameObject.h"
 
+IMPLEMENT_SINGLETON(CObject_Manager)
+
+
 CObject_Manager::CObject_Manager()
 {
 }

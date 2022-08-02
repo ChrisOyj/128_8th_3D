@@ -1,5 +1,8 @@
 #include "../Public/Sound_Device.h"
 
+IMPLEMENT_SINGLETON(CSound_Device)
+
+
 CSound_Device::CSound_Device()
 {
 	ZeroMemory(&m_iCurChannelIndex, sizeof(_uint) * CH_GROUP_END);

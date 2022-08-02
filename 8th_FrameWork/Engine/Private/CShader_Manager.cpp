@@ -1,5 +1,8 @@
 #include "CShader_Manager.h"
 
+IMPLEMENT_SINGLETON(CShader_Manager)
+
+
 CShader_Manager::CShader_Manager()
 {}
 

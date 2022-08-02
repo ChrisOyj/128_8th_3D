@@ -5,6 +5,8 @@
 #include "CLevel_Unity.h"
 #include "GameInstance.h"
 
+IMPLEMENT_SINGLETON(CLoading_Manager)
+
 CLoading_Manager::CLoading_Manager()
 {
 	ZeroMemory(m_arrLevels, sizeof(CLevel) * LEVEL_END);

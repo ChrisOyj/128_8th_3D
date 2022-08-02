@@ -1,5 +1,6 @@
 #include "..\Public\Input_Device.h"
 
+IMPLEMENT_SINGLETON(CInput_Device)
 
 CInput_Device::CInput_Device()
 {

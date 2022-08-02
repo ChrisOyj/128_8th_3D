@@ -7,6 +7,9 @@
 
 #include "Renderer.h"
 
+IMPLEMENT_SINGLETON(CPicking_Manager)
+
+
 CPicking_Manager::CPicking_Manager()
 {
 }

@@ -7,6 +7,9 @@
 
 #include "CShader_Manager.h"
 
+IMPLEMENT_SINGLETON(CCamera_Manager)
+
+
 CCamera_Manager::CCamera_Manager()
 {
 	ZeroMemory(&m_tView, sizeof(VIEW_TRANSFORM));

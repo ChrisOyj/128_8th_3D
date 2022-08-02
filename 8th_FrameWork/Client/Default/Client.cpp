@@ -81,6 +81,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
+    CMainApp::Get_Instance()->Destroy_Instance();
+
 #ifdef _DEBUG
     D3D11LeakFinder();
 #endif

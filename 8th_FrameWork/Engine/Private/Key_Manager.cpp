@@ -24,6 +24,9 @@ _uint g_Arr[(_uint)KEY::LAST] = {
 	//LAST
 };
 
+IMPLEMENT_SINGLETON(CKey_Manager)
+
+
 CKey_Manager::CKey_Manager()
 {
 }

@@ -3,6 +3,9 @@
 #include "GameInstance.h"
 #include "Key_Manager.h"
 
+IMPLEMENT_SINGLETON(CTime_Manager)
+
+
 CTime_Manager::CTime_Manager()
 {
 }

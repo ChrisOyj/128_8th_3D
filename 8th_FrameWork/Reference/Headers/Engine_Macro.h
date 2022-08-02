@@ -80,17 +80,38 @@
 #define BEGIN(NAMESPACE) namespace NAMESPACE { 
 #define END }
 
-
 #define NO_COPY(ClassName)								\
 ClassName(const ClassName&) = delete;					\
 ClassName& operator=(const ClassName&) = delete;
 
-#define DECLARE_SINGLETON(type) public:								\
-									NO_COPY(type)					\
-									static type* Get_Instance() {	\
-										static type mgr;			\
-										return &mgr;				\
-									}								\
-									//void	Destroy_Instance()		\
+
+#define DECLARE_SINGLETON(ClassName)					\
+		NO_COPY(ClassName)								\
+public :												\
+	static ClassName* Get_Instance();					\
+	static void Destroy_Instance();			\
+private:												\
+	static ClassName* m_pInstance;
+
+#define IMPLEMENT_SINGLETON(ClassName)					\
+ClassName* ClassName::m_pInstance = nullptr;			\
+ClassName* ClassName::Get_Instance()					\
+{														\
+	if (nullptr == m_pInstance)							\
+		m_pInstance = new ClassName;					\
+	return m_pInstance;									\
+}														\
+void ClassName::Destroy_Instance()						\
+{														\
+	SAFE_DELETE(m_pInstance);							\
+}
+
+
+//#define DECLARE_SINGLETON(type) public:								\
+//									NO_COPY(type)					\
+//									static type* Get_Instance() {	\
+//										static type mgr;			\
+//										return &mgr;				\
+//									}								\
 
 									

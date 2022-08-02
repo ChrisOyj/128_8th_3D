@@ -7,6 +7,9 @@
 
 #include "Camera_Manager.h"
 
+IMPLEMENT_SINGLETON(CRender_Manager)
+
+
 CRender_Manager::CRender_Manager()
 {
 }

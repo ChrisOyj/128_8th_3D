@@ -7,6 +7,8 @@
 #include "Object_Manager.h"
 #include "Level_Manager.h"
 
+IMPLEMENT_SINGLETON(CEvent_Manager)
+
 CEvent_Manager::CEvent_Manager()
 {
 }

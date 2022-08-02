@@ -3,6 +3,9 @@
 #include "GameInstance.h"
 #include "Level.h"
 
+IMPLEMENT_SINGLETON(CLevel_Manager)
+
+
 CLevel_Manager::CLevel_Manager()
 {
 }

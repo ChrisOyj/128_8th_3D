@@ -1,5 +1,7 @@
 #include "Graphic_Device.h"
 
+IMPLEMENT_SINGLETON(CGraphic_Device);
+
 CGraphic_Device::CGraphic_Device()
 {
 
@@ -191,7 +193,26 @@ HRESULT CGraphic_Device::Release()
 	dwCnt = m_pDepthStencilView.Reset();
 	dwCnt = m_pDeviceContext.Reset();
 
-	//m_pDeviceContext.ReleaseAndGetAddressOf();
+//	#if defined(DEBUG) || defined(_DEBUG)
+//	ID3D11Debug* d3dDebug;
+//	HRESULT hr = m_pDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&d3dDebug));
+//	if (SUCCEEDED(hr))
+//	{
+//		OutputDebugStringW(L"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \r ");
+//		OutputDebugStringW(L"                                                                    D3D11 Live Object ref Count Checker \r ");
+//		OutputDebugStringW(L"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \r ");
+//
+//		hr = d3dDebug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+//
+//		OutputDebugStringW(L"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \r ");
+//		OutputDebugStringW(L"                                                                    D3D11 Live Object ref Count Checker END \r ");
+//		OutputDebugStringW(L"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \r ");
+//	}
+//	if (d3dDebug != nullptr)            d3dDebug->Release();
+//#endif
+
+
+
 	dwCnt = m_pDevice.Reset();
 
 	return S_OK;

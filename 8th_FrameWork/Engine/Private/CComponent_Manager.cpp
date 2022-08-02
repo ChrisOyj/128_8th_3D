@@ -2,6 +2,9 @@
 
 #include "Component.h"
 
+IMPLEMENT_SINGLETON(CComponent_Manager)
+
+
 CComponent_Manager::CComponent_Manager()
 {
 }

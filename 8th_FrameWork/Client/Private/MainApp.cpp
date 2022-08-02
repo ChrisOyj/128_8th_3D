@@ -10,6 +10,8 @@
 
 #include "CGameObject_Factory.h"
 
+IMPLEMENT_SINGLETON(CMainApp)
+
 CMainApp::CMainApp()
 {
 }
@@ -66,6 +68,7 @@ HRESULT CMainApp::Render()
 
 void CMainApp::Release()
 {
+	m_pGameInstance->Destroy_Instance();
 }
 
 HRESULT CMainApp::SetUp_Engine()

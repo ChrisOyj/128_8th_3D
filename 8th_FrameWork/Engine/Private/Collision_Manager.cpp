@@ -6,6 +6,9 @@
 
 #include "Object_Manager.h"
 
+IMPLEMENT_SINGLETON(CCollision_Manager)
+
+
 CCollision_Manager::CCollision_Manager()
 {
 }

@@ -2,6 +2,9 @@
 #include "GameObject.h"
 #include "Component.h"
 
+IMPLEMENT_SINGLETON(CPrototype_Manager)
+
+
 CPrototype_Manager::CPrototype_Manager()
 {
 }
@@ -69,7 +72,8 @@ HRESULT CPrototype_Manager::Add_Component_Prototype(const _uint& _iID, CComponen
 
 CGameObject* CPrototype_Manager::Find_GameObject_Prototype(const _uint& _iID)
 {
-	auto iter = m_GameObject_Prototypes.find(_iID);
+	_uint i = _iID;
+	map<_uint, CGameObject*>::iterator iter = m_GameObject_Prototypes.find(i);
 
 	if (iter == m_GameObject_Prototypes.end())
 		return nullptr;
