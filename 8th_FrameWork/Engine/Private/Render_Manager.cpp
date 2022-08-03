@@ -35,7 +35,8 @@ HRESULT CRender_Manager::Render()
 {
 	Sort_AlphaList();
 
-	CCamera_Manager::Get_Instance()->SetUp_ShaderResources();
+	if (FAILED(CCamera_Manager::Get_Instance()->SetUp_ShaderResources()))
+		return E_FAIL;
 
 	for (_uint i = RENDER_PRIORITY; i < RENDER_UI; ++i)
 	{
@@ -45,7 +46,8 @@ HRESULT CRender_Manager::Render()
 
 	/* UI */
 
-	CCamera_Manager::Get_Instance()->SetUp_ShaderResources(true);
+	if (FAILED(CCamera_Manager::Get_Instance()->SetUp_ShaderResources(true)))
+		return E_FAIL;
 
 	if (FAILED(Render_Group(RENDER_UI)))
 		return E_FAIL;

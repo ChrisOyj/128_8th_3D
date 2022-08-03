@@ -22,8 +22,10 @@
 
 #define	GAMEINSTANCE CGameInstance::Get_Instance()
 
-#define DEVICE	CGameInstance::Get_Instance()->Get_Device().Get()
-#define DEVICE_CONTEXT	CGameInstance::Get_Instance()->Get_DeviceContext().Get()
+#define DEVICE	CGameInstance::Get_Instance()->Get_Device()
+#define DEVICE_CONTEXT	CGameInstance::Get_Instance()->Get_DeviceContext()
+#define PDEVICE	CGameInstance::Get_Instance()->Get_Device().Get()
+#define PDEVICE_CONTEXT	CGameInstance::Get_Instance()->Get_DeviceContext().Get()
 
 #define	HASHCODE(type)	typeid(type).hash_code()
 
@@ -68,6 +70,7 @@
 #define		ToRadian(fAngle)	XMConvertToRadians(fAngle)
 
 #define		MAX_VERTEX_ELEMENT			65
+#define		ZERO_VECTOR				_float4(0.f, 0.f, 0.f, 1.f)
 
 // ====================== Shader Flag ============================
 

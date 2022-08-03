@@ -63,10 +63,13 @@ HRESULT CCamera_Manager::SetUp_ShaderResources(_bool Ortho)
 		matProj = m_tProj.matProj;
 	}
 
-	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(0, "g_viewMatrix", (void*)(&matView), sizeof(_float4x4))))
+	matView.Transpose();
+	matProj.Transpose();
+
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(0, "g_ViewMatrix", (&matView), sizeof(_float4x4))))
 		return E_FAIL;
 
-	return CShader_Manager::Get_Instance()->Set_RawValue(0, "g_projMatrix", (void*)(&matProj), sizeof(_float4x4));
+	return CShader_Manager::Get_Instance()->Set_RawValue(0, "g_ProjMatrix", (&matProj), sizeof(_float4x4));
 }
 
 HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)
@@ -121,7 +124,7 @@ CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 void CCamera_Manager::Add_Camera(wstring strKey, CCamera * pCamera)
 {
 	m_mapCam.emplace(HASHCODE(strKey), pCamera);
-	DISABLE_GAMEOBJECT(pCamera);
+	//DISABLE_GAMEOBJECT(pCamera);
 }
 
 void CCamera_Manager::Make_ViewMatrix()

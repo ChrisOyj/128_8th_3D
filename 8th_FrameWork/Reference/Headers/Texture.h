@@ -13,7 +13,6 @@ class ENGINE_DLL CTexture
 
 private:
 	CTexture(_uint iGroupIdx);
-	CTexture(const CTexture& _origin);
 	virtual ~CTexture();
 
 public:

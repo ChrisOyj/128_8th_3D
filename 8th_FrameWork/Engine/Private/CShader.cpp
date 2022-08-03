@@ -46,7 +46,7 @@ CShader* CShader::Create(_uint iGroupIdx, const _tchar* pShaderFilePath, const D
 //만약 이녀석이 그냥 call_back 함수여서 등록된거 존나 call 해
 HRESULT CShader::SetUp_ShaderResources(const _uint& iPassIndex, CTexture* pTextureCom)
 {
-	if (FAILED(pTextureCom->Set_ShaderResourceView(this, "MyTex")))
+	if (FAILED(pTextureCom->Set_ShaderResourceView(this, "g_DiffuseTexture")))
 		return E_FAIL;
 
 	CallBack_SetRawValues(this, "");
@@ -109,7 +109,7 @@ HRESULT CShader::Begin(_uint iPassIndex)
 
 	DEVICE_CONTEXT->IASetInputLayout(m_Passes[iPassIndex].pInputLayout.Get());
 
-	if (FAILED(m_Passes[iPassIndex].pPass->Apply(0, DEVICE_CONTEXT)))
+	if (FAILED(m_Passes[iPassIndex].pPass->Apply(0, PDEVICE_CONTEXT)))
 		return E_FAIL;
 
 	return S_OK;
@@ -130,7 +130,7 @@ HRESULT CShader::SetUp_Shader(const _tchar* pShaderFilePath, const D3D11_INPUT_E
 #endif
 
 	if (FAILED(D3DX11CompileEffectFromFile(pShaderFilePath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		iHLSLFlag, 0, DEVICE, m_pEffect.GetAddressOf(), /*&pError*/nullptr)))
+		iHLSLFlag, 0, PDEVICE, m_pEffect.GetAddressOf(), /*&pError*/nullptr)))
 		return E_FAIL;
 
 	ID3DX11EffectTechnique* pTechnique = m_pEffect->GetTechniqueByIndex(0);

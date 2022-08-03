@@ -18,7 +18,7 @@ protected:
 	virtual ~CRenderer();
 
 public:
-	static CRenderer* Create(_uint iGroupID, const _uint& iCurPass, const _float4& vOffsetPos);
+	static CRenderer* Create(_uint iGroupID, const RENDER_GROUP& eRenderGroup, const _uint& iCurPass, const _float4& vOffsetPos);
 
 public:
 	void		Set_RenderGroup(RENDER_GROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }
@@ -29,6 +29,7 @@ public:
 public:
 	virtual HRESULT		Initialize_Prototype() override;
 	virtual HRESULT		Initialize() override;
+	virtual void		Start() override;
 	virtual void		Tick() override;
 	virtual void		Late_Tick() override;
 	virtual HRESULT		Render();

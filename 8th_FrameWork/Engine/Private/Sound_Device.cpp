@@ -46,8 +46,8 @@ HRESULT CSound_Device::Release()
 
 	m_mapSound.clear();
 
-	//FMOD_RESULT fHr = FMOD_System_Close(m_pSystem);
-	//fHr = FMOD_System_Release(m_pSystem);
+	FMOD_RESULT fHr = FMOD_System_Release(m_pSystem);
+	fHr = FMOD_System_Close(m_pSystem);
 
 	return S_OK;
 }

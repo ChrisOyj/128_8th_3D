@@ -2,7 +2,7 @@
 #include "Component.h"
 
 BEGIN(Engine)
-class CMesh abstract
+class ENGINE_DLL CMesh abstract
 	: public CComponent
 {
 protected:

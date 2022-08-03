@@ -1,5 +1,27 @@
 #include "CMesh_Rect.h"
 
+CMesh_Rect::CMesh_Rect(_uint iGroupIdx)
+	: CMesh(iGroupIdx)
+{
+}
+
+CMesh_Rect::~CMesh_Rect()
+{
+}
+
+CMesh_Rect* CMesh_Rect::Create(_uint iGroupID)
+{
+	CMesh_Rect* pInstance = new CMesh_Rect(iGroupID);
+
+	if (FAILED(pInstance->Initialize_Prototype()))
+	{
+		SAFE_DELETE(pInstance);
+		Call_MsgBox(L"Failed to Initialize_Prototype : CMesh_Rect");
+		return nullptr;
+	}
+
+	return pInstance;
+}
 
 HRESULT CMesh_Rect::Initialize_Prototype()
 {
@@ -33,8 +55,8 @@ HRESULT CMesh_Rect::Initialize_Prototype()
 	ZeroMemory(&m_SubResourceData, sizeof(D3D11_SUBRESOURCE_DATA));
 	m_SubResourceData.pSysMem = pVertices;
 
-	//if (FAILED(__super::Create_VertexBuffer()))
-		//return E_FAIL;
+	if (FAILED(__super::Create_VertexBuffer()))
+		return E_FAIL;
 
 	Safe_Delete_Array(pVertices);
 #pragma endregion
@@ -71,9 +93,10 @@ HRESULT CMesh_Rect::Initialize_Prototype()
 	ZeroMemory(&m_SubResourceData, sizeof(D3D11_SUBRESOURCE_DATA));
 	m_SubResourceData.pSysMem = pIndices;
 
-	//if (FAILED(Create_IndexBuffer()))
-		//return E_FAIL;
+	if (FAILED(Create_IndexBuffer()))
+		return E_FAIL;
 
+	Safe_Delete_Array(pIndices);
 
 
 	return S_OK;

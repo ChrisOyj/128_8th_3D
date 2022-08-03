@@ -8,7 +8,7 @@
 #pragma region Constructor, Destructor
 CGameObject::CGameObject()
 {
-	m_pTransform = CTransform::Create(0);
+	m_pTransform = static_cast<CTransform*>(CLONE_COMPONENT(TRANSFORM_PROTOTYPE_ID));
 	Add_Component(m_pTransform);
 }
 
@@ -149,12 +149,18 @@ void CGameObject::OnDisable()
 void CGameObject::Release()
 {
 	for (auto iter = m_pComponents.begin(); iter != m_pComponents.end(); ++iter)
-		SAFE_DELETE(*iter);
+	{
+		CComponent* pComponent = *iter;
+		SAFE_DESTROY(pComponent);
+	}
 
 	m_pComponents.clear();
 
 	for (auto iter = m_pChildren.begin(); iter != m_pChildren.end(); ++iter)
-		SAFE_DELETE(*iter);
+	{
+		CGameObject* pChild = *iter;
+		SAFE_DESTROY(pChild);
+	}
 
 	m_pChildren.clear();
 }

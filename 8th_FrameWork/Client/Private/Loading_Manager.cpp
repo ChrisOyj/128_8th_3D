@@ -15,8 +15,6 @@ CLoading_Manager::CLoading_Manager()
 CLoading_Manager::~CLoading_Manager()
 {
 	Release();
-	DeleteCriticalSection(&m_CriticalSection);
-	CloseHandle(m_hThread);
 }
 
 unsigned int APIENTRY LoadingMain(void* pArg)
@@ -67,11 +65,14 @@ HRESULT CLoading_Manager::Load_Level(LEVEL_TYPE_CLIENT	eLevelID)
 	}
 
 	m_eLoadID = eLevelID;
-	InitializeCriticalSection(&m_CriticalSection);
+
+	Start_Loading();
+
+	/*InitializeCriticalSection(&m_CriticalSection);
 
 	m_hThread = (HANDLE)_beginthreadex(nullptr, 0, LoadingMain, this, 0, nullptr);
 	if (0 == m_hThread)
-		return E_FAIL;
+		return E_FAIL;*/
 
 	return S_OK;
 }
@@ -87,7 +88,7 @@ HRESULT CLoading_Manager::Start_Loading()
 	/* 다 생성되면 로딩중 화면이랑 로딩바 객체 지우야함 */
 
 	CHANGE_LEVEL(m_arrLevels[m_eLoadID]);
-	Finish_LoadingThread();
+	//Finish_LoadingThread();
 	return S_OK;
 }
 

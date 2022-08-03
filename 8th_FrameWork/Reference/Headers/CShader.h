@@ -45,7 +45,6 @@ public:
 	CDelegate<CShader*, const char*>	CallBack_SetRawValues;
 
 private:
-
 	ComPtr<ID3DX11Effect>			m_pEffect = nullptr;
 
 	vector<PASSDESC>				m_Passes;

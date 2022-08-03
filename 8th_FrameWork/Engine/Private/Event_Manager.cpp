@@ -130,7 +130,7 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 		CComponent* pComponent = (CComponent*)(tEvent.lParam);
 		CGameObject* pGameObject = (CGameObject*)(tEvent.wParam);
 		pGameObject->Add_Component(pComponent);
-		pComponent->Start();
+		//pComponent->Start();
 	}
 	break;
 

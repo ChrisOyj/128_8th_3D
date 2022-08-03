@@ -1,4 +1,9 @@
+#include "stdafx.h"
 #include "CLevel_Unity.h"
+
+#include "GameInstance.h"
+#include "CGameObject_Factory.h"
+#include "CTestObj.h"
 
 CLevel_Unity::CLevel_Unity()
 {
@@ -17,6 +22,9 @@ CLevel_Unity* CLevel_Unity::Create()
 
 HRESULT CLevel_Unity::Enter()
 {
+    CGameInstance::Get_Instance()->Add_GameObject_Prototype(200000, CTestObj::Create());
+    
+    CREATE_GAMEOBJECT(CGameObject_Factory::Create_FromPrototype(200000), GROUP_PROP);
 
 
 

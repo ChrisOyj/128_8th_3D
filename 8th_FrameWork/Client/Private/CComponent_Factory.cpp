@@ -119,7 +119,7 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 		json RendererJson = _json[JSON_RENDERER_INFO];
 		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(RendererJson, "vOffsetPos");
 
-		pComponent = CRenderer::Create(iGroupID, RendererJson["iCurPass"], vOffsetPos);
+		pComponent = CRenderer::Create(iGroupID, RendererJson["eRenderGroup"], RendererJson["iCurPass"], vOffsetPos);
 	}
 		break;
 

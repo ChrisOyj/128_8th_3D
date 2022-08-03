@@ -174,8 +174,8 @@ void CTransform::Start()
 
 void CTransform::Tick()
 {
-	m_pOwner->CallBack_CollisionEnter +=
-		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
+	//m_pOwner->CallBack_CollisionEnter +=
+		//bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
 }
 
 void CTransform::Late_Tick()
@@ -199,7 +199,7 @@ void CTransform::OnEnable()
 	if (vecShdaer.empty())
 		return;
 
-	vecShdaer[0]->CallBack_SetRawValues -=
+	vecShdaer[0]->CallBack_SetRawValues +=
 		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");;
 }
 
@@ -222,6 +222,7 @@ void CTransform::OnDisable()
 void CTransform::Make_WorldMatrix()
 {
 	_float4x4	parentMat;
+	XMStoreFloat4x4(&parentMat, XMMatrixIdentity());
 	CGameObject* pParent = m_pOwner->Get_Parent();
 
 	if (pParent)

@@ -10,11 +10,6 @@ CTexture::CTexture(_uint iGroupIdx)
 {
 }
 
-CTexture::CTexture(const CTexture& _origin)
-	: CComponent(_origin)
-{
-}
-
 CTexture::~CTexture()
 {
 	
@@ -78,7 +73,7 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 
 	for (_uint i = 0; i < iNumTextures; ++i)
 	{
-		ID3D11ShaderResourceView* pSRV = nullptr;
+		ComPtr<ID3D11ShaderResourceView> pSRV = nullptr;
 
 		wsprintf(szTextureFilePath, pTextureFilePath, i);
 
@@ -89,10 +84,10 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 		HRESULT		hr = 0;
 
 		if (!lstrcmp(szExt, TEXT(".dds")))
-			hr = DirectX::CreateDDSTextureFromFile(DEVICE, szTextureFilePath, nullptr, &pSRV);
+			hr = DirectX::CreateDDSTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
 		else
-			hr = DirectX::CreateWICTextureFromFile(DEVICE, szTextureFilePath, nullptr, &pSRV);
+			hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
 		if (FAILED(hr))
 			return E_FAIL;

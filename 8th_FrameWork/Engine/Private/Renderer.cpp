@@ -31,12 +31,13 @@ CRenderer::~CRenderer()
 	Release();
 }
 
-CRenderer* CRenderer::Create(_uint iGroupID, const _uint& iCurPass, const _float4& vOffsetPos)
+CRenderer* CRenderer::Create(_uint iGroupID, const RENDER_GROUP& eRenderGroup, const _uint& iCurPass, const _float4& vOffsetPos)
 {
 	CRenderer* pRenderer = new CRenderer(iGroupID);
 
 	pRenderer->m_iCurPass = iCurPass;
 	pRenderer->m_vOffsetPos = vOffsetPos;
+	pRenderer->m_eRenderGroup = eRenderGroup;
 
 	if (FAILED(pRenderer->Initialize_Prototype()))
 	{
@@ -63,6 +64,9 @@ HRESULT CRenderer::Render()
 	if (FAILED(m_pShaderCom->SetUp_ShaderResources(m_iCurPass, m_pTextureCom)))
 		return E_FAIL;
 
+	if (FAILED(m_pShaderCom->Begin(m_iCurPass)))
+		return E_FAIL;
+
 	if (FAILED(m_pMeshCom->Render()))
 		return E_FAIL;
 
@@ -82,14 +86,18 @@ HRESULT CRenderer::Initialize_Prototype()
 
 HRESULT CRenderer::Initialize()
 {
+	
+
+	return S_OK;
+}
+
+void CRenderer::Start()
+{
+	__super::Start();
+
 	m_pShaderCom = m_pOwner->Get_Component<CShader>()[0];
 	m_pMeshCom = m_pOwner->Get_Component<CMesh>()[0];
 	m_pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
-
-	if (!m_pMeshCom || !m_pShaderCom || !m_pTextureCom)
-		return E_FAIL;
-
-	return S_OK;
 }
 
 void CRenderer::Tick()

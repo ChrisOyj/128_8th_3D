@@ -56,6 +56,10 @@ HRESULT CGameInstance::Initialize_Engine(const GRAPHICDESC& GraphicDesc, const S
 	if (FAILED(m_pPickingManager->Initialize(GraphicDesc)))
 		return E_FAIL;
 
+	/* Prototype Manager */
+	if (FAILED(m_pPrototypeManager->Initialize()))
+		return E_FAIL;
+
 	return S_OK;	
 }
 
@@ -105,22 +109,23 @@ HRESULT CGameInstance::Render_Engine()
 
 HRESULT CGameInstance::Initialize()
 {
-#define SAFE_GET_INSTANCE(name) if (!(name = name->Get_Instance())) return E_FAIL;
+#define SAFE_GET_INSTANCE(name, type) if (!(name = type::Get_Instance())) return E_FAIL;
 
-	SAFE_GET_INSTANCE(m_pKeyManager);
-	SAFE_GET_INSTANCE(m_pObjectManager);
-	SAFE_GET_INSTANCE(m_pLevelManager);
-	SAFE_GET_INSTANCE(m_pEventManager);
-	SAFE_GET_INSTANCE(m_pCollisionManager);
-	SAFE_GET_INSTANCE(m_pCameraManager);
-	SAFE_GET_INSTANCE(m_pRenderManager);
-	SAFE_GET_INSTANCE(m_pTimeManager);
-	SAFE_GET_INSTANCE(m_pComponentManager);
-	SAFE_GET_INSTANCE(m_pPickingManager);
-	SAFE_GET_INSTANCE(m_pGraphicDevice);
-	SAFE_GET_INSTANCE(m_pShaderManager);
-	SAFE_GET_INSTANCE(m_pSoundDevice);
-	SAFE_GET_INSTANCE(m_pInputDevice);
+	SAFE_GET_INSTANCE(m_pKeyManager, CKey_Manager);
+	SAFE_GET_INSTANCE(m_pObjectManager, CObject_Manager);
+	SAFE_GET_INSTANCE(m_pLevelManager, CLevel_Manager);
+	SAFE_GET_INSTANCE(m_pEventManager, CEvent_Manager);
+	SAFE_GET_INSTANCE(m_pCollisionManager, CCollision_Manager);
+	SAFE_GET_INSTANCE(m_pCameraManager, CCamera_Manager);
+	SAFE_GET_INSTANCE(m_pRenderManager, CRender_Manager);
+	SAFE_GET_INSTANCE(m_pTimeManager, CTime_Manager);
+	SAFE_GET_INSTANCE(m_pComponentManager, CComponent_Manager);
+	SAFE_GET_INSTANCE(m_pPickingManager, CPicking_Manager);
+	SAFE_GET_INSTANCE(m_pGraphicDevice, CGraphic_Device);
+	SAFE_GET_INSTANCE(m_pShaderManager, CShader_Manager);
+	SAFE_GET_INSTANCE(m_pSoundDevice, CSound_Device);
+	SAFE_GET_INSTANCE(m_pInputDevice, CInput_Device);
+	SAFE_GET_INSTANCE(m_pPrototypeManager, CPrototype_Manager);
 
 	return S_OK;
 }

@@ -80,7 +80,9 @@ HRESULT CGraphic_Device::Present()
 	if (nullptr == m_pSwapChain)
 		return E_FAIL;
 
-	return m_pSwapChain->Present(0, 0);
+	HRESULT	hr = m_pSwapChain->Present(0, 0);
+
+	return hr;
 }
 
 
@@ -210,8 +212,6 @@ HRESULT CGraphic_Device::Release()
 //	}
 //	if (d3dDebug != nullptr)            d3dDebug->Release();
 //#endif
-
-
 
 	dwCnt = m_pDevice.Reset();
 

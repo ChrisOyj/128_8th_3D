@@ -5,10 +5,15 @@
 CMesh::CMesh(_uint iGroupIdx)
     : CComponent(iGroupIdx)
 {
+	ZeroMemory(&m_BufferDesc, sizeof(D3D11_BUFFER_DESC));
+	ZeroMemory(&m_SubResourceData, sizeof(D3D11_SUBRESOURCE_DATA));
+	ZeroMemory(&m_eIndexFormat, sizeof(DXGI_FORMAT));
+	m_eToplogy = D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
 }
 
 CMesh::~CMesh()
 {
+	Release();
 }
 
 void CMesh::Tick()
@@ -44,6 +49,8 @@ HRESULT CMesh::Render()
 
 void CMesh::Release()
 {
+	_ulong dwCnt = m_pIB.Reset();
+	dwCnt = m_pVB.Reset();
 }
 
 HRESULT CMesh::Create_VertexBuffer()

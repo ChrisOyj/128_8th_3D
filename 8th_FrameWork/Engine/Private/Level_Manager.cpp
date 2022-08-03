@@ -17,12 +17,14 @@ CLevel_Manager::~CLevel_Manager()
 
 void CLevel_Manager::Tick()
 {
-	m_pCurrentLevel->Tick();
+	if (m_pCurrentLevel)
+		m_pCurrentLevel->Tick();
 }
 
 void CLevel_Manager::Late_Tick()
 {
-	m_pCurrentLevel->Late_Tick();
+	if (m_pCurrentLevel)
+		m_pCurrentLevel->Late_Tick();
 }
 
 HRESULT CLevel_Manager::Render()

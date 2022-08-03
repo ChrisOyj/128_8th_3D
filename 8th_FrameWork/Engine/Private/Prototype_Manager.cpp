@@ -2,7 +2,12 @@
 #include "GameObject.h"
 #include "Component.h"
 
+#include "Transform.h"
+
+#include "GameInstance.h"
+
 IMPLEMENT_SINGLETON(CPrototype_Manager)
+
 
 
 CPrototype_Manager::CPrototype_Manager()
@@ -12,6 +17,14 @@ CPrototype_Manager::CPrototype_Manager()
 CPrototype_Manager::~CPrototype_Manager()
 {
 	Release();
+}
+
+HRESULT CPrototype_Manager::Initialize()
+{
+	CTransform*	pTransform = CTransform::Create(1);
+	Add_Component_Prototype(TRANSFORM_PROTOTYPE_ID, pTransform);
+
+	return S_OK;
 }
 
 CGameObject* CPrototype_Manager::Clone_GameObject(const _uint& _iID)
@@ -72,8 +85,7 @@ HRESULT CPrototype_Manager::Add_Component_Prototype(const _uint& _iID, CComponen
 
 CGameObject* CPrototype_Manager::Find_GameObject_Prototype(const _uint& _iID)
 {
-	_uint i = _iID;
-	map<_uint, CGameObject*>::iterator iter = m_GameObject_Prototypes.find(i);
+	auto iter = m_GameObject_Prototypes.find(_iID);
 
 	if (iter == m_GameObject_Prototypes.end())
 		return nullptr;

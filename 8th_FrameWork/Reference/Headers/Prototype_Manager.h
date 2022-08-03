@@ -1,7 +1,12 @@
 #pragma once
 #include "Engine_Defines.h"
 
-//파일 연동으로 오브젝트 생성시에는 꼭 클라쪽에서 미리 Add_Prototype을 해주는 과정이 필요함!!
+#define	TRANSFORM_PROTOTYPE_ID	100000
+#define	RENDERER_PROTOTYPE_ID	100001
+#define	TEXTURE_PROTOTYPE_ID	100002
+#define	MESHRECT_PROTOTYPE_ID	100003
+#define	COLLIDER_PROTOTYPE_ID	100004
+
 BEGIN(Engine)
 
 class CGameObject;
@@ -14,6 +19,9 @@ class CPrototype_Manager final
 private:
 	CPrototype_Manager();
 	virtual ~CPrototype_Manager();
+
+public:
+	HRESULT		Initialize();
 
 public:
 	CGameObject* Clone_GameObject(const _uint& _iID);

@@ -10,7 +10,7 @@
 
 #include "CGameObject_Factory.h"
 
-IMPLEMENT_SINGLETON(CMainApp)
+IMPLEMENT_SINGLETON(CMainApp);
 
 CMainApp::CMainApp()
 {
@@ -43,18 +43,27 @@ HRESULT CMainApp::Initialize()
 HRESULT CMainApp::Progress()
 {
 	if (FAILED(m_pGameInstance->Tick_Engine()))
+	{
+		Call_MsgBox(L"Failed to Tick_Engine : CMainApp");
 		return E_FAIL;
+	}
 
 	if (FAILED(Render()))
+	{
+		Call_MsgBox(L"Failed to Render : CMainApp");
 		return E_FAIL;
+
+	}
 
 	return S_OK;
 }
 
 HRESULT CMainApp::Render()
 {
-	m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f));
-	m_pGameInstance->Clear_DepthStencil_View();
+	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+		return E_FAIL;
+	if (FAILED(m_pGameInstance->Clear_DepthStencil_View()))
+		return E_FAIL;
 
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
@@ -68,7 +77,8 @@ HRESULT CMainApp::Render()
 
 void CMainApp::Release()
 {
-	m_pGameInstance->Destroy_Instance();
+	SAFE_DESTROY(m_pGameInstance);
+	CLoading_Manager::Get_Instance()->Destroy_Instance();
 }
 
 HRESULT CMainApp::SetUp_Engine()
@@ -109,7 +119,7 @@ HRESULT CMainApp::SetUp_Statics()
 	CGameObject* pFreeCamClone = CGameObject_Factory::Create_FromPrototype(pFreeCam->Get_ID());
 
 	CREATE_STATIC(pFreeCamClone, pFreeCamClone->Get_ID());
-	CGameInstance::Get_Instance()->Add_Camera(L"Free", (CCamera_Free*)pFreeCam);
+	CGameInstance::Get_Instance()->Add_Camera(L"Free", (CCamera_Free*)pFreeCamClone);
 	CGameInstance::Get_Instance()->Change_Camera(L"Free");
 
 	return S_OK;
