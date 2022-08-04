@@ -19,7 +19,7 @@ private:
 
 public:
 	const CRITICAL_SECTION&	Get_CS() { return m_CriticalSection; }
-	bool					IsFinish() { return m_bFinish; }
+	bool					IsFinished() { return m_bFinish; }
 
 public:
 	HRESULT					Initialize();
@@ -27,10 +27,11 @@ public:
 public:
 	HRESULT					Load_Level(LEVEL_TYPE_CLIENT	eLevelID);
 	HRESULT					Start_Loading();
+	void					Open_NextLevel();
 
 private:
 	CLevel*					m_arrLevels[LEVEL_END];
-	LEVEL_TYPE_CLIENT			m_eLoadID = LEVEL_END;
+	LEVEL_TYPE_CLIENT		m_eLoadID = LEVEL_END;
 
 
 
@@ -42,6 +43,8 @@ private:
 private:
 	void		Release();
 	void		Finish_LoadingThread();
+
+
 
 };
 

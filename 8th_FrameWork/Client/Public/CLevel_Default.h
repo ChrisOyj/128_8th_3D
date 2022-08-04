@@ -25,6 +25,7 @@ public:
 
 public:
 	// CLevel을(를) 통해 상속됨
+	virtual HRESULT Initialize() override;
 	virtual HRESULT Enter() override;
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
@@ -32,6 +33,7 @@ public:
 	virtual HRESULT Exit() override;
 
 private:
+	LEVEL_TYPE_CLIENT		m_eLevelType = LEVEL_END;
 	list<GameObejctData>	m_tGameObjectDataList;
 
 private:

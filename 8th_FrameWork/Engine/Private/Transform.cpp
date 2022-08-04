@@ -200,7 +200,7 @@ void CTransform::OnEnable()
 		return;
 
 	vecShdaer[0]->CallBack_SetRawValues +=
-		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");;
+		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
 }
 
 void CTransform::OnDisable()

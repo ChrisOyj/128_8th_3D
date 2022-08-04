@@ -32,6 +32,7 @@ namespace Client
 
 	enum LEVEL_TYPE_CLIENT
 	{
+		LEVEL_LOADING,
 		LEVEL_UNITY,
 		LEVEL_LOGO,
 		LEVEL_MAINMENU,
@@ -50,6 +51,12 @@ namespace Client
 		CP_RENDERER,
 		CP_AFTER_RENDERER,
 		CP_END,
+	};
+
+	enum SHADER_FILE_ID
+	{
+		SHADER_DEFAULT,
+		SHADER_END
 	};
 }
 

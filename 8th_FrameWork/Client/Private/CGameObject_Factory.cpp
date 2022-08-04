@@ -62,7 +62,13 @@ CGameObject* CGameObject_Factory::Create_PrototypeFromJson(const _uint& iGameObj
 	// 1. 어떤 클래스인지 enum으로 받음.
 	// 2. 스위치문으로 분기해서 그에 맞게 정보 넣어주고 제작
 
-	json GameObjectJson = CUtility_Json::Load_Json(CUtility_Json::Complete_Path(iGameObjectID));
+	json GameObjectJson;
+	
+	if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(iGameObjectID).c_str(), &GameObjectJson)))
+	{
+		Call_MsgBox_Index(L"Failed to Load_Json : CGameObject_Factory", iGameObjectID);
+		return nullptr;
+	}
 
 	pGameObject = Create_InstanceFromJson(GameObjectJson);
 

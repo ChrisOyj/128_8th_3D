@@ -22,8 +22,29 @@ CLevel_Default* CLevel_Default::Create(LEVEL_TYPE_CLIENT	eLevelID)
 {
     CLevel_Default* pLevel = new CLevel_Default;
 
+    pLevel->m_eLevelType = eLevelID;
+
+    if (FAILED(pLevel->Initialize()))
+    {
+        Call_MsgBox_Index(L"Falied to Initialize : CLevel_Default", eLevelID);
+        SAFE_DELETE(pLevel);
+        return nullptr;
+    }
+
+    return pLevel;
+}
+
+
+HRESULT CLevel_Default::Initialize()
+{
     //파일의 경로를 읽는다.
-    json LevelJson = CUtility_Json::Load_Json(CUtility_Json::Complete_Path(eLevelID));
+    json LevelJson;
+
+    if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(m_eLevelType).c_str(), &LevelJson)))
+    {
+        Call_MsgBox_Index(L"Failed to Load_Json : CLevel_Default", m_eLevelType);
+        return E_FAIL;
+    }
 
     //생성해야하는 오브젝트들의 키를 모두 저장한다.
     for (_uint i = 0; i < LevelJson.size(); ++i)
@@ -32,21 +53,19 @@ CLevel_Default* CLevel_Default::Create(LEVEL_TYPE_CLIENT	eLevelID)
         GameObejctData  tData;
         tData.iPrototypeID = GameObjectDataJson["GameObject_ID"];
         tData.eGroupType = GameObjectDataJson["eGroupType"];
-        tData.vStartPosition = CUtility_Json::Get_VectorFromJson(GameObjectDataJson, "vStartPosition");
-        tData.vStartLook = CUtility_Json::Get_VectorFromJson(GameObjectDataJson, "vStartLook");
+        tData.vStartPosition = CUtility_Json::Get_VectorFromJson(GameObjectDataJson["vStartPosition"]);
+        tData.vStartLook = CUtility_Json::Get_VectorFromJson(GameObjectDataJson["vStartLook"]);
 
         if (!Safe_CheckID(tData.iPrototypeID, ID_LEVEL))
         {
-            delete pLevel;
-            return nullptr;
+            return E_FAIL;
         }
 
-        pLevel->m_tGameObjectDataList.push_back(tData);
+        m_tGameObjectDataList.push_back(tData);
     }
 
-    return pLevel;
+    return S_OK;
 }
-
 
 HRESULT CLevel_Default::Enter()
 {

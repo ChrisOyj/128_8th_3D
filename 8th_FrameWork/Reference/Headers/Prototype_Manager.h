@@ -30,6 +30,10 @@ public:
 	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
 	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
 
+public:
+	void	Delete_GameObject_Prototypes();
+	void	Delete_Component_Prototypes();
+
 private:
 	map<_uint, CGameObject*>	m_GameObject_Prototypes;
 	map<_uint, CComponent*>		m_Component_Prototypes;

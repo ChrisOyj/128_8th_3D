@@ -21,8 +21,8 @@ public:
 	}
 
 private:
-	LPDIRECTINPUT8			m_pInputSDK = nullptr;
-	LPDIRECTINPUTDEVICE8	m_pMouse = nullptr;
+	ComPtr<IDirectInput8W>			m_pInputSDK = nullptr;
+	ComPtr<IDirectInputDevice8W>	m_pMouse = nullptr;
 	DIMOUSESTATE			m_MouseState;
 
 private:

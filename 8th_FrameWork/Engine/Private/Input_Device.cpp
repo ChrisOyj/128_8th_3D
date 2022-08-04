@@ -14,10 +14,10 @@ CInput_Device::~CInput_Device()
 
 HRESULT CInput_Device::Initialize(HINSTANCE hInst, HWND hWnd)
 {
-	if (FAILED(DirectInput8Create(hInst, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pInputSDK, nullptr)))
+	if (FAILED(DirectInput8Create(hInst, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)m_pInputSDK.GetAddressOf(), nullptr)))
 		return E_FAIL;
 
-	if(FAILED(m_pInputSDK->CreateDevice(GUID_SysMouse, &m_pMouse, nullptr)))
+	if(FAILED(m_pInputSDK->CreateDevice(GUID_SysMouse, m_pMouse.GetAddressOf(), nullptr)))
 		return E_FAIL;
 
 	if (FAILED(m_pMouse->SetDataFormat(&c_dfDIMouse)))
@@ -40,6 +40,6 @@ HRESULT CInput_Device::SetUp_DeviceStates()
 
 void CInput_Device::Release()
 {
-	Safe_Release(m_pMouse);
-	Safe_Release(m_pInputSDK);
+	m_pMouse.Reset();
+	m_pInputSDK.Reset();
 }

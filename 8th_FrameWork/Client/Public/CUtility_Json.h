@@ -7,14 +7,18 @@ BEGIN(Client)
 class CUtility_Json
 {
 public:
-    static json    Load_Json(const _tchar* _strPath);
-    static void    Save_Json(const _tchar* _strPath, json _json);
+    static HRESULT		Load_Json(const _tchar* _strPath, json* pOut);
+    static HRESULT		Save_Json(const _tchar* _strPath, json _json);
 
 public:
-    static _float4 Get_VectorFromJson(json _json, const char* strName);
+    static _float4      Get_VectorFromJson(json _json);
+    static _float4x4    Get_MatrixFromJson(json _json);
+
+    static json		    Convert_ToJson(_float4 vValue);
+    static json		    Convert_ToJson(_float4x4 matValue);
 
 public:
-    static const _tchar* Complete_Path(const _uint& iID);
+    static wstring Complete_Path(const _uint& iID);
 };
 
 END

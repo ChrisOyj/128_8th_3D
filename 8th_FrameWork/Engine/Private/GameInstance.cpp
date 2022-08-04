@@ -65,13 +65,17 @@ HRESULT CGameInstance::Initialize_Engine(const GRAPHICDESC& GraphicDesc, const S
 
 HRESULT CGameInstance::Tick_Engine( )
 {
+	m_pTimeManager->Tick();
+
+	//if (!m_pTimeManager->Can_Update())
+		//return S_OK;
+
 	/* Event */
 	m_pEventManager->Tick();
 
-	/* Time, Key */
-	m_pTimeManager->Tick();
+	/* Key */
 	m_pKeyManager->Tick();
-//	m_pInputDevice->SetUp_DeviceStates();
+	m_pInputDevice->SetUp_DeviceStates();
 
 	/* Object */
 	m_pLevelManager->Tick();
@@ -99,10 +103,20 @@ HRESULT CGameInstance::Tick_Engine( )
 
 HRESULT CGameInstance::Render_Engine()
 {
+	if (!m_pTimeManager->Can_Update())
+		return S_OK;
+
+	if (FAILED(m_pGraphicDevice->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+		return E_FAIL;
+	if (FAILED(m_pGraphicDevice->Clear_DepthStencil_View()))
+		return E_FAIL;
+
 	if (FAILED(m_pRenderManager->Render()))
 		return E_FAIL;
 
-	m_pTimeManager->Render();
+	if (FAILED(m_pGraphicDevice->Present()))
+		return E_FAIL;
+
 
 	return S_OK;
 }
@@ -230,6 +244,16 @@ _double CGameInstance::Get_DT()
 	return m_pTimeManager->Get_DT();
 }
 
+_double CGameInstance::Get_FPSLimitTime()
+{
+	return m_pTimeManager->Get_FPSLimitTime();
+}
+
+void CGameInstance::Set_FPSLimitTIme(_double dTime)
+{
+	m_pTimeManager->Set_FPSLimitTIme(dTime);
+}
+
 KEY_STATE CGameInstance::Get_KeyState(KEY _key)
 {
 	return m_pKeyManager->Get_KeyState(_key);
@@ -342,4 +366,19 @@ HRESULT CGameInstance::Add_GameObject_Prototype(const _uint& _iID, CGameObject* 
 HRESULT CGameInstance::Add_Component_Prototype(const _uint& _iID, CComponent* pComponent)
 {
 	return m_pPrototypeManager->Add_Component_Prototype(_iID, pComponent);
+}
+
+void CGameInstance::Delete_GameObject_Prototypes()
+{
+	m_pPrototypeManager->Delete_GameObject_Prototypes();
+}
+
+void CGameInstance::Delete_Component_Prototypes()
+{
+	m_pPrototypeManager->Delete_Component_Prototypes();
+}
+
+HRESULT CGameInstance::Load_EffectFile(const _tchar* pFilePath)
+{
+	return m_pShaderManager->Load_EffectFile(pFilePath);
 }

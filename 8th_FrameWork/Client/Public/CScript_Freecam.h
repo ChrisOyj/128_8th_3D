@@ -25,6 +25,10 @@ public:
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
 	virtual void Release() override;
+
+private:
+	void	Key_Input();
+	void	OnMouseMove();
 };
 
 END

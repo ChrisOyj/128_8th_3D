@@ -34,9 +34,6 @@
     <Filter Include="03. Instances\01. Level">
       <UniqueIdentifier>{4024bbdb-c656-4a43-bb70-c99eb58d9c76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\01. Level\01. Level_Default">
-      <UniqueIdentifier>{e0d5f43e-865c-4723-ad7a-4a1407ef5e12}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\03. Component">
       <UniqueIdentifier>{97a9d4be-a63d-419b-84aa-7f691c038efe}</UniqueIdentifier>
     </Filter>
@@ -82,11 +79,23 @@
     <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Free">
       <UniqueIdentifier>{3a78cade-5ede-4357-b853-72beb4c76d23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\01. Level\00. Level_Unity">
-      <UniqueIdentifier>{74da3066-0c94-411f-9ab2-a8fa523e4cf1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\02. GameObject\04. Test">
       <UniqueIdentifier>{9aa0c8e1-ea45-4c12-b082-e4ab7c2d1148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\03. User">
+      <UniqueIdentifier>{f750e642-8359-40d2-97e5-52a68afcc440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module\01. Utility\Utility_Transform">
+      <UniqueIdentifier>{797fc741-5103-4b2f-82be-954a377f6d15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\01. Level_Unity">
+      <UniqueIdentifier>{74da3066-0c94-411f-9ab2-a8fa523e4cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\02. Level_Default">
+      <UniqueIdentifier>{e0d5f43e-865c-4723-ad7a-4a1407ef5e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\00. Level_Loading">
+      <UniqueIdentifier>{01e49f4a-6746-4eab-bb07-8420e38cdb08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +133,7 @@
       <Filter>04. Module\00. Functor</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CLevel_Default.h">
-      <Filter>03. Instances\01. Level\01. Level_Default</Filter>
+      <Filter>03. Instances\01. Level\02. Level_Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\CUtility_Json.h">
       <Filter>04. Module\01. Utility\Utility_Json</Filter>
@@ -154,10 +163,19 @@
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Free</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CLevel_Unity.h">
-      <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
+      <Filter>03. Instances\01. Level\01. Level_Unity</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CTestObj.h">
       <Filter>03. Instances\02. GameObject\04. Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUser.h">
+      <Filter>02. Design\03. User</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUtility_Transform.h">
+      <Filter>04. Module\01. Utility\Utility_Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Loading.h">
+      <Filter>03. Instances\01. Level\00. Level_Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +197,7 @@
       <Filter>04. Module\00. Functor</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CLevel_Default.cpp">
-      <Filter>03. Instances\01. Level\01. Level_Default</Filter>
+      <Filter>03. Instances\01. Level\02. Level_Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\CUtility_Json.cpp">
       <Filter>04. Module\01. Utility\Utility_Json</Filter>
@@ -212,10 +230,19 @@
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Free</Filter>
     </ClCompile>
     <ClCompile Include="CLevel_Unity.cpp">
-      <Filter>03. Instances\01. Level\00. Level_Unity</Filter>
+      <Filter>03. Instances\01. Level\01. Level_Unity</Filter>
     </ClCompile>
     <ClCompile Include="CTestObj.cpp">
       <Filter>03. Instances\02. GameObject\04. Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUser.cpp">
+      <Filter>02. Design\03. User</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUtility_Transform.cpp">
+      <Filter>04. Module\01. Utility\Utility_Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Loading.cpp">
+      <Filter>03. Instances\01. Level\00. Level_Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

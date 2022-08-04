@@ -6,6 +6,8 @@
 #include "GameObject.h"
 #include "Transform.h"
 
+#include "CUtility_Transform.h"
+
 CScript_Freecam::CScript_Freecam(_uint iGroupIdx)
 	: CScriptable(iGroupIdx)
 {
@@ -40,6 +42,20 @@ HRESULT CScript_Freecam::Initialize()
 }
 
 void CScript_Freecam::Tick()
+{
+	OnMouseMove();
+	Key_Input();
+}
+
+void CScript_Freecam::Late_Tick()
+{
+}
+
+void CScript_Freecam::Release()
+{
+}
+
+void CScript_Freecam::Key_Input()
 {
 	CTransform* pTransform = m_pOwner->Get_Transform();
 
@@ -76,17 +92,28 @@ void CScript_Freecam::Tick()
 	{
 		fSpeed *= 2.f;
 	}
-	
+
 	vPos += vDir * fSpeed * fDT;
 	vPos.w = 1.f;
 
 	pTransform->Set_World(WORLD_POS, vPos);
 }
 
-void CScript_Freecam::Late_Tick()
+void CScript_Freecam::OnMouseMove()
 {
-}
+	if (GetFocus() != g_hWnd)
+		return;
 
-void CScript_Freecam::Release()
-{
+	CTransform* pTransform = m_pOwner->Get_Transform();
+
+	//마우스 이동에 따라 회전
+	_float fTurnSpeedX = ((_float)MOUSE_MOVE(MMS_X)) * MOUSE_DPI_X;
+	_float fTurnSpeedY = ((_float)MOUSE_MOVE(MMS_Y)) * MOUSE_DPI_Y;
+
+	CUtility_Transform::Turn_ByAngle(pTransform, pTransform->Get_MyWorld(WORLD_RIGHT), fTurnSpeedY);
+	CUtility_Transform::Turn_ByAngle(pTransform, _float4(0.f, 1.f, 0.f, 0.f), fTurnSpeedX);
+
+	/* Mouse Wheel */
+	//_long lWheelmMove = MOUSE_MOVE(MMS_WHEEL);
+	//m_tProj.fFOV -= (_float)lWheelmMove * fDT * 0.5f;
 }

@@ -2,9 +2,12 @@
 #include "..\Public\MainApp.h"
 
 #include "GameInstance.h"
-#include "CLevel_Default.h"
 
 #include "Loading_Manager.h"
+
+#include "CLevel_Default.h"
+#include "CLevel_Loading.h"
+#include "CUser.h"
 
 #include "CCamera_Free.h"
 
@@ -28,14 +31,23 @@ HRESULT CMainApp::Initialize()
 	if (nullptr == m_pGameInstance)
 		return E_FAIL;
 
+
 	if (FAILED(SetUp_Engine()))
+		return E_FAIL;
+
+	if (FAILED(SetUp_ShaderFiles()))
 		return E_FAIL;
 
 	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
 		return E_FAIL;
 
+	if (FAILED(CUser::Get_Instance()->Initialize()))
+		return E_FAIL;
+
 	if (FAILED(SetUp_Statics()))
 		return E_FAIL;
+
+	CLoading_Manager::Get_Instance()->Load_Level(LEVEL_UNITY);
 
 	return S_OK;
 }
@@ -60,16 +72,16 @@ HRESULT CMainApp::Progress()
 
 HRESULT CMainApp::Render()
 {
-	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+	/*if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
 		return E_FAIL;
 	if (FAILED(m_pGameInstance->Clear_DepthStencil_View()))
-		return E_FAIL;
+		return E_FAIL;*/
 
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Present()))
-		return E_FAIL;
+	/*if (FAILED(m_pGameInstance->Present()))
+		return E_FAIL;*/
 
 
 	return S_OK;
@@ -79,6 +91,7 @@ void CMainApp::Release()
 {
 	SAFE_DESTROY(m_pGameInstance);
 	CLoading_Manager::Get_Instance()->Destroy_Instance();
+	CUser::Get_Instance()->Destroy_Instance();
 }
 
 HRESULT CMainApp::SetUp_Engine()
@@ -121,6 +134,14 @@ HRESULT CMainApp::SetUp_Statics()
 	CREATE_STATIC(pFreeCamClone, pFreeCamClone->Get_ID());
 	CGameInstance::Get_Instance()->Add_Camera(L"Free", (CCamera_Free*)pFreeCamClone);
 	CGameInstance::Get_Instance()->Change_Camera(L"Free");
+
+	return S_OK;
+}
+
+HRESULT CMainApp::SetUp_ShaderFiles()
+{
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxTex.hlsl")))
+		return E_FAIL;
 
 	return S_OK;
 }

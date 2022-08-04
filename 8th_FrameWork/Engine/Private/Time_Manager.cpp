@@ -25,24 +25,41 @@ HRESULT CTime_Manager::Initialize(HWND hWnd)
 	return S_OK;
 }
 
+_double CTime_Manager::Get_DT()
+{
+	// 진짜 DT가 FPSLimit (예 : 60분의 1)보다 작으면
+	// 프레임이 더 잘나오고 있는거다.
+	// 하지만 제한을 걸어야 하므로 1/60 을 리턴.
+	//return (m_dDT < m_dFPSLimitTime) ? m_dFPSLimitTime : m_dDT;
+
+	return m_dDT;
+}
+
+
 void CTime_Manager::Tick()
 {
+	m_bFPSUpdate = false;
+
 	QueryPerformanceCounter(&m_llCurCount);
 
 	m_dDT = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / (double)m_llFrequency.QuadPart;
 	m_llPrevCount = m_llCurCount;
-
-//#ifdef _DEBUG
-//
-//	m_dDT = 1. / 60.;
-//
-//#endif
-
 	
+
+	m_dFPSLimitAcc += m_dDT;
+	Render();
+
+	if (m_dFPSLimitAcc > m_dFPSLimitTime)
+	{
+		m_dFPSLimitAcc = 0.;
+		m_bFPSUpdate = true;
+	}
 }
 void CTime_Manager::Render()
 {
-	++m_iCallCount;
+	if (m_dFPSLimitAcc > m_dFPSLimitTime)
+		++m_iCallCount;
+
 	m_dAcc += m_dDT;
 
 	if (m_dFPSUpdateTime <= m_dAcc) {

@@ -22,11 +22,11 @@ CShader::CShader(const CShader& rhs)
 {
 }
 
-CShader* CShader::Create(_uint iGroupIdx, const _tchar* pShaderFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
+CShader* CShader::Create(_uint iGroupIdx, const _uint& iShaderFileIdx, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
 {
 	CShader* pInstance = new CShader(iGroupIdx);
 
-	if (FAILED(pInstance->SetUp_Shader(pShaderFilePath, pElements, iNumElement)))
+	if (FAILED(pInstance->SetUp_Shader(iShaderFileIdx, pElements, iNumElement)))
 	{
 		Call_MsgBox(L"Failed to SetUp_Shader CShader : CShader");
 		SAFE_DELETE(pInstance);
@@ -119,18 +119,11 @@ void CShader::Release()
 {
 }
 
-HRESULT CShader::SetUp_Shader(const _tchar* pShaderFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
+HRESULT CShader::SetUp_Shader(const _uint& iShaderFileIdx, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
 {
-	_uint		iHLSLFlag = 0;
+	m_pEffect = CShader_Manager::Get_Instance()->Get_EffectFile(iShaderFileIdx);
 
-#ifdef _DEBUG
-	iHLSLFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_OPTIMIZATION_LEVEL0;
-#else
-	iHLSLFlag = D3DCOMPILE_OPTIMIZATION_LEVEL1;
-#endif
-
-	if (FAILED(D3DX11CompileEffectFromFile(pShaderFilePath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		iHLSLFlag, 0, PDEVICE, m_pEffect.GetAddressOf(), /*&pError*/nullptr)))
+	if (!m_pEffect)
 		return E_FAIL;
 
 	ID3DX11EffectTechnique* pTechnique = m_pEffect->GetTechniqueByIndex(0);

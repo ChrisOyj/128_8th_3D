@@ -16,6 +16,7 @@ public:
 
 public:
 	//virtual void Load() PURE; // 파일 연동시 불러와서 Prototype 미리 채워놓기
+	virtual HRESULT	Initialize() PURE;
 	virtual HRESULT	Enter() PURE;
 	virtual void	Tick() PURE;
 	virtual void	Late_Tick() PURE;

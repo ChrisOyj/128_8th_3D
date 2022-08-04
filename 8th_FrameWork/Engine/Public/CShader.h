@@ -24,7 +24,7 @@ private:
 	virtual ~CShader() = default;
 
 public:
-	static CShader* Create(_uint iGroupIdx, const _tchar* pShaderFilePath,
+	static CShader* Create(_uint iGroupIdx, const _uint& iShaderFileIdx,
 		const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 public:
@@ -58,7 +58,7 @@ private:
 
 	virtual	void	Release() override;
 
-	HRESULT			SetUp_Shader(const _tchar* pShaderFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
+	HRESULT			SetUp_Shader(const _uint& iShaderFileIdx, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 
 

@@ -5,6 +5,8 @@
 #include "CGameObject_Factory.h"
 #include "CTestObj.h"
 
+#include "CUser.h"
+
 CLevel_Unity::CLevel_Unity()
 {
 }
@@ -20,6 +22,11 @@ CLevel_Unity* CLevel_Unity::Create()
     return pLevel;
 }
 
+HRESULT CLevel_Unity::Initialize()
+{
+    return S_OK;
+}
+
 HRESULT CLevel_Unity::Enter()
 {
     CGameInstance::Get_Instance()->Add_GameObject_Prototype(200000, CTestObj::Create());
@@ -33,6 +40,8 @@ HRESULT CLevel_Unity::Enter()
 
 void CLevel_Unity::Tick()
 {
+    CUser::Get_Instance()->Fix_CursorPosToCenter();
+    CUser::Get_Instance()->KeyInput_FPSSetter();
 }
 
 void CLevel_Unity::Late_Tick()

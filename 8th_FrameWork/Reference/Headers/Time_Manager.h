@@ -14,8 +14,13 @@ private:
 	~CTime_Manager();
 
 public:
-	_double	Get_DT() { return m_dDT; };
+	_double	Get_DT();
 	void	Set_FPSUpdateTime(_double dTime) { m_dFPSUpdateTime = dTime; }
+
+	_double	Get_FPSLimitTime()				{ return m_dFPSLimitTime; }
+	void	Set_FPSLimitTIme(_double dTime) { m_dFPSLimitTime = dTime; }
+
+	_bool	Can_Update() { return m_bFPSUpdate; }
 
 public:
 	HRESULT	Initialize(HWND hWnd);
@@ -28,6 +33,10 @@ private:
 	LARGE_INTEGER	m_llPrevCount = {};
 	LARGE_INTEGER	m_llFrequency = {};
 
+	_bool			m_bFPSUpdate = false;
+
+	_double			m_dFPSLimitAcc = 0.;
+	_double			m_dFPSLimitTime = 0.;
 	_double			m_dFPSUpdateTime = 1.;
 	_double			m_dDT = 0.;
 	_double			m_dAcc = 0.; 

@@ -68,6 +68,8 @@ public: /* For. Sound_Device */
 
 public: /* For. Time_Manager */
 	_double		Get_DT();
+	_double		Get_FPSLimitTime();
+	void		Set_FPSLimitTIme(_double dTime);
 
 public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);
@@ -107,6 +109,13 @@ public: /* For. Prototype_Manager */
 
 	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
 	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
+
+	void	Delete_GameObject_Prototypes();
+	void	Delete_Component_Prototypes();
+
+public:
+	HRESULT		Load_EffectFile(const _tchar* pFilePath);
+
 
 private:
 	CEvent_Manager* m_pEventManager = nullptr;

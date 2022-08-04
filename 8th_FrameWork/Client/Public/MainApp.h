@@ -28,6 +28,7 @@ private:
 	HRESULT	SetUp_Engine();
 	HRESULT	SetUp_Levels();
 	HRESULT	SetUp_Statics();
+	HRESULT	SetUp_ShaderFiles();
 };
 
 END

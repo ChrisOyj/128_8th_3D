@@ -42,7 +42,16 @@ HRESULT CLevel_Manager::Enter_Level(CLevel* pLevel)
 {
 	//delete m_pCurrentLevel;
 	//SAFE_DELETE(m_pCurrentLevel);
+
+
+	if (m_pCurrentLevel 
+		&& FAILED(m_pCurrentLevel->Exit()))
+		return E_FAIL;
+
 	m_pCurrentLevel = pLevel;
+
+	if (FAILED(m_pCurrentLevel->Enter()))
+		return E_FAIL;
 
 	return S_OK;
 }

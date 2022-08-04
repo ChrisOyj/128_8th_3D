@@ -24,6 +24,8 @@ HRESULT CPrototype_Manager::Initialize()
 	CTransform*	pTransform = CTransform::Create(1);
 	Add_Component_Prototype(TRANSFORM_PROTOTYPE_ID, pTransform);
 
+	
+
 	return S_OK;
 }
 
@@ -81,6 +83,22 @@ HRESULT CPrototype_Manager::Add_Component_Prototype(const _uint& _iID, CComponen
 	m_Component_Prototypes.emplace(_iID, pComponent);
 
 	return S_OK;
+}
+
+void CPrototype_Manager::Delete_GameObject_Prototypes()
+{
+	for (auto elemPair : m_GameObject_Prototypes)
+		SAFE_DESTROY(elemPair.second);
+
+	m_GameObject_Prototypes.clear();
+}
+
+void CPrototype_Manager::Delete_Component_Prototypes()
+{
+	for (auto elemPair : m_Component_Prototypes)
+		SAFE_DESTROY(elemPair.second);
+
+	m_Component_Prototypes.clear();
 }
 
 CGameObject* CPrototype_Manager::Find_GameObject_Prototype(const _uint& _iID)
