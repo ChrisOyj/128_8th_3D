@@ -19,7 +19,14 @@ public:
 	static CTexture* Create(_uint iGroupIdx, const _tchar* pTextureFilePath, const _uint& iNumTextures);
 
 public:
-	void	Set_CurTextureIndex(const _uint& iIndex) { m_iCurTextureIndex = iIndex; }
+	void	Set_CurTextureIndex(const _uint& iIndex) { 
+		if (iIndex < 0 || iIndex >= m_SRVs.size())
+		{
+			Call_MsgBox(L"Out of Range on Set_CurTextureIndex : CTexture");
+		}
+		m_iCurTextureIndex = iIndex;
+
+	}
 	HRESULT Set_ShaderResourceView(class CShader* pShader, const char* pConstantName);
 
 public:

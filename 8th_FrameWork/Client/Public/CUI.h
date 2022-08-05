@@ -12,7 +12,7 @@ class CUI
 {
 	DECLARE_PROTOTYPE(CUI);
 
-private:
+protected:
 	CUI();
 	virtual ~CUI();
 

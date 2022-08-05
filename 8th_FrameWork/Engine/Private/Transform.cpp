@@ -194,13 +194,7 @@ void CTransform::OnEnable()
 	m_pOwner->CallBack_CollisionEnter +=
 		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
 
-	vector<CShader*>	vecShdaer = m_pOwner->Get_Component<CShader>();
-
-	if (vecShdaer.empty())
-		return;
-
-	vecShdaer[0]->CallBack_SetRawValues +=
-		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
+	BIND_SHADERRESOURCES(CTransform, "g_WorldMatrix");
 }
 
 void CTransform::OnDisable()
@@ -210,13 +204,7 @@ void CTransform::OnDisable()
 	m_pOwner->CallBack_CollisionEnter -=
 		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
 
-	vector<CShader*>	vecShdaer	= m_pOwner->Get_Component<CShader>();
-
-	if (vecShdaer.empty())
-		return;
-
-	vecShdaer[0]->CallBack_SetRawValues -=
-		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
+	REMOVE_SHADERRESOURCES(CTransform, "g_WorldMatrix");
 }
 
 void CTransform::Make_WorldMatrix()

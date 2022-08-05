@@ -71,8 +71,10 @@ HRESULT CLoading_Manager::Load_Level(LEVEL_TYPE_CLIENT	eLevelID)
 		CGameInstance::Get_Instance()->Delete_Objects(i);
 	}
 
-	CGameInstance::Get_Instance()->Delete_GameObject_Prototypes();
+	CGameInstance::Get_Instance()->Clear_All_Components();
+	//CGameInstance::Get_Instance()->Delete_GameObject_Prototypes();
 
+	m_bFinish = false;
 	m_eLoadID = eLevelID;
 	//static_cast<CLevel_Loading*>(m_arrLevels[LEVEL_LOADING])->Set_NextLevel(eLevelID);
 	CHANGE_LEVEL(m_arrLevels[LEVEL_LOADING]);

@@ -53,10 +53,12 @@ public:/*Get, Set*/
 	CCollider*			Get_Collider() { return m_pCollider; }
 	list<CGameObject*>&	Get_Children() { return m_pChildren; }
 	_uint				Get_ID() { return m_iID; }
+	_uint				Get_GroupIndex() { return m_iGroupIndex; }
 
 	void				Set_Parent(CGameObject* pParent) { m_pParent = pParent; }
 	void				Set_Enable(_bool bEnable);
 	void				Set_ID(const _uint& iID) { m_iID = iID; }
+	void				Set_GroupIndex(const _uint& iID) { m_iGroupIndex = iID; }
 
 	/* Is_Valid : Check the Instance is okay to update. */
 	_bool			Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
@@ -99,6 +101,7 @@ protected:
 	list<CComponent*>		m_pComponents;
 
 	_uint					m_iID = 0;
+	_uint					m_iGroupIndex = 0;
 
 protected:
 	// These will be called by Set_Enable Func.
@@ -117,7 +120,7 @@ private:
 private:
 	/* Only Event_Manager can set this dead. */
 	friend class CEvent_Manager;
-	void	Set_Dead() { m_bAlive = false; }
+	void	Set_Dead() { m_bAlive = false; Call_Dead(); }
 	void	Destroy_Instance() { delete this; }
 };
 

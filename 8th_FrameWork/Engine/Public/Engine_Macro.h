@@ -57,7 +57,7 @@
 #define DELETE_GAMEOBJECT(GameObject) CGameInstance::Get_Instance()->Delete_GameObject(GameObject)
 #define ENABLE_GAMEOBJECT(GameObject) CGameInstance::Get_Instance()->Enable_GameObject(GameObject)
 #define DISABLE_GAMEOBJECT(GameObject) CGameInstance::Get_Instance()->Disable_GameObject(GameObject)
-#define CREATE_STATIC(GameObject, hashcode) CGameInstance::Get_Instance()->Create_StaticObject(GameObject, hashcode)
+#define CREATE_STATIC(GameObject, keyID) CGameInstance::Get_Instance()->Create_StaticObject(GameObject, keyID)
 #define CHANGE_LEVEL(pLevel) CGameInstance::Get_Instance()->Change_Level(pLevel)
 #define CREATE_COMPONENT(Component, GameObject) CGameInstance::Get_Instance()->Create_Component(Component, GameObject)
 #define DELETE_COMPONENT(Component, GameObject) CGameInstance::Get_Instance()->Delete_Component(Component, GameObject)
@@ -79,6 +79,21 @@
 #define		SH_CARTOON		0x002
 #define		SH_OUTLINE		0x004
 #define		SH_GLOW			0x008
+
+// ==============================================================
+
+#define BIND_SHADERRESOURCES(classname, variablename) vector<CShader*>	vecShdaer = m_pOwner->Get_Component<CShader>();\
+if (vecShdaer.empty())\
+return;\
+vecShdaer[0]->CallBack_SetRawValues +=\
+bind(&classname::Set_ShaderResource, this, placeholders::_1, variablename);\
+
+#define REMOVE_SHADERRESOURCES(classname, variablename) vector<CShader*>	vecShdaer = m_pOwner->Get_Component<CShader>();\
+if (vecShdaer.empty())\
+return;\
+vecShdaer[0]->CallBack_SetRawValues -=\
+bind(&classname::Set_ShaderResource, this, placeholders::_1, variablename);\
+
 
 #define BEGIN(NAMESPACE) namespace NAMESPACE { 
 #define END }

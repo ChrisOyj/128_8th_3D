@@ -31,6 +31,20 @@ namespace Engine
 
 	}
 
+	static	size_t	Convert_ToHash(wstring strTemp)
+	{
+		hash<wstring>	strHash;
+		return strHash(strTemp);
+	}
+
+	static	size_t	Convert_ToHash(const _tchar* strTemp)
+	{
+		hash<wstring>	strHash;
+		return strHash(strTemp);
+	}
+
+
+
 	template<typename T>
 	void Safe_Delete(T& Temp)
 	{

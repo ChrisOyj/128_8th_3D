@@ -13,6 +13,8 @@
 #define COLOR_BROWN		_float4(0.4f, 0.2f, 0.1f, 1.0f)
 
 
+
+
 #define	DECLARE_GAMEOBJECT(classname) public:\
 static classname* Create() \
 { \

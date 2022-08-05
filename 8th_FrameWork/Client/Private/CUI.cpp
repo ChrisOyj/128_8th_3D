@@ -11,6 +11,8 @@ CUI::~CUI()
 
 CUI* CUI::Create(const _float4& vStartPosition)
 {
+
+
     return nullptr;
 }
 

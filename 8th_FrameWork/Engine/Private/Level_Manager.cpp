@@ -48,7 +48,8 @@ HRESULT CLevel_Manager::Enter_Level(CLevel* pLevel)
 		&& FAILED(m_pCurrentLevel->Exit()))
 		return E_FAIL;
 
-	m_pCurrentLevel = pLevel;
+	if (!(m_pCurrentLevel = pLevel))
+		return E_FAIL;
 
 	if (FAILED(m_pCurrentLevel->Enter()))
 		return E_FAIL;

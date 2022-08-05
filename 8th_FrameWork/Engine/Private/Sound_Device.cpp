@@ -87,7 +87,7 @@ void CSound_Device::Load_SoundFile()
 			// 아스키 코드 문자열을 유니코드 문자열로 변환시켜주는 함수
 			MultiByteToWideChar(CP_ACP, 0, fd.name, iLength, pSoundKey, iLength);
 
-			_hashcode hcCode = HASHCODE(pSoundKey);
+			_hashcode hcCode = Convert_ToHash(pSoundKey);
 
 			m_mapSound.emplace(hcCode, pSound);
 		}
@@ -136,7 +136,7 @@ void CSound_Device::Load_SoundFile()
 				// 아스키 코드 문자열을 유니코드 문자열로 변환시켜주는 함수
 				MultiByteToWideChar(CP_ACP, 0, fd.name, iLength, pSoundKey, iLength);
 
-				_hashcode hcCode = HASHCODE(pSoundKey);
+				_hashcode hcCode = Convert_ToHash(pSoundKey);
 
 				m_mapSound.emplace(hcCode, pSound);
 			}
@@ -156,7 +156,7 @@ void CSound_Device::Play_BGM(const TCHAR* strSoundKey)
 {
 	map<_hashcode, FMOD_SOUND*>::iterator iter;
 
-	iter = m_mapSound.find(HASHCODE(strSoundKey));
+	iter = m_mapSound.find(Convert_ToHash(strSoundKey));
 
 	if (iter == m_mapSound.end())
 	{
@@ -173,7 +173,7 @@ void CSound_Device::Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIn
 {
 	map<_hashcode, FMOD_SOUND*>::iterator iter;
 
-	iter = m_mapSound.find(HASHCODE(strSoundKey));
+	iter = m_mapSound.find(Convert_ToHash(strSoundKey));
 
 	if (iter == m_mapSound.end())
 	{

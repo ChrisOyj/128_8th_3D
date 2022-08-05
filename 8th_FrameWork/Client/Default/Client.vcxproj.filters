@@ -97,6 +97,24 @@
     <Filter Include="03. Instances\01. Level\00. Level_Loading">
       <UniqueIdentifier>{01e49f4a-6746-4eab-bb07-8420e38cdb08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_UI">
+      <UniqueIdentifier>{60e38feb-7ac6-4669-b659-e066b8277971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\04. MouseChecker">
+      <UniqueIdentifier>{54e2a38a-0c99-4cae-a4de-26bf532447e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\02.">
+      <UniqueIdentifier>{a936c74c-c21b-4d10-b3d4-75845d1fac40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\03. Fader">
+      <UniqueIdentifier>{e3a093a7-6adb-430e-8b7c-0c0af79af8b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Default">
+      <UniqueIdentifier>{cca51b9b-4651-470b-9cb5-6322f05da2e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_LoadingBar">
+      <UniqueIdentifier>{efa49f8c-0e4c-4907-bee2-ff7f8d1eba65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -177,6 +195,15 @@
     <ClInclude Include="..\public\CLevel_Loading.h">
       <Filter>03. Instances\01. Level\00. Level_Loading</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CFader.h">
+      <Filter>03. Instances\03. Component\03. Fader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Bin\ShaderFiles\Client_Shader_Defines.hpp">
+      <Filter>05. ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCamera_Default.h">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -244,6 +271,12 @@
     <ClCompile Include="..\private\CLevel_Loading.cpp">
       <Filter>03. Instances\01. Level\00. Level_Loading</Filter>
     </ClCompile>
+    <ClCompile Include="CFader.cpp">
+      <Filter>03. Instances\03. Component\03. Fader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCamera_Default.cpp">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Default</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -251,6 +284,12 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxCubeTex.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxNorTex.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTex.hlsl">
       <Filter>05. ShaderFiles</Filter>
     </FxCompile>

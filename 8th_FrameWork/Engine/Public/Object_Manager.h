@@ -18,8 +18,10 @@ public:
 	list<CGameObject*>&		Get_ObjGroup(const _uint& iGroupIdx) { return m_pGameObjects[iGroupIdx]; }
 
 public:
-	void	Tick();
-	void	Late_Tick();
+	HRESULT	Regist_GameObject(CGameObject* pGameObject, const _uint& iGroupIndex);
+
+public:
+	void	Check_Objects_Dead();
 
 public:
 	void	Delete_AllObjects();
@@ -35,7 +37,7 @@ private:
 	/* Must go through with Event_Manager to Add Object */
 
 	void	Add_StaticObject(CGameObject* pGameObject, const _uint& iObjectID)	{m_mapStaticObj.emplace(iObjectID, pGameObject);}
-	void	Add_Object(CGameObject* pGameObject, const _uint& iGroupIdx) { m_pGameObjects[iGroupIdx].push_back(pGameObject); }
+	void	Add_Object(CGameObject* pGameObject, const _uint& iGroupIdx);
 
 private:
 	void	Release();

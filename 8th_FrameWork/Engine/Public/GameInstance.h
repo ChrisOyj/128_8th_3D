@@ -16,6 +16,7 @@
 #include "Prototype_Manager.h"
 #include "CComponent_Manager.h"
 #include "CShader_Manager.h"
+#include "Font_Manager.h"
 
 //매니져 매니저..
 
@@ -79,6 +80,9 @@ public:	/* For. Object_Manager */
 	list<CGameObject*>&		Get_ObjGroup(const _uint& iGroupIdx);
 	void					Delete_Objects(const _uint& iGroupIdx);
 
+public:
+	void					Clear_All_Components();
+
 
 
 public: /* For. Camera_Manager */
@@ -113,7 +117,14 @@ public: /* For. Prototype_Manager */
 	void	Delete_GameObject_Prototypes();
 	void	Delete_Component_Prototypes();
 
-public:
+	CGameObject* Find_GameObject_Prototype(const _uint& _iID);
+	CComponent* Find_Component_Prototype(const _uint& _iID);
+
+public: /* For. Font_Manager */
+	HRESULT Add_Font(const _tchar* pFontTag, const _tchar* pFontFilePath);
+	HRESULT Render_Font(const _tchar* pFontTag, const _tchar* pString, const _float2& vPosition, const _float4& vColor);
+
+public: /* For. Shader_Manager */
 	HRESULT		Load_EffectFile(const _tchar* pFilePath);
 
 
@@ -133,6 +144,7 @@ private:
 	CGraphic_Device* m_pGraphicDevice = nullptr;
 	CInput_Device* m_pInputDevice = nullptr;
 	CSound_Device* m_pSoundDevice = nullptr;
+	CFont_Manager* m_pFontManager = nullptr;
 
 private:
 	HRESULT	Initialize();

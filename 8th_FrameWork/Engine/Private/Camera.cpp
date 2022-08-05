@@ -22,8 +22,11 @@ HRESULT CCamera::Initialize_Prototype()
 
 void CCamera::OnEnable()
 {
+	__super::OnEnable();
 }
 
 void CCamera::OnDisable()
 {
+	__super::OnDisable();
+
 }

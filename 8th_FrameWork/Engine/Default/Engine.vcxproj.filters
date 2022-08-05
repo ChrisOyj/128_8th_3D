@@ -127,6 +127,12 @@
     <Filter Include="02. Singleton\02. Design\14. Shader_Manager">
       <UniqueIdentifier>{9d593c2a-d90b-4a46-94cb-ee9c74c6fc7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Singleton\02. Design\15. Font_Manager">
+      <UniqueIdentifier>{73f8e57e-f010-484f-9f25-2d326606690e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\15. Font_Manager\CustomFont">
+      <UniqueIdentifier>{3be17a00-0fbf-42ee-9d99-00cd5988e54d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Camera.cpp">
@@ -236,6 +242,12 @@
     </ClCompile>
     <ClCompile Include="..\private\CShader_Manager.cpp">
       <Filter>02. Singleton\02. Design\14. Shader_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Font_Manager.cpp">
+      <Filter>02. Singleton\02. Design\15. Font_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CustomFont.cpp">
+      <Filter>02. Singleton\02. Design\15. Font_Manager\CustomFont</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +379,12 @@
     </ClInclude>
     <ClInclude Include="..\public\CShader_Manager.h">
       <Filter>02. Singleton\02. Design\14. Shader_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Font_Manager.h">
+      <Filter>02. Singleton\02. Design\15. Font_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CustomFont.h">
+      <Filter>02. Singleton\02. Design\15. Font_Manager\CustomFont</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

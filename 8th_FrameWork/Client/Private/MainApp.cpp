@@ -10,6 +10,7 @@
 #include "CUser.h"
 
 #include "CCamera_Free.h"
+#include "CCamera_Default.h"
 
 #include "CGameObject_Factory.h"
 
@@ -89,9 +90,10 @@ HRESULT CMainApp::Render()
 
 void CMainApp::Release()
 {
-	SAFE_DESTROY(m_pGameInstance);
 	CLoading_Manager::Get_Instance()->Destroy_Instance();
 	CUser::Get_Instance()->Destroy_Instance();
+	SAFE_DESTROY(m_pGameInstance);
+
 }
 
 HRESULT CMainApp::SetUp_Engine()
@@ -125,15 +127,22 @@ HRESULT CMainApp::SetUp_Levels()
 
 HRESULT CMainApp::SetUp_Statics()
 {
+	/*Default Cam*/
+	CCamera* pDefaultCam = CCamera_Default::Create();
+	pDefaultCam->Initialize();
+	CREATE_STATIC(pDefaultCam, 111113);
+	CGameInstance::Get_Instance()->Add_Camera(L"Default", pDefaultCam);
+	CGameInstance::Get_Instance()->Change_Camera(L"Default");
+
+
 	/* Free Camera */
 	CCamera_Free* pFreeCam = CCamera_Free::Create();
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(pFreeCam->Get_ID(), pFreeCam);
+	pFreeCam->Initialize();
+	CREATE_STATIC(pFreeCam, 111114);
+	DISABLE_GAMEOBJECT(pFreeCam);
+	CGameInstance::Get_Instance()->Add_Camera(L"Free", pFreeCam);
 
-	CGameObject* pFreeCamClone = CGameObject_Factory::Create_FromPrototype(pFreeCam->Get_ID());
-
-	CREATE_STATIC(pFreeCamClone, pFreeCamClone->Get_ID());
-	CGameInstance::Get_Instance()->Add_Camera(L"Free", (CCamera_Free*)pFreeCamClone);
-	CGameInstance::Get_Instance()->Change_Camera(L"Free");
+	
 
 	return S_OK;
 }

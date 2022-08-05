@@ -79,7 +79,7 @@ HRESULT CGameInstance::Tick_Engine( )
 
 	/* Object */
 	m_pLevelManager->Tick();
-	m_pObjectManager->Tick();
+	m_pObjectManager->Check_Objects_Dead();
 	m_pComponentManager->Tick();
 
 	m_pLevelManager->Late_Tick();
@@ -106,12 +106,15 @@ HRESULT CGameInstance::Render_Engine()
 	if (!m_pTimeManager->Can_Update())
 		return S_OK;
 
-	if (FAILED(m_pGraphicDevice->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+	if (FAILED(m_pGraphicDevice->Clear_BackBuffer_View(_float4(0.f, 0.f, 0.f, 1.f))))
 		return E_FAIL;
 	if (FAILED(m_pGraphicDevice->Clear_DepthStencil_View()))
 		return E_FAIL;
 
 	if (FAILED(m_pRenderManager->Render()))
+		return E_FAIL;
+
+	if (FAILED(m_pLevelManager->Render()))
 		return E_FAIL;
 
 	if (FAILED(m_pGraphicDevice->Present()))
@@ -140,6 +143,7 @@ HRESULT CGameInstance::Initialize()
 	SAFE_GET_INSTANCE(m_pSoundDevice, CSound_Device);
 	SAFE_GET_INSTANCE(m_pInputDevice, CInput_Device);
 	SAFE_GET_INSTANCE(m_pPrototypeManager, CPrototype_Manager);
+	SAFE_GET_INSTANCE(m_pFontManager, CFont_Manager);
 
 	return S_OK;
 }
@@ -161,6 +165,7 @@ void CGameInstance::Release()
 	m_pShaderManager->Destroy_Instance();
 	m_pInputDevice->Destroy_Instance();
 	m_pSoundDevice->Destroy_Instance();
+	m_pFontManager->Destroy_Instance();
 }
 
 HRESULT CGameInstance::Clear_BackBuffer_View(_float4 vClearColor)
@@ -274,6 +279,11 @@ void CGameInstance::Delete_Objects(const _uint& iGroupIdx)
 	return m_pObjectManager->Delete_Objects(iGroupIdx);
 }
 
+void CGameInstance::Clear_All_Components()
+{
+	m_pComponentManager->Clear_All();
+}
+
 void CGameInstance::Add_Camera(wstring strKey, CCamera * pCamera)
 {
 	m_pCameraManager->Add_Camera(strKey, pCamera);
@@ -376,6 +386,26 @@ void CGameInstance::Delete_GameObject_Prototypes()
 void CGameInstance::Delete_Component_Prototypes()
 {
 	m_pPrototypeManager->Delete_Component_Prototypes();
+}
+
+CGameObject* CGameInstance::Find_GameObject_Prototype(const _uint& _iID)
+{
+	return m_pPrototypeManager->Find_GameObject_Prototype(_iID);
+}
+
+CComponent* CGameInstance::Find_Component_Prototype(const _uint& _iID)
+{
+	return m_pPrototypeManager->Find_Component_Prototype(_iID);
+}
+
+HRESULT CGameInstance::Add_Font(const _tchar* pFontTag, const _tchar* pFontFilePath)
+{
+	return m_pFontManager->Add_Font(pFontTag, pFontFilePath);
+}
+
+HRESULT CGameInstance::Render_Font(const _tchar* pFontTag, const _tchar* pString, const _float2& vPosition, const _float4& vColor)
+{
+	return m_pFontManager->Render_Font(pFontTag, pString, vPosition, vColor);
 }
 
 HRESULT CGameInstance::Load_EffectFile(const _tchar* pFilePath)

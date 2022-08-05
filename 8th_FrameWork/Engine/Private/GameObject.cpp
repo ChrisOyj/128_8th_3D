@@ -138,6 +138,7 @@ void CGameObject::Start_Components()
 
 void CGameObject::OnEnable()
 {
+	//CObject_Manager::Get_Instance()->Regist_GameObject(this, m_iGroupIndex);
 	Call_Enable();
 }
 

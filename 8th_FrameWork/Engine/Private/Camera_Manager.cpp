@@ -101,7 +101,7 @@ void CCamera_Manager::Make_ViewProj()
 
 CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 {
-	auto iter = m_mapCam.find(HASHCODE(strKey));
+	auto iter = m_mapCam.find(Convert_ToHash(strKey));
 
 	if (iter == m_mapCam.end())
 	{
@@ -115,15 +115,22 @@ CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 	
 	ENABLE_GAMEOBJECT(iter->second);
 	m_pCurCam = iter->second;
-	Make_ViewMatrix();
-	Make_ProjMatrix();
+	Make_ViewProj();
 
 	return m_pCurCam;
 }
 
 void CCamera_Manager::Add_Camera(wstring strKey, CCamera * pCamera)
 {
-	m_mapCam.emplace(HASHCODE(strKey), pCamera);
+	auto iter = m_mapCam.find(Convert_ToHash(strKey));
+
+	if (iter != m_mapCam.end())
+	{
+		Call_MsgBox(L"Alreadt Exist Camera : CCamera_Manager");
+		return;
+	}
+
+	m_mapCam.emplace(Convert_ToHash(strKey), pCamera);
 	//DISABLE_GAMEOBJECT(pCamera);
 }
 

@@ -43,6 +43,10 @@ public:
 	virtual void		OnPickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal = { 0.f,0.f,0.f }) {}
 	virtual void		OnTimerEvent(const _uint& iEventNum) {}
 
+public:
+	virtual void		Set_ShaderResource(class CShader* pShader, const char* pConstantName) {}
+
+
 protected:
 	CGameObject*	m_pOwner = nullptr;
 	_uint			m_iGroupID = 0;

@@ -168,8 +168,11 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Bin\ShaderFiles\Client_Shader_Defines.hpp" />
+    <ClInclude Include="..\public\CCamera_Default.h" />
     <ClInclude Include="..\public\CCamera_Free.h" />
     <ClInclude Include="..\public\CComponent_Factory.h" />
+    <ClInclude Include="..\public\CFader.h" />
     <ClInclude Include="..\public\CGameObject_Factory.h" />
     <ClInclude Include="..\public\CLevel_Loading.h" />
     <ClInclude Include="..\public\CLevel_Unity.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\private\CCamera_Default.cpp" />
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
     <ClCompile Include="..\private\CGameObject_Factory.cpp" />
@@ -211,6 +215,7 @@
     <ClCompile Include="..\private\Functor.cpp" />
     <ClCompile Include="..\Private\Loading_Manager.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
+    <ClCompile Include="CFader.cpp" />
     <ClCompile Include="CLevel_Unity.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CTestObj.cpp" />
@@ -224,6 +229,8 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxCubeTex.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxNorTex.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTex.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,6 +3,7 @@
 
 BEGIN(Engine)
 class CGameObject;
+class CShader;
 
 enum WORLD {WORLD_RIGHT, WORLD_UP, WORLD_LOOK, WORLD_POS, WORLD_END};
 
@@ -36,7 +37,7 @@ public:
 	void				Set_ParentFlag(_byte parentFlag)			{ m_cParentFlag = parentFlag; }
 
 public:
-	void				Set_ShaderResource(class CShader* pShader, const char* pConstantName);
+	virtual void		Set_ShaderResource(CShader* pShader, const char* pConstantName) override;
 
 public:
 	virtual void		OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint) override;
