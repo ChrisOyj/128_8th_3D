@@ -58,6 +58,7 @@ private:
 
 private:
 	void	Change_State(FADE_STATE eState);
+	void	OnFadeOut_Finish();
 
 };
 END

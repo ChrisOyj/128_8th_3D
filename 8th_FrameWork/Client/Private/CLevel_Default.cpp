@@ -62,6 +62,9 @@ HRESULT CLevel_Default::Initialize()
         }
 
         m_tGameObjectDataList.push_back(tData);
+
+
+        m_fLoadingFinish = (_float)(i+1) / (_float)(LevelJson.size());
     }
 
     return S_OK;

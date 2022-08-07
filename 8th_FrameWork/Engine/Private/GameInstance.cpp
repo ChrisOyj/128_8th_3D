@@ -103,21 +103,11 @@ HRESULT CGameInstance::Tick_Engine( )
 
 HRESULT CGameInstance::Render_Engine()
 {
-	if (!m_pTimeManager->Can_Update())
-		return S_OK;
-
-	if (FAILED(m_pGraphicDevice->Clear_BackBuffer_View(_float4(0.f, 0.f, 0.f, 1.f))))
-		return E_FAIL;
-	if (FAILED(m_pGraphicDevice->Clear_DepthStencil_View()))
-		return E_FAIL;
 
 	if (FAILED(m_pRenderManager->Render()))
 		return E_FAIL;
 
 	if (FAILED(m_pLevelManager->Render()))
-		return E_FAIL;
-
-	if (FAILED(m_pGraphicDevice->Present()))
 		return E_FAIL;
 
 
@@ -257,6 +247,11 @@ _double CGameInstance::Get_FPSLimitTime()
 void CGameInstance::Set_FPSLimitTIme(_double dTime)
 {
 	m_pTimeManager->Set_FPSLimitTIme(dTime);
+}
+
+_bool CGameInstance::Can_Update()
+{
+	return m_pTimeManager->Can_Update();
 }
 
 KEY_STATE CGameInstance::Get_KeyState(KEY _key)

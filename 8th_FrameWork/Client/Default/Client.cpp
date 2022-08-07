@@ -5,6 +5,8 @@
 #include "Client.h"
 #include "../Public/MainApp.h"
 #include <dxgidebug.h>
+#include "imgui/imgui.h"
+
 
 #define MAX_LOADSTRING 100
 
@@ -152,18 +154,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  목적:  주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 응용 프로그램 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+     if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+         return true;
+
     switch (message)
     {
     case WM_COMMAND:

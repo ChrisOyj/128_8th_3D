@@ -14,6 +14,8 @@
 
 #include "CGameObject_Factory.h"
 
+#include "ImGui_Manager.h"
+
 IMPLEMENT_SINGLETON(CMainApp);
 
 CMainApp::CMainApp()
@@ -48,6 +50,9 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(SetUp_Statics()))
 		return E_FAIL;
 
+	if (FAILED(CImGui_Manager::Get_Instance()->Initialize()))
+		return E_FAIL;
+
 	CLoading_Manager::Get_Instance()->Load_Level(LEVEL_UNITY);
 
 	return S_OK;
@@ -61,11 +66,12 @@ HRESULT CMainApp::Progress()
 		return E_FAIL;
 	}
 
+	CImGui_Manager::Get_Instance()->Tick();
+
 	if (FAILED(Render()))
 	{
 		Call_MsgBox(L"Failed to Render : CMainApp");
 		return E_FAIL;
-
 	}
 
 	return S_OK;
@@ -73,16 +79,22 @@ HRESULT CMainApp::Progress()
 
 HRESULT CMainApp::Render()
 {
-	/*if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+	if (!m_pGameInstance->Can_Update())
+		return S_OK;
+
+	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 0.f, 1.f))))
 		return E_FAIL;
 	if (FAILED(m_pGameInstance->Clear_DepthStencil_View()))
-		return E_FAIL;*/
+		return E_FAIL;
 
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
 
-	/*if (FAILED(m_pGameInstance->Present()))
-		return E_FAIL;*/
+	if (FAILED(CImGui_Manager::Get_Instance()->Render()))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Present()))
+		return E_FAIL;
 
 
 	return S_OK;
@@ -92,6 +104,7 @@ void CMainApp::Release()
 {
 	CLoading_Manager::Get_Instance()->Destroy_Instance();
 	CUser::Get_Instance()->Destroy_Instance();
+	CImGui_Manager::Get_Instance()->Destroy_Instance();
 	SAFE_DESTROY(m_pGameInstance);
 
 }

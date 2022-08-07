@@ -7,6 +7,8 @@
 
 using json = nlohmann::json;
 
+#include "Imgui/imgui.h"
+
 
 namespace Client
 {

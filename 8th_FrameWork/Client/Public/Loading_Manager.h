@@ -3,6 +3,7 @@
 
 BEGIN(Engine)
 	class CLevel;
+class CShader;
 END
 
 BEGIN(Client)
@@ -28,6 +29,10 @@ public:
 	HRESULT					Load_Level(LEVEL_TYPE_CLIENT	eLevelID);
 	HRESULT					Start_Loading();
 	void					Open_NextLevel();
+
+public:
+	void	Set_ShaderResource(CShader* pShader, const char* pConstantName);
+
 
 private:
 	CLevel*					m_arrLevels[LEVEL_END];

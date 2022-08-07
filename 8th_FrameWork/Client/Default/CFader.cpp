@@ -97,8 +97,6 @@ void CFader::FadeIn()
     {
         m_tFadeDesc.fAlpha = 1.f;
         Change_State(FADEDELAY);
-
-
     }
     else
     {
@@ -129,8 +127,7 @@ void CFader::FadeOut()
 {
     if (m_tFadeDesc.fAlpha <= 0.f)
     {
-        m_tFadeDesc.fAlpha = 0.f;
-        DELETE_GAMEOBJECT(m_pOwner);
+        OnFadeOut_Finish();
     }
     else
     {
@@ -143,4 +140,46 @@ void CFader::Change_State(FADE_STATE eState)
     m_eState = eState;
     m_fTimeAcc = 0.f;
 
+}
+
+void CFader::OnFadeOut_Finish()
+{
+    switch (m_tFadeDesc.eFadeOutType)
+    {
+    case FADEDESC::FADEOUT_DELETE:
+        DELETE_GAMEOBJECT(m_pOwner);
+
+        break;
+
+    case FADEDESC::FADEOUT_DISABLE:
+        DISABLE_GAMEOBJECT(m_pOwner);
+
+        break;
+
+    case FADEDESC::FADEOUT_NEXTTEXTURE:
+    {
+        CTexture* pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+        if (pTextureCom->Next_Texture())
+        {
+            Change_State(FADEIN);
+        }
+        else
+            DELETE_GAMEOBJECT(m_pOwner);
+    }
+        break;
+
+    case FADEDESC::FADEOUT_RANDOMTEXTURE:
+    {
+        CTexture* pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+        pTextureCom->Random_Texture();
+        Change_State(FADEIN);
+    }
+    break;
+
+
+
+
+    default:
+        break;
+    }
 }

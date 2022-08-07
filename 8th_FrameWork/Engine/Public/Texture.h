@@ -30,6 +30,10 @@ public:
 	HRESULT Set_ShaderResourceView(class CShader* pShader, const char* pConstantName);
 
 public:
+	_bool	Next_Texture();
+	void	Random_Texture();
+
+public:
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
 

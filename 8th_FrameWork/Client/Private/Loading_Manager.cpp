@@ -6,6 +6,8 @@
 #include "CLevel_Unity.h"
 #include "GameInstance.h"
 
+#include "CShader.h"
+
 IMPLEMENT_SINGLETON(CLoading_Manager)
 
 CLoading_Manager::CLoading_Manager()
@@ -121,6 +123,23 @@ void CLoading_Manager::Release()
 	}
 
 	
+}
+
+void CLoading_Manager::Set_ShaderResource(CShader* pShader, const char* pConstantName)
+{
+	_float fResource = 1.f;
+	CLevel_Default* pLevelDefault = dynamic_cast<CLevel_Default*>(m_arrLevels[m_eLoadID]);
+
+	if (pLevelDefault != nullptr)
+	{
+		fResource = pLevelDefault->Get_LoadingFinish();
+	}
+
+	pShader->Set_RawValue(pConstantName, &fResource, sizeof(_float));
+
+
+	/*pShader->CallBack_SetRawValues +=
+		bind(&CLevel_Loading::Set_ShaderResource, this, placeholders::_1, variablename);*/
 }
 
 void CLoading_Manager::Finish_LoadingThread()

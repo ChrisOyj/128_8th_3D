@@ -115,6 +115,21 @@
     <Filter Include="03. Instances\03. Component\01. Scriptable\Script_LoadingBar">
       <UniqueIdentifier>{efa49f8c-0e4c-4907-bee2-ff7f8d1eba65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager">
+      <UniqueIdentifier>{29f03db1-0e78-4cc0-ae04-d51f360b2db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui">
+      <UniqueIdentifier>{72ea879c-c2bf-4e9f-a8f1-f866aa013f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window">
+      <UniqueIdentifier>{c93b7f01-98f6-4c3d-ba3c-62411939ed83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default">
+      <UniqueIdentifier>{6a6a4de7-3c95-4414-bf2e-3e875da97250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\02. Window_">
+      <UniqueIdentifier>{df54652d-3722-43e6-9765-05cb93daae61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -204,6 +219,39 @@
     <ClInclude Include="..\public\CCamera_Default.h">
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Default</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ImGui_Manager.h">
+      <Filter>02. Design\05. ImGui_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imconfig.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_impl_win32.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_internal.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_rectpack.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_textedit.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_truetype.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CImGui_Window.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Default.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -276,6 +324,36 @@
     </ClCompile>
     <ClCompile Include="..\private\CCamera_Default.cpp">
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ImGui_Manager.cpp">
+      <Filter>02. Design\05. ImGui_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_demo.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_draw.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_win32.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_tables.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_widgets.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="CImGui_Window.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindow_Default.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ matrix	g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 texture2D	g_DiffuseTexture;
 
 float	g_fAlpha = 1.f;
-float	g_fProgress = 0.7f;
+float	g_fProgress = 1.0f;
 
 
 

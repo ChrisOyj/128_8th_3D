@@ -6,6 +6,7 @@
 #include "CShader.h"
 #include "Renderer.h"
 #include "Transform.h"
+#include "Physics.h"
 
 #include "GameInstance.h"
 
@@ -41,6 +42,13 @@ HRESULT CPrototype_Factory::SetUp_DefaultComponents()
     {
         CRenderer* pRenderer = CRenderer::Create(CP_RENDERER, RENDER_UI, VTXTEX_PASS_ALPHA, ZERO_VECTOR);
         if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(CPrototype_Factory::DEFAULT_UI_RENDERER, pRenderer)))
+            return E_FAIL;
+    }
+
+    if (!CFunctor::Check_Component_Prototype_Exist(CPrototype_Factory::DEFAULT_PHYSICS))
+    {
+        CPhysics* pPhysics = CPhysics::Create(CP_AFTER_TRANSFORM);
+        if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(CPrototype_Factory::DEFAULT_PHYSICS, pPhysics)))
             return E_FAIL;
     }
    

@@ -20,7 +20,7 @@ HRESULT CCamera_Free::Initialize_Prototype()
 
 	__super::Initialize_Prototype();
 
-	CScript_Freecam* pScriptable = CScript_Freecam::Create(CP_AFTERTRANSFORM);
+	CScript_Freecam* pScriptable = CScript_Freecam::Create(CP_AFTER_TRANSFORM);
 	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(SCRIPT_FREECAM_PROTOTYPE_ID, pScriptable)))
 		return E_FAIL;
 	Add_Component(CComponent_Factory::Create_FromPrototype(SCRIPT_FREECAM_PROTOTYPE_ID, this));

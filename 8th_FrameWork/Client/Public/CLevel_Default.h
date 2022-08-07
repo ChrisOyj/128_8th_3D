@@ -24,6 +24,9 @@ public:
 	static CLevel_Default* Create(LEVEL_TYPE_CLIENT	eLevelID);
 
 public:
+	_float	Get_LoadingFinish() { return m_fLoadingFinish; }
+
+public:
 	// CLevel을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
 	virtual HRESULT Enter() override;
@@ -35,6 +38,8 @@ public:
 private:
 	LEVEL_TYPE_CLIENT		m_eLevelType = LEVEL_END;
 	list<GameObejctData>	m_tGameObjectDataList;
+
+	_float					m_fLoadingFinish = 0.f;
 
 private:
 	HRESULT				Create_GameObjectInLevel(const GameObejctData& tData);

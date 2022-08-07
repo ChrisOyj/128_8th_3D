@@ -81,18 +81,23 @@ HRESULT CSimple_Image::SetUp_Components(const _float4& vPosition, const _float2&
 	Add_Component(CComponent_Factory::Create_FromPrototype(eSimpleTextureID, this));
 
 	/* Fader */
-	if (!CFunctor::Check_Component_Prototype_Exist(eSimpleFaderID))
+	if (eSimpleFaderID != FADER_END)
 	{
-		CFader* pFader = CFader::Create(CP_AFTERTRANSFORM, tFadeDesc);
+		if (!CFunctor::Check_Component_Prototype_Exist(eSimpleFaderID))
+		{
+			CFader* pFader = CFader::Create(CP_AFTER_TRANSFORM, tFadeDesc);
 
-		if (!pFader)
-			return E_FAIL;
+			if (!pFader)
+				return E_FAIL;
 
-		if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(eSimpleFaderID, pFader)))
-			return E_FAIL;
+			if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(eSimpleFaderID, pFader)))
+				return E_FAIL;
+		}
+
+		Add_Component(CComponent_Factory::Create_FromPrototype(eSimpleFaderID, this));
 	}
 
-	Add_Component(CComponent_Factory::Create_FromPrototype(eSimpleFaderID, this));
+	
 
 
 

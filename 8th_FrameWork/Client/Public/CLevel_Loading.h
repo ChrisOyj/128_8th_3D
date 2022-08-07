@@ -1,7 +1,10 @@
 #pragma once
-
 #include "Client_Defines.h"
 #include "Level.h"
+
+BEGIN(Engine)
+class CShader;
+END
 
 BEGIN(Client)
 
@@ -29,6 +32,7 @@ public:
 
 private:
 	LEVEL_TYPE_CLIENT			m_eNextLevel = LEVEL_END;
+	CShader* m_pLoadingBarShader = nullptr;
 	
 
 };

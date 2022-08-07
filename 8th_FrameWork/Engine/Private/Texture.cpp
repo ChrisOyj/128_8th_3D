@@ -43,6 +43,22 @@ HRESULT CTexture::Set_ShaderResourceView(CShader* pShader, const char* pConstant
 	return pShader->Set_ShaderResourceView(pConstantName, m_SRVs[m_iCurTextureIndex]);
 }
 
+_bool CTexture::Next_Texture()
+{
+	if (++m_iCurTextureIndex >= m_SRVs.size())
+	{
+		--m_iCurTextureIndex;
+		return false;
+	}
+
+	return true;
+}
+
+void CTexture::Random_Texture()
+{
+	m_iCurTextureIndex = random(0, (_int)(m_SRVs.size() - 1));
+}
+
 void CTexture::Tick()
 {
 }

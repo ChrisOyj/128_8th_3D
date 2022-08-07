@@ -71,6 +71,7 @@ public: /* For. Time_Manager */
 	_double		Get_DT();
 	_double		Get_FPSLimitTime();
 	void		Set_FPSLimitTIme(_double dTime);
+	_bool		Can_Update();
 
 public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);

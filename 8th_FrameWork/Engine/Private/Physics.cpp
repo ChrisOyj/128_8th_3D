@@ -65,10 +65,12 @@ void CPhysics::Late_Tick()
 
 void CPhysics::OnEnable()
 {
+	__super::OnEnable();
 }
 
 void CPhysics::OnDisable()
 {
+	__super::OnDisable();
 }
 
 void CPhysics::Release()
@@ -123,7 +125,7 @@ void CPhysics::Turn()
 	vUp *= RotationMatrix;
 	vLook *= RotationMatrix;
 
-	pTransform->Set_World(WORLD_RIGHT, vRight);
-	pTransform->Set_World(WORLD_UP, vUp);
-	pTransform->Set_World(WORLD_LOOK, vLook);
+	pTransform->Set_World(WORLD_RIGHT, vRight.Normalize());
+	pTransform->Set_World(WORLD_UP, vUp.Normalize());
+	pTransform->Set_World(WORLD_LOOK, vLook.Normalize());
 }

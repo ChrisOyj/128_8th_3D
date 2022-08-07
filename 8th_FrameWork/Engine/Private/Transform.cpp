@@ -109,7 +109,6 @@ void CTransform::Set_Look(const _float4& vLook)
 
 void CTransform::Set_Rect()
 {
-
 	_float4	vRight;
 	_float4 vUp;
 	_float4	vLook;
@@ -209,6 +208,8 @@ void CTransform::OnDisable()
 
 void CTransform::Make_WorldMatrix()
 {
+	Rescale_WorldMatrix();
+
 	_float4x4	parentMat;
 	XMStoreFloat4x4(&parentMat, XMMatrixIdentity());
 	CGameObject* pParent = m_pOwner->Get_Parent();
@@ -217,4 +218,12 @@ void CTransform::Make_WorldMatrix()
 		parentMat = pParent->Get_Transform()->Get_WorldMatrix(m_cParentFlag);
 
 	m_tTransform.matWorld = m_tTransform.matMyWorld * parentMat;
+
+}
+
+void CTransform::Rescale_WorldMatrix()
+{
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_RIGHT])).Normalize() *= m_tTransform.vScale.x;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_UP])).Normalize() *= m_tTransform.vScale.y;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_LOOK])).Normalize() *= m_tTransform.vScale.z;
 }

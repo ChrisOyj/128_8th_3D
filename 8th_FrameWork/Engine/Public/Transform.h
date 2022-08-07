@@ -56,6 +56,7 @@ public:
 
 public:
 	void			Make_WorldMatrix();
+	void			Rescale_WorldMatrix();
 
 private:
 	TRANSFORM	m_tTransform;

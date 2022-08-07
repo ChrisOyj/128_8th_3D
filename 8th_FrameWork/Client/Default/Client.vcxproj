@@ -168,12 +168,21 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imconfig.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_impl_win32.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_internal.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_textedit.h" />
+    <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_truetype.h" />
     <ClInclude Include="..\Bin\ShaderFiles\Client_Shader_Defines.hpp" />
     <ClInclude Include="..\public\CCamera_Default.h" />
     <ClInclude Include="..\public\CCamera_Free.h" />
     <ClInclude Include="..\public\CComponent_Factory.h" />
     <ClInclude Include="..\public\CFader.h" />
     <ClInclude Include="..\public\CGameObject_Factory.h" />
+    <ClInclude Include="..\public\CImGui_Window.h" />
     <ClInclude Include="..\public\CLevel_Loading.h" />
     <ClInclude Include="..\public\CLevel_Unity.h" />
     <ClInclude Include="..\public\CPrototype_Factory.h" />
@@ -190,7 +199,9 @@
     <ClInclude Include="..\Public\Client_Macro.h" />
     <ClInclude Include="..\Public\Client_Struct.h" />
     <ClInclude Include="..\public\CUtility_Transform.h" />
+    <ClInclude Include="..\public\CWindow_Default.h" />
     <ClInclude Include="..\public\Functor.h" />
+    <ClInclude Include="..\Public\ImGui_Manager.h" />
     <ClInclude Include="..\Public\Loading_Manager.h" />
     <ClInclude Include="..\Public\MainApp.h" />
     <ClInclude Include="Client.h" />
@@ -199,6 +210,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\private\CCamera_Default.cpp" />
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
@@ -213,12 +231,15 @@
     <ClCompile Include="..\private\CLevel_Default.cpp" />
     <ClCompile Include="..\private\CUtility_Transform.cpp" />
     <ClCompile Include="..\private\Functor.cpp" />
+    <ClCompile Include="..\Private\ImGui_Manager.cpp" />
     <ClCompile Include="..\Private\Loading_Manager.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="CFader.cpp" />
+    <ClCompile Include="CImGui_Window.cpp" />
     <ClCompile Include="CLevel_Unity.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CTestObj.cpp" />
+    <ClCompile Include="CWindow_Default.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
