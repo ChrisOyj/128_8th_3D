@@ -38,11 +38,6 @@ VS_OUT VS_MAIN(VS_IN In)
 	return Out;	
 }
 
-// w나누기연산을 수행하낟. (In 투영스페이스)
-// 뷰포트 변환. (In 뷰포트(윈도우좌표))
-
-// 래스터라이즈(픽셀정볼르 생성한다. )
-
 struct PS_IN
 {
 	float4		vPosition : SV_POSITION;
@@ -87,6 +82,9 @@ PS_OUT PS_LoadingBar_MAIN(PS_IN In)
 	{
 		Out.vColor.rgb = 0.6f;
 	}
+
+	Out.vColor.w *= g_fAlpha;
+
 
 	return Out;
 }

@@ -14,12 +14,18 @@ CGameObject::CGameObject()
 
 CGameObject::CGameObject(const CGameObject & Prototype)
 	: m_pParent(Prototype.m_pParent)
+	, m_iID(Prototype.m_iID)
+	, m_iGroupIndex(Prototype.m_iGroupIndex)
 {
 	//Deep Copy for Component
 	for (auto& elem : Prototype.m_pComponents)
 		Add_Component(elem->Clone());
 
 	m_pTransform = static_cast<CTransform*>(m_pComponents.front());
+	if (!Get_Component<CCollider>().empty())
+	{
+		m_pCollider = Get_Component<CCollider>()[0];
+	}
 
 	//Deep Copy for Children
 	for (auto& elem : Prototype.m_pChildren)

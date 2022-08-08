@@ -97,13 +97,33 @@ void CTransform::Set_Look(const _float4& vLook)
 	if ((vLook.y < 1.1f && vLook.y > 0.9f) ||
 		(vLook.y > -1.1f && vLook.y < -0.9f)
 		)
-		vUp = _float4(0.f, 0.f, 1.f);
+		vUp = _float4(0.f, 0.f, 1.f, 0.f);
 
 	vUp.Normalize();
 	_float4 vRight = vUp.Cross(vLook);
 	Set_World(WORLD_RIGHT, vRight.Normalize());
 	
 	vUp = _vLook.Cross(vRight);
+	Set_World(WORLD_UP, vUp.Normalize());
+}
+
+void CTransform::Set_Right(const _float4& vRight)
+{
+	_float4 _vRight = vRight;
+	Set_World(WORLD_RIGHT, _vRight.Normalize());
+
+	_float4 vUp = { 0.f, 1.f, 0.f, 0.f };
+
+	if (vRight.y < 1.1f && vRight.y > 0.9f)
+		vUp = _float4(0.f, 0.f, 1.f, 0.f);
+	else if (vRight.y > -1.1f && vRight.y < -0.9f)
+		vUp = _float4(0.f, 0.f, 1.f, 0.f);
+
+	vUp.Normalize();
+	_float4 vLook = _vRight.Cross(vUp);
+	Set_World(WORLD_LOOK, vLook.Normalize());
+
+	vUp = vLook.Cross(_vRight);
 	Set_World(WORLD_UP, vUp.Normalize());
 }
 

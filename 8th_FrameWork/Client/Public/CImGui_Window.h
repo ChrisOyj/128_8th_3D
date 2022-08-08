@@ -21,11 +21,16 @@ protected:
 	virtual ~CImGui_Window();
 
 public:
+	void			Set_Enable(_bool bEnable) { m_bEnable = bEnable; }
+	_bool			Is_Enable() { return m_bEnable; }
+
+public:
 	virtual HRESULT	Initialize() PURE;
 	virtual void	Tick() PURE;
 	virtual HRESULT	Render() PURE;
 
 protected:
+	_bool			m_bEnable = false;
 	ImGuiDESC		m_tImGuiDESC;
 
 protected:

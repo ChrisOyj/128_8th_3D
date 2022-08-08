@@ -8,6 +8,8 @@
 #include "GameInstance.h"
 
 #include "CWindow_Default.h"
+#include "CWindow_UI.h"
+#include "CWindow_Select.h"
 
 
 IMPLEMENT_SINGLETON(CImGui_Manager)
@@ -19,6 +21,21 @@ CImGui_Manager::CImGui_Manager()
 CImGui_Manager::~CImGui_Manager()
 {
 	Release();
+}
+
+void CImGui_Manager::Enable_Window(IMGUI_WINDOW_TYPE eType, _bool bEnable)
+{
+	m_arrWindows[eType]->Set_Enable(bEnable);
+}
+
+void CImGui_Manager::Turn_Window(IMGUI_WINDOW_TYPE eType)
+{
+	_bool bEnable = true;
+
+	if (m_arrWindows[eType]->Is_Enable())
+		bEnable = false;
+
+	m_arrWindows[eType]->Set_Enable(bEnable);
 }
 
 HRESULT CImGui_Manager::Initialize()
@@ -40,6 +57,8 @@ HRESULT CImGui_Manager::Initialize()
 
 
 	m_arrWindows[IMGUI_DEFAULT] = CWindow_Default::Create();
+	m_arrWindows[IMGUI_SELECT] = CWindow_Select::Create();
+	m_arrWindows[IMGUI_UI] = CWindow_UI::Create();
 
 	return S_OK;
 }
@@ -59,8 +78,11 @@ HRESULT CImGui_Manager::Render(void)
 
 	for (_uint i = 0; i < IMGUI_END; ++i)
 	{
-		if (FAILED(m_arrWindows[i]->Render()))
-			return E_FAIL;
+		if (m_arrWindows[i]->Is_Enable())
+		{
+			if (FAILED(m_arrWindows[i]->Render()))
+				return E_FAIL;
+		}
 	}
 
 	ImGui::Render();

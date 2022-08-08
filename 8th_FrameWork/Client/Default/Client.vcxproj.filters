@@ -127,7 +127,13 @@
     <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default">
       <UniqueIdentifier>{6a6a4de7-3c95-4414-bf2e-3e875da97250}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\02. Window_">
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\00. base">
+      <UniqueIdentifier>{619deb11-b6fb-45ca-bf3d-8884254c2f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\02. Window_Select">
+      <UniqueIdentifier>{ce510bcd-be11-4df7-9ffe-fb24c9f65018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\03. Window_UI">
       <UniqueIdentifier>{df54652d-3722-43e6-9765-05cb93daae61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -246,11 +252,17 @@
     <ClInclude Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.h">
       <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\CImGui_Window.h">
-      <Filter>02. Design\05. ImGui_Manager\ImGui_Window</Filter>
-    </ClInclude>
     <ClInclude Include="..\public\CWindow_Default.h">
       <Filter>02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_UI.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\03. Window_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CImGui_Window.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\00. base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Select.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\02. Window_Select</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,12 +316,6 @@
     <ClCompile Include="..\private\CCamera_Free.cpp">
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Free</Filter>
     </ClCompile>
-    <ClCompile Include="CLevel_Unity.cpp">
-      <Filter>03. Instances\01. Level\01. Level_Unity</Filter>
-    </ClCompile>
-    <ClCompile Include="CTestObj.cpp">
-      <Filter>03. Instances\02. GameObject\04. Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\private\CUser.cpp">
       <Filter>02. Design\03. User</Filter>
     </ClCompile>
@@ -318,9 +324,6 @@
     </ClCompile>
     <ClCompile Include="..\private\CLevel_Loading.cpp">
       <Filter>03. Instances\01. Level\00. Level_Loading</Filter>
-    </ClCompile>
-    <ClCompile Include="CFader.cpp">
-      <Filter>03. Instances\03. Component\03. Fader</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CCamera_Default.cpp">
       <Filter>03. Instances\02. GameObject\03. Camera\Camera_Default</Filter>
@@ -349,11 +352,26 @@
     <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_dx11.cpp">
       <Filter>02. Design\05. ImGui_Manager\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="CImGui_Window.cpp">
-      <Filter>02. Design\05. ImGui_Manager\ImGui_Window</Filter>
+    <ClCompile Include="..\private\CWindow_UI.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\03. Window_UI</Filter>
     </ClCompile>
-    <ClCompile Include="CWindow_Default.cpp">
+    <ClCompile Include="..\Private\CWindow_Default.cpp">
       <Filter>02. Design\05. ImGui_Manager\ImGui_Window\01. Window_Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CLevel_Unity.cpp">
+      <Filter>03. Instances\01. Level\01. Level_Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CFader.cpp">
+      <Filter>03. Instances\03. Component\03. Fader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CImGui_Window.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\00. base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Select.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\02. Window_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CTestObj.cpp">
+      <Filter>03. Instances\02. GameObject\04. Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

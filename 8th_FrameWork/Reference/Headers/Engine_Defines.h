@@ -16,6 +16,13 @@
 #include <DirectXTK/WICTextureLoader.h>
 #include <DirectXTK/SpriteBatch.h>
 #include <DirectXTK/SpriteFont.h>
+#include <DirectXTK/ScreenGrab.h>
+
+#include <DirectXCollision.h>
+
+#include <assimp/scene.h>
+#include <assimp/Importer.hpp>
+
 
 #include <d3dcompiler.h>
 
@@ -37,8 +44,8 @@ using namespace DirectX;
 #include <functional>
 
 #include <io.h>
-#include "fmod.h"
-#include "fmod.hpp"
+#include "fmod/fmod.h"
+#include "fmod/fmod.hpp"
 
 #include <wrl.h>
 using namespace Microsoft::WRL;

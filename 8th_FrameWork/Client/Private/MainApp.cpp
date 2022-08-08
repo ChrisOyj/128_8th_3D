@@ -50,8 +50,10 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(SetUp_Statics()))
 		return E_FAIL;
 
+#ifdef _DEBUG
 	if (FAILED(CImGui_Manager::Get_Instance()->Initialize()))
 		return E_FAIL;
+#endif
 
 	CLoading_Manager::Get_Instance()->Load_Level(LEVEL_UNITY);
 
@@ -66,7 +68,9 @@ HRESULT CMainApp::Progress()
 		return E_FAIL;
 	}
 
+#ifdef _DEBUG
 	CImGui_Manager::Get_Instance()->Tick();
+#endif
 
 	if (FAILED(Render()))
 	{
@@ -90,8 +94,10 @@ HRESULT CMainApp::Render()
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
 
+#ifdef _DEBUG
 	if (FAILED(CImGui_Manager::Get_Instance()->Render()))
 		return E_FAIL;
+#endif
 
 	if (FAILED(m_pGameInstance->Present()))
 		return E_FAIL;

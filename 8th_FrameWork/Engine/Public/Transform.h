@@ -30,6 +30,7 @@ public:
 	void				Set_RealWorld(WORLD eType, const _float4& vCol);
 	void				Set_MyMatrix(_float4x4 matWorld);
 	void				Set_Look(const _float4& vLook);
+	void				Set_Right(const _float4& vRight);
 	void				Set_Rect();
 
 	void				Set_Scale(const _float4& vScale);

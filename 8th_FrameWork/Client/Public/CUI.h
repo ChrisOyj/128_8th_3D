@@ -17,7 +17,7 @@ protected:
 	virtual ~CUI();
 
 public:
-	static CUI* Create(const _float4&	vStartPosition);
+	static CUI* Create(const _uint& iID, const _float4&	vStartPosition);
 
 public:
 	// CGameObject을(를) 통해 상속됨
@@ -25,6 +25,9 @@ public:
 	virtual HRESULT Initialize() override;
 	virtual void OnEnable() override;
 	virtual void OnDisable() override;
+
+private:
+	HRESULT	SetUp_Components(const _float4& vStartPosition);
 };
 
 END

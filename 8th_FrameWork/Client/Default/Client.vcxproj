@@ -130,7 +130,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;DirectXTKd.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -158,7 +158,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;DirectXTK.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -200,6 +200,8 @@
     <ClInclude Include="..\Public\Client_Struct.h" />
     <ClInclude Include="..\public\CUtility_Transform.h" />
     <ClInclude Include="..\public\CWindow_Default.h" />
+    <ClInclude Include="..\public\CWindow_Select.h" />
+    <ClInclude Include="..\public\CWindow_UI.h" />
     <ClInclude Include="..\public\Functor.h" />
     <ClInclude Include="..\Public\ImGui_Manager.h" />
     <ClInclude Include="..\Public\Loading_Manager.h" />
@@ -220,26 +222,28 @@
     <ClCompile Include="..\private\CCamera_Default.cpp" />
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
+    <ClCompile Include="..\Private\CFader.cpp" />
     <ClCompile Include="..\private\CGameObject_Factory.cpp" />
+    <ClCompile Include="..\Private\CImGui_Window.cpp" />
     <ClCompile Include="..\private\CLevel_Loading.cpp" />
+    <ClCompile Include="..\Private\CLevel_Unity.cpp" />
     <ClCompile Include="..\private\CPrototype_Factory.cpp" />
     <ClCompile Include="..\private\CScript_Freecam.cpp" />
     <ClCompile Include="..\private\CSimple_Image.cpp" />
+    <ClCompile Include="..\Private\CTestObj.cpp" />
     <ClCompile Include="..\private\CUI.cpp" />
     <ClCompile Include="..\private\CUser.cpp" />
     <ClCompile Include="..\Private\CUtility_Json.cpp" />
     <ClCompile Include="..\private\CLevel_Default.cpp" />
     <ClCompile Include="..\private\CUtility_Transform.cpp" />
+    <ClCompile Include="..\Private\CWindow_Default.cpp" />
+    <ClCompile Include="..\private\CWindow_Select.cpp" />
+    <ClCompile Include="..\private\CWindow_UI.cpp" />
     <ClCompile Include="..\private\Functor.cpp" />
     <ClCompile Include="..\Private\ImGui_Manager.cpp" />
     <ClCompile Include="..\Private\Loading_Manager.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
-    <ClCompile Include="CFader.cpp" />
-    <ClCompile Include="CImGui_Window.cpp" />
-    <ClCompile Include="CLevel_Unity.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="CTestObj.cpp" />
-    <ClCompile Include="CWindow_Default.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>

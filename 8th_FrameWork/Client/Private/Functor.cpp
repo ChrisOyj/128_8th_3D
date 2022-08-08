@@ -50,3 +50,22 @@ _float4 CFunctor::RealToOrthoPosition(const _float4& vPosition)
 
 	return vScreenPosition;
 }
+
+_float CFunctor::Get_DegreeFromDot(const _float4& V1, const _float4& V2)
+{
+	_float4	vLeft = V1;
+	_float4	vRight = V2;
+
+	vLeft.Normalize();
+	vRight.Normalize();
+
+	_float fCosTheta = vLeft.Dot(V2);
+	_float fTheta = acosf(fCosTheta);
+
+	if (vLeft.y < 0)
+		fTheta = (PI - fTheta);
+
+	_float fDegree = XMConvertToDegrees(fTheta);
+
+	return fDegree;
+}

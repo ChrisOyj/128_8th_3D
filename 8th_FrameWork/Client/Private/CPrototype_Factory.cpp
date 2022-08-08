@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Transform.h"
 #include "Physics.h"
+#include "CFader.h"
 
 #include "GameInstance.h"
 
@@ -52,7 +53,28 @@ HRESULT CPrototype_Factory::SetUp_DefaultComponents()
             return E_FAIL;
     }
    
+    if (!CFunctor::Check_Component_Prototype_Exist(CPrototype_Factory::DEFAULT_TEXTURE))
+    {
+        CTexture* pTexture = CTexture::Create(CP_END, L"../bin/resources/textures/ui/Jusin_0.png", 1);
+        if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(CPrototype_Factory::DEFAULT_TEXTURE, pTexture)))
+            return E_FAIL;
+    }
 
+    if (!CFunctor::Check_Component_Prototype_Exist(CPrototype_Factory::DEFAULT_FADER))
+    {
+        FADEDESC    tFadeDesc;
+        tFadeDesc.bFadeFlag = FADE_NONE;
+        tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DELETE;
+        tFadeDesc.fAlpha = 1.f;
+        tFadeDesc.eKeyType = KEY::ENTER;
+        tFadeDesc.fFadeOutTime = 1.f;
+        tFadeDesc.fFadeInTime = 1.f;
+        tFadeDesc.fFadeOutStartTime = 1.f;
+
+        CFader* pFader = CFader::Create(CP_AFTER_TRANSFORM, tFadeDesc);
+        if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(CPrototype_Factory::DEFAULT_FADER, pFader)))
+            return E_FAIL;
+    }
 
 
     return S_OK;

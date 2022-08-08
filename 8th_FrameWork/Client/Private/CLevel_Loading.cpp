@@ -57,7 +57,7 @@ HRESULT CLevel_Loading::Initialize()
 	tFadeDesc.fFadeOutStartTime = 4.f;
 	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
 
-	CSimple_Image* pLoadingImage = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.f, 1.f), _float2((_float)g_iWinCX, (_float)g_iWinCY),
+	CSimple_Image* pLoadingImage = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.1f, 1.f), _float2((_float)g_iWinCX, (_float)g_iWinCY),
 		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadingScreen_%.3d_BC.png", 10,
 		CSimple_Image::SIMPLE_LOADING, tFadeDesc, CSimple_Image::FADER_LOADING);
 
@@ -67,10 +67,13 @@ HRESULT CLevel_Loading::Initialize()
 	CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADING_IMAGE_PROTOTYPE_ID, pLoadingImage);
 
 
+
 	/* Loading Bar */
+	tFadeDesc.bFadeFlag = FADE_NONE;
+
 	CSimple_Image* pLoadingBar = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.9f, 0.f, 1.f), _float2((_float)g_iWinCX * 0.75f, 2.f),
 		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadIndicator_Base_BC.png", 1,
-		CSimple_Image::SIMPLE_LOADINGBAR, tFadeDesc, CSimple_Image::FADER_END);
+		CSimple_Image::SIMPLE_LOADINGBAR, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
 
 	if (!pLoadingImage)
 		return E_FAIL;
@@ -82,7 +85,7 @@ HRESULT CLevel_Loading::Initialize()
 	/* Loading Image */
 	CSimple_Image* pLoadingTurn = CSimple_Image::Create(_float4(g_iWinCX * 0.92f, g_iWinCY * 0.9f, 0.f, 1.f), _float2(75.f, 75.f),
 		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_Load_Icon_BC.png", 1,
-		CSimple_Image::SIMPLE_LOADINGIMAGE, tFadeDesc, CSimple_Image::FADER_END);
+		CSimple_Image::SIMPLE_LOADINGIMAGE, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
 
 	CPhysics* pPhysics = static_cast<CPhysics*>(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_PHYSICS, pLoadingTurn));
 	pLoadingTurn->Add_Component(pPhysics);
