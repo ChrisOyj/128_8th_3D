@@ -30,25 +30,6 @@ HRESULT CLevel_Unity::Initialize()
     //if (FAILED(CGameInstance::Get_Instance()->Add_Font(TEXT("Font_Dream"), TEXT("../Bin/Resources/Fonts/128.spriteFont"))))
        // return E_FAIL;
 
-    for (_uint i = 0; i < 99999999; ++i)
-    {
-        int a = 0;
-    }
-
-    for (_uint i = 0; i < 99999999; ++i)
-    {
-        int a = 0;
-    }
-
-    for (_uint i = 0; i < 99999999; ++i)
-    {
-        int a = 0;
-    }
-
-    for (_uint i = 0; i < 99999999; ++i)
-    {
-        int a = 0;
-    }
 
     return S_OK;
 }
@@ -59,6 +40,7 @@ HRESULT CLevel_Unity::Enter()
     CGameInstance::Get_Instance()->Change_Camera(L"Free");
 
 
+    CREATE_GAMEOBJECT(CGameObject_Factory::Create_FromJson(100), GROUP_UI);
 
     return S_OK;
 }

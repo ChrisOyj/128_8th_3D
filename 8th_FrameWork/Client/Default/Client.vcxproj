@@ -123,7 +123,7 @@
       <AdditionalIncludeDirectories>../Public/;../../Reference/Headers/;../Default/</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -149,8 +149,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../Public/;../../Reference/Headers/;../Default/</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -180,6 +180,7 @@
     <ClInclude Include="..\public\CCamera_Default.h" />
     <ClInclude Include="..\public\CCamera_Free.h" />
     <ClInclude Include="..\public\CComponent_Factory.h" />
+    <ClInclude Include="..\public\CEmpty_GameObject.h" />
     <ClInclude Include="..\public\CFader.h" />
     <ClInclude Include="..\public\CGameObject_Factory.h" />
     <ClInclude Include="..\public\CImGui_Window.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="..\private\CCamera_Default.cpp" />
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
+    <ClCompile Include="..\private\CEmpty_GameObject.cpp" />
     <ClCompile Include="..\Private\CFader.cpp" />
     <ClCompile Include="..\private\CGameObject_Factory.cpp" />
     <ClCompile Include="..\Private\CImGui_Window.cpp" />

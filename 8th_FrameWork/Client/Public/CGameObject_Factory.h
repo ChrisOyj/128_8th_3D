@@ -24,7 +24,7 @@ public:
 
 private:
 	static CGameObject* Create_PrototypeFromJson(const _uint& iGameObjectID);
-	static CGameObject* Create_InstanceFromJson(const json& _json);
+	static CGameObject* Create_InstanceFromJson(const _uint& iGameObjectID, const json& _json);
 
 	static HRESULT Add_ComponentsToGameObject(CGameObject* pGameObject, const json& _ComponentListjson);
 	static HRESULT Add_ChildrenObjectsToGameObject(CGameObject* pGameObject, const json& _ChildrenListjson);

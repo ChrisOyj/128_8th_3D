@@ -44,8 +44,6 @@ HRESULT CUtility_Json::Save_Json(const _tchar* _strPath, json _json)
 	return S_OK;
 }
 
-
-
 _float4 CUtility_Json::Get_VectorFromJson(json _json)
 {
 	if (_json.empty())

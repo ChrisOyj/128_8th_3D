@@ -23,8 +23,12 @@ public:
 public:
 	void		Set_RenderGroup(RENDER_GROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }
 	void		Set_Pass(const _uint& iCurPass) { m_iCurPass = iCurPass; }
-	_float4		Get_WorldPosition();
-	_float4		Get_FinalPos() { return m_vFinalPos; }
+
+	_float4				Get_WorldPosition();
+	_float4				Get_FinalPos() { return m_vFinalPos; }
+	_float4				Get_OffsetPos() { return m_vOffsetPos; }
+	RENDER_GROUP		Get_RenderGroup() { return m_eRenderGroup; }
+	_uint				Get_Pass() { return m_iCurPass; }
 
 public:
 	virtual HRESULT		Initialize_Prototype() override;

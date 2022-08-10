@@ -259,6 +259,11 @@ KEY_STATE CGameInstance::Get_KeyState(KEY _key)
 	return m_pKeyManager->Get_KeyState(_key);
 }
 
+vector<CKey_Manager::tKeyInfo>& CGameInstance::Get_KeyList()
+{
+	return m_pKeyManager->Get_KeyList();
+}
+
 CGameObject* CGameInstance::Get_StaticObj(const _uint& iKeyValue)
 {
 	return m_pObjectManager->Get_StaticObj(iKeyValue);

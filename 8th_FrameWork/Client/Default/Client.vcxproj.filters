@@ -264,6 +264,9 @@
     <ClInclude Include="..\public\CWindow_Select.h">
       <Filter>02. Design\05. ImGui_Manager\ImGui_Window\02. Window_Select</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CEmpty_GameObject.h">
+      <Filter>03. Instances\02. GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -372,6 +375,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\CTestObj.cpp">
       <Filter>03. Instances\02. GameObject\04. Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEmpty_GameObject.cpp">
+      <Filter>03. Instances\02. GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

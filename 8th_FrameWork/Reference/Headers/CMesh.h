@@ -10,6 +10,10 @@ protected:
 	virtual ~CMesh();
 
 public:
+	_uint		Get_MeshType() { return m_iMeshType; }
+	void		Set_MeshType(_uint iMeshType) { m_iMeshType = iMeshType; }
+
+public:
 	// CComponent을(를) 통해 상속됨
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
@@ -37,6 +41,7 @@ protected:
 	_uint							m_iNumVertexBuffers = 0;
 	DXGI_FORMAT						m_eIndexFormat;
 	D3D11_PRIMITIVE_TOPOLOGY		m_eToplogy;
+	_uint							m_iMeshType = 0;
 
 protected:
 	HRESULT Create_VertexBuffer();

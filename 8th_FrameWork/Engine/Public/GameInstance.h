@@ -75,6 +75,7 @@ public: /* For. Time_Manager */
 
 public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);
+	vector<CKey_Manager::tKeyInfo>& Get_KeyList();
 
 public:	/* For. Object_Manager */
 	CGameObject*			Get_StaticObj(const _uint& iKeyValue);

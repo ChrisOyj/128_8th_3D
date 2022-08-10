@@ -12,6 +12,9 @@
 
 #include "GameObject.h"
 
+#include "CUI.h"
+#include "CEmpty_GameObject.h"
+
 #define JSON_GAMEOBJECT_TYPE	"GameObject_Type"
 #define JSON_GAMEOBJECT_COMPONENT_LIST	"Component_List"
 #define JSON_GAMEOBJECT_CHILDREN_LIST	"Children_List"
@@ -22,7 +25,7 @@ CGameObject* CGameObject_Factory::Create_FromJson(const _uint& iID)
 
 	if (!pGameObject)
 	{
-		pGameObject = Create_PrototypeFromJson(iID)->Clone();
+		pGameObject = Create_PrototypeFromJson(iID);
 	}
 
 	if (FAILED(pGameObject->Initialize()))
@@ -70,7 +73,7 @@ CGameObject* CGameObject_Factory::Create_PrototypeFromJson(const _uint& iGameObj
 		return nullptr;
 	}
 
-	pGameObject = Create_InstanceFromJson(GameObjectJson);
+	pGameObject = Create_InstanceFromJson(iGameObjectID, GameObjectJson);
 
 	if (FAILED(CGameInstance::Get_Instance()->Add_GameObject_Prototype(iGameObjectID, pGameObject)))
 		return nullptr;
@@ -79,7 +82,7 @@ CGameObject* CGameObject_Factory::Create_PrototypeFromJson(const _uint& iGameObj
 	return pGameObject->Clone();
 }
 
-CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
+CGameObject* CGameObject_Factory::Create_InstanceFromJson(const _uint& iGameObjectID, const json& _json)
 {
 	GAMEOBJECT_TYPE	eGameObjectType = _json[JSON_GAMEOBJECT_TYPE];
 	CGameObject* pGameObject = nullptr;
@@ -90,6 +93,8 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 		break;
 
 	case Client::OBJ_UI:
+		pGameObject = CEmpty_GameObject::Create();
+		pGameObject->Set_ID(iGameObjectID);
 		break;
 
 	case Client::OBJ_EFFECT:
@@ -102,7 +107,10 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 	if (FAILED(Add_ComponentsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_COMPONENT_LIST])))
 		return nullptr;
 
-	if (FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_CHILDREN_LIST])))
+	auto iter = _json.find(JSON_GAMEOBJECT_CHILDREN_LIST);
+
+	if (iter != _json.end() &&
+		FAILED(Add_ChildrenObjectsToGameObject(pGameObject, _json[JSON_GAMEOBJECT_CHILDREN_LIST])))
 		return nullptr;
 
 	if (FAILED(pGameObject->Initialize_Prototype()))
@@ -111,6 +119,8 @@ CGameObject* CGameObject_Factory::Create_InstanceFromJson(const json& _json)
 		return nullptr;
 	}
 
+	pGameObject->Get_Transform()->Get_Transform().vScale = CUtility_Json::Get_VectorFromJson(_json["vScale"]);
+	pGameObject->Get_Transform()->Get_Transform().matMyWorld = CUtility_Json::Get_MatrixFromJson(_json["WorldMatrix"]);
 
 	return pGameObject;
 }

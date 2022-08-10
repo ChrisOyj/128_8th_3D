@@ -9,15 +9,56 @@
 #include "CUtility_Json.h"
 #include "GameObject.h"
 #include "Texture.h"
-#include "CMesh.h"
+#include "CMesh_Rect.h"
 #include "Renderer.h"
+#include "CFader.h"
+#include "Physics.h"
+#include "CShader.h"
+
+#include "CPrototype_Factory.h"
 
 
 #define JSON_COMPONENT_TYPE	"Component_Type"
-#define JSON_COLLIDER_INFO	"Collider_Info"
-#define JSON_RENDERER_INFO	"Renderer_Info"
-#define JSON_TEXTURE_INFO	"Texture_Info"
-#define JSON_MESH_INFO		"Mesh_Info"
+
+HRESULT CComponent_Factory::Save_Json(const _uint& iID, CComponent* pComponent)
+{
+	COMPONENT_TYPE	eComponentType = (COMPONENT_TYPE)pComponent->Get_ComponentID();
+	json	SaveJson;
+	SaveJson.emplace(JSON_COMPONENT_TYPE, (_uint)eComponentType);
+	SaveJson.emplace("iGroupID", pComponent->Get_GroupID());
+
+	switch (eComponentType)
+	{
+	case Client::COM_TRANSFORM:
+		return E_FAIL;
+		break;
+	case Client::COM_COLLIDER:
+		Save_Collider(pComponent, &SaveJson);
+		break;
+	case Client::COM_RENDERER:
+		Save_Renderer(pComponent, &SaveJson);
+		break;
+	case Client::COM_PHYSICS:
+		Save_Physics(pComponent, &SaveJson);
+		break;
+	case Client::COM_TEXTURE:
+		Save_Texture(pComponent, &SaveJson);
+		break;
+	case Client::COM_SHADER:
+		Save_Shader(pComponent, &SaveJson);
+		break;
+	case Client::COM_FADER:
+		Save_Fader(pComponent, &SaveJson);
+		break;
+	case Client::COM_MESH:
+		Save_Mesh(pComponent, &SaveJson);
+		break;
+	default:
+		break;
+	}
+
+	return CUtility_Json::Save_Json(CUtility_Json::Complete_Path(iID).c_str(), SaveJson);
+}
 
 CComponent* CComponent_Factory::Create_FromJson(const _uint& iID, CGameObject* pOwner)
 {
@@ -25,7 +66,7 @@ CComponent* CComponent_Factory::Create_FromJson(const _uint& iID, CGameObject* p
 
 	if (!pComponent)
 	{
-		pComponent = Create_PrototypeFromJson(iID)->Clone();
+		pComponent = Create_PrototypeFromJson(iID);
 
 		if (!pComponent)
 			return nullptr;
@@ -107,39 +148,93 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 	switch (eComponentID)
 	{
 	case Client::COM_TRANSFORM:
-		pComponent = CTransform::Create(iGroupID);
 		break;
 
 	case Client::COM_COLLIDER:
 	{
-		json ColliderJson = _json[JSON_COLLIDER_INFO];
-		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(ColliderJson["vOffsetPos"]);
+		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(_json["vOffsetPos"]);
 
-		pComponent = CCollider_Sphere::Create(iGroupID, ColliderJson["fRadius"], ColliderJson["iColIndex"], vOffsetPos);
+		pComponent = CCollider_Sphere::Create(iGroupID, _json["fRadius"], _json["iColIndex"], vOffsetPos);
 	}
 
 	break;
 
 	case Client::COM_RENDERER:
 	{
-		json RendererJson = _json[JSON_RENDERER_INFO];
-		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(RendererJson["vOffsetPos"]);
+		_float4 vOffsetPos = CUtility_Json::Get_VectorFromJson(_json["vOffsetPos"]);
 
-		pComponent = CRenderer::Create(iGroupID, RendererJson["eRenderGroup"], RendererJson["iCurPass"], vOffsetPos);
+		pComponent = CRenderer::Create(iGroupID, _json["eRenderGroup"], _json["iCurPass"], vOffsetPos);
 	}
 		break;
 
 	case Client::COM_PHYSICS:
+	{
+		CPhysics* pPhyscis = CPhysics::Create(iGroupID);
+		pPhyscis->Get_Physics().fTurnSpeed = _json["fTurnSpeed"];
+		pPhyscis->Get_Physics().vTurnDir = CUtility_Json::Get_VectorFromJson(_json["vTurnDir"]);
+		pComponent = pPhyscis;
+	}
+
 		break;
 
 	case Client::COM_TEXTURE:
+	{
+		json TexturePathJson = _json["strFilePath"];
+		wstring strFirstFilePath = TexturePathJson[0];
+		CTexture* pTexture = CTexture::Create(iGroupID, strFirstFilePath.c_str(), 1);
+
+		for (_uint i = 1; i < TexturePathJson.size(); ++i)
+		{
+			wstring strFilePath = TexturePathJson[i];
+			pTexture->Add_Texture(strFilePath.c_str());
+		}
+
+		pComponent = pTexture;
+	}
 		break;
 
 	case Client::COM_SHADER:
+	{
+		const D3D11_INPUT_ELEMENT_DESC* pDesc = nullptr;
+		_uint	iNumElement = 0;
+		SHADER_FILE_ID eShaderFileType = (SHADER_FILE_ID)_json["iShaderFileIndex"];
+
+		switch (eShaderFileType)
+		{
+		case SHADER_VTXTEX:
+			pDesc = VTXTEX_DECLARATION::Element;
+			iNumElement = VTXTEX_DECLARATION::iNumElements;
+			break;
+		default:
+			break;
+		}
+
+		CShader* pShader = CShader::Create(iGroupID, eShaderFileType, pDesc, iNumElement);
+		pComponent = pShader;
+	}
 		break;
 
-	case Client::COM_END:
+	case Client::COM_FADER:
+	{
+		FADEDESC	tFadeDesc = CUtility_Json::Get_StructFromJson<FADEDESC>(_json["tFadeDesc"]);
+		CFader* pFader = CFader::Create((COMPONENT_PIPELINE)iGroupID, tFadeDesc);
+		pComponent = pFader;
+	}
 		break;
+
+	case COM_MESH:
+	{
+		MESH_TYPE eMeshType = _json["iMeshType"];
+		switch (eMeshType)
+		{
+		case MESH_RECT:
+			pComponent = CGameInstance::Get_Instance()->Find_Component_Prototype(CPrototype_Factory::DEFAULT_MESH_RECT);
+			break;
+		default:
+			pComponent = nullptr;
+			break;
+		}
+	}
 
 	default:
 		break;
@@ -147,5 +242,114 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 	
 
 	return pComponent;
+}
+
+void CComponent_Factory::Save_Transform(CComponent* pComponent, json* pOut)
+{
+	CTransform* pTransform = dynamic_cast<CTransform*>(pComponent);
+
+	if (!pTransform)
+	{
+		Call_MsgBox(L"Failed to Save_Transform : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("WorldMatrix", pTransform->Get_Transform().matMyWorld.m);
+}
+
+void CComponent_Factory::Save_Collider(CComponent* pComponent, json* pOut)
+{
+}
+
+void CComponent_Factory::Save_Renderer(CComponent* pComponent, json* pOut)
+{
+	CRenderer* pRenderer = dynamic_cast<CRenderer*>(pComponent);
+
+	if (!pRenderer)
+	{
+		Call_MsgBox(L"Failed to Save_Renderer : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("eRenderGroup", (_uint)pRenderer->Get_RenderGroup());
+	pOut->emplace("vOffsetPos", pRenderer->Get_OffsetPos().XMLoad().m128_f32);
+	pOut->emplace("iCurPass", pRenderer->Get_Pass());
+	
+}
+
+void CComponent_Factory::Save_Physics(CComponent* pComponent, json* pOut)
+{
+	CPhysics* pPhysics = dynamic_cast<CPhysics*>(pComponent);
+
+	if (!pPhysics)
+	{
+		Call_MsgBox(L"Failed to Save_Physics : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("vTurnDir", pPhysics->Get_Physics().vTurnDir.XMLoad().m128_f32);
+	pOut->emplace("fTurnSpeed", pPhysics->Get_Physics().fTurnSpeed);
+}
+
+void CComponent_Factory::Save_Texture(CComponent* pComponent, json* pOut)
+{
+	CTexture* pTexture = dynamic_cast<CTexture*>(pComponent);
+
+	if (!pTexture)
+	{
+		Call_MsgBox(L"Failed to Save_Texture : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("iCurTextureIndex", pTexture->Get_CurTextureIndex());
+
+	json TextureFilePathJson;
+	vector<TEXTUREDESC>& vecTextures = pTexture->Get_vecTexture();
+	for (_uint i = 1; i < vecTextures.size(); ++i)
+	{
+		TextureFilePathJson.push_back(vecTextures[i].strFilePath);
+	}
+	pOut->emplace("strFilePath", TextureFilePathJson);
+}
+
+void CComponent_Factory::Save_Shader(CComponent* pComponent, json* pOut)
+{
+	CShader* pShdaer = dynamic_cast<CShader*>(pComponent);
+
+	if (!pShdaer)
+	{
+		Call_MsgBox(L"Failed to Save_Shader : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("iShaderFileIndex", pShdaer->Get_ShaderFileIndex());
+}
+
+void CComponent_Factory::Save_Fader(CComponent* pComponent, json* pOut)
+{
+	CFader* pFader = dynamic_cast<CFader*>(pComponent);
+
+	if (!pFader)
+	{
+		Call_MsgBox(L"Failed to Save_Fader : CComponent_Factory");
+		return;
+	}
+
+	FADEDESC& tFadeDesc = pFader->Get_FadeDesc();
+	CUtility_Json::Save_Struct("tFadeDesc", tFadeDesc, pOut);
+
+}
+
+void CComponent_Factory::Save_Mesh(CComponent* pComponent, json* pOut)
+{
+	CMesh* pMesh = dynamic_cast<CMesh*>(pComponent);
+
+	if (!pMesh)
+	{
+		Call_MsgBox(L"Failed to Save_Mesh : CComponent_Factory");
+		return;
+	}
+
+	pOut->emplace("iMeshType", pMesh->Get_MeshType());
 }
 

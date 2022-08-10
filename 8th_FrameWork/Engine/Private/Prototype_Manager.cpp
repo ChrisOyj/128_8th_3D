@@ -35,7 +35,7 @@ CGameObject* CPrototype_Manager::Clone_GameObject(const _uint& _iID)
 
 	if (!pPrototype)
 	{
-		Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
+		//Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
 		return nullptr;
 	}
 
@@ -48,7 +48,7 @@ CComponent* CPrototype_Manager::Clone_Component(const _uint& _iID)
 
 	if (!pPrototype)
 	{
-		Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
+		//Call_MsgBox(L"failed to find Prototype : CPrototype_Manager");
 		return nullptr;
 	}
 
@@ -73,12 +73,14 @@ HRESULT CPrototype_Manager::Add_GameObject_Prototype(const _uint& _iID, CGameObj
 HRESULT CPrototype_Manager::Add_Component_Prototype(const _uint& _iID, CComponent* pComponent)
 {
 	CComponent* pPrototype = Find_Component_Prototype(_iID);
-
 	if (pPrototype)
 	{
 		Call_MsgBox(L"failed to Add Component : CPrototype_Manager");
 		return E_FAIL;
 	}
+
+	if (Find_Component_Prototype(pComponent))
+		return S_OK;
 
 	m_Component_Prototypes.emplace(_iID, pComponent);
 
@@ -119,6 +121,17 @@ CComponent* CPrototype_Manager::Find_Component_Prototype(const _uint& _iID)
 		return nullptr;
 
 	return iter->second;
+}
+
+_bool CPrototype_Manager::Find_Component_Prototype(CComponent* pComponent)
+{
+	for (auto iter = m_Component_Prototypes.begin(); iter != m_Component_Prototypes.end(); ++iter)
+	{
+		if (iter->second == pComponent)
+			return false;
+	}
+
+	return true;
 }
 
 void CPrototype_Manager::Release()

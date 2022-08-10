@@ -28,6 +28,9 @@ public:
 		const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 public:
+	_uint	Get_ShaderFileIndex() { return m_iShaderFileIdx; }
+
+public:
 	virtual HRESULT SetUp_ShaderResources(const _uint& iPassIndex, CTexture* pTextureCom);
 
 public:
@@ -49,6 +52,8 @@ private:
 
 	vector<PASSDESC>				m_Passes;
 	typedef vector<PASSDESC>		PASSES;
+
+	_uint							m_iShaderFileIdx = 0;
 
 private:
 	/* Non_Update_Component */

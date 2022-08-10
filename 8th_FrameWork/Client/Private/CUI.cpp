@@ -71,6 +71,7 @@ HRESULT CUI::SetUp_Components(const _float4& vStartPosition)
 	Add_Component(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_UI_RENDERER, this));
 	Add_Component(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_TEXTURE, this));
 	Add_Component(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_FADER, this));
+	Add_Component(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_PHYSICS, this));
 
     return S_OK;
 }

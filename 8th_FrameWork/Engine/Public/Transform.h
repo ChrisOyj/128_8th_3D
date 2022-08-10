@@ -20,7 +20,7 @@ public:
 	static CTransform* Create(_uint iGroupID);
 
 public:
-	const TRANSFORM&	Get_Transform()		{ return m_tTransform;}
+	TRANSFORM&	Get_Transform()		{ return m_tTransform;}
 	_float4x4			Get_WorldMatrix(const _byte& matrixFlag = 0);
 	_float4				Get_World(WORLD eType);
 	_float4				Get_MyWorld(WORLD eType);

@@ -9,6 +9,8 @@ using json = nlohmann::json;
 
 #include "Imgui/imgui.h"
 
+#include <filesystem>
+
 
 namespace Client
 {
@@ -25,6 +27,10 @@ namespace Client
 	static const unsigned int g_iMaxGameObjectID = 9999;
 	static const unsigned int g_iMinComponentID = 10000;
 	static const unsigned int g_iMaxComponentID = 99999;
+
+	static unsigned int g_iCurLevelID = 0;
+	static unsigned int g_iCurGameObjectID = 100;
+	static unsigned int g_iCurComponentID = 10000;
 }
 
 #include "Client_Enum.h"

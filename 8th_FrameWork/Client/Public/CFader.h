@@ -16,6 +16,7 @@ BEGIN(Client)
 class CFader
 	: public CComponent
 {
+public:
 	enum FADE_STATE
 	{
 		FADEIN,
@@ -32,6 +33,9 @@ private:
 
 public:
 	static CFader* Create(COMPONENT_PIPELINE	ePipeLine, const FADEDESC& tFadeDesc);
+
+public:
+	FADEDESC& Get_FadeDesc() { return m_tFadeDesc; }
 
 public:
 	virtual void	Set_ShaderResource(CShader* pShader, const char* pConstantName) override;

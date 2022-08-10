@@ -56,7 +56,7 @@ namespace Client
 
 	enum SHADER_FILE_ID
 	{
-		SHADER_DEFAULT,
+		SHADER_VTXTEX,
 		SHADER_END
 	};
 
@@ -66,6 +66,12 @@ namespace Client
 		VTXTEX_PASS_ALPHA,
 		VTXTEX_PASS_LOADINGBAR,
 		VTXTEX_PASS_END,
+	};
+
+	enum MESH_TYPE
+	{
+		MESH_RECT,
+		MESH_END,
 	};
 }
 

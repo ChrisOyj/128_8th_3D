@@ -12,7 +12,7 @@ CTexture::CTexture(_uint iGroupIdx)
 
 CTexture::~CTexture()
 {
-	
+
 }
 CTexture* CTexture::Create(_uint iGroupIdx, const _tchar* pTextureFilePath, const _uint& iNumTextures)
 {
@@ -40,7 +40,52 @@ HRESULT CTexture::Set_ShaderResourceView(CShader* pShader, const char* pConstant
 	if (m_iCurTextureIndex >= m_SRVs.size())
 		return E_FAIL;
 
-	return pShader->Set_ShaderResourceView(pConstantName, m_SRVs[m_iCurTextureIndex]);
+	return pShader->Set_ShaderResourceView(pConstantName, m_SRVs[m_iCurTextureIndex].pSRV);
+}
+
+HRESULT CTexture::Add_Texture(const _tchar* pTextureFilePath)
+{
+	TEXTUREDESC	tDesc;
+
+	_tchar		szTextureFilePath[MAX_PATH] = TEXT("");
+	ComPtr<ID3D11ShaderResourceView> pSRV = nullptr;
+
+	wsprintf(szTextureFilePath, pTextureFilePath);
+
+	_tchar			szExt[MAX_PATH] = TEXT("");
+
+	_wsplitpath_s(szTextureFilePath, nullptr, 0, nullptr, 0, nullptr, 0, szExt, MAX_PATH);
+
+	HRESULT		hr = 0;
+
+	if (!lstrcmp(szExt, TEXT(".dds")))
+		hr = DirectX::CreateDDSTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
+
+	else
+		hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
+
+	if (FAILED(hr))
+		return E_FAIL;
+
+	tDesc.pSRV = pSRV;
+	tDesc.strFilePath = szTextureFilePath;
+
+	m_SRVs.push_back(tDesc);
+
+	return S_OK;
+}
+
+void CTexture::Pop_Texture()
+{
+	if (m_SRVs.size() == 1)
+		return;
+
+	if (m_iCurTextureIndex == m_SRVs.size() - 1)
+	{
+		m_iCurTextureIndex--;
+	}
+
+	m_SRVs.pop_back();
 }
 
 _bool CTexture::Next_Texture()
@@ -89,6 +134,8 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 
 	for (_uint i = 0; i < iNumTextures; ++i)
 	{
+		TEXTUREDESC	tDesc;
+
 		ComPtr<ID3D11ShaderResourceView> pSRV = nullptr;
 
 		wsprintf(szTextureFilePath, pTextureFilePath, i);
@@ -108,7 +155,10 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 		if (FAILED(hr))
 			return E_FAIL;
 
-		m_SRVs.push_back(pSRV);
+		tDesc.pSRV = pSRV;
+		tDesc.strFilePath = szTextureFilePath;
+
+		m_SRVs.push_back(tDesc);
 
 	}
 

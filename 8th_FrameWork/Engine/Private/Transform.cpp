@@ -49,7 +49,7 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 		(*((_float4*)&WorldMat.m[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
 	}
 
-	if (matrixFlag & MATRIX_TYPEENTITY)
+	if (matrixFlag & MATRIX_IDENTITY)
 	{
 		WorldMat.Identity();
 	}

@@ -51,7 +51,8 @@ public:/*Get, Set*/
 	CGameObject*		Get_RootParent();
 	CTransform*			Get_Transform() { return m_pTransform; }
 	CCollider*			Get_Collider() { return m_pCollider; }
-	list<CGameObject*>&	Get_Children() { return m_pChildren; }
+	list<CGameObject*>& Get_Children() { return m_pChildren; }
+	list<CComponent*>&	Get_ComponentsList() { return m_pComponents; }
 	_uint				Get_ID() { return m_iID; }
 	_uint				Get_GroupIndex() { return m_iGroupIndex; }
 

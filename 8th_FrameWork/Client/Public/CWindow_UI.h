@@ -35,6 +35,11 @@ private:
 	vector<UI_ITEM>		m_vecUI;
 	_uint				m_iCurrentIdx = 9999;
 	_uint				m_iUIID = 100;
+	wstring				m_CurSelectedTextureFilePath;
+
+private:
+	HRESULT	Save_UI();
+	HRESULT	Load_UI();
 
 private:
 	void	Create_Ortho();
@@ -49,6 +54,11 @@ private:
 	void	Show_Texture(_uint iIndex);
 	void	Show_Shader(_uint iIndex);
 	void	Show_Fader(_uint iIndex);
+
+private:
+	_uint	Check_KeyInput();
+
+	void	Read_Folder(const char* pFolderPath);
 
 
 };

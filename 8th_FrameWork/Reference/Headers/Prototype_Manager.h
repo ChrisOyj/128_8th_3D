@@ -42,6 +42,10 @@ private:
 	map<_uint, CComponent*>		m_Component_Prototypes;
 
 private:
+	_bool Find_Component_Prototype(CComponent* pComponent);
+
+
+private:
 	void			Release();
 
 	friend class CLevel_Manager;

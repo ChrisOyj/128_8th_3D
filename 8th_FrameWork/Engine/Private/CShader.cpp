@@ -122,6 +122,7 @@ void CShader::Release()
 HRESULT CShader::SetUp_Shader(const _uint& iShaderFileIdx, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement)
 {
 	m_pEffect = CShader_Manager::Get_Instance()->Get_EffectFile(iShaderFileIdx);
+	m_iShaderFileIdx = iShaderFileIdx;
 
 	if (!m_pEffect)
 		return E_FAIL;

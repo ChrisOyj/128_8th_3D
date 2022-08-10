@@ -43,7 +43,7 @@ namespace Client
 			break;
 		}
 
-		if (minID >= iID || maxID <= iID)
+		if (minID > iID || maxID <= iID)
 			return false;
 
 		return true;

@@ -7,17 +7,15 @@ END
 
 BEGIN(Client)
 
-class CUI 
+class CEmpty_GameObject
 	: public CGameObject
 {
-	DECLARE_PROTOTYPE(CUI);
+	DECLARE_PROTOTYPE(CEmpty_GameObject);
+	DECLARE_GAMEOBJECT(CEmpty_GameObject);
 
 protected:
-	CUI();
-	virtual ~CUI();
-
-public:
-	static CUI* Create(const _uint& iID, const _float4&	vStartPosition = _float4(g_iWinCX*0.5f, g_iWinCY*0.5f, 0.f, 1.f));
+	CEmpty_GameObject();
+	virtual ~CEmpty_GameObject();
 
 public:
 	// CGameObject을(를) 통해 상속됨
@@ -25,9 +23,6 @@ public:
 	virtual HRESULT Initialize() override;
 	virtual void OnEnable() override;
 	virtual void OnDisable() override;
-
-private:
-	HRESULT	SetUp_Components(const _float4& vStartPosition);
 };
 
 END

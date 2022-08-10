@@ -63,7 +63,7 @@ _float CFunctor::Get_DegreeFromDot(const _float4& V1, const _float4& V2)
 	_float fTheta = acosf(fCosTheta);
 
 	if (vLeft.y < 0)
-		fTheta = (PI - fTheta);
+		fTheta *= -1.f;
 
 	_float fDegree = XMConvertToDegrees(fTheta);
 

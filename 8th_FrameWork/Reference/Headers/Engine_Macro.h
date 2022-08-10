@@ -35,7 +35,7 @@
 
 #define MATRIX_NOSCALE				0x001
 #define MATRIX_NOTURN				0x002
-#define MATRIX_TYPEENTITY			    0x004
+#define MATRIX_IDENTITY			    0x004
 #define MARTIX_NOTRANS				0x008
 
 #define MATRIX_DEFAULT				0x00f

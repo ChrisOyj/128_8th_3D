@@ -26,7 +26,7 @@ HRESULT CTestObj::Initialize_Prototype()
         return E_FAIL;
     Add_Component(CComponent_Factory::Create_FromPrototype(TEXTURE_PROTOTYPE_ID, this));
 
-    CShader* pShader = CShader::Create(CP_END, SHADER_DEFAULT, VTXTEX_DECLARATION::Element,
+    CShader* pShader = CShader::Create(CP_END, SHADER_VTXTEX, VTXTEX_DECLARATION::Element,
         VTXTEX_DECLARATION::iNumElements);
     if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(100005, pShader)))
         return E_FAIL;
