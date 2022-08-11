@@ -38,8 +38,8 @@ public:
 	void	Delete_Component_Prototypes();
 
 private:
-	map<_uint, CGameObject*>	m_GameObject_Prototypes;
-	map<_uint, CComponent*>		m_Component_Prototypes;
+	map<_hashcode, CGameObject*>	m_GameObject_Prototypes;
+	map<_hashcode, CComponent*>		m_Component_Prototypes;
 
 private:
 	_bool Find_Component_Prototype(CComponent* pComponent);

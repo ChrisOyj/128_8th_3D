@@ -13,8 +13,12 @@
 #include "CCamera_Default.h"
 
 #include "CGameObject_Factory.h"
+#include "CPrototype_Factory.h"
 
 #include "ImGui_Manager.h"
+
+#include "Transform.h"
+
 
 IMPLEMENT_SINGLETON(CMainApp);
 
@@ -34,11 +38,13 @@ HRESULT CMainApp::Initialize()
 	if (nullptr == m_pGameInstance)
 		return E_FAIL;
 
-
 	if (FAILED(SetUp_Engine()))
 		return E_FAIL;
 
 	if (FAILED(SetUp_ShaderFiles()))
+		return E_FAIL;
+
+	if (FAILED(CPrototype_Factory::SetUp_DefaultComponents()))
 		return E_FAIL;
 
 	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
@@ -50,27 +56,28 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(SetUp_Statics()))
 		return E_FAIL;
 
-#ifdef _DEBUG
-	if (FAILED(CImGui_Manager::Get_Instance()->Initialize()))
+	if (FAILED(CLoading_Manager::Get_Instance()->Reserve_Load_Level(LEVEL_UNITY)))
 		return E_FAIL;
-#endif
 
-	CLoading_Manager::Get_Instance()->Load_Level(LEVEL_UNITY);
+	if (FAILED(SetUp_CurID()))
+		return E_FAIL;
 
 	return S_OK;
 }
 
 HRESULT CMainApp::Progress()
 {
+	if (FAILED(CLoading_Manager::Get_Instance()->Load_Level()))
+	{
+		Call_MsgBox(L"Failed to Load_Level : CLoading_Manager");
+		return E_FAIL;
+	}
+
 	if (FAILED(m_pGameInstance->Tick_Engine()))
 	{
 		Call_MsgBox(L"Failed to Tick_Engine : CMainApp");
 		return E_FAIL;
 	}
-
-#ifdef _DEBUG
-	CImGui_Manager::Get_Instance()->Tick();
-#endif
 
 	if (FAILED(Render()))
 	{
@@ -93,11 +100,6 @@ HRESULT CMainApp::Render()
 
 	if (FAILED(m_pGameInstance->Render_Engine()))
 		return E_FAIL;
-
-#ifdef _DEBUG
-	if (FAILED(CImGui_Manager::Get_Instance()->Render()))
-		return E_FAIL;
-#endif
 
 	if (FAILED(m_pGameInstance->Present()))
 		return E_FAIL;
@@ -171,5 +173,51 @@ HRESULT CMainApp::SetUp_ShaderFiles()
 	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxTex.hlsl")))
 		return E_FAIL;
 
+	return S_OK;
+}
+
+HRESULT CMainApp::SetUp_CurID()
+{
+	g_iCurLevelID = g_iMinLevelID;
+	g_iCurUIID = g_iMinUIID;
+	g_iCurGameObjectID = g_iMinGameObjectID;
+	g_iCurComponentID = g_iMinComponentID;
+
+	for (filesystem::directory_iterator FileIter("../bin/Json");
+		FileIter != filesystem::end(FileIter); ++FileIter)
+	{
+		const filesystem::directory_entry& entry = *FileIter;
+
+		wstring wstrPath = entry.path().relative_path();
+		string strFullPath;
+		strFullPath.assign(wstrPath.begin(), wstrPath.end());
+
+		_int iFind = (_int)strFullPath.rfind("\\") + 1;
+		string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
+
+		_int iFind2 = (_int)strFileName.find(".");
+		strFileName = strFileName.substr(0, iFind2);
+
+		_uint iFileNum = stoi(strFileName);
+		_uint iNewID = iFileNum + 1;
+
+		if (Safe_CheckID(iFileNum, ID_COMPONENT))
+		{
+			g_iCurComponentID = max(g_iCurComponentID, iNewID);
+
+		}
+		else if (Safe_CheckID(iFileNum, ID_MESHGAMEOBJECT))
+		{
+			g_iCurGameObjectID = max(g_iCurGameObjectID, iNewID);
+		}
+		else if (Safe_CheckID(iFileNum, ID_UI))
+		{
+			g_iCurUIID = max(g_iCurUIID, iNewID);
+		}
+		else
+		{
+			g_iCurLevelID = max(g_iCurLevelID, iNewID);
+		}
+	}
 	return S_OK;
 }

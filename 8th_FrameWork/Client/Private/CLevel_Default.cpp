@@ -47,23 +47,21 @@ HRESULT CLevel_Default::Initialize()
     }
 
     //생성해야하는 오브젝트들의 키를 모두 저장한다.
-    for (_uint i = 0; i < LevelJson.size(); ++i)
+    for (_uint i = 0; i < LevelJson["GameObjects"].size(); ++i)
     {
-        json    GameObjectDataJson = LevelJson["GameObjects"][i];
-        GameObejctData  tData;
-        tData.iPrototypeID = GameObjectDataJson["GameObject_ID"];
-        tData.eGroupType = GameObjectDataJson["eGroupType"];
-        tData.vStartPosition = CUtility_Json::Get_VectorFromJson(GameObjectDataJson["vStartPosition"]);
-        tData.vStartLook = CUtility_Json::Get_VectorFromJson(GameObjectDataJson["vStartLook"]);
 
-        if (!Safe_CheckID(tData.iPrototypeID, ID_LEVEL))
+        if (!Safe_CheckID(LevelJson["GameObjects"][i], ID_GAMEOBJECT))
         {
             return E_FAIL;
         }
 
-        m_tGameObjectDataList.push_back(tData);
+        GameObjectData  tData;
 
+        tData.iPrototypeID = LevelJson["GameObjects"][i];
+        tData.eGroupType = LevelJson["GroupType"][i];
 
+        m_vecGameObjectData.push_back(tData);
+        
         m_fLoadingFinish = (_float)(i+1) / (_float)(LevelJson.size());
     }
 
@@ -73,9 +71,9 @@ HRESULT CLevel_Default::Initialize()
 HRESULT CLevel_Default::Enter()
 {
     //저장해놓은 오브젝트들의 키에 맞춰 모두 생성한다.
-    for (auto& tData : m_tGameObjectDataList)
+    for (_uint i = 0; i < m_vecGameObjectData.size(); ++i)
     {
-        Create_GameObjectInLevel(tData);
+        Create_GameObjectInLevel(m_vecGameObjectData[i]);
     }
 
 
@@ -102,26 +100,24 @@ HRESULT CLevel_Default::Exit()
     return S_OK;
 }
 
-HRESULT CLevel_Default::Create_GameObjectInLevel(const GameObejctData& tData)
+HRESULT CLevel_Default::Create_GameObjectInLevel(const GameObjectData& tData)
 {
     CGameObject* pGameObject = nullptr;
+    _uint iID = tData.iPrototypeID;
 
-    if (!Safe_CheckID(tData.iPrototypeID, ID_GAMEOBJECT))
+    if (!Safe_CheckID(iID, ID_GAMEOBJECT))
     {
-        Call_MsgBox_Index(L"Out of Range GameObject Prototype ID", tData.iPrototypeID);
+        Call_MsgBox_Index(L"Out of Range GameObject Prototype ID", iID);
         return E_FAIL;
     }
 
-    pGameObject = CGameObject_Factory::Create_FromJson(tData.iPrototypeID);
+    pGameObject = CGameObject_Factory::Create_FromJson(iID);
 
     if (!pGameObject)
     {
-        Call_MsgBox_Index(L"Failed to Create_GameObjectInLevel : CLevel_Default", tData.iPrototypeID);
+        Call_MsgBox_Index(L"Failed to Create_GameObjectInLevel : CLevel_Default", iID);
         return E_FAIL;
     }
-
-    pGameObject->Get_Transform()->Set_World(WORLD_POS, tData.vStartPosition);
-    pGameObject->Get_Transform()->Set_Look(tData.vStartLook);
     
     if (tData.eGroupType == GROUP_STATIC)
     {

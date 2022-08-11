@@ -4,6 +4,7 @@
 #include "CLevel_Loading.h"
 #include "CLevel_Default.h"
 #include "CLevel_Unity.h"
+#include "CLevel_Logo.h"
 #include "GameInstance.h"
 
 #include "CShader.h"
@@ -43,9 +44,17 @@ HRESULT CLoading_Manager::Initialize()
 
 	m_arrLevels[LEVEL_LOADING] = CLevel_Loading::Create();
 	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
+	//m_arrLevels[LEVEL_LOGO] = CLevel_Logo::Create();
 
-	/*for (_uint i = LEVEL_LOGO; i < LEVEL_END; ++i)
+	for (_uint i = LEVEL_MAINMENU; i < LEVEL_END; ++i)
 	{
+		//if (i > LEVEL_MAINMENU)
+		{
+			m_arrLevels[i] = nullptr;
+			continue;
+		}
+
+
 		m_arrLevels[i] = CLevel_Default::Create((LEVEL_TYPE_CLIENT)i);
 
 		if (!m_arrLevels[i])
@@ -53,21 +62,35 @@ HRESULT CLoading_Manager::Initialize()
 			Call_MsgBox_Index(L"Failed to Create Level : CLoading_Manager", i);
 			return E_FAIL;
 		}
-	}*/
+
+	}
 
 
 	return S_OK;
 }
 
-HRESULT CLoading_Manager::Load_Level(LEVEL_TYPE_CLIENT	eLevelID)
+HRESULT CLoading_Manager::Reserve_Load_Level(LEVEL_TYPE_CLIENT eLevelID)
 {
-	if (eLevelID < 0 || eLevelID > LEVEL_END)
+	if (eLevelID < 0 || eLevelID >= LEVEL_END)
 	{
 		Call_MsgBox_Index(L"Out of Range in Load_Level : CLoading_Manager", eLevelID);
 		return E_FAIL;
 	}
-	/* Delete all Objects except Statics */
 
+	m_eLoadID = eLevelID;
+	m_bReservation = true;
+
+	return S_OK;
+}
+
+HRESULT CLoading_Manager::Load_Level()
+{
+	if (!m_bReservation)
+		return S_OK;
+
+	m_bReservation = false;
+
+	/* Delete all Objects except Statics */
 	for (_uint i = 0; i < GR_END; ++i)
 	{
 		CGameInstance::Get_Instance()->Delete_Objects(i);
@@ -77,7 +100,6 @@ HRESULT CLoading_Manager::Load_Level(LEVEL_TYPE_CLIENT	eLevelID)
 	//CGameInstance::Get_Instance()->Delete_GameObject_Prototypes();
 
 	m_bFinish = false;
-	m_eLoadID = eLevelID;
 	//static_cast<CLevel_Loading*>(m_arrLevels[LEVEL_LOADING])->Set_NextLevel(eLevelID);
 	CHANGE_LEVEL(m_arrLevels[LEVEL_LOADING]);
 
@@ -116,10 +138,9 @@ void CLoading_Manager::Release()
 		continue;
 	}
 
-	for (_uint i = 0; i < LEVEL_LOGO; ++i)
+	for (_uint i = 0; i < LEVEL_END; ++i)
 	{
-		m_arrLevels[i]->Destroy_Instance();
-		m_arrLevels[i] = nullptr;
+		SAFE_DESTROY(m_arrLevels[i]);
 	}
 
 	

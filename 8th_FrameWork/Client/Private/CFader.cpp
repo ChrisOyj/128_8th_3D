@@ -34,7 +34,12 @@ CFader* CFader::Create(COMPONENT_PIPELINE ePipeLine, const FADEDESC& tFadeDesc)
 
 void CFader::Set_ShaderResource(CShader* pShader, const char* pConstantName)
 {
-    pShader->Set_RawValue(pConstantName, &m_tFadeDesc.fAlpha, sizeof(_float));
+    _float fValue = 1.f;
+
+    if (!Is_Disable())
+        fValue = m_tFadeDesc.fAlpha;
+
+    pShader->Set_RawValue(pConstantName, &fValue, sizeof(_float));
 }
 
 HRESULT CFader::Initialize_Prototype()
@@ -90,6 +95,11 @@ void CFader::OnDisable()
 {
     __super::OnDisable();
 
+    //REMOVE_SHADERRESOURCES(CFader, "g_fAlpha");
+}
+
+void CFader::OnDead()
+{
     REMOVE_SHADERRESOURCES(CFader, "g_fAlpha");
 }
 
@@ -166,7 +176,7 @@ void CFader::OnFadeOut_Finish()
             Change_State(FADEIN);
         }
         else
-            DELETE_GAMEOBJECT(m_pOwner);
+            DISABLE_GAMEOBJECT(m_pOwner);
     }
         break;
 

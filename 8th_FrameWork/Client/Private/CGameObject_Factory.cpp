@@ -34,6 +34,8 @@ CGameObject* CGameObject_Factory::Create_FromJson(const _uint& iID)
 		return nullptr;
 	}
 
+	pGameObject->m_iSaveID = iID;
+
 	return pGameObject;
 }
 
@@ -49,6 +51,8 @@ CGameObject* CGameObject_Factory::Create_FromPrototype(const _uint& iID)
 		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
 		return nullptr;
 	}
+
+	pGameObject->m_iSaveID = iID;
 
 	return pGameObject;
 }

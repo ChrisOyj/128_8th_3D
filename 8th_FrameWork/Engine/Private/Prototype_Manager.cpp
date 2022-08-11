@@ -128,10 +128,10 @@ _bool CPrototype_Manager::Find_Component_Prototype(CComponent* pComponent)
 	for (auto iter = m_Component_Prototypes.begin(); iter != m_Component_Prototypes.end(); ++iter)
 	{
 		if (iter->second == pComponent)
-			return false;
+			return true;
 	}
 
-	return true;
+	return false;
 }
 
 void CPrototype_Manager::Release()

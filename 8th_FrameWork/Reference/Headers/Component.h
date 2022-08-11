@@ -7,6 +7,9 @@ class CGameObject;
 
 class ENGINE_DLL CComponent abstract
 {
+public:
+	_uint					m_iSaveID = 0;
+
 	friend class CEvent_Manager;
 	friend class CGameObject;
 	friend class CPrototype_Manager;
@@ -46,6 +49,7 @@ public:
 
 	virtual void		OnPickingEvent(const _float4& vPickedPos, const _float4& vPickedNormal = { 0.f,0.f,0.f }) {}
 	virtual void		OnTimerEvent(const _uint& iEventNum) {}
+	virtual void		OnDead() {}
 
 public:
 	virtual void		Set_ShaderResource(class CShader* pShader, const char* pConstantName) {}
@@ -67,7 +71,7 @@ private:
 	_bool				m_bAlive = true;
 
 private:
-	void	Set_Dead() { m_bAlive = false; }
+	void	Set_Dead() { if (m_bAlive)OnDead(); m_bAlive = false; }
 	void	Set_Enable(_bool bEnable);
 	void	Destroy_Instance() { delete this; }
 

@@ -50,6 +50,7 @@ HRESULT CWindow_UI::Initialize()
 	m_bEnable = false;
 	SetUp_ImGuiDESC(typeid(CWindow_UI).name(), ImVec2(350.f, 600.f), window_flags);
 
+
 	return S_OK;
 }
 
@@ -62,18 +63,255 @@ HRESULT CWindow_UI::Render()
 	if (FAILED(__super::Begin()))
 		return E_FAIL;
 
-	if (ImGui::Button("SAVE", ImVec2(120.f, 20.f)))
+	if (ImGui::BeginTabBar("GROUP"))
 	{
-		if (FAILED(Save_UI()))
+		if (ImGui::BeginTabItem("LEVEL"))
 		{
-			Call_MsgBox(L"Failed to Save_UI");
+			Show_LevelTab();
+
+			ImGui::EndTabItem();
 		}
-		else
+
+		if (ImGui::BeginTabItem("UI"))
 		{
-			Call_MsgBox(L"Succeeded to Save_UI");
+			Show_UITab();
+
+			ImGui::EndTabItem();
+		}
+
+
+		ImGui::EndTabBar();
+	}
+
+
+
+	__super::End();
+
+	return S_OK;
+}
+
+HRESULT CWindow_UI::Save_Level()
+{
+	json LevelJson;
+	vector<_uint> vecGameObjectID;
+	vector<_uint> vecGroupType;
+
+	_uint SaveLevelID = m_vecLevel[m_iCurrentLevelIdx].iLevelID;
+
+	if (SUCCEEDED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(SaveLevelID).c_str(), &LevelJson)))
+	{
+		for (_uint i = 0; i < LevelJson["GameObjects"].size(); ++i)
+		{
+			vecGameObjectID.push_back(LevelJson["GameObjects"][i]);
+			vecGroupType.push_back(GROUP_UI);
+			Save_UI(i);
+		}
+
+		for (_uint i = LevelJson["GameObjects"].size(); i < m_vecUI.size(); ++i)
+		{
+			vecGameObjectID.push_back(m_vecUI[i].iGameObjectID);
+			vecGroupType.push_back(GROUP_UI);
+			Save_UI(i);
+		}
+	}
+	else
+	{
+		for (_uint i = 0; i < m_vecUI.size(); ++i)
+		{
+			vecGameObjectID.push_back(m_vecUI[i].iGameObjectID);
+			vecGroupType.push_back(GROUP_UI);
+			Save_UI(i);
 		}
 	}
 
+	
+
+	json SaveJson;
+	SaveJson.emplace("GameObjects", vecGameObjectID);
+	SaveJson.emplace("GroupType", vecGroupType);
+
+	if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(SaveLevelID).c_str(), SaveJson)))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CWindow_UI::Save_UI(_uint iIndex)
+{
+	json	UIjson;
+	CGameObject* pUI = m_vecUI[iIndex].pUI;
+	vector<_uint>	vecComponents;
+	list<CComponent*>& ComponentList = pUI->Get_ComponentsList();
+	TRANSFORM& tTransform = pUI->Get_Transform()->Get_Transform();
+
+	for (auto& pComponent : ComponentList)
+	{
+		if (pComponent == pUI->Get_Transform())
+			continue;
+
+		if (SUCCEEDED(CComponent_Factory::Save_Json(g_iCurComponentID, pComponent)))
+		{
+			vecComponents.push_back(g_iCurComponentID++);
+		}
+		else
+		{
+			vecComponents.push_back(pComponent->m_iSaveID);
+		}
+	}
+
+	UIjson.emplace("GameObject_Type", OBJ_UI);
+	UIjson.emplace("Component_List", vecComponents);
+	UIjson.emplace("WorldMatrix", tTransform.matMyWorld.m);
+	UIjson.emplace("vScale", tTransform.vScale.XMLoad().m128_f32);
+
+	if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(m_vecUI[iIndex].iGameObjectID).c_str(), UIjson)))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CWindow_UI::Load_Levels()
+{
+	m_vecLevel.clear();
+
+	for (filesystem::directory_iterator FileIter("../bin/Json");
+		FileIter != filesystem::end(FileIter); ++FileIter)
+	{
+		const filesystem::directory_entry& entry = *FileIter;
+
+		wstring wstrPath = entry.path().relative_path();
+		string strFullPath;
+		strFullPath.assign(wstrPath.begin(), wstrPath.end());
+
+		_int iFind = (_int)strFullPath.rfind("\\") + 1;
+		string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
+
+		_int iFind2 = (_int)strFileName.find(".");
+		strFileName = strFileName.substr(0, iFind2);
+
+		_uint iFileNum = stoi(strFileName);
+
+		if (Safe_CheckID(iFileNum, ID_LEVEL))
+		{
+			LEVEL_ITEM tItem;
+			tItem.iLevelID = iFileNum;
+			m_vecLevel.push_back(tItem);
+		}
+	}
+
+
+	return S_OK;
+}
+
+HRESULT CWindow_UI::Load_UI()
+{
+	json LevelJson;
+	if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(m_vecLevel[m_iCurrentLevelIdx].iLevelID).c_str(), &LevelJson)))
+		return S_OK;
+
+	for (_uint i = 0; i < LevelJson["GameObjects"].size(); ++i)
+	{
+		if (!Safe_CheckID(LevelJson["GameObjects"][i], ID_UI))
+			break;
+
+		CGameObject* pGameObject = CGameObject_Factory::Create_FromJson(LevelJson["GameObjects"][i]);
+
+		if (!pGameObject)
+			return E_FAIL;
+
+		CREATE_GAMEOBJECT(pGameObject, GROUP_UI);
+		//g_iCurUIID = LevelJson["GameObjects"][i] + 1;
+		//g_iCurComponentID = pGameObject->Get_ComponentsList().back()->m_iSaveID + 1;
+
+		UI_ITEM	tItem;
+		tItem.bOrtho = false;
+		tItem.bSelected = false;
+		tItem.iGameObjectID = LevelJson["GameObjects"][i];
+		tItem.pUI = pGameObject;
+
+		m_vecUI.push_back(tItem);
+	}
+
+	return S_OK;
+}
+
+void CWindow_UI::Show_LevelTab()
+{
+	if (ImGui::Button("Add_Level"))
+	{
+		LEVEL_ITEM	tItem;
+		tItem.bSelected = false;
+		tItem.iLevelID = g_iCurLevelID++;
+		m_vecLevel.push_back(tItem);
+	}
+
+	if (ImGui::BeginListBox("Level_List", ImVec2(0, 200.f)))
+	{
+		for (_uint i = 0; i < m_vecLevel.size(); ++i)
+		{
+
+			if (ImGui::Selectable(to_string(m_vecLevel[i].iLevelID).c_str(), m_vecLevel[i].bSelected))
+			{
+				for (_uint j = 0; j < m_vecLevel.size(); ++j)
+					m_vecLevel[j].bSelected = false;
+
+				m_iCurrentLevelIdx = i;
+				m_iCurrentIdx = 9999;
+				m_vecLevel[i].bSelected = true;
+
+				/* Select Event */
+				for (auto& elem : CGameInstance::Get_Instance()->Get_ObjGroup(GROUP_UI))
+					DELETE_GAMEOBJECT(elem);
+
+
+				m_vecUI.clear();
+
+				if (FAILED(Load_UI()))
+				{
+					Call_MsgBox(L"Failed to Load_UI : CWindow_UI");
+					return;
+				}
+			}
+
+			if (m_vecLevel[i].bSelected)
+			{
+				ImGui::SetItemDefaultFocus();
+			}
+
+		}
+
+		ImGui::EndListBox();
+	}
+
+	if (ImGui::Button("SAVE_LEVEL", ImVec2(120.f, 20.f)))
+	{
+		if (FAILED(Save_Level()))
+		{
+			Call_MsgBox(L"Failed to Save_Level");
+		}
+		else
+		{
+			Call_MsgBox(L"Succeeded to Save_Level");
+		}
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("LOAD_ALL_LEVELS", ImVec2(150.f, 20.f)))
+	{
+		if (FAILED(Load_Levels()))
+		{
+			Call_MsgBox(L"Failed to Load_Levels");
+		}
+		else
+		{
+			Call_MsgBox(L"Succeeded to Load_Levels");
+		}
+	}
+}
+
+void CWindow_UI::Show_UITab()
+{
 	if (ImGui::Button("CREATE ORTHO"))
 	{
 		Create_Ortho();
@@ -87,6 +325,42 @@ HRESULT CWindow_UI::Render()
 	}
 
 	ImGui::NewLine();
+
+	if (ImGui::Button("ENABLE_UI"))
+	{
+		if (m_iCurrentIdx < m_vecUI.size())
+		{
+			ENABLE_GAMEOBJECT(m_vecUI[m_iCurrentIdx].pUI);
+		}
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("DISABLE_UI"))
+	{
+		if (m_iCurrentIdx < m_vecUI.size())
+		{
+			DISABLE_GAMEOBJECT(m_vecUI[m_iCurrentIdx].pUI);
+		}
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("DELETE_UI"))
+	{
+		if (m_iCurrentIdx < m_vecUI.size())
+		{
+			DELETE_GAMEOBJECT(m_vecUI[m_iCurrentIdx].pUI);
+
+			auto iter = m_vecUI.begin();
+			for (_uint i = 0; i < m_iCurrentIdx; ++i)
+				++iter;
+			iter = m_vecUI.erase(iter);
+
+			m_iCurrentIdx = 9999;
+
+		}
+	}
 
 	if (ImGui::BeginTabBar("ui_list"))
 	{
@@ -144,64 +418,19 @@ HRESULT CWindow_UI::Render()
 			ImGui::EndTabBar();
 		}
 	}
-
-	
-
-
-
-
-
-	__super::End();
-
-	return S_OK;
-}
-
-HRESULT CWindow_UI::Save_UI()
-{
-	for (_uint i = 0; i < m_vecUI.size(); ++i)
-	{
-		json	UIjson;
-		CUI* pUI = m_vecUI[i].pUI;
-		vector<_uint>	vecComponents;
-		list<CComponent*>& ComponentList = pUI->Get_ComponentsList();
-		TRANSFORM& tTransform = pUI->Get_Transform()->Get_Transform();
-
-		for (auto& pComponent : ComponentList)
-		{
-			if (SUCCEEDED(CComponent_Factory::Save_Json(g_iCurComponentID, pComponent)))
-				vecComponents.push_back(g_iCurComponentID++);
-		}
-
-		UIjson.emplace("GameObject_Type", OBJ_UI);
-		UIjson.emplace("Component_List", vecComponents);
-		UIjson.emplace("WorldMatrix", tTransform.matMyWorld.m);
-		UIjson.emplace("vScale", tTransform.vScale.XMLoad().m128_f32);
-
-		if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(m_vecUI[i].iGameObjectID).c_str(), UIjson)))
-			return E_FAIL;
-	}
-	
-
-
-	return S_OK;
-}
-
-HRESULT CWindow_UI::Load_UI()
-{
-	return E_NOTIMPL;
 }
 
 void CWindow_UI::Create_Ortho()
 {
-	CUI* pUIPrototype = CUI::Create(m_iUIID, _float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.f));
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(m_iUIID, pUIPrototype);
+	CUI* pUIPrototype = CUI::Create(g_iCurUIID, _float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.f));
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(g_iCurUIID, pUIPrototype);
 
-	CUI* pUI = static_cast<CUI*>(CGameObject_Factory::Create_FromPrototype(m_iUIID));
+	CUI* pUI = static_cast<CUI*>(CGameObject_Factory::Create_FromPrototype(g_iCurUIID));
 	CREATE_GAMEOBJECT(pUI, GROUP_UI);
 
 	UI_ITEM	tItem;
 	tItem.bSelected = false;
-	tItem.iGameObjectID = m_iUIID++;
+	tItem.iGameObjectID = g_iCurUIID++;
 	tItem.pUI = pUI;
 	tItem.bOrtho = true;
 
@@ -230,6 +459,12 @@ void CWindow_UI::Show_ListBox()
 			if (m_vecUI[i].bSelected)
 			{
 				ImGui::SetItemDefaultFocus();
+			}
+
+			if (m_vecUI[i].pUI->Is_Disable())
+			{
+				ImGui::SameLine(0.f, 70.f);
+				ImGui::Text("disable");
 			}
 
 		}
@@ -335,24 +570,54 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 
 	if (ImGui::CollapsingHeader("- Textures List -"))
 	{
-		Read_Folder("../bin/resources/textures");
-	}
-
-	if (ImGui::Button("Add Texture"))
-	{
-		if (FAILED(pTexture->Add_Texture(m_CurSelectedTextureFilePath.c_str())))
+		if (ImGui::Button("Add Texture") || ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 		{
-			Call_MsgBox(L"Failed to Add_Texture : CWindow_UI");
-			return;
+			if (FAILED(pTexture->Add_Texture(m_CurSelectedTextureFilePath.c_str())))
+			{
+				Call_MsgBox(L"Failed to Add_Texture : CWindow_UI");
+				return;
+			}
+
+			pTexture->Set_CurTextureIndex(pTexture->Get_TextureSize() - 1);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Pop Texture"))
+		{
+			pTexture->Pop_Texture();
+		}
+		if (ImGui::BeginListBox("Textures List"))
+		{
+			Read_Folder("../bin/resources/textures");
+
+			ImGui::EndListBox();
 		}
 	}
 
-	if (ImGui::Button("Pop Texture"))
+	ImGui::Text("Current Texture Size : %d", pTexture->Get_TextureSize());
+
+	if (ImGui::BeginListBox("Textures List"))
 	{
-		pTexture->Pop_Texture();
+		for (auto& elem : pTexture->Get_vecTexture())
+		{
+			wstring wstrPath = elem.strFilePath;
+			string strFullPath;
+			strFullPath.assign(wstrPath.begin(), wstrPath.end());
+
+			_int iFind = (_int)strFullPath.rfind("/") + 1;
+			_int iFind2 = (_int)strFullPath.rfind("\\") + 1;
+			_int iFinder = max(iFind, iFind2);
+			string strFileName = strFullPath.substr(iFinder, strFullPath.length() - iFinder);
+
+			ImGui::Text(strFileName.c_str());
+		}
+
+		ImGui::EndListBox();
+
 	}
 
-	ImGui::Text("Current Texture Size : %d", pTexture->Get_TextureSize());
+	
 }
 
 void CWindow_UI::Show_Shader(_uint iIndex)
@@ -369,6 +634,17 @@ void CWindow_UI::Show_Shader(_uint iIndex)
 
 void CWindow_UI::Show_Fader(_uint iIndex)
 {
+	if (ImGui::Button("Enable Fader"))
+	{
+		ENABLE_COMPONENT(m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]);
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Disable Fader"))
+	{
+		DISABLE_COMPONENT(m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]);
+	}
+
+
 	FADEDESC& tFadeDesc = m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]->Get_FadeDesc();
 
 	if (ImGui::CollapsingHeader("- FadeOut Flag -"))
@@ -378,35 +654,66 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 
 		if (ImGui::Selectable("FADE_TIME", &bFlagSelect[0]))
 		{
-			if (bFlagSelect[0])
-				tFadeDesc.bFadeFlag |= FADE_TIME;
-			else
+			if (tFadeDesc.bFadeFlag & FADE_TIME)
+			{
+				bFlagSelect[0] = true;
 				tFadeDesc.bFadeFlag &= ~FADE_TIME;
+			}
+			else
+			{
+				bFlagSelect[0] = false;
+				tFadeDesc.bFadeFlag |= FADE_TIME;
+			}
+
 		}
 
 		if (ImGui::Selectable("FADE_KEY", &bFlagSelect[1]))
 		{
-			if (bFlagSelect[1])
-				tFadeDesc.bFadeFlag |= FADE_KEY;
-			else
+			if (tFadeDesc.bFadeFlag & FADE_KEY)
+			{
 				tFadeDesc.bFadeFlag &= ~FADE_KEY;
+			}
+			else
+			{
+				tFadeDesc.bFadeFlag |= FADE_KEY;
+			}
 		}
 
 		if (ImGui::Selectable("FADE_COL", &bFlagSelect[2]))
 		{
-			if (bFlagSelect[2])
-				tFadeDesc.bFadeFlag |= FADE_COL;
-			else
+			if (tFadeDesc.bFadeFlag & FADE_COL)
+			{
 				tFadeDesc.bFadeFlag &= ~FADE_COL;
+			}
+			else
+			{
+				tFadeDesc.bFadeFlag |= FADE_COL;
+			}
 		}
 
 		if (ImGui::Selectable("FADE_TEMP", &bFlagSelect[3]))
 		{
-			if (bFlagSelect[3])
-				tFadeDesc.bFadeFlag |= FADE_TEMP;
-			else
+			if (tFadeDesc.bFadeFlag & FADE_TEMP)
+			{
 				tFadeDesc.bFadeFlag &= ~FADE_TEMP;
+			}
+			else
+			{
+				tFadeDesc.bFadeFlag |= FADE_TEMP;
+			}
 		}
+
+		memset(bFlagSelect, 0, sizeof(_bool) * 4);
+
+		if (tFadeDesc.bFadeFlag & FADE_TIME)
+			bFlagSelect[0] = true;
+		if (tFadeDesc.bFadeFlag & FADE_KEY)
+			bFlagSelect[1] = true;
+		if (tFadeDesc.bFadeFlag & FADE_COL)
+			bFlagSelect[2] = true;
+		if (tFadeDesc.bFadeFlag & FADE_TEMP)
+			bFlagSelect[3] = true;
+
 	}
 
 	if (ImGui::CollapsingHeader("- FadeOut Key -"))
@@ -437,30 +744,28 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 	if (ImGui::CollapsingHeader("- FadeOut Type -"))
 	{
 		static _bool	bSelect[FADEDESC::FADEOUT_END] = {};
+
+
 		if (ImGui::Selectable("DELETE", &bSelect[FADEDESC::FADEOUT_DELETE]))
 		{
-			memset(bSelect, 0, sizeof(_bool) * FADEDESC::FADEOUT_END);
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DELETE;
-			bSelect[FADEDESC::FADEOUT_DELETE] = true;
 		}
 		if (ImGui::Selectable("DISABLE", &bSelect[FADEDESC::FADEOUT_DISABLE]))
 		{
-			memset(bSelect, 0, sizeof(_bool) * FADEDESC::FADEOUT_END);
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DISABLE;
-			bSelect[FADEDESC::FADEOUT_DISABLE] = true;
 		}
 		if (ImGui::Selectable("NEXT_TEXTURE", &bSelect[FADEDESC::FADEOUT_NEXTTEXTURE]))
 		{
-			memset(bSelect, 0, sizeof(_bool) * FADEDESC::FADEOUT_END);
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_NEXTTEXTURE;
-			bSelect[FADEDESC::FADEOUT_NEXTTEXTURE] = true;
 		}
 		if (ImGui::Selectable("RANDOM_TEXTURE", &bSelect[FADEDESC::FADEOUT_RANDOMTEXTURE]))
 		{
-			memset(bSelect, 0, sizeof(_bool) * FADEDESC::FADEOUT_END);
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
-			bSelect[FADEDESC::FADEOUT_RANDOMTEXTURE] = true;
 		}
+
+		memset(bSelect, 0, sizeof(_bool)* FADEDESC::FADEOUT_END);
+		bSelect[tFadeDesc.eFadeOutType] = true;
+
 	}
 
 	if (ImGui::CollapsingHeader("- Variables -"))
@@ -533,6 +838,7 @@ void CWindow_UI::Read_Folder(const char* pFolderPath)
 			if (ImGui::Selectable(strFileName.c_str(), bSelected))
 			{
 				m_CurSelectedTextureFilePath = wstrPath;
+
 			}
 		}
 	}

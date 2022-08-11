@@ -177,6 +177,7 @@
     <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_textedit.h" />
     <ClInclude Include="..\..\Reference\Headers\Imgui\imstb_truetype.h" />
     <ClInclude Include="..\Bin\ShaderFiles\Client_Shader_Defines.hpp" />
+    <ClInclude Include="..\public\CButton.h" />
     <ClInclude Include="..\public\CCamera_Default.h" />
     <ClInclude Include="..\public\CCamera_Free.h" />
     <ClInclude Include="..\public\CComponent_Factory.h" />
@@ -185,9 +186,11 @@
     <ClInclude Include="..\public\CGameObject_Factory.h" />
     <ClInclude Include="..\public\CImGui_Window.h" />
     <ClInclude Include="..\public\CLevel_Loading.h" />
+    <ClInclude Include="..\public\CLevel_Logo.h" />
     <ClInclude Include="..\public\CLevel_Unity.h" />
     <ClInclude Include="..\public\CPrototype_Factory.h" />
     <ClInclude Include="..\public\CScript_Freecam.h" />
+    <ClInclude Include="..\public\CScript_Logo.h" />
     <ClInclude Include="..\public\CSimple_Image.h" />
     <ClInclude Include="..\public\CTestObj.h" />
     <ClInclude Include="..\public\CUI.h" />
@@ -220,6 +223,7 @@
     <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_tables.cpp" />
     <ClCompile Include="..\..\Reference\Headers\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\private\CButton.cpp" />
     <ClCompile Include="..\private\CCamera_Default.cpp" />
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
@@ -228,9 +232,12 @@
     <ClCompile Include="..\private\CGameObject_Factory.cpp" />
     <ClCompile Include="..\Private\CImGui_Window.cpp" />
     <ClCompile Include="..\private\CLevel_Loading.cpp" />
+    <ClCompile Include="..\private\CLevel_Logo.cpp" />
     <ClCompile Include="..\Private\CLevel_Unity.cpp" />
+    <ClCompile Include="..\Private\Client_Defines.cpp" />
     <ClCompile Include="..\private\CPrototype_Factory.cpp" />
     <ClCompile Include="..\private\CScript_Freecam.cpp" />
+    <ClCompile Include="..\private\CScript_Logo.cpp" />
     <ClCompile Include="..\private\CSimple_Image.cpp" />
     <ClCompile Include="..\Private\CTestObj.cpp" />
     <ClCompile Include="..\private\CUI.cpp" />

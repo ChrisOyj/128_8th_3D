@@ -358,6 +358,11 @@ void CGameInstance::Change_Level(CLevel* pLevel)
 	m_pEventManager->Change_Level(pLevel);
 }
 
+void CGameInstance::Clear_All_Event()
+{
+	m_pEventManager->Clear_All_Event();
+}
+
 CGameObject* CGameInstance::Clone_GameObject(const _uint& _iID)
 {
 	return m_pPrototypeManager->Clone_GameObject(_iID);

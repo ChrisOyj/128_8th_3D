@@ -26,7 +26,8 @@ public:
 	HRESULT					Initialize();
 
 public:
-	HRESULT					Load_Level(LEVEL_TYPE_CLIENT	eLevelID);
+	HRESULT					Reserve_Load_Level(LEVEL_TYPE_CLIENT	eLevelID);
+	HRESULT					Load_Level();
 	HRESULT					Start_Loading();
 	void					Open_NextLevel();
 
@@ -36,6 +37,7 @@ public:
 
 private:
 	CLevel*					m_arrLevels[LEVEL_END];
+	_bool					m_bReservation = false;
 	LEVEL_TYPE_CLIENT		m_eLoadID = LEVEL_END;
 
 

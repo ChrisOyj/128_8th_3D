@@ -22,8 +22,12 @@
 
 HRESULT CComponent_Factory::Save_Json(const _uint& iID, CComponent* pComponent)
 {
-	COMPONENT_TYPE	eComponentType = (COMPONENT_TYPE)pComponent->Get_ComponentID();
+	_uint iSaveID = iID;
 	json	SaveJson;
+	if (Safe_CheckID(pComponent->m_iSaveID, ID_COMPONENT))
+		iSaveID = pComponent->m_iSaveID;
+
+	COMPONENT_TYPE	eComponentType = (COMPONENT_TYPE)pComponent->Get_ComponentID();
 	SaveJson.emplace(JSON_COMPONENT_TYPE, (_uint)eComponentType);
 	SaveJson.emplace("iGroupID", pComponent->Get_GroupID());
 
@@ -57,7 +61,9 @@ HRESULT CComponent_Factory::Save_Json(const _uint& iID, CComponent* pComponent)
 		break;
 	}
 
-	return CUtility_Json::Save_Json(CUtility_Json::Complete_Path(iID).c_str(), SaveJson);
+	CUtility_Json::Save_Json(CUtility_Json::Complete_Path(iSaveID).c_str(), SaveJson);
+
+	return (iSaveID == iID) ? S_OK : E_FAIL;
 }
 
 CComponent* CComponent_Factory::Create_FromJson(const _uint& iID, CGameObject* pOwner)
@@ -80,6 +86,8 @@ CComponent* CComponent_Factory::Create_FromJson(const _uint& iID, CGameObject* p
 		return nullptr;
 	}
 
+	pComponent->m_iSaveID = iID;
+
 	return pComponent;
 }
 
@@ -99,6 +107,8 @@ CComponent* CComponent_Factory::Create_FromPrototype(const _uint& iID, CGameObje
 		Call_MsgBox_Index(L"Failed to Initialize : Index ->", iID);
 		return nullptr;
 	}
+
+	pComponent->m_iSaveID = iID;
 
 	return pComponent;
 }
@@ -169,10 +179,10 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 
 	case Client::COM_PHYSICS:
 	{
-		CPhysics* pPhyscis = CPhysics::Create(iGroupID);
+		pComponent = CGameInstance::Get_Instance()->Find_Component_Prototype(CPrototype_Factory::DEFAULT_PHYSICS);
+		CPhysics* pPhyscis = static_cast<CPhysics*>(pComponent);
 		pPhyscis->Get_Physics().fTurnSpeed = _json["fTurnSpeed"];
 		pPhyscis->Get_Physics().vTurnDir = CUtility_Json::Get_VectorFromJson(_json["vTurnDir"]);
-		pComponent = pPhyscis;
 	}
 
 		break;
@@ -182,7 +192,12 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 		json TexturePathJson = _json["strFilePath"];
 		wstring strFirstFilePath = TexturePathJson[0];
 		CTexture* pTexture = CTexture::Create(iGroupID, strFirstFilePath.c_str(), 1);
-
+		_uint iTexIdx = _json["iCurTextureIndex"];
+		if (iTexIdx >= pTexture->Get_TextureSize())
+		{
+			iTexIdx = pTexture->Get_TextureSize() - 1;
+		}
+		pTexture->Set_CurTextureIndex(iTexIdx);
 		for (_uint i = 1; i < TexturePathJson.size(); ++i)
 		{
 			wstring strFilePath = TexturePathJson[i];
@@ -195,22 +210,17 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 
 	case Client::COM_SHADER:
 	{
-		const D3D11_INPUT_ELEMENT_DESC* pDesc = nullptr;
-		_uint	iNumElement = 0;
 		SHADER_FILE_ID eShaderFileType = (SHADER_FILE_ID)_json["iShaderFileIndex"];
 
 		switch (eShaderFileType)
 		{
 		case SHADER_VTXTEX:
-			pDesc = VTXTEX_DECLARATION::Element;
-			iNumElement = VTXTEX_DECLARATION::iNumElements;
+			pComponent = CGameInstance::Get_Instance()->Find_Component_Prototype(CPrototype_Factory::DEFAULT_SHADER);
+
 			break;
 		default:
 			break;
 		}
-
-		CShader* pShader = CShader::Create(iGroupID, eShaderFileType, pDesc, iNumElement);
-		pComponent = pShader;
 	}
 		break;
 
@@ -235,6 +245,7 @@ CComponent* CComponent_Factory::Create_InstanceFromJson(const json& _json)
 			break;
 		}
 	}
+	break;
 
 	default:
 		break;
@@ -305,8 +316,22 @@ void CComponent_Factory::Save_Texture(CComponent* pComponent, json* pOut)
 
 	json TextureFilePathJson;
 	vector<TEXTUREDESC>& vecTextures = pTexture->Get_vecTexture();
-	for (_uint i = 1; i < vecTextures.size(); ++i)
+	for (_uint i = 0; i < vecTextures.size(); ++i)
 	{
+		if (i == 0)
+		{
+			wstring wstrFullPath = vecTextures[i].strFilePath;
+			string strFullPath;
+			strFullPath.assign(wstrFullPath.begin(), wstrFullPath.end());
+
+			_int iFind = (_int)strFullPath.rfind("\\") + 1;
+			string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
+
+			if (strFileName == "Jusin_0.png");
+			continue;
+		}
+		
+
 		TextureFilePathJson.push_back(vecTextures[i].strFilePath);
 	}
 	pOut->emplace("strFilePath", TextureFilePathJson);

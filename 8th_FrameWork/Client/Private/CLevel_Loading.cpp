@@ -17,6 +17,8 @@
 #include "Renderer.h"
 #include "Physics.h"
 
+#include "Functor.h"
+
 #define	LOADING_IMAGE_PROTOTYPE_ID		111112
 #define	LOADINGBAR_IMAGE_PROTOTYPE_ID		111113
 #define	LOADINGTURN_IMAGE_PROTOTYPE_ID		111114
@@ -41,13 +43,6 @@ CLevel_Loading* CLevel_Loading::Create()
 
 HRESULT CLevel_Loading::Initialize()
 {
-	if (FAILED(CGameInstance::Get_Instance()->Add_Font(TEXT("Font_Arial"), TEXT("../Bin/Resources/Fonts/125.spriteFont"))))
-		return E_FAIL;
-
-	if (FAILED(CPrototype_Factory::SetUp_DefaultComponents()))
-		return E_FAIL;
-
-	/* Loading Image */
 	FADEDESC	tFadeDesc;
 	tFadeDesc.bFadeFlag = FADE_TIME;
 	tFadeDesc.eKeyType = KEY::ENTER;
@@ -57,44 +52,58 @@ HRESULT CLevel_Loading::Initialize()
 	tFadeDesc.fFadeOutStartTime = 4.f;
 	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
 
-	CSimple_Image* pLoadingImage = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.1f, 1.f), _float2((_float)g_iWinCX, (_float)g_iWinCY),
-		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadingScreen_%.3d_BC.png", 10,
-		CSimple_Image::SIMPLE_LOADING, tFadeDesc, CSimple_Image::FADER_LOADING);
+	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::FADER_LOADING))
+	{
+		/* Loading Image */
+		
 
-	if (!pLoadingImage)
-		return E_FAIL;
+		CSimple_Image* pLoadingImage = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.1f, 1.f), _float2((_float)g_iWinCX, (_float)g_iWinCY),
+			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadingScreen_%.3d_BC.png", 10,
+			CSimple_Image::SIMPLE_LOADING, tFadeDesc, CSimple_Image::FADER_LOADING);
 
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADING_IMAGE_PROTOTYPE_ID, pLoadingImage);
+		if (!pLoadingImage)
+			return E_FAIL;
 
-
-
-	/* Loading Bar */
-	tFadeDesc.bFadeFlag = FADE_NONE;
-
-	CSimple_Image* pLoadingBar = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.9f, 0.f, 1.f), _float2((_float)g_iWinCX * 0.75f, 2.f),
-		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadIndicator_Base_BC.png", 1,
-		CSimple_Image::SIMPLE_LOADINGBAR, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
-
-	if (!pLoadingImage)
-		return E_FAIL;
-
-	pLoadingBar->Get_Component<CRenderer>()[0]->Set_Pass(VTXTEX_PASS_LOADINGBAR);
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGBAR_IMAGE_PROTOTYPE_ID, pLoadingBar);
-
+		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADING_IMAGE_PROTOTYPE_ID, pLoadingImage);
+	}
 	
-	/* Loading Image */
-	CSimple_Image* pLoadingTurn = CSimple_Image::Create(_float4(g_iWinCX * 0.92f, g_iWinCY * 0.9f, 0.f, 1.f), _float2(75.f, 75.f),
-		L"../Bin/resources/textures/UI/Loading_Screen/T_UI_Load_Icon_BC.png", 1,
-		CSimple_Image::SIMPLE_LOADINGIMAGE, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
+	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::SIMPLE_LOADINGBAR))
+	{
+		/* Loading Bar */
+		tFadeDesc.bFadeFlag = FADE_NONE;
 
-	CPhysics* pPhysics = static_cast<CPhysics*>(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_PHYSICS, pLoadingTurn));
-	pLoadingTurn->Add_Component(pPhysics);
+		CSimple_Image* pLoadingBar = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.9f, 0.f, 1.f), _float2((_float)g_iWinCX * 0.75f, 2.f),
+			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadIndicator_Base_BC.png", 1,
+			CSimple_Image::SIMPLE_LOADINGBAR, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
 
-	pPhysics->Set_TurnSpeed(1.f);
-	pPhysics->Set_TurnDir(_float4(0.f, 0.f, 1.f, 0.f));
+		if (!pLoadingBar)
+			return E_FAIL;
 
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGTURN_IMAGE_PROTOTYPE_ID, pLoadingTurn);
+		pLoadingBar->Get_Component<CRenderer>()[0]->Set_Pass(VTXTEX_PASS_LOADINGBAR);
+		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGBAR_IMAGE_PROTOTYPE_ID, pLoadingBar);
+	}
+	
 
+	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::SIMPLE_LOADINGIMAGE))
+	{
+		/* Loading Image */
+		CSimple_Image* pLoadingTurn = CSimple_Image::Create(_float4(g_iWinCX * 0.92f, g_iWinCY * 0.9f, 0.f, 1.f), _float2(75.f, 75.f),
+			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_Load_Icon_BC.png", 1,
+			CSimple_Image::SIMPLE_LOADINGIMAGE, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
+
+		if (!pLoadingTurn)
+			return E_FAIL;
+
+		CPhysics* pPhysics = static_cast<CPhysics*>(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_PHYSICS, pLoadingTurn));
+		pLoadingTurn->Add_Component(pPhysics);
+
+		pPhysics->Set_TurnSpeed(1.f);
+		pPhysics->Set_TurnDir(_float4(0.f, 0.f, 1.f, 0.f));
+
+		
+
+		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGTURN_IMAGE_PROTOTYPE_ID, pLoadingTurn);
+	}
 
 	return S_OK;
 }
@@ -126,8 +135,6 @@ HRESULT CLevel_Loading::Enter()
 
 void CLevel_Loading::Tick()
 {
-
-
 	if (true == CLoading_Manager::Get_Instance()->IsFinished())
 	{
 		if (KEY(ENTER, TAP))

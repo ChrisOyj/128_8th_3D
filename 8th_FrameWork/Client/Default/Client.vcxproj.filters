@@ -103,9 +103,6 @@
     <Filter Include="02. Design\04. MouseChecker">
       <UniqueIdentifier>{54e2a38a-0c99-4cae-a4de-26bf532447e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\03. Component\02.">
-      <UniqueIdentifier>{a936c74c-c21b-4d10-b3d4-75845d1fac40}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\03. Component\03. Fader">
       <UniqueIdentifier>{e3a093a7-6adb-430e-8b7c-0c0af79af8b6}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,15 @@
     </Filter>
     <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\03. Window_UI">
       <UniqueIdentifier>{df54652d-3722-43e6-9765-05cb93daae61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_Logo">
+      <UniqueIdentifier>{12714d7d-3eaa-42e3-8368-c0ec6d1957d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\03. Level_Logo">
+      <UniqueIdentifier>{cc203f8c-a77b-42bc-945f-64242e812960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\02. Button">
+      <UniqueIdentifier>{a936c74c-c21b-4d10-b3d4-75845d1fac40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +273,15 @@
     <ClInclude Include="..\public\CEmpty_GameObject.h">
       <Filter>03. Instances\02. GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CScript_Logo.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Logo.h">
+      <Filter>03. Instances\01. Level\03. Level_Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CButton.h">
+      <Filter>03. Instances\03. Component\02. Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -378,6 +393,18 @@
     </ClCompile>
     <ClCompile Include="..\private\CEmpty_GameObject.cpp">
       <Filter>03. Instances\02. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScript_Logo.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Logo.cpp">
+      <Filter>03. Instances\01. Level\03. Level_Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Client_Defines.cpp">
+      <Filter>00. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CButton.cpp">
+      <Filter>03. Instances\03. Component\02. Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

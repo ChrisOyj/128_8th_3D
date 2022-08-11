@@ -52,6 +52,8 @@ public:
 	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
 	void	Change_Level(CLevel* pLevel);
 
+	void	Clear_All_Event();
+
 private:
 	void	Add_Event(const EVENT_TYPE& eEven, const DWORD_PTR& lParam = 0, const DWORD_PTR& wParam = 0);
 	void	Execute(const EVENT& tEvent);

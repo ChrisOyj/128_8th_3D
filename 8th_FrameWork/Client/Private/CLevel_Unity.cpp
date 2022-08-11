@@ -7,6 +7,8 @@
 
 #include "CUser.h"
 
+#include "ImGui_Manager.h"
+
 CLevel_Unity::CLevel_Unity()
 {
 }
@@ -17,7 +19,12 @@ CLevel_Unity::~CLevel_Unity()
 
 CLevel_Unity* CLevel_Unity::Create()
 {
+    if (FAILED(CImGui_Manager::Get_Instance()->Initialize()))
+        return nullptr;
+
     CLevel_Unity* pLevel = new CLevel_Unity();
+
+    
 
     return pLevel;
 }
@@ -26,9 +33,6 @@ HRESULT CLevel_Unity::Initialize()
 {
     if (FAILED(CGameInstance::Get_Instance()->Add_GameObject_Prototype(200000, CTestObj::Create())))
         return E_FAIL;
-
-    //if (FAILED(CGameInstance::Get_Instance()->Add_Font(TEXT("Font_Dream"), TEXT("../Bin/Resources/Fonts/128.spriteFont"))))
-       // return E_FAIL;
 
 
     return S_OK;
@@ -39,15 +43,13 @@ HRESULT CLevel_Unity::Enter()
     CREATE_GAMEOBJECT(CGameObject_Factory::Create_FromPrototype(200000), GROUP_PROP);
     CGameInstance::Get_Instance()->Change_Camera(L"Free");
 
-
-    CREATE_GAMEOBJECT(CGameObject_Factory::Create_FromJson(100), GROUP_UI);
-
     return S_OK;
 }
 
 void CLevel_Unity::Tick()
 {
-    //CUser::Get_Instance()->Fix_CursorPosToCenter();
+    CImGui_Manager::Get_Instance()->Tick();
+
     CUser::Get_Instance()->KeyInput_FPSSetter();
 }
 
@@ -57,8 +59,12 @@ void CLevel_Unity::Late_Tick()
 
 HRESULT CLevel_Unity::Render()
 {
-    if (FAILED(CGameInstance::Get_Instance()->Render_Font(TEXT("Font_Arial"), L"폰트 테스트", _float2(10.f, 10.f), _float4(1.f, 1.f, 1.f, 1.f))))
+    if (FAILED(CGameInstance::Get_Instance()->Render_Font(TEXT("Font_Arial"), L"유니티 레벨", _float2(10.f, 10.f), _float4(1.f, 1.f, 1.f, 1.f))))
         return E_FAIL;
+
+    if (FAILED(CImGui_Manager::Get_Instance()->Render()))
+        return E_FAIL;
+
     return S_OK;
 }
 

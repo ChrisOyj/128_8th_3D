@@ -17,6 +17,9 @@
 
 HRESULT CPrototype_Factory::SetUp_DefaultComponents()
 {
+    if (FAILED(CGameInstance::Get_Instance()->Add_Font(TEXT("Font_Arial"), TEXT("../Bin/Resources/Fonts/125.spriteFont"))))
+        return E_FAIL;
+
     if (!CFunctor::Check_Component_Prototype_Exist(CPrototype_Factory::DEFAULT_SHADER))
     {
         CShader* pShader = CShader::Create(CP_END, SHADER_VTXTEX, VTXTEX_DECLARATION::Element,

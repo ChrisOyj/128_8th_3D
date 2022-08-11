@@ -49,6 +49,7 @@ public:
 	virtual void Release() override;
 	virtual void OnEnable() override;
 	virtual void OnDisable() override;
+	virtual void OnDead()	override;
 
 private:
 	FADEDESC	m_tFadeDesc;

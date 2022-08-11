@@ -4,12 +4,10 @@
 
 BEGIN(Client)
 
-struct GameObejctData
+struct GameObjectData
 {
 	_uint	iPrototypeID = 0;
 	OBJ_GROUP_CLIENT	eGroupType = GROUP_END;
-	_float4 vStartPosition;
-	_float4 vStartLook;
 };
 
 
@@ -37,12 +35,12 @@ public:
 
 private:
 	LEVEL_TYPE_CLIENT		m_eLevelType = LEVEL_END;
-	list<GameObejctData>	m_tGameObjectDataList;
+	vector<GameObjectData>	m_vecGameObjectData;
 
 	_float					m_fLoadingFinish = 0.f;
 
 private:
-	HRESULT				Create_GameObjectInLevel(const GameObejctData& tData);
+	HRESULT				Create_GameObjectInLevel(const GameObjectData& tData);
 };
 
 END

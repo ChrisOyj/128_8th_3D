@@ -103,6 +103,13 @@ void CEvent_Manager::Change_Level(CLevel* pLevel)
 	Add_Event(EVENT_CHANGE_LEVEL, (DWORD_PTR)pLevel);
 }
 
+void CEvent_Manager::Clear_All_Event()
+{
+	m_vecEvent.clear();
+	m_vecDeadObjects.clear();
+	m_vecDeadComponents.clear();
+}
+
 void CEvent_Manager::Add_Event(const EVENT_TYPE & eEven, const DWORD_PTR & lParam, const DWORD_PTR & wParam)
 {
 	m_vecEvent.push_back(EVENT(eEven, lParam, wParam));

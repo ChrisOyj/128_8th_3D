@@ -4,6 +4,8 @@ namespace Client
 	enum PROTOTYPE_ID_TYPE
 	{
 		ID_LEVEL,
+		ID_UI,
+		ID_MESHGAMEOBJECT,
 		ID_GAMEOBJECT,
 		ID_COMPONENT,
 		ID_END

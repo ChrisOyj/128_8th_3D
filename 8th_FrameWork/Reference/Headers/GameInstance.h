@@ -109,6 +109,9 @@ public: /* For. Event_Manager */
 	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
 	void	Change_Level(CLevel* pLevel);
 
+	void	Clear_All_Event();
+
+
 public: /* For. Prototype_Manager */
 	CGameObject* Clone_GameObject(const _uint& _iID);
 	CComponent* Clone_Component(const _uint& _iID);

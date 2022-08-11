@@ -1,6 +1,9 @@
 #pragma once
 #include "CImGui_Window.h"
 
+BEGIN(Engine)
+class CGameObject;
+END
 
 BEGIN(Client)
 
@@ -12,10 +15,17 @@ class CWindow_UI final
 public:
 	struct UI_ITEM
 	{
-		CUI* pUI = nullptr;
+		CGameObject* pUI = nullptr;
 		_uint iGameObjectID = 0;
 		_bool bSelected = false;
 		_bool bOrtho = false;
+
+	};
+
+	struct LEVEL_ITEM
+	{
+		_uint iLevelID = 0;
+		_bool bSelected = false;
 
 	};
 private:
@@ -32,14 +42,22 @@ public:
 	virtual HRESULT Render() override;
 
 private:
+	vector<LEVEL_ITEM>	m_vecLevel;
 	vector<UI_ITEM>		m_vecUI;
 	_uint				m_iCurrentIdx = 9999;
+	_uint				m_iCurrentLevelIdx = 9999;
 	_uint				m_iUIID = 100;
 	wstring				m_CurSelectedTextureFilePath;
 
 private:
-	HRESULT	Save_UI();
+	HRESULT	Save_Level();
+	HRESULT	Save_UI(_uint iIndex);
+	HRESULT Load_Levels();
 	HRESULT	Load_UI();
+
+private:
+	void	Show_LevelTab();
+	void	Show_UITab();
 
 private:
 	void	Create_Ortho();

@@ -29,8 +29,18 @@ namespace Client
 			maxID = g_iMaxLevelID;
 			break;
 
-		case Client::ID_GAMEOBJECT:
+		case Client::ID_UI:
+			minID = g_iMinUIID;
+			maxID = g_iMaxUIID;
+			break;
+
+		case Client::ID_MESHGAMEOBJECT:
 			minID = g_iMinGameObjectID;
+			maxID = g_iMaxGameObjectID;
+			break;
+
+		case Client::ID_GAMEOBJECT:
+			minID = g_iMinUIID;
 			maxID = g_iMaxGameObjectID;
 			break;
 

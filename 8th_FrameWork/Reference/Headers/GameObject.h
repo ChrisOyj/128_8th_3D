@@ -15,6 +15,10 @@ enum PASS_TYPE;
 
 class ENGINE_DLL CGameObject abstract
 {
+public:
+	_uint					m_iSaveID = 0;
+
+
 protected:
 	CGameObject();	
 	CGameObject(const CGameObject& Prototype);
@@ -103,7 +107,6 @@ protected:
 
 	_uint					m_iID = 0;
 	_uint					m_iGroupIndex = 0;
-
 protected:
 	// These will be called by Set_Enable Func.
 	virtual	void	OnEnable();
