@@ -1,29 +1,12 @@
 # 128_8th_3D
 개인 3D 포트폴리오 작업물 (나루토 시노비 스트라이커)
 
+로딩 시작 :
+1. Level 객체의 SetUp_Prototypes
+객체들의 프로토타입을 모두 생성한다.
 
-# 1. Json 저장 방식
-* 파일이름 기준 분류 (확장자 앞까지)
-
-0-99 Level (씬, 장면, 스테이지 개념)\
-100-9999 GameObject \
-10000-99999 Component 
-
-**Level Json이 가진 정보**
-- 게임오브젝트의 JsonID
-- 게임오브젝트의 Group Type
-- float4 위치벡터
-- float4 룩벡터
-
-**GameObject Json이 가진 정보**
-- 게임오브젝트 클래스 Enum값
-- 컴포넌트의 JsonID
-- 자식 오브젝트의 JsonID
-
-**Component Json이 가진 정보**
-- 공통 정보 : 컴포넌트 클래스 Enum값
-- 그 외 컴포넌트 별 Json 구조체로 또 들고 있음.
-- 특이사항 : 컴포넌트가 생성될 때 커플링하기 위한 컴포넌트를 직접 생성하는 경우도 
-
+로딩 끝 :
+2. Level 객체의 Enter
+객체들을 실제로 클론해서 추가한다.
 
 
