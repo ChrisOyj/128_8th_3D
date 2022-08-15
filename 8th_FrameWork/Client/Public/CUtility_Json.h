@@ -45,7 +45,7 @@ public:
     static json		    Convert_ToJson(_float4x4 matValue);
 
 public:
-    static wstring Complete_Path(const _uint& iID);
+    static wstring Complete_Path(wstring    strFileKey);
 };
 
 END

@@ -4,11 +4,8 @@
 #include "GameInstance.h"
 #include "CGameObject_Factory.h"
 #include "CComponent_Factory.h"
-#include "CTestObj.h"
 
 #include "CUser.h"
-
-#include "CScript_Logo.h"
 
 CLevel_Logo::CLevel_Logo()
 {
@@ -27,17 +24,12 @@ CLevel_Logo* CLevel_Logo::Create()
 
 HRESULT CLevel_Logo::Initialize()
 {
-    CScript_Logo* pScript = CScript_Logo::Create(CP_AFTER_TRANSFORM, LEVEL_MAINMENU);
-    CGameInstance::Get_Instance()->Add_Component_Prototype(131111, pScript);
 
     return S_OK;
 }
 
 HRESULT CLevel_Logo::Enter()
 {
-    CGameObject* pLogoUI = CGameObject_Factory::Create_FromJson(100);
-    pLogoUI->Add_Component(CComponent_Factory::Create_FromPrototype(131111, pLogoUI));
-    CREATE_GAMEOBJECT(pLogoUI, GROUP_UI);
 
     return S_OK;
 }
@@ -61,4 +53,9 @@ HRESULT CLevel_Logo::Render()
 HRESULT CLevel_Logo::Exit()
 {
     return S_OK;
+}
+
+HRESULT CLevel_Logo::SetUp_Prototypes()
+{
+    return E_NOTIMPL;
 }

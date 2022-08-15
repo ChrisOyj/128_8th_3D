@@ -10,15 +10,9 @@ class CCollider;
 class CMesh;
 class CParticleSystem;
 class CMeshRenderer;
-enum MESH_TYPE;
-enum PASS_TYPE;
 
 class ENGINE_DLL CGameObject abstract
 {
-public:
-	_uint					m_iSaveID = 0;
-
-
 protected:
 	CGameObject();	
 	CGameObject(const CGameObject& Prototype);
@@ -33,22 +27,18 @@ public:
 #pragma region GET, SET
 public:/*Get, Set*/
 	template<typename T>
-	vector<T*>			Get_Component()
+	list<CComponent*>			Get_Component()
 	{
-		vector<T*> vecComponents;
+		list<CComponent*> listTemp;
 
-		for (auto& elem : m_pComponents)
+		auto iter = m_mapComponents.find(HASHCODE(T));
+
+		if (iter == m_mapComponents.end())
 		{
-			T* pComponent = dynamic_cast<T*>(elem);
-
-			if (pComponent)
-				vecComponents.push_back(pComponent);
+			return listTemp;
 		}
 
-		//if (vecComponents.empty())
-			//Call_MsgBox(L"Failed to Find Component : CGameObject");
-
-		return vecComponents;
+		return iter->second;
 	}
 
 	CGameObject*		Get_Parent() { return m_pParent; }
@@ -56,13 +46,10 @@ public:/*Get, Set*/
 	CTransform*			Get_Transform() { return m_pTransform; }
 	CCollider*			Get_Collider() { return m_pCollider; }
 	list<CGameObject*>& Get_Children() { return m_pChildren; }
-	list<CComponent*>&	Get_ComponentsList() { return m_pComponents; }
-	_uint				Get_ID() { return m_iID; }
 	_uint				Get_GroupIndex() { return m_iGroupIndex; }
 
 	void				Set_Parent(CGameObject* pParent) { m_pParent = pParent; }
 	void				Set_Enable(_bool bEnable);
-	void				Set_ID(const _uint& iID) { m_iID = iID; }
 	void				Set_GroupIndex(const _uint& iID) { m_iGroupIndex = iID; }
 
 	/* Is_Valid : Check the Instance is okay to update. */
@@ -74,13 +61,26 @@ public:/*Get, Set*/
 public:
 	virtual	HRESULT	Initialize_Prototype() PURE;
 	virtual	HRESULT	Initialize() PURE;
+	virtual HRESULT	Start();
 	virtual void	Tick();
 	virtual void	Late_Tick();
 
 public:
-	void			Add_Component(CComponent* pComponent);
+	template<typename T>
+	void			Add_Component(CComponent* pComponent)
+	{
+		m_mapComponents[HASHCODE(T)].push_back(pComponent);
+
+	}
+
+	template<typename T>
+	T*			Add_Component(T* pComponent)
+	{
+		m_mapComponents[HASHCODE(T)].push_back(pComponent);
+		return pComponent;
+
+	}
 	void			Add_Child(CGameObject* pChild);
-	void			Start_Components();
 
 #pragma region Message_Event
 
@@ -102,21 +102,21 @@ protected:
 	CCollider*				m_pCollider = nullptr;
 	CGameObject*			m_pParent = nullptr;
 
-	list<CGameObject*>		m_pChildren;
-	list<CComponent*>		m_pComponents;
+	list<CGameObject*>						m_pChildren;
+	map<_hashcode, list<CComponent*>>		m_mapComponents;
 
-	_uint					m_iID = 0;
 	_uint					m_iGroupIndex = 0;
+
 protected:
 	// These will be called by Set_Enable Func.
 	virtual	void	OnEnable();
 	virtual	void	OnDisable();
+	virtual void	My_Tick() {}
+	virtual void	My_LateTick() {}
 
 private:
 	_bool				m_bEnable = true;
 	_bool				m_bAlive = true;
-
-	
 
 private:
 	virtual void		Release();

@@ -40,17 +40,11 @@
     <Filter Include="03. Instances\02. GameObject\01. UI">
       <UniqueIdentifier>{2af18f2f-4a48-4919-8cee-dbbc2b2d1574}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\02. GameObject\01. UI\01. Simple_Image">
-      <UniqueIdentifier>{674ee092-13e8-4de8-ba20-9e74ade304ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\02. GameObject\02. Unit">
       <UniqueIdentifier>{5ace4eb0-2e8b-4956-9a87-e813c988962b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Design\01. Loading_Manager">
       <UniqueIdentifier>{4f731315-f33d-4843-8fd4-2bd76f8c123e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Design\01. Loading_Manager\Level_Data">
-      <UniqueIdentifier>{4240e4ca-983d-4f21-8947-aae6b59042cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Design\02. Abstract_Factory">
       <UniqueIdentifier>{91a7f978-fd46-42d9-be06-33f6f15a84c8}</UniqueIdentifier>
@@ -79,26 +73,14 @@
     <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Free">
       <UniqueIdentifier>{3a78cade-5ede-4357-b853-72beb4c76d23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\02. GameObject\04. Test">
-      <UniqueIdentifier>{9aa0c8e1-ea45-4c12-b082-e4ab7c2d1148}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Design\03. User">
-      <UniqueIdentifier>{f750e642-8359-40d2-97e5-52a68afcc440}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Module\01. Utility\Utility_Transform">
       <UniqueIdentifier>{797fc741-5103-4b2f-82be-954a377f6d15}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Instances\01. Level\01. Level_Unity">
       <UniqueIdentifier>{74da3066-0c94-411f-9ab2-a8fa523e4cf1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\01. Level\02. Level_Default">
-      <UniqueIdentifier>{e0d5f43e-865c-4723-ad7a-4a1407ef5e12}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\01. Level\00. Level_Loading">
       <UniqueIdentifier>{01e49f4a-6746-4eab-bb07-8420e38cdb08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_UI">
-      <UniqueIdentifier>{60e38feb-7ac6-4669-b659-e066b8277971}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Design\04. MouseChecker">
       <UniqueIdentifier>{54e2a38a-0c99-4cae-a4de-26bf532447e0}</UniqueIdentifier>
@@ -108,9 +90,6 @@
     </Filter>
     <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Default">
       <UniqueIdentifier>{cca51b9b-4651-470b-9cb5-6322f05da2e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_LoadingBar">
-      <UniqueIdentifier>{efa49f8c-0e4c-4907-bee2-ff7f8d1eba65}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Design\05. ImGui_Manager">
       <UniqueIdentifier>{29f03db1-0e78-4cc0-ae04-d51f360b2db0}</UniqueIdentifier>
@@ -133,14 +112,35 @@
     <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\03. Window_UI">
       <UniqueIdentifier>{df54652d-3722-43e6-9765-05cb93daae61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_Logo">
-      <UniqueIdentifier>{12714d7d-3eaa-42e3-8368-c0ec6d1957d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\01. Level\03. Level_Logo">
       <UniqueIdentifier>{cc203f8c-a77b-42bc-945f-64242e812960}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Instances\03. Component\02. Button">
       <UniqueIdentifier>{a936c74c-c21b-4d10-b3d4-75845d1fac40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\00. Base">
+      <UniqueIdentifier>{fd6488fc-6d17-4d39-985b-4cc0c04d6679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI">
+      <UniqueIdentifier>{674ee092-13e8-4de8-ba20-9e74ade304ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\01. Loading_BG">
+      <UniqueIdentifier>{55f5f8a1-2c1d-44e7-a38d-acafa8f72217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\03. User">
+      <UniqueIdentifier>{f750e642-8359-40d2-97e5-52a68afcc440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\02. Loading_Turn">
+      <UniqueIdentifier>{61fd902c-9f6b-4655-b775-d425ed705dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\03. Loading_Bar">
+      <UniqueIdentifier>{914b4d2d-9093-4069-b419-21952b37bab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\02. Unit\TestObj">
+      <UniqueIdentifier>{a74008d7-a0cc-433c-9e25-26014d094628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\02. Default_UI">
+      <UniqueIdentifier>{b6b37ee4-7c1e-4435-af14-f964eae57137}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,14 +177,8 @@
     <ClInclude Include="..\public\Functor.h">
       <Filter>04. Module\00. Functor</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\CLevel_Default.h">
-      <Filter>03. Instances\01. Level\02. Level_Default</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\CUtility_Json.h">
       <Filter>04. Module\01. Utility\Utility_Json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\CSimple_Image.h">
-      <Filter>03. Instances\02. GameObject\01. UI\01. Simple_Image</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Loading_Manager.h">
       <Filter>02. Design\01. Loading_Manager</Filter>
@@ -198,9 +192,6 @@
     <ClInclude Include="..\public\CGameObject_Factory.h">
       <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\CUI.h">
-      <Filter>03. Instances\02. GameObject\01. UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\public\CScript_Freecam.h">
       <Filter>03. Instances\03. Component\01. Scriptable\Script_FreeCam</Filter>
     </ClInclude>
@@ -209,9 +200,6 @@
     </ClInclude>
     <ClInclude Include="..\public\CLevel_Unity.h">
       <Filter>03. Instances\01. Level\01. Level_Unity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\CTestObj.h">
-      <Filter>03. Instances\02. GameObject\04. Test</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CUser.h">
       <Filter>02. Design\03. User</Filter>
@@ -273,14 +261,29 @@
     <ClInclude Include="..\public\CEmpty_GameObject.h">
       <Filter>03. Instances\02. GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\CScript_Logo.h">
-      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
-    </ClInclude>
     <ClInclude Include="..\public\CLevel_Logo.h">
       <Filter>03. Instances\01. Level\03. Level_Logo</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CButton.h">
       <Filter>03. Instances\03. Component\02. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLoading_BG.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\01. Loading_BG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLoading_Turn.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\02. Loading_Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCustom_UI.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLoading_Bar.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\03. Loading_Bar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDefault_UI.h">
+      <Filter>03. Instances\02. GameObject\01. UI\02. Default_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTestObj.h">
+      <Filter>03. Instances\02. GameObject\02. Unit\TestObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -301,14 +304,8 @@
     <ClCompile Include="..\private\Functor.cpp">
       <Filter>04. Module\00. Functor</Filter>
     </ClCompile>
-    <ClCompile Include="..\private\CLevel_Default.cpp">
-      <Filter>03. Instances\01. Level\02. Level_Default</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\CUtility_Json.cpp">
       <Filter>04. Module\01. Utility\Utility_Json</Filter>
-    </ClCompile>
-    <ClCompile Include="..\private\CSimple_Image.cpp">
-      <Filter>03. Instances\02. GameObject\01. UI\01. Simple_Image</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Loading_Manager.cpp">
       <Filter>02. Design\01. Loading_Manager</Filter>
@@ -324,9 +321,6 @@
     </ClCompile>
     <ClCompile Include="..\private\CGameObject_Factory.cpp">
       <Filter>02. Design\02. Abstract_Factory\GameObject_Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\private\CUI.cpp">
-      <Filter>03. Instances\02. GameObject\01. UI</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CScript_Freecam.cpp">
       <Filter>03. Instances\03. Component\01. Scriptable\Script_FreeCam</Filter>
@@ -388,14 +382,8 @@
     <ClCompile Include="..\private\CWindow_Select.cpp">
       <Filter>02. Design\05. ImGui_Manager\ImGui_Window\02. Window_Select</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\CTestObj.cpp">
-      <Filter>03. Instances\02. GameObject\04. Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\private\CEmpty_GameObject.cpp">
       <Filter>03. Instances\02. GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\private\CScript_Logo.cpp">
-      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CLevel_Logo.cpp">
       <Filter>03. Instances\01. Level\03. Level_Logo</Filter>
@@ -405,6 +393,24 @@
     </ClCompile>
     <ClCompile Include="..\private\CButton.cpp">
       <Filter>03. Instances\03. Component\02. Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLoading_BG.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\01. Loading_BG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLoading_Turn.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\02. Loading_Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCustom_UI.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLoading_Bar.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\03. Loading_Bar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDefault_UI.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\02. Default_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTestObj.cpp">
+      <Filter>03. Instances\02. GameObject\02. Unit\TestObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,14 +16,11 @@ CCamera_Free::~CCamera_Free()
 
 HRESULT CCamera_Free::Initialize_Prototype()
 {
-	m_iID = 111111;
-
 	__super::Initialize_Prototype();
 
 	CScript_Freecam* pScriptable = CScript_Freecam::Create(CP_AFTER_TRANSFORM);
-	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(SCRIPT_FREECAM_PROTOTYPE_ID, pScriptable)))
-		return E_FAIL;
-	Add_Component(CComponent_Factory::Create_FromPrototype(SCRIPT_FREECAM_PROTOTYPE_ID, this));
+	pScriptable->Set_Owner(this);
+	Add_Component(pScriptable);
 
 
 	return S_OK;

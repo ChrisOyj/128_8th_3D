@@ -2,8 +2,6 @@
 #include "CScriptable.h"
 #include "Client_Defines.h"
 
-#define	SCRIPT_FREECAM_PROTOTYPE_ID	100010
-
 BEGIN(Client)
 
 class CScript_Freecam final

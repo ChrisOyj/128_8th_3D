@@ -3,14 +3,15 @@
 
 #include "GameInstance.h"
 
-#include "CLevel_Default.h"
-
 #include "Loading_Manager.h"
 
 #include "CPrototype_Factory.h"
 #include "CGameObject_Factory.h"
 #include "CComponent_Factory.h"
-#include "CSimple_Image.h"
+
+#include "CLoading_BG.h"
+#include "CLoading_Turn.h"
+#include "CLoading_Bar.h"
 
 #include "CFader.h"
 #include "CShader.h"
@@ -18,10 +19,6 @@
 #include "Physics.h"
 
 #include "Functor.h"
-
-#define	LOADING_IMAGE_PROTOTYPE_ID		111112
-#define	LOADINGBAR_IMAGE_PROTOTYPE_ID		111113
-#define	LOADINGTURN_IMAGE_PROTOTYPE_ID		111114
 
 CLevel_Loading::CLevel_Loading()
 {
@@ -43,92 +40,42 @@ CLevel_Loading* CLevel_Loading::Create()
 
 HRESULT CLevel_Loading::Initialize()
 {
-	FADEDESC	tFadeDesc;
-	tFadeDesc.bFadeFlag = FADE_TIME;
-	tFadeDesc.eKeyType = KEY::ENTER;
-	tFadeDesc.fAlpha = 0.f;
-	tFadeDesc.fFadeInTime = 1.5f;
-	tFadeDesc.fFadeOutTime = 1.5f;
-	tFadeDesc.fFadeOutStartTime = 4.f;
-	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
+	CLoading_BG* pLoadingBG = CLoading_BG::Create();
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(pLoadingBG);
 
-	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::FADER_LOADING))
-	{
-		/* Loading Image */
-		
+	_float4 vPos = _float4(g_iWinCX*0.5f, g_iWinCY*0.87f, 0.f, 1.f);
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(CLoading_Bar::Create(vPos));
 
-		CSimple_Image* pLoadingImage = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.1f, 1.f), _float2((_float)g_iWinCX, (_float)g_iWinCY),
-			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadingScreen_%.3d_BC.png", 10,
-			CSimple_Image::SIMPLE_LOADING, tFadeDesc, CSimple_Image::FADER_LOADING);
+	vPos.x += g_iWinCX * 0.4f;
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(CLoading_Turn::Create(vPos));
 
-		if (!pLoadingImage)
-			return E_FAIL;
+	return S_OK;
+}
 
-		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADING_IMAGE_PROTOTYPE_ID, pLoadingImage);
-	}
-	
-	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::SIMPLE_LOADINGBAR))
-	{
-		/* Loading Bar */
-		tFadeDesc.bFadeFlag = FADE_NONE;
-
-		CSimple_Image* pLoadingBar = CSimple_Image::Create(_float4(g_iWinCX * 0.5f, g_iWinCY * 0.9f, 0.f, 1.f), _float2((_float)g_iWinCX * 0.75f, 2.f),
-			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_LoadIndicator_Base_BC.png", 1,
-			CSimple_Image::SIMPLE_LOADINGBAR, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
-
-		if (!pLoadingBar)
-			return E_FAIL;
-
-		pLoadingBar->Get_Component<CRenderer>()[0]->Set_Pass(VTXTEX_PASS_LOADINGBAR);
-		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGBAR_IMAGE_PROTOTYPE_ID, pLoadingBar);
-	}
-	
-
-	if (!CFunctor::Check_GameObject_Prototype_Exist(CSimple_Image::SIMPLE_LOADINGIMAGE))
-	{
-		/* Loading Image */
-		CSimple_Image* pLoadingTurn = CSimple_Image::Create(_float4(g_iWinCX * 0.92f, g_iWinCY * 0.9f, 0.f, 1.f), _float2(75.f, 75.f),
-			L"../Bin/resources/textures/UI/Loading_Screen/T_UI_Load_Icon_BC.png", 1,
-			CSimple_Image::SIMPLE_LOADINGIMAGE, tFadeDesc, CSimple_Image::FADER_ONLYFADEIN);
-
-		if (!pLoadingTurn)
-			return E_FAIL;
-
-		CPhysics* pPhysics = static_cast<CPhysics*>(CComponent_Factory::Create_FromPrototype(CPrototype_Factory::DEFAULT_PHYSICS, pLoadingTurn));
-		pLoadingTurn->Add_Component(pPhysics);
-
-		pPhysics->Set_TurnSpeed(1.f);
-		pPhysics->Set_TurnDir(_float4(0.f, 0.f, 1.f, 0.f));
-
-		
-
-		CGameInstance::Get_Instance()->Add_GameObject_Prototype(LOADINGTURN_IMAGE_PROTOTYPE_ID, pLoadingTurn);
-	}
-
+HRESULT CLevel_Loading::SetUp_Prototypes()
+{
 	return S_OK;
 }
 
 HRESULT CLevel_Loading::Enter()
 {
-	CGameObject* pLoadingImage = CGameObject_Factory::Create_FromPrototype(LOADING_IMAGE_PROTOTYPE_ID);
-	_uint iRand = random(0, 9);
-	static_cast<CSimple_Image*>(pLoadingImage)->Set_TextureIdx(iRand);
-	CREATE_GAMEOBJECT(pLoadingImage, GROUP_LOADING);
+	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_BG>(), GROUP_LOADING);
+	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_Turn>(), GROUP_LOADING);
+	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_Bar>(), GROUP_LOADING);
 
-	CGameObject* pLoadingBar = CGameObject_Factory::Create_FromPrototype(LOADINGBAR_IMAGE_PROTOTYPE_ID);
-	CREATE_GAMEOBJECT(pLoadingBar, GROUP_LOADING);
-
-	CGameObject* pLoadingTurn = CGameObject_Factory::Create_FromPrototype(LOADINGTURN_IMAGE_PROTOTYPE_ID);
-	CREATE_GAMEOBJECT(pLoadingTurn, GROUP_LOADING);
+	CGameObject* pLoadingBar = m_vecGameObjects.back().first;
 
 	/* bind g_fProgress */
-	if (!(m_pLoadingBarShader = pLoadingBar->Get_Component<CShader>()[0]))
+	if (!(m_pLoadingBarShader = GET_COMPONENT_FROM(pLoadingBar, CShader)))
 		return E_FAIL;
 
 	m_pLoadingBarShader->CallBack_SetRawValues += bind(&CLoading_Manager::Set_ShaderResource, CLoading_Manager::Get_Instance()
 		, placeholders::_1, "g_fProgress");
 
 	CGameInstance::Get_Instance()->Change_Camera(L"Default");
+
+	__super::Enter();
+
 
 	return S_OK;
 }
@@ -170,6 +117,8 @@ HRESULT CLevel_Loading::Exit()
 {
 	CGameInstance::Get_Instance()->Delete_Objects(GROUP_LOADING);
 	CGameInstance::Get_Instance()->Clear_All_Components();
+
+	__super::Exit();
 
 	return S_OK;
 }

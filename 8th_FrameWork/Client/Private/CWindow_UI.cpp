@@ -3,8 +3,6 @@
 
 #include "GameInstance.h"
 
-#include "CUI.h"
-
 #include "Transform.h"
 #include "Physics.h"
 #include "Texture.h"
@@ -19,6 +17,11 @@
 #include "CPrototype_Factory.h"
 
 #include "CUtility_Json.h"
+
+#include "CDefault_UI.h"
+
+#define GET_UICOMPONENT(classname) static_cast<classname*>(m_vecUI[iIndex].pUI->Get_Component<classname>().front())
+
 
 CWindow_UI::CWindow_UI()
 {
@@ -63,26 +66,7 @@ HRESULT CWindow_UI::Render()
 	if (FAILED(__super::Begin()))
 		return E_FAIL;
 
-	if (ImGui::BeginTabBar("GROUP"))
-	{
-		if (ImGui::BeginTabItem("LEVEL"))
-		{
-			Show_LevelTab();
-
-			ImGui::EndTabItem();
-		}
-
-		if (ImGui::BeginTabItem("UI"))
-		{
-			Show_UITab();
-
-			ImGui::EndTabItem();
-		}
-
-
-		ImGui::EndTabBar();
-	}
-
+	Show_UITab();
 
 
 	__super::End();
@@ -92,89 +76,38 @@ HRESULT CWindow_UI::Render()
 
 HRESULT CWindow_UI::Save_Level()
 {
-	json LevelJson;
-	vector<_uint> vecGameObjectID;
-	vector<_uint> vecGroupType;
-
-	_uint SaveLevelID = m_vecLevel[m_iCurrentLevelIdx].iLevelID;
-
-	if (SUCCEEDED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(SaveLevelID).c_str(), &LevelJson)))
-	{
-		for (_uint i = 0; i < LevelJson["GameObjects"].size(); ++i)
-		{
-			vecGameObjectID.push_back(LevelJson["GameObjects"][i]);
-			vecGroupType.push_back(GROUP_UI);
-			Save_UI(i);
-		}
-
-		for (_uint i = LevelJson["GameObjects"].size(); i < m_vecUI.size(); ++i)
-		{
-			vecGameObjectID.push_back(m_vecUI[i].iGameObjectID);
-			vecGroupType.push_back(GROUP_UI);
-			Save_UI(i);
-		}
-	}
-	else
-	{
-		for (_uint i = 0; i < m_vecUI.size(); ++i)
-		{
-			vecGameObjectID.push_back(m_vecUI[i].iGameObjectID);
-			vecGroupType.push_back(GROUP_UI);
-			Save_UI(i);
-		}
-	}
-
 	
-
-	json SaveJson;
-	SaveJson.emplace("GameObjects", vecGameObjectID);
-	SaveJson.emplace("GroupType", vecGroupType);
-
-	if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(SaveLevelID).c_str(), SaveJson)))
-		return E_FAIL;
 
 	return S_OK;
 }
 
 HRESULT CWindow_UI::Save_UI(_uint iIndex)
 {
-	json	UIjson;
-	CGameObject* pUI = m_vecUI[iIndex].pUI;
-	vector<_uint>	vecComponents;
-	list<CComponent*>& ComponentList = pUI->Get_ComponentsList();
-	TRANSFORM& tTransform = pUI->Get_Transform()->Get_Transform();
-
-	for (auto& pComponent : ComponentList)
-	{
-		if (pComponent == pUI->Get_Transform())
-			continue;
-
-		if (SUCCEEDED(CComponent_Factory::Save_Json(g_iCurComponentID, pComponent)))
-		{
-			vecComponents.push_back(g_iCurComponentID++);
-		}
-		else
-		{
-			vecComponents.push_back(pComponent->m_iSaveID);
-		}
-	}
-
-	UIjson.emplace("GameObject_Type", OBJ_UI);
-	UIjson.emplace("Component_List", vecComponents);
-	UIjson.emplace("WorldMatrix", tTransform.matMyWorld.m);
-	UIjson.emplace("vScale", tTransform.vScale.XMLoad().m128_f32);
-
-	if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(m_vecUI[iIndex].iGameObjectID).c_str(), UIjson)))
-		return E_FAIL;
+	
 
 	return S_OK;
 }
 
 HRESULT CWindow_UI::Load_Levels()
 {
-	m_vecLevel.clear();
+	m_vecUI.clear();
 
-	for (filesystem::directory_iterator FileIter("../bin/Json");
+	list<CGameObject*>& UIList = CGameInstance::Get_Instance()->Get_ObjGroup(GROUP_UI);
+
+	for (auto& elem : UIList)
+	{
+		CDefault_UI* pUI = dynamic_cast<CDefault_UI*>(elem);
+		if (!pUI)
+			continue;
+
+		UI_ITEM	tItem;
+		tItem.pUI = pUI;
+		tItem.bSelected = false;
+
+		m_vecUI.push_back(tItem);
+	}
+
+	/*for (filesystem::directory_iterator FileIter("../bin/Json");
 		FileIter != filesystem::end(FileIter); ++FileIter)
 	{
 		const filesystem::directory_entry& entry = *FileIter;
@@ -197,7 +130,7 @@ HRESULT CWindow_UI::Load_Levels()
 			tItem.iLevelID = iFileNum;
 			m_vecLevel.push_back(tItem);
 		}
-	}
+	}*/
 
 
 	return S_OK;
@@ -205,126 +138,34 @@ HRESULT CWindow_UI::Load_Levels()
 
 HRESULT CWindow_UI::Load_UI()
 {
-	json LevelJson;
-	if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(m_vecLevel[m_iCurrentLevelIdx].iLevelID).c_str(), &LevelJson)))
-		return S_OK;
 
-	for (_uint i = 0; i < LevelJson["GameObjects"].size(); ++i)
-	{
-		if (!Safe_CheckID(LevelJson["GameObjects"][i], ID_UI))
-			break;
-
-		CGameObject* pGameObject = CGameObject_Factory::Create_FromJson(LevelJson["GameObjects"][i]);
-
-		if (!pGameObject)
-			return E_FAIL;
-
-		CREATE_GAMEOBJECT(pGameObject, GROUP_UI);
-		//g_iCurUIID = LevelJson["GameObjects"][i] + 1;
-		//g_iCurComponentID = pGameObject->Get_ComponentsList().back()->m_iSaveID + 1;
-
-		UI_ITEM	tItem;
-		tItem.bOrtho = false;
-		tItem.bSelected = false;
-		tItem.iGameObjectID = LevelJson["GameObjects"][i];
-		tItem.pUI = pGameObject;
-
-		m_vecUI.push_back(tItem);
-	}
 
 	return S_OK;
 }
 
 void CWindow_UI::Show_LevelTab()
 {
-	if (ImGui::Button("Add_Level"))
-	{
-		LEVEL_ITEM	tItem;
-		tItem.bSelected = false;
-		tItem.iLevelID = g_iCurLevelID++;
-		m_vecLevel.push_back(tItem);
-	}
-
-	if (ImGui::BeginListBox("Level_List", ImVec2(0, 200.f)))
-	{
-		for (_uint i = 0; i < m_vecLevel.size(); ++i)
-		{
-
-			if (ImGui::Selectable(to_string(m_vecLevel[i].iLevelID).c_str(), m_vecLevel[i].bSelected))
-			{
-				for (_uint j = 0; j < m_vecLevel.size(); ++j)
-					m_vecLevel[j].bSelected = false;
-
-				m_iCurrentLevelIdx = i;
-				m_iCurrentIdx = 9999;
-				m_vecLevel[i].bSelected = true;
-
-				/* Select Event */
-				for (auto& elem : CGameInstance::Get_Instance()->Get_ObjGroup(GROUP_UI))
-					DELETE_GAMEOBJECT(elem);
-
-
-				m_vecUI.clear();
-
-				if (FAILED(Load_UI()))
-				{
-					Call_MsgBox(L"Failed to Load_UI : CWindow_UI");
-					return;
-				}
-			}
-
-			if (m_vecLevel[i].bSelected)
-			{
-				ImGui::SetItemDefaultFocus();
-			}
-
-		}
-
-		ImGui::EndListBox();
-	}
-
-	if (ImGui::Button("SAVE_LEVEL", ImVec2(120.f, 20.f)))
-	{
-		if (FAILED(Save_Level()))
-		{
-			Call_MsgBox(L"Failed to Save_Level");
-		}
-		else
-		{
-			Call_MsgBox(L"Succeeded to Save_Level");
-		}
-	}
-
-	ImGui::SameLine();
-
-	if (ImGui::Button("LOAD_ALL_LEVELS", ImVec2(150.f, 20.f)))
-	{
-		if (FAILED(Load_Levels()))
-		{
-			Call_MsgBox(L"Failed to Load_Levels");
-		}
-		else
-		{
-			Call_MsgBox(L"Succeeded to Load_Levels");
-		}
-	}
+	
 }
 
 void CWindow_UI::Show_UITab()
 {
-	if (ImGui::Button("CREATE ORTHO"))
+	if (ImGui::Button("CREATE_UI"))
 	{
 		Create_Ortho();
 	}
 
-	ImGui::SameLine();
-
-	if (ImGui::Button("CREATE PERSPECTIVE"))
+	if (ImGui::Button("SAVE_UI"))
 	{
-		Create_Perspective();
+		Save_UI(m_iCurrentIdx);
 	}
 
-	ImGui::NewLine();
+	ImGui::SameLine();
+
+	if (ImGui::Button("LOAD_UI"))
+	{
+		Load_Levels();
+	}
 
 	if (ImGui::Button("ENABLE_UI"))
 	{
@@ -360,6 +201,16 @@ void CWindow_UI::Show_UITab()
 			m_iCurrentIdx = 9999;
 
 		}
+	}
+	if (m_iCurrentIdx != 9999)
+	{
+		if (ImGui::InputText("UI_NAME", m_vecUI[m_iCurrentIdx].szBuf, sizeof(m_vecUI[m_iCurrentIdx].szBuf), ImGuiInputTextFlags_EnterReturnsTrue))
+		{
+			string strKey = m_vecUI[m_iCurrentIdx].szBuf;
+			wstring wstrKey(strKey.begin(), strKey.end());
+			m_vecUI[m_iCurrentIdx].pUI->Set_FileKey(wstrKey);
+		}
+
 	}
 
 	if (ImGui::BeginTabBar("ui_list"))
@@ -422,17 +273,13 @@ void CWindow_UI::Show_UITab()
 
 void CWindow_UI::Create_Ortho()
 {
-	CUI* pUIPrototype = CUI::Create(g_iCurUIID, _float4(g_iWinCX * 0.5f, g_iWinCY * 0.5f, 0.f));
-	CGameInstance::Get_Instance()->Add_GameObject_Prototype(g_iCurUIID, pUIPrototype);
-
-	CUI* pUI = static_cast<CUI*>(CGameObject_Factory::Create_FromPrototype(g_iCurUIID));
+	CDefault_UI* pUI = CGameObject_Factory::Clone_GameObject<CDefault_UI>();
 	CREATE_GAMEOBJECT(pUI, GROUP_UI);
 
 	UI_ITEM	tItem;
-	tItem.bSelected = false;
-	tItem.iGameObjectID = g_iCurUIID++;
 	tItem.pUI = pUI;
-	tItem.bOrtho = true;
+	tItem.bSelected = false;
+	ZeroMemory(tItem.szBuf, sizeof(tItem.szBuf));
 
 	m_vecUI.push_back(tItem);
 }
@@ -447,7 +294,11 @@ void CWindow_UI::Show_ListBox()
 	{
 		for (_uint i = 0; i < m_vecUI.size(); ++i)
 		{
-			if (ImGui::Selectable(to_string(m_vecUI[i].iGameObjectID).c_str(), m_vecUI[i].bSelected))
+			wstring wstrFileKey = m_vecUI[i].pUI->Get_FileKey();
+			string strFileKey;
+			strFileKey.assign(wstrFileKey.begin(), wstrFileKey.end());
+
+			if (ImGui::Selectable(strFileKey.c_str(), m_vecUI[i].bSelected))
 			{
 				for (_uint j = 0; j < m_vecUI.size(); ++j)
 					m_vecUI[j].bSelected = false;
@@ -459,6 +310,8 @@ void CWindow_UI::Show_ListBox()
 			if (m_vecUI[i].bSelected)
 			{
 				ImGui::SetItemDefaultFocus();
+				strcpy_s(m_vecUI[i].szBuf, strFileKey.c_str());
+				//sprintf(m_vecUI[i].szBuf, strFileKey.c_str());
 			}
 
 			if (m_vecUI[i].pUI->Is_Disable())
@@ -545,7 +398,7 @@ void CWindow_UI::Show_Transform(_uint iIndex)
 
 void CWindow_UI::Show_Physics(_uint iIndex)
 {
-	CPhysics* pPhysics = m_vecUI[iIndex].pUI->Get_Component<CPhysics>()[0];
+	CPhysics* pPhysics = static_cast<CPhysics*>(m_vecUI[iIndex].pUI->Get_Component<CPhysics>().front());
 	PHYSICS& tPhysics = pPhysics->Get_Physics();
 
 	ImGui::Text("- TurnAxis -");
@@ -559,7 +412,7 @@ void CWindow_UI::Show_Physics(_uint iIndex)
 
 void CWindow_UI::Show_Texture(_uint iIndex)
 {
-	CTexture* pTexture = m_vecUI[iIndex].pUI->Get_Component<CTexture>()[0];
+	CTexture* pTexture = static_cast<CTexture*>(m_vecUI[iIndex].pUI->Get_Component<CTexture>().front());
 	_int iCurIdx = pTexture->Get_CurTextureIndex();
 	_int iTextureSize = pTexture->Get_TextureSize();
 	ImGui::Text("Current Texture Index");
@@ -622,7 +475,7 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 
 void CWindow_UI::Show_Shader(_uint iIndex)
 {
-	CRenderer* pRenderer = m_vecUI[iIndex].pUI->Get_Component<CRenderer>()[0];
+	CRenderer* pRenderer = GET_UICOMPONENT(CRenderer);
 	_int iCurIndex = pRenderer->Get_Pass();
 	ImGui::Text("- Shader Pass -");
 
@@ -636,16 +489,16 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 {
 	if (ImGui::Button("Enable Fader"))
 	{
-		ENABLE_COMPONENT(m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]);
+		ENABLE_COMPONENT(GET_UICOMPONENT(CFader));
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Disable Fader"))
 	{
-		DISABLE_COMPONENT(m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]);
+		DISABLE_COMPONENT(GET_UICOMPONENT(CFader));
 	}
 
 
-	FADEDESC& tFadeDesc = m_vecUI[iIndex].pUI->Get_Component<CFader>()[0]->Get_FadeDesc();
+	FADEDESC& tFadeDesc = GET_UICOMPONENT(CFader)->Get_FadeDesc();
 
 	if (ImGui::CollapsingHeader("- FadeOut Flag -"))
 	{

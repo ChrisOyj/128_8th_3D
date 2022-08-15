@@ -17,6 +17,7 @@ public:
 public:
 	// CLevel을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
+	virtual HRESULT SetUp_Prototypes() override;
 	virtual HRESULT Enter() override;
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
@@ -24,7 +25,6 @@ public:
 	virtual HRESULT Exit() override;
 
 private:
-
 
 };
 

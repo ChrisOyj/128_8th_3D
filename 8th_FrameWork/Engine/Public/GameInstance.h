@@ -78,7 +78,11 @@ public: /* For. Key_Manager */
 	vector<CKey_Manager::tKeyInfo>& Get_KeyList();
 
 public:	/* For. Object_Manager */
-	CGameObject*			Get_StaticObj(const _uint& iKeyValue);
+	template <typename T>
+	T* Get_StaticObj()
+	{
+		return m_pObjectManager->Get_StaticObj<T>();
+	}
 	list<CGameObject*>&		Get_ObjGroup(const _uint& iGroupIdx);
 	void					Delete_Objects(const _uint& iGroupIdx);
 
@@ -106,24 +110,55 @@ public: /* For. Event_Manager */
 	void	Disable_Component(CComponent* pComponent);
 	void	Enable_Component(CComponent* pComponent);
 
-	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
+	void	Create_StaticObject(CGameObject* pGameObject, _hashcode hcClassName);
 	void	Change_Level(CLevel* pLevel);
 
 	void	Clear_All_Event();
 
 
 public: /* For. Prototype_Manager */
-	CGameObject* Clone_GameObject(const _uint& _iID);
-	CComponent* Clone_Component(const _uint& _iID);
+	CGameObject* Clone_GameObject(_hashcode	hcClassName);
+	CComponent* Clone_Component(_hashcode	hcClassName);
 
-	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
-	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
+
+	template <typename T>
+	T* Clone_GameObject()
+	{
+		return m_pPrototypeManager->Clone_GameObject<T>();
+	}
+
+	template <typename T>
+	HRESULT	Add_GameObject_Prototype(T* pGameObject)
+	{
+		return m_pPrototypeManager->Add_GameObject_Prototype<T>(pGameObject);
+	}
+
+	template <typename T>
+	T* Find_GameObject_Prototype()
+	{
+		return m_pPrototypeManager->Find_GameObject_Prototype<T>();
+	}
+
+	template <typename T>
+	T* Clone_Component()
+	{
+		return m_pPrototypeManager->Clone_Component<T>();
+	}
+
+	template <typename T>
+	HRESULT	Add_Component_Prototype(T* pComponent)
+	{
+		return m_pPrototypeManager->Add_Component_Prototype<T>(pComponent);
+	}
+
+	template <typename T>
+	T* Find_Component_Prototype()
+	{
+		return m_pPrototypeManager->Find_Component_Prototype<T>();
+	}
 
 	void	Delete_GameObject_Prototypes();
 	void	Delete_Component_Prototypes();
-
-	CGameObject* Find_GameObject_Prototype(const _uint& _iID);
-	CComponent* Find_Component_Prototype(const _uint& _iID);
 
 public: /* For. Font_Manager */
 	HRESULT Add_Font(const _tchar* pFontTag, const _tchar* pFontFilePath);
@@ -134,6 +169,10 @@ public: /* For. Shader_Manager */
 
 
 private:
+	CGraphic_Device* m_pGraphicDevice = nullptr;
+	CInput_Device* m_pInputDevice = nullptr;
+	CSound_Device* m_pSoundDevice = nullptr;
+
 	CEvent_Manager* m_pEventManager = nullptr;
 	CLevel_Manager* m_pLevelManager = nullptr;
 	CObject_Manager* m_pObjectManager = nullptr;
@@ -146,9 +185,7 @@ private:
 	CPicking_Manager* m_pPickingManager = nullptr;
 	CPrototype_Manager* m_pPrototypeManager = nullptr;
 	CShader_Manager* m_pShaderManager = nullptr;
-	CGraphic_Device* m_pGraphicDevice = nullptr;
-	CInput_Device* m_pInputDevice = nullptr;
-	CSound_Device* m_pSoundDevice = nullptr;
+	
 	CFont_Manager* m_pFontManager = nullptr;
 
 private:

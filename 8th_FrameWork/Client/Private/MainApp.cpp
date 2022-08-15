@@ -5,7 +5,6 @@
 
 #include "Loading_Manager.h"
 
-#include "CLevel_Default.h"
 #include "CLevel_Loading.h"
 #include "CUser.h"
 
@@ -47,6 +46,9 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(CPrototype_Factory::SetUp_DefaultComponents()))
 		return E_FAIL;
 
+	if (FAILED(CPrototype_Factory::SetUp_DefaultGameObjects()))
+		return E_FAIL;
+
 	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
 		return E_FAIL;
 
@@ -57,9 +59,6 @@ HRESULT CMainApp::Initialize()
 		return E_FAIL;
 
 	if (FAILED(CLoading_Manager::Get_Instance()->Reserve_Load_Level(LEVEL_UNITY)))
-		return E_FAIL;
-
-	if (FAILED(SetUp_CurID()))
 		return E_FAIL;
 
 	return S_OK;
@@ -151,7 +150,7 @@ HRESULT CMainApp::SetUp_Statics()
 	/*Default Cam*/
 	CCamera* pDefaultCam = CCamera_Default::Create();
 	pDefaultCam->Initialize();
-	CREATE_STATIC(pDefaultCam, 111113);
+	CREATE_STATIC(pDefaultCam, HASHCODE(CCamera_Default));
 	CGameInstance::Get_Instance()->Add_Camera(L"Default", pDefaultCam);
 	CGameInstance::Get_Instance()->Change_Camera(L"Default");
 
@@ -159,7 +158,7 @@ HRESULT CMainApp::SetUp_Statics()
 	/* Free Camera */
 	CCamera_Free* pFreeCam = CCamera_Free::Create();
 	pFreeCam->Initialize();
-	CREATE_STATIC(pFreeCam, 111114);
+	CREATE_STATIC(pFreeCam, HASHCODE(CCamera_Free));
 	DISABLE_GAMEOBJECT(pFreeCam);
 	CGameInstance::Get_Instance()->Add_Camera(L"Free", pFreeCam);
 
@@ -173,51 +172,5 @@ HRESULT CMainApp::SetUp_ShaderFiles()
 	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxTex.hlsl")))
 		return E_FAIL;
 
-	return S_OK;
-}
-
-HRESULT CMainApp::SetUp_CurID()
-{
-	g_iCurLevelID = g_iMinLevelID;
-	g_iCurUIID = g_iMinUIID;
-	g_iCurGameObjectID = g_iMinGameObjectID;
-	g_iCurComponentID = g_iMinComponentID;
-
-	for (filesystem::directory_iterator FileIter("../bin/Json");
-		FileIter != filesystem::end(FileIter); ++FileIter)
-	{
-		const filesystem::directory_entry& entry = *FileIter;
-
-		wstring wstrPath = entry.path().relative_path();
-		string strFullPath;
-		strFullPath.assign(wstrPath.begin(), wstrPath.end());
-
-		_int iFind = (_int)strFullPath.rfind("\\") + 1;
-		string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
-
-		_int iFind2 = (_int)strFileName.find(".");
-		strFileName = strFileName.substr(0, iFind2);
-
-		_uint iFileNum = stoi(strFileName);
-		_uint iNewID = iFileNum + 1;
-
-		if (Safe_CheckID(iFileNum, ID_COMPONENT))
-		{
-			g_iCurComponentID = max(g_iCurComponentID, iNewID);
-
-		}
-		else if (Safe_CheckID(iFileNum, ID_MESHGAMEOBJECT))
-		{
-			g_iCurGameObjectID = max(g_iCurGameObjectID, iNewID);
-		}
-		else if (Safe_CheckID(iFileNum, ID_UI))
-		{
-			g_iCurUIID = max(g_iCurUIID, iNewID);
-		}
-		else
-		{
-			g_iCurLevelID = max(g_iCurLevelID, iNewID);
-		}
-	}
 	return S_OK;
 }

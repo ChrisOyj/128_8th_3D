@@ -7,7 +7,7 @@ END
 
 BEGIN(Client)
 
-class CUI;
+class CDefault_UI;
 
 class CWindow_UI final
 	: public CImGui_Window
@@ -15,16 +15,8 @@ class CWindow_UI final
 public:
 	struct UI_ITEM
 	{
-		CGameObject* pUI = nullptr;
-		_uint iGameObjectID = 0;
-		_bool bSelected = false;
-		_bool bOrtho = false;
-
-	};
-
-	struct LEVEL_ITEM
-	{
-		_uint iLevelID = 0;
+		char szBuf[MIN_STR];
+		CDefault_UI* pUI = nullptr;
 		_bool bSelected = false;
 
 	};
@@ -42,11 +34,8 @@ public:
 	virtual HRESULT Render() override;
 
 private:
-	vector<LEVEL_ITEM>	m_vecLevel;
 	vector<UI_ITEM>		m_vecUI;
 	_uint				m_iCurrentIdx = 9999;
-	_uint				m_iCurrentLevelIdx = 9999;
-	_uint				m_iUIID = 100;
 	wstring				m_CurSelectedTextureFilePath;
 
 private:

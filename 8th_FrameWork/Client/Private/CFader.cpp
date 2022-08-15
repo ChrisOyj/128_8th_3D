@@ -170,7 +170,7 @@ void CFader::OnFadeOut_Finish()
 
     case FADEDESC::FADEOUT_NEXTTEXTURE:
     {
-        CTexture* pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+        CTexture* pTextureCom = GET_COMPONENT_FROM(m_pOwner, CTexture);
         if (pTextureCom->Next_Texture())
         {
             Change_State(FADEIN);
@@ -182,7 +182,7 @@ void CFader::OnFadeOut_Finish()
 
     case FADEDESC::FADEOUT_RANDOMTEXTURE:
     {
-        CTexture* pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+        CTexture* pTextureCom = GET_COMPONENT_FROM(m_pOwner, CTexture);
         pTextureCom->Random_Texture();
         Change_State(FADEIN);
     }

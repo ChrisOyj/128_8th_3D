@@ -3,11 +3,12 @@
 
 #include "GameInstance.h"
 #include "CGameObject_Factory.h"
-#include "CTestObj.h"
 
 #include "CUser.h"
 
 #include "ImGui_Manager.h"
+
+#include "CTestObj.h"
 
 CLevel_Unity::CLevel_Unity()
 {
@@ -24,23 +25,34 @@ CLevel_Unity* CLevel_Unity::Create()
 
     CLevel_Unity* pLevel = new CLevel_Unity();
 
-    
+    pLevel->Initialize();
 
     return pLevel;
 }
 
 HRESULT CLevel_Unity::Initialize()
 {
-    if (FAILED(CGameInstance::Get_Instance()->Add_GameObject_Prototype(200000, CTestObj::Create())))
-        return E_FAIL;
+    CGameInstance::Get_Instance()->Add_GameObject_Prototype(CTestObj::Create());
 
+    return S_OK;
+}
+
+HRESULT CLevel_Unity::SetUp_Prototypes()
+{
+    /*for (_uint i = 0; i < 999999999; ++i)
+    {
+        m_fLoadingFinish = (i / 999999999.f);
+    }*/
+
+    Ready_GameObject(CGameObject_Factory::Clone_GameObject<CTestObj>(), GROUP_PROP);
 
     return S_OK;
 }
 
 HRESULT CLevel_Unity::Enter()
 {
-    CREATE_GAMEOBJECT(CGameObject_Factory::Create_FromPrototype(200000), GROUP_PROP);
+    __super::Enter();
+
     CGameInstance::Get_Instance()->Change_Camera(L"Free");
 
     return S_OK;
@@ -70,5 +82,9 @@ HRESULT CLevel_Unity::Render()
 
 HRESULT CLevel_Unity::Exit()
 {
+    __super::Exit();
+
     return S_OK;
 }
+
+

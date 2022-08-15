@@ -29,7 +29,6 @@ private:
 	HRESULT	SetUp_Levels();
 	HRESULT	SetUp_Statics();
 	HRESULT	SetUp_ShaderFiles();
-	HRESULT	SetUp_CurID();
 };
 
 END

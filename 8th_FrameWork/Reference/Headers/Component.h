@@ -7,9 +7,6 @@ class CGameObject;
 
 class ENGINE_DLL CComponent abstract
 {
-public:
-	_uint					m_iSaveID = 0;
-
 	friend class CEvent_Manager;
 	friend class CGameObject;
 	friend class CPrototype_Manager;
@@ -26,9 +23,6 @@ public:
 	void			Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
 	_uint			Get_GroupID() { return m_iGroupID; }
 	void			Set_GroupID(const _uint& iGroupID) { m_iGroupID = iGroupID; }
-
-	_uint			Get_ComponentID() { return m_iComponentID; }
-	void			Set_ComponentID(_uint iID) { m_iComponentID = iID; }
 
 	_bool				Is_Valid() { return (m_bAlive && m_bEnable) ? (true) : (false); }
 	_bool				Is_Dead() { return !m_bAlive; }
@@ -58,7 +52,6 @@ public:
 protected:
 	CGameObject*	m_pOwner = nullptr;
 	_uint			m_iGroupID = 0;
-	_uint			m_iComponentID = 0;
 
 protected:
 	virtual	void	OnEnable();

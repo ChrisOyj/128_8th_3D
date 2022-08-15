@@ -1,5 +1,6 @@
 #pragma once
 #include "Client_Defines.h"
+#include "GameInstance.h"
 
 BEGIN(Engine)
 class CTransform;
@@ -19,15 +20,27 @@ enum GAMEOBJECT_TYPE
 class CGameObject_Factory
 {
 public:
-	static CGameObject* Create_FromPrototype(const _uint& iID);
-	static CGameObject* Create_FromJson(const _uint& iID);
+	template <typename T>
+	static T* Clone_GameObject()
+	{
+		T* pGameObject = CGameInstance::Get_Instance()->Clone_GameObject<T>();
 
-private:
-	static CGameObject* Create_PrototypeFromJson(const _uint& iGameObjectID);
-	static CGameObject* Create_InstanceFromJson(const _uint& iGameObjectID, const json& _json);
+		if (!pGameObject)
+		{
+			return nullptr;
+		}
 
-	static HRESULT Add_ComponentsToGameObject(CGameObject* pGameObject, const json& _ComponentListjson);
-	static HRESULT Add_ChildrenObjectsToGameObject(CGameObject* pGameObject, const json& _ChildrenListjson);
+		if (FAILED(pGameObject->Initialize()))
+		{
+			Call_MsgBox(L"Failed to Initialize : CGameObject_Factory");
+			return nullptr;
+		}
+
+		return pGameObject;
+	}
+
+public:
+	static CGameObject* Clone_GameObject(_hashcode hcClassName);
 };
 
 END

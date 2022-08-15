@@ -10,6 +10,7 @@ CGameObject::CGameObject()
 {
 	m_pTransform = CTransform::Create(1);
 	Add_Component<CTransform>(m_pTransform);
+	m_pTransform->Set_Owner(this);
 }
 
 CGameObject::CGameObject(const CGameObject & Prototype)
@@ -21,7 +22,9 @@ CGameObject::CGameObject(const CGameObject & Prototype)
 	{
 		for (auto& pComponent : elem.second)
 		{
-			m_mapComponents[elem.first].push_back(pComponent->Clone());
+			CComponent* pCloneComponent = pComponent->Clone();
+			pCloneComponent->Set_Owner(this);
+			m_mapComponents[elem.first].push_back(pCloneComponent);
 		}
 	}
 
@@ -134,7 +137,17 @@ void CGameObject::OnDisable()
 
 void CGameObject::Release()
 {
-	for (auto& CompList : m_mapComponents)
+	for (auto mapIter = m_mapComponents.begin(); mapIter != m_mapComponents.end(); ++mapIter)
+	{
+		for (auto CompIter = mapIter->second.begin(); CompIter != mapIter->second.end(); ++CompIter)
+		{
+			SAFE_DESTROY((*CompIter));
+		}
+
+		mapIter->second.clear();
+	}
+
+	/*for (auto& CompList : m_mapComponents)
 	{
 		for (auto& pComponent : CompList.second)
 		{
@@ -142,7 +155,7 @@ void CGameObject::Release()
 		}
 
 		CompList.second.clear();
-	}
+	}*/
 
 	m_mapComponents.clear();
 

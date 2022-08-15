@@ -13,18 +13,6 @@ CObject_Manager::~CObject_Manager()
 	Release();
 }
 
-CGameObject* CObject_Manager::Get_StaticObj(const _uint& iKeyValue)
-{
-	auto iter = m_mapStaticObj.find(iKeyValue);
-	if (iter == m_mapStaticObj.end())
-	{
-		Call_MsgBox(L"Failed to find StaticObj : CObject_Manager");
-		return nullptr;
-	}
-
-	return iter->second;
-}
-
 HRESULT CObject_Manager::Regist_GameObject(CGameObject* pComponent, const _uint& iGroupIndex)
 {
 	if (iGroupIndex < 0 || iGroupIndex >= GR_END)
@@ -35,35 +23,57 @@ HRESULT CObject_Manager::Regist_GameObject(CGameObject* pComponent, const _uint&
 	return S_OK;
 }
 
-void CObject_Manager::Check_Objects_Dead()
+void CObject_Manager::Tick_GameObjects()
 {
-	for (auto iter = m_mapStaticObj.begin(); iter != m_mapStaticObj.end();)
+	for (auto StaticObjIter = m_mapStaticObj.begin(); StaticObjIter != m_mapStaticObj.end();)
 	{
-		//객체가 dead 상태면 리스트에서 빼주기
-		CGameObject* pGameObject = iter->second;
-
-		if (pGameObject->Is_Dead())
-			iter = m_mapStaticObj.erase(iter);
+		if (!(*StaticObjIter).second->Is_Valid())
+		{
+			if ((*StaticObjIter).second->Is_Dead())
+				StaticObjIter = m_mapStaticObj.erase(StaticObjIter);
+			else
+				++StaticObjIter;
+		}
 		else
-			++iter;
+		{
+			(*StaticObjIter).second->Tick();
+			++StaticObjIter;
+		}
 	}
+
 
 	for (_uint i = 0; i < GR_END; ++i)
 	{
-		for (auto iter = m_pGameObjects[i].begin(); iter != m_pGameObjects[i].end();)
+		for (auto ObjIter = m_pGameObjects[i].begin(); ObjIter != m_pGameObjects[i].end();)
 		{
-			//객체가 dead 상태면 리스트에서 빼주기
-			CGameObject* pGameObject = *iter;
-
-			if (pGameObject->Is_Dead())
-				iter = m_pGameObjects[i].erase(iter);
+			if (!(*ObjIter)->Is_Valid())
+			{
+				if ((*ObjIter)->Is_Dead())
+					ObjIter = m_pGameObjects[i].erase(ObjIter);
+				else
+					++ObjIter;
+			}
 			else
-				++iter;
-
-
+			{
+				(*ObjIter)->Tick();
+				++ObjIter;
+			}
 		}
 	}
-	
+}
+
+void CObject_Manager::LateTick_GameObjects()
+{
+	for (auto& elem : m_mapStaticObj)
+		elem.second->Late_Tick();
+
+	for (_uint i = 0; i < GR_END; ++i)
+	{
+		for (auto& pGameObject : m_pGameObjects[i])
+		{
+			pGameObject->Late_Tick();
+		}
+	}
 }
 
 void CObject_Manager::Delete_AllObjects()

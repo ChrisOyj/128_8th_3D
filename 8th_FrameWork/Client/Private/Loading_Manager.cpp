@@ -2,7 +2,6 @@
 #include "Loading_Manager.h"
 
 #include "CLevel_Loading.h"
-#include "CLevel_Default.h"
 #include "CLevel_Unity.h"
 #include "CLevel_Logo.h"
 #include "GameInstance.h"
@@ -41,29 +40,15 @@ unsigned int APIENTRY LoadingMain(void* pArg)
 
 HRESULT CLoading_Manager::Initialize()
 {
+	for (_uint i = LEVEL_LOADING; i < LEVEL_END; ++i)
+	{
+		m_arrLevels[i] = nullptr;
+	}
 
 	m_arrLevels[LEVEL_LOADING] = CLevel_Loading::Create();
 	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
-	//m_arrLevels[LEVEL_LOGO] = CLevel_Logo::Create();
 
-	for (_uint i = LEVEL_MAINMENU; i < LEVEL_END; ++i)
-	{
-		//if (i > LEVEL_MAINMENU)
-		{
-			m_arrLevels[i] = nullptr;
-			continue;
-		}
-
-
-		m_arrLevels[i] = CLevel_Default::Create((LEVEL_TYPE_CLIENT)i);
-
-		if (!m_arrLevels[i])
-		{
-			Call_MsgBox_Index(L"Failed to Create Level : CLoading_Manager", i);
-			return E_FAIL;
-		}
-
-	}
+	
 
 
 	return S_OK;
@@ -118,7 +103,7 @@ HRESULT CLoading_Manager::Start_Loading()
 
 
 	/* 이곳에 파일 읽고, 객체 생성하는 코드 작성 */
-	m_arrLevels[m_eLoadID]->Initialize();
+	m_arrLevels[m_eLoadID]->SetUp_Prototypes();
 
 	/* 다 생성되면 로딩중 화면이랑 로딩바 객체 지우야함 */
 
@@ -149,12 +134,8 @@ void CLoading_Manager::Release()
 void CLoading_Manager::Set_ShaderResource(CShader* pShader, const char* pConstantName)
 {
 	_float fResource = 1.f;
-	CLevel_Default* pLevelDefault = dynamic_cast<CLevel_Default*>(m_arrLevels[m_eLoadID]);
 
-	if (pLevelDefault != nullptr)
-	{
-		fResource = pLevelDefault->Get_LoadingFinish();
-	}
+	fResource = m_arrLevels[m_eLoadID]->Get_LoadingFinish();
 
 	pShader->Set_RawValue(pConstantName, &fResource, sizeof(_float));
 

@@ -49,7 +49,7 @@ public:
 	void	Disable_Component(CComponent* pComponent);
 	void	Enable_Component(CComponent* pComponent);
 
-	void	Create_StaticObject(CGameObject* pGameObject, const _uint& iObjectID);
+	void	Create_StaticObject(CGameObject* pGameObject, _hashcode hcClassName);
 	void	Change_Level(CLevel* pLevel);
 
 	void	Clear_All_Event();

@@ -213,7 +213,13 @@ void CTransform::OnEnable()
 	m_pOwner->CallBack_CollisionEnter +=
 		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
 
-	BIND_SHADERRESOURCES(CTransform, "g_WorldMatrix");
+	list<CComponent*>	pShdaerlist = m_pOwner->Get_Component<CShader>();
+		if (pShdaerlist.empty())
+			return;
+			static_cast<CShader*>(pShdaerlist.front())->CallBack_SetRawValues +=
+			bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
+
+	//BIND_SHADERRESOURCES(CTransform, "g_WorldMatrix");
 }
 
 void CTransform::OnDisable()

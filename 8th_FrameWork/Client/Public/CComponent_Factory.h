@@ -1,10 +1,8 @@
 #pragma once
 #include "Client_Defines.h"
+#include "GameInstance.h"
 
 BEGIN(Engine)
-class CTransform;
-class CComponent;
-class CGameObject;
 END
 
 BEGIN(Client)
@@ -25,25 +23,30 @@ enum COMPONENT_TYPE
 class CComponent_Factory
 {
 public:
-	static	HRESULT		Save_Json(const _uint& iID, CComponent* pComponent);
+	template <typename T>
+	static T* Clone_Component(CGameObject* pOwner)
+	{
+		T* pComponent = CGameInstance::Get_Instance()->Clone_Component<T>();
+
+		if (!pComponent)
+		{
+			return nullptr;
+		}
+
+		pComponent->Set_Owner(pOwner);
+
+		if (FAILED(pComponent->Initialize()))
+		{
+			Call_MsgBox(L"Failed to Initialize : CComponent_Factory");
+			return nullptr;
+		}
+
+		return pComponent;
+	}
 
 public:
-	static CComponent* Create_FromJson(const _uint& iID, CGameObject* pOwner);
-	static CComponent* Create_FromPrototype(const _uint& iID, CGameObject* pOwner);
+	static CComponent* Clone_Component(CGameObject* pOwner, _hashcode hcClassName);
 
-private:
-	static CComponent* Create_PrototypeFromJson(const _uint& iComponentID);
-	static CComponent* Create_InstanceFromJson(const json& _json);
-
-private:
-	static void			Save_Transform(CComponent* pComponent, json* pOut);
-	static void			Save_Collider(CComponent* pComponent, json* pOut);
-	static void			Save_Renderer(CComponent* pComponent, json* pOut);
-	static void			Save_Physics(CComponent* pComponent, json* pOut);
-	static void			Save_Texture(CComponent* pComponent, json* pOut);
-	static void			Save_Shader(CComponent* pComponent, json* pOut);
-	static void			Save_Fader(CComponent* pComponent, json* pOut);
-	static void			Save_Mesh(CComponent* pComponent, json* pOut);
 };
 
 END

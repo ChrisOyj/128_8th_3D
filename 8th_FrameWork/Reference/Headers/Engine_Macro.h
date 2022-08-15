@@ -40,8 +40,8 @@
 
 #define MATRIX_DEFAULT				0x00f
 
-#define CLONE_GAMEOBJECT(ID)				CGameInstance::Get_Instance()->Clone_GameObject(ID)
-#define CLONE_COMPONENT(ID)					CGameInstance::Get_Instance()->Clone_Component(ID)
+#define CLONE_GAMEOBJECT(type)				CGameInstance::Get_Instance()->Clone_GameObject<type>()
+#define CLONE_COMPONENT(type)					CGameInstance::Get_Instance()->Clone_Component<type>()
 
 
 // ==========================
@@ -82,18 +82,20 @@
 
 // ==============================================================
 
-#define BIND_SHADERRESOURCES(classname, variablename) vector<CShader*>	vecShdaer = m_pOwner->Get_Component<CShader>();\
-if (vecShdaer.empty())\
+#define BIND_SHADERRESOURCES(classname, variablename) list<CComponent*>	pShdaerlist = m_pOwner->Get_Component<CShader>();\
+if (pShdaerlist.empty())\
 return;\
-vecShdaer[0]->CallBack_SetRawValues +=\
+static_cast<CShader*>(pShdaerlist.front())->CallBack_SetRawValues +=\
 bind(&classname::Set_ShaderResource, this, placeholders::_1, variablename);\
 
-#define REMOVE_SHADERRESOURCES(classname, variablename) vector<CShader*>	vecShdaer = m_pOwner->Get_Component<CShader>();\
-if (vecShdaer.empty())\
+#define REMOVE_SHADERRESOURCES(classname, variablename) list<CComponent*>	pShdaerlist = m_pOwner->Get_Component<CShader>();\
+if (pShdaerlist.empty())\
 return;\
-vecShdaer[0]->CallBack_SetRawValues -=\
+static_cast<CShader*>(pShdaerlist.front())->CallBack_SetRawValues -=\
 bind(&classname::Set_ShaderResource, this, placeholders::_1, variablename);\
 
+#define GET_COMPONENT_FROM(instance, classname) static_cast<classname*>(instance->Get_Component<classname>().front())
+#define GET_COMPONENT(classname) static_cast<classname*>(Get_Component<classname>().front())
 
 #define BEGIN(NAMESPACE) namespace NAMESPACE { 
 #define END }

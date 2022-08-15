@@ -79,12 +79,12 @@ HRESULT CGameInstance::Tick_Engine( )
 
 	/* Object */
 	m_pLevelManager->Tick();
-	m_pObjectManager->Check_Objects_Dead();
+	m_pObjectManager->Tick_GameObjects();
 	m_pComponentManager->Tick();
 
 	m_pLevelManager->Late_Tick();
-	//m_pObjectManager->Late_Tick();
 	m_pComponentManager->Late_Tick();
+	m_pObjectManager->LateTick_GameObjects();
 
 	/* ViewProj */
 	m_pCameraManager->Make_ViewProj();
@@ -264,11 +264,6 @@ vector<CKey_Manager::tKeyInfo>& CGameInstance::Get_KeyList()
 	return m_pKeyManager->Get_KeyList();
 }
 
-CGameObject* CGameInstance::Get_StaticObj(const _uint& iKeyValue)
-{
-	return m_pObjectManager->Get_StaticObj(iKeyValue);
-}
-
 list<CGameObject*>& CGameInstance::Get_ObjGroup(const _uint& iGroupIdx)
 {
 	return m_pObjectManager->Get_ObjGroup(iGroupIdx);
@@ -348,9 +343,9 @@ void CGameInstance::Enable_Component(CComponent* pComponent)
 
 }
 
-void CGameInstance::Create_StaticObject(CGameObject * pGameObject, const _uint& iObjectID)
+void CGameInstance::Create_StaticObject(CGameObject * pGameObject, _hashcode hcClassName)
 {
-	m_pEventManager->Create_StaticObject(pGameObject, iObjectID);
+	m_pEventManager->Create_StaticObject(pGameObject, hcClassName);
 }
 
 void CGameInstance::Change_Level(CLevel* pLevel)
@@ -363,24 +358,14 @@ void CGameInstance::Clear_All_Event()
 	m_pEventManager->Clear_All_Event();
 }
 
-CGameObject* CGameInstance::Clone_GameObject(const _uint& _iID)
+CGameObject* CGameInstance::Clone_GameObject(_hashcode hcClassName)
 {
-	return m_pPrototypeManager->Clone_GameObject(_iID);
+	return m_pPrototypeManager->Clone_GameObject(hcClassName);
 }
 
-CComponent* CGameInstance::Clone_Component(const _uint& _iID)
+CComponent* CGameInstance::Clone_Component(_hashcode hcClassName)
 {
-	return m_pPrototypeManager->Clone_Component(_iID);
-}
-
-HRESULT CGameInstance::Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject)
-{
-	return m_pPrototypeManager->Add_GameObject_Prototype(_iID, pGameObject);
-}
-
-HRESULT CGameInstance::Add_Component_Prototype(const _uint& _iID, CComponent* pComponent)
-{
-	return m_pPrototypeManager->Add_Component_Prototype(_iID, pComponent);
+	return m_pPrototypeManager->Clone_Component(hcClassName);
 }
 
 void CGameInstance::Delete_GameObject_Prototypes()
@@ -391,16 +376,6 @@ void CGameInstance::Delete_GameObject_Prototypes()
 void CGameInstance::Delete_Component_Prototypes()
 {
 	m_pPrototypeManager->Delete_Component_Prototypes();
-}
-
-CGameObject* CGameInstance::Find_GameObject_Prototype(const _uint& _iID)
-{
-	return m_pPrototypeManager->Find_GameObject_Prototype(_iID);
-}
-
-CComponent* CGameInstance::Find_Component_Prototype(const _uint& _iID)
-{
-	return m_pPrototypeManager->Find_Component_Prototype(_iID);
 }
 
 HRESULT CGameInstance::Add_Font(const _tchar* pFontTag, const _tchar* pFontFilePath)

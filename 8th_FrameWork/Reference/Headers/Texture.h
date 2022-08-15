@@ -46,15 +46,6 @@ public:
 	void	Random_Texture();
 
 public:
-	virtual void Tick() override;
-	virtual void Late_Tick() override;
-
-private:
-	vector<TEXTUREDESC>			m_SRVs;
-
-	_uint		m_iCurTextureIndex = 0;
-
-private:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize() override;
 
@@ -64,6 +55,17 @@ private:
 	virtual void OnDisable() override {}
 
 	virtual void Release() override;
+
+public:
+	virtual void Tick() override;
+	virtual void Late_Tick() override;
+
+private:
+	vector<TEXTUREDESC>			m_SRVs;
+
+	_uint		m_iCurTextureIndex = 0;
+
+
 
 private:
 	HRESULT		SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iNumTextures);

@@ -90,10 +90,10 @@ json CUtility_Json::Convert_ToJson(_float4x4 matValue)
 	return jsonTemp;
 }
 
-wstring CUtility_Json::Complete_Path(const _uint& iID)
+wstring CUtility_Json::Complete_Path(wstring    strFileKey)
 {
 	wstring strFullPath = L"../Bin/Json/";
-	strFullPath += to_wstring(iID);
+	strFullPath += strFileKey;
 	strFullPath += L".json";
 
 

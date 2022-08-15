@@ -1,12 +1,6 @@
 #pragma once
 #include "Engine_Defines.h"
 
-#define	TRANSFORM_PROTOTYPE_ID	100000
-#define	RENDERER_PROTOTYPE_ID	100001
-#define	TEXTURE_PROTOTYPE_ID	100002
-#define	MESHRECT_PROTOTYPE_ID	100003
-#define	COLLIDER_PROTOTYPE_ID	100004
-
 BEGIN(Engine)
 
 class CGameObject;
@@ -24,26 +18,94 @@ public:
 	HRESULT		Initialize();
 
 public:
-	CGameObject* Clone_GameObject(const _uint& _iID);
-	CComponent* Clone_Component(const _uint& _iID);
+	CGameObject* Clone_GameObject(_hashcode	hcClassName);
+	CComponent* Clone_Component(_hashcode	hcClassName);
 
-	HRESULT Add_GameObject_Prototype(const _uint& _iID, CGameObject* pGameObject);
-	HRESULT Add_Component_Prototype(const _uint& _iID, CComponent* pComponent);
+	template <typename T>
+	T* Clone_GameObject()
+	{
+		T* pTargetObject = Find_GameObject_Prototype<T>();
 
-	CGameObject* Find_GameObject_Prototype(const _uint& _iID);
-	CComponent* Find_Component_Prototype(const _uint& _iID);
+		if (!pTargetObject)
+		{
+			wstring strMsg = L"Failed to Find_GameObject_Prototype : CPrototype_Manager - ";
+			string strTemp = typeid(T).name();
+			wstring wstrName(strTemp.begin(), strTemp.end());
+			strMsg += wstrName;
+			Call_MsgBox(strMsg.c_str());
+			return nullptr;
+		}
+
+		return pTargetObject->Clone();
+	}
+
+	template <typename T>
+	T* Find_GameObject_Prototype()
+	{
+		auto iter = m_GameObject_Prototypes.find(HASHCODE(T));
+		if (iter == m_GameObject_Prototypes.end())
+			return nullptr;
+		return static_cast<T*>(iter->second);
+	}
+	
+	template <typename T>
+	HRESULT	Add_GameObject_Prototype(T* pGameObject)
+	{
+		if (Find_GameObject_Prototype<T>())
+			return E_FAIL;
+
+		m_GameObject_Prototypes.emplace(HASHCODE(T), pGameObject);
+		
+		return S_OK;
+	}
+
+
+	template <typename T>
+	T* Clone_Component()
+	{
+		T* pTargetObject = Find_Component_Prototype<T>();
+
+		if (!pTargetObject)
+		{
+			wstring strMsg = L"Failed to Find_Component_Prototype : CPrototype_Manager - ";
+			string strTemp = typeid(T).name();
+			wstring wstrName(strTemp.begin(), strTemp.end());
+			strMsg += wstrName;
+			Call_MsgBox(strMsg.c_str());
+			return nullptr;
+		}
+
+		return pTargetObject->Clone();
+	}
+
+	template <typename T>
+	T* Find_Component_Prototype()
+	{
+		auto iter = m_Component_Prototypes.find(HASHCODE(T));
+		if (iter == m_Component_Prototypes.end())
+			return nullptr;
+		return static_cast<T*>(iter->second);
+	}
+
+	template <typename T>
+	HRESULT	Add_Component_Prototype(T* pComponent)
+	{
+		if (Find_Component_Prototype<T>())
+			return E_FAIL;
+
+		m_Component_Prototypes.emplace(HASHCODE(T), pComponent);
+
+		return S_OK;
+	}
+
 
 public:
 	void	Delete_GameObject_Prototypes();
 	void	Delete_Component_Prototypes();
 
 private:
-	map<_uint, CGameObject*>	m_GameObject_Prototypes;
-	map<_uint, CComponent*>		m_Component_Prototypes;
-
-private:
-	_bool Find_Component_Prototype(CComponent* pComponent);
-
+	map<_hashcode, CGameObject*>	m_GameObject_Prototypes;
+	map<_hashcode, CComponent*>		m_Component_Prototypes;
 
 private:
 	void			Release();

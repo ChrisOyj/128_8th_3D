@@ -13,22 +13,6 @@ _float4 CFunctor::Get_MousePos(void)
 	return _float4(float(pt.x), float(pt.y), 0.f, 1.f);
 }
 
-_bool CFunctor::Check_GameObject_Prototype_Exist(const _uint& iID)
-{
-	if (CGameInstance::Get_Instance()->Find_GameObject_Prototype(iID))
-		return true;
-
-	return false;
-}
-
-_bool CFunctor::Check_Component_Prototype_Exist(const _uint& iID)
-{
-	if (CGameInstance::Get_Instance()->Find_Component_Prototype(iID))
-		return true;
-
-	return false;
-}
-
 _float4 CFunctor::OrthoToRealPosition(const _float4& vPosition)
 {
 	_float4 vScreenPosition = _float4(

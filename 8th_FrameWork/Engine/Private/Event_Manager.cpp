@@ -92,9 +92,9 @@ void CEvent_Manager::Enable_Component(CComponent* pComponent)
 	Add_Event(EVENT_ENABLE_COMPONENT, (DWORD_PTR)pComponent);
 }
 
-void CEvent_Manager::Create_StaticObject(CGameObject * pGameObject, const _uint& iObjectID)
+void CEvent_Manager::Create_StaticObject(CGameObject * pGameObject, _hashcode hcClassName)
 {
-	Add_Event(EVENT_CREATE_STATIC, (DWORD_PTR)pGameObject, (DWORD_PTR)iObjectID);
+	Add_Event(EVENT_CREATE_STATIC, (DWORD_PTR)pGameObject, (DWORD_PTR)hcClassName);
 
 }
 
@@ -127,16 +127,20 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 		CGameObject* pGameObject = (CGameObject*)(tEvent.lParam);
 		_uint iGroupIdx = (_uint)(tEvent.wParam);
 		CObject_Manager::Get_Instance()->Add_Object(pGameObject, iGroupIdx);
-		pGameObject->Start_Components();
+		if (FAILED(pGameObject->Start()))
+		{
+			Call_MsgBox(L"Failed to Start Static GameObject : CEvent_Manager");
+			return;
+		}
 
 	}
 	break;
 
 	case EVENT_CREATE_COMPONENT:
 	{
-		CComponent* pComponent = (CComponent*)(tEvent.lParam);
+		/*CComponent* pComponent = (CComponent*)(tEvent.lParam);
 		CGameObject* pGameObject = (CGameObject*)(tEvent.wParam);
-		pGameObject->Add_Component(pComponent);
+		pGameObject->Add_Component(pComponent);*/
 		//pComponent->Start();
 	}
 	break;
@@ -144,9 +148,13 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 	case EVENT_CREATE_STATIC:
 	{
 		CGameObject* pGameObject = (CGameObject*)(tEvent.lParam);
-		_uint	iObjectID = static_cast<_uint>(tEvent.wParam);
+		_hashcode	iObjectID = static_cast<_uint>(tEvent.wParam);
 		CObject_Manager::Get_Instance()->Add_StaticObject(pGameObject, iObjectID);
-		pGameObject->Start_Components();
+		if (FAILED(pGameObject->Start()))
+		{
+			Call_MsgBox(L"Failed to Start Static GameObject : CEvent_Manager");
+			return;
+		}
 
 	}
 	break;

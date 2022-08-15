@@ -95,9 +95,11 @@ void CRenderer::Start()
 {
 	__super::Start();
 
-	m_pShaderCom = m_pOwner->Get_Component<CShader>()[0];
-	m_pMeshCom = m_pOwner->Get_Component<CMesh>()[0];
-	m_pTextureCom = m_pOwner->Get_Component<CTexture>()[0];
+	m_pShaderCom = GET_COMPONENT_FROM(m_pOwner, CShader);
+	m_pMeshCom = GET_COMPONENT_FROM(m_pOwner, CMesh);
+	m_pTextureCom = GET_COMPONENT_FROM(m_pOwner, CTexture);
+
+
 }
 
 void CRenderer::Tick()

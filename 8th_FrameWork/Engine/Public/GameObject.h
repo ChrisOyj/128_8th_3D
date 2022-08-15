@@ -27,13 +27,15 @@ public:
 #pragma region GET, SET
 public:/*Get, Set*/
 	template<typename T>
-	list<CComponent*>&			Get_Component()
+	list<CComponent*>			Get_Component()
 	{
+		list<CComponent*> listTemp;
+
 		auto iter = m_mapComponents.find(HASHCODE(T));
 
 		if (iter == m_mapComponents.end())
 		{
-			return list<CComponent*>();
+			return listTemp;
 		}
 
 		return iter->second;
@@ -68,6 +70,15 @@ public:
 	void			Add_Component(CComponent* pComponent)
 	{
 		m_mapComponents[HASHCODE(T)].push_back(pComponent);
+
+	}
+
+	template<typename T>
+	T*			Add_Component(T* pComponent)
+	{
+		m_mapComponents[HASHCODE(T)].push_back(pComponent);
+		return pComponent;
+
 	}
 	void			Add_Child(CGameObject* pChild);
 
