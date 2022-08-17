@@ -2,6 +2,7 @@
 
 namespace Engine
 {
+	enum MODEL_TYPE { TYPE_NONANIM, TYPE_ANIM, TYPE_END };
 
 	enum MOUSEMOVE { MMS_X, MMS_Y, MMS_WHEEL, MMS_END };
 

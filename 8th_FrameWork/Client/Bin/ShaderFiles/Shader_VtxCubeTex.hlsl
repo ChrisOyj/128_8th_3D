@@ -34,10 +34,6 @@ VS_OUT VS_MAIN_SKY(VS_IN In)
 	return Out;	
 }
 
-// w나누기연산을 수행하낟. (In 투영스페이스)
-// 뷰포트 변환. (In 뷰포트(윈도우좌표))
-
-// 래스터라이즈(픽셀정볼르 생성한다. )
 
 struct PS_IN
 {
@@ -48,13 +44,6 @@ struct PS_IN
 struct PS_OUT
 {	
 	vector		vColor : SV_TARGET0;	
-	/*vector		vColor : SV_TARGET1;
-	vector		vColor : SV_TARGET2;
-	vector		vColor : SV_TARGET3;
-	vector		vColor : SV_TARGET4;
-	vector		vColor : SV_TARGET5;
-	vector		vColor : SV_TARGET6;
-	vector		vColor : SV_TARGET7;*/
 };
 
 PS_OUT PS_MAIN_SKY(PS_IN In)

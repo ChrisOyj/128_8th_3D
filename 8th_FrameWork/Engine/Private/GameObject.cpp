@@ -9,7 +9,7 @@
 CGameObject::CGameObject()
 {
 	m_pTransform = CTransform::Create(1);
-	Add_Component<CTransform>(m_pTransform);
+	Add_Component(m_pTransform);
 	m_pTransform->Set_Owner(this);
 }
 

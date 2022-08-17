@@ -31,6 +31,7 @@ private:
 private:
 	HRESULT		Render_Group(RENDER_GROUP eGroup);
 	void		Sort_AlphaList();
+	void		Sort_UIGroup();
 
 	
 };

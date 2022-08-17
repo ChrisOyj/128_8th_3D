@@ -9,6 +9,7 @@
 #include "CGameObject_Factory.h"
 #include "CComponent_Factory.h"
 
+#include "CDarkScreen.h"
 #include "CLoading_BG.h"
 #include "CLoading_Turn.h"
 #include "CLoading_Bar.h"
@@ -40,6 +41,8 @@ CLevel_Loading* CLevel_Loading::Create()
 
 HRESULT CLevel_Loading::Initialize()
 {
+	CGameInstance::Get_Instance()->Add_GameObject_Prototype(CDarkScreen::Create());
+
 	CLoading_BG* pLoadingBG = CLoading_BG::Create();
 	CGameInstance::Get_Instance()->Add_GameObject_Prototype(pLoadingBG);
 
@@ -59,6 +62,7 @@ HRESULT CLevel_Loading::SetUp_Prototypes()
 
 HRESULT CLevel_Loading::Enter()
 {
+	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CDarkScreen>(), GROUP_LOADING);
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_BG>(), GROUP_LOADING);
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_Turn>(), GROUP_LOADING);
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_Bar>(), GROUP_LOADING);

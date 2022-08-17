@@ -92,7 +92,7 @@ HRESULT CMainApp::Render()
 	if (!m_pGameInstance->Can_Update())
 		return S_OK;
 
-	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 0.f, 1.f))))
+	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
 		return E_FAIL;
 	if (FAILED(m_pGameInstance->Clear_DepthStencil_View()))
 		return E_FAIL;
@@ -170,6 +170,15 @@ HRESULT CMainApp::SetUp_Statics()
 HRESULT CMainApp::SetUp_ShaderFiles()
 {
 	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxTex.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxCubeTex.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxnorTex.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxModel.hlsl")))
 		return E_FAIL;
 
 	return S_OK;

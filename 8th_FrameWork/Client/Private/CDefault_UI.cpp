@@ -72,9 +72,11 @@ HRESULT CDefault_UI::Initialize()
 	tTransform.vScale = CUtility_Json::Get_VectorFromJson(UIJson["vScale"]);
 
 	GET_COMPONENT(CFader)->Get_FadeDesc() = CUtility_Json::Get_StructFromJson<FADEDESC>(UIJson["tFadeDesc"]);
+	//_uint iCurPass = UIJson["iCurPass"];
 	GET_COMPONENT(CRenderer)->Set_Pass(UIJson["iCurPass"]);
+	GET_COMPONENT(CPhysics)->Get_Physics() = CUtility_Json::Get_StructFromJson<PHYSICS>(UIJson["tPhysics"]);
 
-
+	//_uint iCurTextureIndex = UIJson["iCurTextureIndex"];
 	GET_COMPONENT(CTexture)->Get_vecTexture().clear();
 
 	for (_uint i = 0; i < UIJson["strTextureFilePath"].size(); ++i)
@@ -83,6 +85,11 @@ HRESULT CDefault_UI::Initialize()
 		if (FAILED(GET_COMPONENT(CTexture)->Add_Texture(strFilePath.c_str())))
 			return E_FAIL;
 	}
+
+	_uint iCurTextureIndex = UIJson["iCurTextureIndex"];
+
+	GET_COMPONENT(CTexture)->Set_CurTextureIndex(0);
+
 
 	return S_OK;
 }

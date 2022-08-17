@@ -6,6 +6,12 @@ sampler DefaultSampler = sampler_state
 	AddressV = wrap;
 };
 
+sampler PointSampler = sampler_state
+{
+	filter = min_mag_mip_Point;
+	AddressU = wrap;
+	AddressV = wrap;
+};
 
 BlendState BS_Default
 {
@@ -71,4 +77,9 @@ RasterizerState RS_Sky
 	FrontCounterClockwise = false;
 };
 
-
+RasterizerState RS_None
+{
+	FillMode = solid;
+	CullMode = none;
+	FrontCounterClockwise = false;
+};

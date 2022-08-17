@@ -68,3 +68,19 @@ HRESULT CShader_Manager::Set_RawValue(const _uint& iIndex, const char* pConstant
 
 	return pVariable->SetRawValue(pData, 0, iDataSize);
 }
+
+HRESULT CShader_Manager::Set_RawValue_All(const char* pConstantName, void* pData, _uint iDataSize)
+{
+	for (_uint i = 0; i < m_vecEffects.size(); ++i)
+	{
+		ID3DX11EffectVariable* pVariable = m_vecEffects[i]->GetVariableByName(pConstantName);
+
+		if (nullptr == pVariable)
+			return E_FAIL;
+
+		if (FAILED(pVariable->SetRawValue(pData, 0, iDataSize)))
+			return E_FAIL;
+	}
+	
+	return S_OK;
+}

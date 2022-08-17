@@ -53,3 +53,13 @@ _float CFunctor::Get_DegreeFromDot(const _float4& V1, const _float4& V2)
 
 	return fDegree;
 }
+
+string CFunctor::To_String(wstring wstrText)
+{
+	return string(wstrText.begin(), wstrText.end());
+}
+
+wstring CFunctor::To_Wstring(string wstrText)
+{
+	return wstring(wstrText.begin(), wstrText.end());
+}

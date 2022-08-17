@@ -2,12 +2,15 @@
 #include "CPrototype_Factory.h"
 
 #include "CMesh_Rect.h"
+#include "CMesh_Cube.h"
 #include "Texture.h"
 #include "CShader.h"
 #include "Renderer.h"
 #include "Transform.h"
 #include "Physics.h"
 #include "CFader.h"
+
+#include "CSkyBox.h"
 
 #include "GameInstance.h"
 
@@ -52,6 +55,11 @@ HRESULT CPrototype_Factory::SetUp_DefaultComponents()
 		return E_FAIL;
 
 	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(
+		CMesh_Cube::Create(CP_BEFORE_RENDERER)))
+		)
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(
 		CMesh_Rect::Create(CP_BEFORE_RENDERER)))
 		)
 		return E_FAIL;
@@ -69,6 +77,11 @@ HRESULT CPrototype_Factory::SetUp_DefaultGameObjects()
 	if (FAILED(CGameInstance::Get_Instance()->Add_GameObject_Prototype(
 		CDefault_UI::Create()))
 	)
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Add_GameObject_Prototype(
+		CSkyBox::Create()))
+		)
 		return E_FAIL;
 
 	return S_OK;

@@ -21,6 +21,7 @@ private:
 public:
 	const CRITICAL_SECTION&	Get_CS() { return m_CriticalSection; }
 	bool					IsFinished() { return m_bFinish; }
+	CLevel* Get_Level(LEVEL_TYPE_CLIENT eType) { return m_arrLevels[eType]; }
 
 public:
 	HRESULT					Initialize();

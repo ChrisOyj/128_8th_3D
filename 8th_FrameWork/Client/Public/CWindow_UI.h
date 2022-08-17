@@ -20,6 +20,13 @@ public:
 		_bool bSelected = false;
 
 	};
+
+	struct UI_FILE
+	{
+		string strFileName;
+		_bool bSelected = false;
+	};
+
 private:
 	CWindow_UI();
 	virtual ~CWindow_UI();
@@ -34,8 +41,10 @@ public:
 	virtual HRESULT Render() override;
 
 private:
+	vector<UI_FILE>		m_vecUIFile;
 	vector<UI_ITEM>		m_vecUI;
 	_uint				m_iCurrentIdx = 9999;
+	_uint				m_iCurrentFileIdx = 9999;
 	wstring				m_CurSelectedTextureFilePath;
 
 private:
@@ -47,6 +56,7 @@ private:
 private:
 	void	Show_LevelTab();
 	void	Show_UITab();
+	void	Show_UIList();
 
 private:
 	void	Create_Ortho();

@@ -66,10 +66,10 @@ HRESULT CCamera_Manager::SetUp_ShaderResources(_bool Ortho)
 	matView.Transpose();
 	matProj.Transpose();
 
-	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(0, "g_ViewMatrix", (&matView), sizeof(_float4x4))))
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue_All("g_ViewMatrix", (&matView), sizeof(_float4x4))))
 		return E_FAIL;
 
-	return CShader_Manager::Get_Instance()->Set_RawValue(0, "g_ProjMatrix", (&matProj), sizeof(_float4x4));
+	return CShader_Manager::Get_Instance()->Set_RawValue_All("g_ProjMatrix", (&matProj), sizeof(_float4x4));
 }
 
 HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)

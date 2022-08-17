@@ -142,6 +142,30 @@
     <Filter Include="03. Instances\02. GameObject\01. UI\02. Default_UI">
       <UniqueIdentifier>{b6b37ee4-7c1e-4435-af14-f964eae57137}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_Logo">
+      <UniqueIdentifier>{ec046488-814c-43ae-bd2c-fa5ae04ebc53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\04. Level_MainMenu">
+      <UniqueIdentifier>{adc0eec9-2a09-4018-bc52-908c5ed35673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen">
+      <UniqueIdentifier>{09f7c083-5471-4ef2-9231-702779ce0827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\04. SkyBox">
+      <UniqueIdentifier>{e44984c4-ff41-4acd-bb30-f34b71e76516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_FollowCam">
+      <UniqueIdentifier>{f8ad8e26-b9d1-492d-be1f-9d979c67d58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\05. Decoration">
+      <UniqueIdentifier>{763de49c-7246-49ef-91f9-ae6ba14443e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\06. Map">
+      <UniqueIdentifier>{f265b4ab-8149-4659-a048-46f691b0caf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\07. Terrain">
+      <UniqueIdentifier>{7f6b8132-3a08-4709-a053-5fa44a00fd19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -285,6 +309,27 @@
     <ClInclude Include="..\public\CTestObj.h">
       <Filter>03. Instances\02. GameObject\02. Unit\TestObj</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CScript_Logo.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_MainMenu.h">
+      <Filter>03. Instances\01. Level\04. Level_MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDarkScreen.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CSkyBox.h">
+      <Filter>03. Instances\02. GameObject\04. SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CScript_FollowCam.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FollowCam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTerrain.h">
+      <Filter>03. Instances\02. GameObject\07. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CMap.h">
+      <Filter>03. Instances\02. GameObject\06. Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -412,6 +457,27 @@
     <ClCompile Include="..\private\CTestObj.cpp">
       <Filter>03. Instances\02. GameObject\02. Unit\TestObj</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\CScript_Logo.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_MainMenu.cpp">
+      <Filter>03. Instances\01. Level\04. Level_MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDarkScreen.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CSkyBox.cpp">
+      <Filter>03. Instances\02. GameObject\04. SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScript_FollowCam.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FollowCam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTerrain.cpp">
+      <Filter>03. Instances\02. GameObject\07. Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CMap.cpp">
+      <Filter>03. Instances\02. GameObject\06. Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -426,6 +492,9 @@
       <Filter>05. ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTex.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxModel.hlsl">
       <Filter>05. ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

@@ -9,6 +9,9 @@
 #include "ImGui_Manager.h"
 
 #include "CTestObj.h"
+#include "CSkyBox.h"
+#include "CTerrain.h"
+#include "CMap.h"
 
 CLevel_Unity::CLevel_Unity()
 {
@@ -33,6 +36,8 @@ CLevel_Unity* CLevel_Unity::Create()
 HRESULT CLevel_Unity::Initialize()
 {
     CGameInstance::Get_Instance()->Add_GameObject_Prototype(CTestObj::Create());
+    CGameInstance::Get_Instance()->Add_GameObject_Prototype(CTerrain::Create());
+    CGameInstance::Get_Instance()->Add_GameObject_Prototype(CMap::Create());
 
     return S_OK;
 }
@@ -45,6 +50,9 @@ HRESULT CLevel_Unity::SetUp_Prototypes()
     }*/
 
     Ready_GameObject(CGameObject_Factory::Clone_GameObject<CTestObj>(), GROUP_PROP);
+    Ready_GameObject(CGameObject_Factory::Clone_GameObject<CSkyBox>(), GROUP_DEFAULT);
+    Ready_GameObject(CGameObject_Factory::Clone_GameObject<CTerrain>(), GROUP_DEFAULT);
+    Ready_GameObject(CGameObject_Factory::Clone_GameObject<CMap>(), GROUP_DEFAULT);
 
     return S_OK;
 }

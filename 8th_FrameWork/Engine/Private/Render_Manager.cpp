@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "GameInstance.h"
-#include "Renderer.h"
+#include "CModel_Renderer.h"
 
 #include "Camera_Manager.h"
 
@@ -45,6 +45,7 @@ HRESULT CRender_Manager::Render()
 	}
 
 	/* UI */
+	Sort_UIGroup();
 
 	if (FAILED(CCamera_Manager::Get_Instance()->SetUp_ShaderResources(true)))
 		return E_FAIL;
@@ -78,4 +79,12 @@ void CRender_Manager::Sort_AlphaList()
 	}
 
 	m_pAlphaRenderers.sort(greater<pair<_float, CRenderer*>>());
+}
+
+void CRender_Manager::Sort_UIGroup()
+{
+	m_Renderers[RENDER_UI].sort([](CRenderer* p1, CRenderer* p2)
+		{
+			return p1->Get_FinalPos().z > p2->Get_FinalPos().z;
+		});
 }

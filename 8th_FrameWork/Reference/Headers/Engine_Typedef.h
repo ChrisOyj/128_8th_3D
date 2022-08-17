@@ -28,6 +28,8 @@ namespace Engine
 
 	typedef XMFLOAT2					_float2;
 	typedef XMFLOAT3					_float3;
+	typedef XMVECTOR					_vector;
+	typedef XMMATRIX					_matrix;
 
 
 	typedef struct XMFLOAT4X4_DERIVED : public XMFLOAT4X4

@@ -56,6 +56,8 @@ _float4 CRenderer::Get_WorldPosition()
 
 void CRenderer::Late_Tick()
 {
+	m_vFinalPos = m_pOwner->Get_Transform()->Get_World(WORLD_POS);
+	m_vFinalPos += m_vOffsetPos * m_pOwner->Get_Transform()->Get_WorldMatrix();
 	CRender_Manager::Get_Instance()->Add_Renderer(m_eRenderGroup, this);
 }
 

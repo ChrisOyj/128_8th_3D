@@ -4,6 +4,7 @@
 #include "CLevel_Loading.h"
 #include "CLevel_Unity.h"
 #include "CLevel_Logo.h"
+#include "CLevel_MainMenu.h"
 #include "GameInstance.h"
 
 #include "CShader.h"
@@ -47,6 +48,8 @@ HRESULT CLoading_Manager::Initialize()
 
 	m_arrLevels[LEVEL_LOADING] = CLevel_Loading::Create();
 	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
+	m_arrLevels[LEVEL_LOGO] = CLevel_Logo::Create();
+	m_arrLevels[LEVEL_MAINMENU] = CLevel_MainMenu::Create();
 
 	
 

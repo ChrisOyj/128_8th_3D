@@ -7,6 +7,9 @@
 
 #include "CUser.h"
 
+#include "CDefault_UI.h"
+#include "CScript_Logo.h"
+
 CLevel_Logo::CLevel_Logo()
 {
 }
@@ -15,21 +18,30 @@ CLevel_Logo::~CLevel_Logo()
 {
 }
 
-CLevel_Logo* CLevel_Logo::Create()
-{
-    CLevel_Logo* pLevel = new CLevel_Logo();
-
-    return pLevel;
-}
-
 HRESULT CLevel_Logo::Initialize()
 {
 
     return S_OK;
 }
 
+HRESULT CLevel_Logo::SetUp_Prototypes()
+{
+    CDefault_UI* pLogoBG = CGameObject_Factory::Create_UI(L"Logo_BG");
+    CDefault_UI* pLogo = CGameObject_Factory::Create_UI(L"Logo");
+    
+    pLogo->Add_Component(CScript_Logo::Create(CP_AFTER_TRANSFORM, pLogoBG));
+
+    Ready_GameObject(pLogo, GROUP_UI);
+    Ready_GameObject(pLogoBG, GROUP_UI);
+
+
+    return S_OK;
+}
+
+
 HRESULT CLevel_Logo::Enter()
 {
+    __super::Enter();
 
     return S_OK;
 }
@@ -52,10 +64,7 @@ HRESULT CLevel_Logo::Render()
 
 HRESULT CLevel_Logo::Exit()
 {
+    __super::Exit();
     return S_OK;
 }
 
-HRESULT CLevel_Logo::SetUp_Prototypes()
-{
-    return E_NOTIMPL;
-}

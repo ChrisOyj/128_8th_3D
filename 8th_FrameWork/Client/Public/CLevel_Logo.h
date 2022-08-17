@@ -7,12 +7,11 @@ BEGIN(Client)
 class CLevel_Logo final
 	: public CLevel
 {
+	DECLARE_LEVEL(CLevel_Logo);
+
 private:
 	CLevel_Logo();
 	virtual ~CLevel_Logo();
-
-public:
-	static CLevel_Logo* Create();
 
 public:
 	// CLevel을(를) 통해 상속됨

@@ -16,6 +16,7 @@ class ENGINE_DLL CTexture
 	: public CComponent
 {
 	DECLARE_PROTOTYPE(CTexture);
+	friend class CModel;
 
 private:
 	CTexture(_uint iGroupIdx);

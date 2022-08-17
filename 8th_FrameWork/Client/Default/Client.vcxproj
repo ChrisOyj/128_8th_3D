@@ -182,6 +182,7 @@
     <ClInclude Include="..\public\CCamera_Free.h" />
     <ClInclude Include="..\public\CComponent_Factory.h" />
     <ClInclude Include="..\public\CCustom_UI.h" />
+    <ClInclude Include="..\public\CDarkScreen.h" />
     <ClInclude Include="..\public\CDefault_UI.h" />
     <ClInclude Include="..\public\CEmpty_GameObject.h" />
     <ClInclude Include="..\public\CFader.h" />
@@ -189,12 +190,18 @@
     <ClInclude Include="..\public\CImGui_Window.h" />
     <ClInclude Include="..\public\CLevel_Loading.h" />
     <ClInclude Include="..\public\CLevel_Logo.h" />
+    <ClInclude Include="..\public\CLevel_MainMenu.h" />
     <ClInclude Include="..\public\CLevel_Unity.h" />
     <ClInclude Include="..\public\CLoading_Bar.h" />
     <ClInclude Include="..\public\CLoading_BG.h" />
     <ClInclude Include="..\public\CLoading_Turn.h" />
+    <ClInclude Include="..\public\CMap.h" />
     <ClInclude Include="..\public\CPrototype_Factory.h" />
+    <ClInclude Include="..\public\CScript_FollowCam.h" />
+    <ClInclude Include="..\public\CScript_Logo.h" />
     <ClInclude Include="..\public\CScript_Freecam.h" />
+    <ClInclude Include="..\public\CSkyBox.h" />
+    <ClInclude Include="..\public\CTerrain.h" />
     <ClInclude Include="..\public\CTestObj.h" />
     <ClInclude Include="..\public\CUser.h" />
     <ClInclude Include="..\Public\CUtility_Json.h" />
@@ -229,6 +236,7 @@
     <ClCompile Include="..\private\CCamera_Free.cpp" />
     <ClCompile Include="..\private\CComponent_Factory.cpp" />
     <ClCompile Include="..\private\CCustom_UI.cpp" />
+    <ClCompile Include="..\private\CDarkScreen.cpp" />
     <ClCompile Include="..\private\CDefault_UI.cpp" />
     <ClCompile Include="..\private\CEmpty_GameObject.cpp" />
     <ClCompile Include="..\Private\CFader.cpp" />
@@ -236,13 +244,19 @@
     <ClCompile Include="..\Private\CImGui_Window.cpp" />
     <ClCompile Include="..\private\CLevel_Loading.cpp" />
     <ClCompile Include="..\private\CLevel_Logo.cpp" />
+    <ClCompile Include="..\private\CLevel_MainMenu.cpp" />
     <ClCompile Include="..\Private\CLevel_Unity.cpp" />
     <ClCompile Include="..\Private\Client_Defines.cpp" />
     <ClCompile Include="..\private\CLoading_Bar.cpp" />
     <ClCompile Include="..\private\CLoading_BG.cpp" />
     <ClCompile Include="..\private\CLoading_Turn.cpp" />
+    <ClCompile Include="..\private\CMap.cpp" />
     <ClCompile Include="..\private\CPrototype_Factory.cpp" />
+    <ClCompile Include="..\private\CScript_FollowCam.cpp" />
+    <ClCompile Include="..\private\CScript_Logo.cpp" />
     <ClCompile Include="..\private\CScript_Freecam.cpp" />
+    <ClCompile Include="..\private\CSkyBox.cpp" />
+    <ClCompile Include="..\private\CTerrain.cpp" />
     <ClCompile Include="..\private\CTestObj.cpp" />
     <ClCompile Include="..\private\CUser.cpp" />
     <ClCompile Include="..\Private\CUtility_Json.cpp" />
@@ -266,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxCubeTex.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxModel.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxNorTex.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTex.hlsl" />
   </ItemGroup>

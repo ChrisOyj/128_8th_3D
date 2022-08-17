@@ -51,7 +51,7 @@ HRESULT CWindow_UI::Initialize()
 	window_flags |= ImGuiWindowFlags_HorizontalScrollbar;
 
 	m_bEnable = false;
-	SetUp_ImGuiDESC(typeid(CWindow_UI).name(), ImVec2(350.f, 600.f), window_flags);
+	SetUp_ImGuiDESC(typeid(CWindow_UI).name(), ImVec2(400.f, 600.f), window_flags);
 
 
 	return S_OK;
@@ -66,7 +66,25 @@ HRESULT CWindow_UI::Render()
 	if (FAILED(__super::Begin()))
 		return E_FAIL;
 
-	Show_UITab();
+	if (ImGui::BeginTabBar("Tab"))
+	{
+		if (ImGui::BeginTabItem("UI_Setting"))
+		{
+			Show_UITab();
+
+			ImGui::EndTabItem();
+		}
+
+		if (ImGui::BeginTabItem("UI_Loader"))
+		{
+			Show_UIList();
+
+			ImGui::EndTabItem();
+		}
+
+
+		ImGui::EndTabBar();
+	}
 
 
 	__super::End();
@@ -83,7 +101,41 @@ HRESULT CWindow_UI::Save_Level()
 
 HRESULT CWindow_UI::Save_UI(_uint iIndex)
 {
+	CDefault_UI* pUI = m_vecUI[m_iCurrentIdx].pUI;
+
+	if (pUI->Get_FileKey() == L"0")
+		return E_FAIL;
+
+	json	UIJson;
+	UIJson.emplace("matWorld", pUI->Get_Transform()->Get_Transform().matMyWorld.m);
+	UIJson.emplace("vScale", pUI->Get_Transform()->Get_Transform().vScale.XMLoad().m128_f32);
 	
+
+	UIJson.emplace("iCurPass", GET_COMPONENT_FROM(pUI, CRenderer)->Get_Pass());
+	UIJson.emplace("iCurTextureIndex", GET_COMPONENT_FROM(pUI, CTexture)->Get_CurTextureIndex());
+
+	FADEDESC	tFadeDesc = GET_COMPONENT_FROM(pUI, CFader)->Get_FadeDesc();
+	CUtility_Json::Save_Struct("tFadeDesc", tFadeDesc, &UIJson);
+
+	PHYSICS	tPhysics = GET_COMPONENT_FROM(pUI, CPhysics)->Get_Physics();
+	CUtility_Json::Save_Struct("tPhysics", tPhysics, &UIJson);
+
+	vector<TEXTUREDESC>& vecTexture = GET_COMPONENT_FROM(pUI, CTexture)->Get_vecTexture();
+
+	vector<wstring> vecFilePath;
+	for (_uint i = 0; i < vecTexture.size(); ++i)
+	{
+		if (i == 0 &&
+			vecTexture[i].strFilePath == L"../bin/resources/textures/ui/Jusin_0.png")
+			continue;
+
+		vecFilePath.push_back(vecTexture[i].strFilePath);
+	}
+
+	UIJson.emplace("strTextureFilePath", vecFilePath);
+
+	if (FAILED(CUtility_Json::Save_Json(CUtility_Json::Complete_Path(pUI->Get_FileKey()).c_str(), UIJson)))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -157,12 +209,19 @@ void CWindow_UI::Show_UITab()
 
 	if (ImGui::Button("SAVE_UI"))
 	{
-		Save_UI(m_iCurrentIdx);
+		if (FAILED(Save_UI(m_iCurrentIdx)))
+		{
+			Call_MsgBox(L"Failed to Save_UI : CWindow_UI");
+			return;
+		}
+		else
+		{
+			Call_MsgBox(L"Save ¼º°ø");
+		}
 	}
-
 	ImGui::SameLine();
 
-	if (ImGui::Button("LOAD_UI"))
+	if (ImGui::Button("Refresh_List"))
 	{
 		Load_Levels();
 	}
@@ -199,7 +258,6 @@ void CWindow_UI::Show_UITab()
 			iter = m_vecUI.erase(iter);
 
 			m_iCurrentIdx = 9999;
-
 		}
 	}
 	if (m_iCurrentIdx != 9999)
@@ -210,7 +268,6 @@ void CWindow_UI::Show_UITab()
 			wstring wstrKey(strKey.begin(), strKey.end());
 			m_vecUI[m_iCurrentIdx].pUI->Set_FileKey(wstrKey);
 		}
-
 	}
 
 	if (ImGui::BeginTabBar("ui_list"))
@@ -268,6 +325,74 @@ void CWindow_UI::Show_UITab()
 
 			ImGui::EndTabBar();
 		}
+	}
+}
+
+void CWindow_UI::Show_UIList()
+{
+	if (ImGui::Button("Load_Files"))
+	{
+		m_vecUIFile.clear();
+
+		for (filesystem::directory_iterator FileIter("../bin/Json");
+			FileIter != filesystem::end(FileIter); ++FileIter)
+		{
+			const filesystem::directory_entry& entry = *FileIter;
+
+			wstring wstrPath = entry.path().relative_path();
+			string strFullPath;
+			strFullPath.assign(wstrPath.begin(), wstrPath.end());
+
+			_int iFind = (_int)strFullPath.rfind("\\") + 1;
+			string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
+
+			_int iFind2 = (_int)strFileName.find(".");
+			strFileName = strFileName.substr(0, iFind2);
+
+			UI_FILE tFile;
+			tFile.bSelected = false;
+			tFile.strFileName = strFileName;
+
+			m_vecUIFile.push_back(tFile);
+		}
+	}
+
+	if (ImGui::Button("Create_UI"))
+	{
+		if (m_iCurrentFileIdx == 9999)
+			return;
+
+		CREATE_GAMEOBJECT(
+			CDefault_UI::Clone_WithJson(CFunctor::To_Wstring(m_vecUIFile[m_iCurrentFileIdx].strFileName)),
+			GROUP_UI);
+	}
+
+
+	if (ImGui::BeginListBox("ALL_UI_LIST", ImVec2(0, 300.f)))
+	{
+		for (_uint i = 0; i < m_vecUIFile.size(); ++i)
+		{
+			string strFileKey = m_vecUIFile[i].strFileName;
+
+			if (ImGui::Selectable(strFileKey.c_str(), m_vecUIFile[i].bSelected))
+			{
+				for (_uint j = 0; j < m_vecUIFile.size(); ++j)
+					m_vecUIFile[j].bSelected = false;
+
+				m_iCurrentFileIdx = i;
+				m_vecUIFile[i].bSelected = true;
+			}
+
+			if (m_vecUIFile[i].bSelected)
+			{
+				ImGui::SetItemDefaultFocus();
+			}
+
+		}
+
+		ImGui::EndListBox();
+
+
 	}
 }
 
@@ -360,6 +485,7 @@ void CWindow_UI::Show_Transform(_uint iIndex)
 	ImGui::SliderFloat("Pos:Y", &vOrthoPos.y, 0.f, (_float)g_iWinCY);
 	ImGui::SameLine();
 	ImGui::InputFloat("Pos:Y,", &vOrthoPos.y);
+	ImGui::InputFloat("Pos:Z,", &vOrthoPos.z);
 
 	_float4 vScale = pTransform->Get_Scale();
 	ImGui::Text("- Scale -");
@@ -423,7 +549,8 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 
 	if (ImGui::CollapsingHeader("- Textures List -"))
 	{
-		if (ImGui::Button("Add Texture") || ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+		if (ImGui::Button("Add Texture") || 
+			ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 		{
 			if (FAILED(pTexture->Add_Texture(m_CurSelectedTextureFilePath.c_str())))
 			{
@@ -440,7 +567,7 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 		{
 			pTexture->Pop_Texture();
 		}
-		if (ImGui::BeginListBox("Textures List"))
+		if (ImGui::BeginListBox("Textures List", ImVec2(300.f, 0.f)))
 		{
 			Read_Folder("../bin/resources/textures");
 
@@ -450,7 +577,7 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 
 	ImGui::Text("Current Texture Size : %d", pTexture->Get_TextureSize());
 
-	if (ImGui::BeginListBox("Textures List"))
+	if (ImGui::BeginListBox("Current Textures List"))
 	{
 		for (auto& elem : pTexture->Get_vecTexture())
 		{

@@ -9,6 +9,12 @@ CLevel::CLevel()
 
 CLevel::~CLevel()
 {
+    for (_uint i = 0; i < m_vecGameObjects.size(); ++i)
+    {
+        SAFE_DELETE(m_vecGameObjects[i].first);
+    }
+    m_vecGameObjects.clear();
+
 }
 
 HRESULT CLevel::Enter()

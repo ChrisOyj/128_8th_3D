@@ -9,6 +9,8 @@ END
 
 BEGIN(Client)
 
+class CDefault_UI;
+
 enum GAMEOBJECT_TYPE
 {
 	OBJ_UNIT,
@@ -41,6 +43,12 @@ public:
 
 public:
 	static CGameObject* Clone_GameObject(_hashcode hcClassName);
+
+public:
+	static CDefault_UI* Create_UI(wstring strFileKey);
+
+public:
+	static vector<CGameObject*>	Create_vecUI(wstring strFileTagKey);
 };
 
 END

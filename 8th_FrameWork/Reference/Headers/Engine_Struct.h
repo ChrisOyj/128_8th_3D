@@ -54,6 +54,23 @@ namespace Engine
 		unsigned short _1, _2, _3;
 	}FACEINDICES16;
 
+	typedef struct tagModelMaterial
+	{
+		class CTexture* pTextures[AI_TEXTURE_TYPE_MAX];
+	}MODEL_MATERIAL;
+
+	typedef struct tagVertex_Normal_Texture
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT3		vNormal;
+		XMFLOAT2		vTexUV;
+	}VTXNORTEX;
+
+	typedef struct ENGINE_DLL tagVertex_Normal_Texture_Declaration
+	{
+		static const unsigned int		iNumElements = 3;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXNORTEX_DECLARATION;
 
 	typedef struct tagVertex_Texture
 	{
@@ -66,6 +83,36 @@ namespace Engine
 		static const unsigned int		iNumElements = 2;
 		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
 	} VTXTEX_DECLARATION;
+
+	typedef struct tagVertex_Model
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT3		vNormal;
+		XMFLOAT2		vTexUV;
+		XMFLOAT3		vTangent;
+	}VTXMODEL;
+
+	typedef struct ENGINE_DLL tagtagVertex_Model_Declaration
+	{
+		static const unsigned int		iNumElements = 4;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXMODEL_DECLARATION;
+
+	typedef struct tagVertex_AnimModel
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT3		vNormal;
+		XMFLOAT2		vTexUV;
+		XMFLOAT3		vTangent;
+		XMUINT4			vBlendIndex;
+		XMFLOAT4		vBlendWeight;
+	}VTXANIM;
+
+	typedef struct ENGINE_DLL tagVertex_AnimModel_Declaration
+	{
+		static const unsigned int		iNumElements = 6;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXANIM_DECLARATION;
 
 	typedef struct tagVertex_Cube_Texture
 	{

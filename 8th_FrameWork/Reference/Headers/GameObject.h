@@ -20,6 +20,7 @@ protected:
 
 	friend class CObject_Manager;
 	friend class CPrototype_Manager;
+	friend class CLevel;
 
 public:
 	virtual CGameObject* Clone() PURE;
@@ -66,16 +67,11 @@ public:
 	virtual void	Late_Tick();
 
 public:
-	template<typename T>
-	void			Add_Component(CComponent* pComponent)
-	{
-		m_mapComponents[HASHCODE(T)].push_back(pComponent);
-
-	}
 
 	template<typename T>
 	T*			Add_Component(T* pComponent)
 	{
+		pComponent->Set_Owner(this);
 		m_mapComponents[HASHCODE(T)].push_back(pComponent);
 		return pComponent;
 
