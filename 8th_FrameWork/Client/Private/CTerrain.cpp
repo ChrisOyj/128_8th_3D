@@ -48,5 +48,6 @@ HRESULT CTerrain::Initialize_Prototype()
 
 HRESULT CTerrain::Initialize()
 {
+    m_pTransform->Set_World(WORLD_POS, _float4(0.f, -5.f, 0.f));
     return S_OK;
 }

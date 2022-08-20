@@ -46,11 +46,11 @@ CModel::~CModel()
 	Release();
 }
 
-CModel* CModel::Create(_uint iGroupIdx, MODEL_TYPE eType, const char* pModelFilePath, const char* pModelFileName, _float4x4 TransformMatrix)
+CModel* CModel::Create(_uint iGroupIdx, MODEL_TYPE eType, const char* pModelFilePath, _float4x4 TransformMatrix)
 {
 	CModel* pInstance = new CModel(iGroupIdx);
 
-	if (FAILED(pInstance->SetUp_Model(eType, pModelFilePath, pModelFileName, TransformMatrix)))
+	if (FAILED(pInstance->SetUp_Model(eType, pModelFilePath, TransformMatrix)))
 	{
 		Call_MsgBox(L"Failed to SetUp_Model : CModel");
 		SAFE_DELETE(pInstance);
@@ -165,21 +165,16 @@ HRESULT CModel::Bind_SRV(CShader * pShader, const char * pConstantName, _uint iM
 	return m_Materials[iMaterialIndex].pTextures[eType]->Set_ShaderResourceView(pShader, pConstantName);	
 }
 
-HRESULT CModel::SetUp_Model(MODEL_TYPE eType, const char* pModelFilePath, const char* pModelFileName, _float4x4 TransformMatrix)
+HRESULT CModel::SetUp_Model(MODEL_TYPE eType, const char* pModelFilePath, _float4x4 TransformMatrix)
 {
 	m_eMODEL_TYPE = eType;
 
 	XMStoreFloat4x4(&m_TransformMatrix, TransformMatrix.XMLoad());
 
-	char			szFullPath[MAX_PATH] = "";
-
-	strcpy_s(szFullPath, pModelFilePath);
-	strcat_s(szFullPath, pModelFileName);
-
 	if (TYPE_NONANIM == eType)
-		m_pAIScene = m_Importer.ReadFile(szFullPath, aiProcess_PreTransformVertices | aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
+		m_pAIScene = m_Importer.ReadFile(pModelFilePath, aiProcess_PreTransformVertices | aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 	else
-		m_pAIScene = m_Importer.ReadFile(szFullPath, aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
+		m_pAIScene = m_Importer.ReadFile(pModelFilePath, aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 
 
 
@@ -236,8 +231,21 @@ HRESULT CModel::Create_Materials(const char* pModelFilePath)
 
 			char			szFileName[MAX_PATH] = "";
 			char			szExt[MAX_PATH] = "";
-
 			_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szExt, MAX_PATH);
+
+			string strFileNames = szFileName;
+			strFileNames += szExt;
+			//strFileNames += ".tga";
+			wstring wstrFileName(strFileNames.begin(), strFileNames.end());
+			wstring wstrPath = L"../bin/resources/textures/ModelTextures/";
+
+			wstrPath += wstrFileName;
+
+			Material.pTextures[j] = CTexture::Create(0, wstrPath.c_str(), 1);
+			if (nullptr == Material.pTextures[j])
+				return E_FAIL;
+
+			/*_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szExt, MAX_PATH);
 
 			strcpy_s(szFullPath, pModelFilePath);
 			strcat_s(szFullPath, szFileName);
@@ -247,9 +255,10 @@ HRESULT CModel::Create_Materials(const char* pModelFilePath)
 
 			MultiByteToWideChar(CP_ACP, 0, szFullPath, strlen(szFullPath), szTextureFilePath, MAX_PATH);
 
-			Material.pTextures[j] = CTexture::Create(0, szTextureFilePath, 1);
+
+			Material.pTextures[j] = CTexture::Create(0, wstrPath.c_str(), 1);
 			if (nullptr == Material.pTextures[j])
-				return E_FAIL;
+				return E_FAIL;*/
 		}
 
 		m_Materials.push_back(Material);		

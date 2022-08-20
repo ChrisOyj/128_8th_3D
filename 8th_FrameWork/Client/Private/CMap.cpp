@@ -26,6 +26,26 @@ CMap::~CMap()
 {
 }
 
+CMap* CMap::Create(const char* pFilePath)
+{
+    CMap* pInstance = new CMap;
+
+    if (FAILED(pInstance->SetUp_Model(pFilePath)))
+    {
+        Call_MsgBox(L"Failed to SetUp_Model : CMap");
+        SAFE_DELETE(pInstance);
+        return nullptr;
+    }
+
+    if (FAILED(pInstance->Initialize_Prototype()))
+    {
+        Call_MsgBox(L"Failed to Initialize_Prototype : CMap");
+        SAFE_DELETE(pInstance);
+    }
+
+    return pInstance;
+}
+
 HRESULT CMap::Initialize_Prototype()
 {
     CShader* pShader = CShader::Create(CP_BEFORE_RENDERER, SHADER_VTXMODEL,
@@ -33,16 +53,9 @@ HRESULT CMap::Initialize_Prototype()
     pShader->Initialize();
     Add_Component(pShader);
 
-    _float4x4			TransformMatrix;
-    TransformMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-
-    CModel* pModel = CModel::Create(CP_BEFORE_RENDERER, TYPE_NONANIM, "../bin/resources/meshes/test/",
-        "SK_CHR_Sasuke.fbx", TransformMatrix);
-    pModel->Initialize();
-    Add_Component(pModel);
-
     CModel_Renderer* pRenderer = CModel_Renderer::Create(CP_RENDERER, RENDER_NONALPHA, VTXMODEL_PASS_DEFAULT
         , _float4(0.f, 0.f, 0.f, 1.f));
+
     Add_Component<CModel_Renderer>(pRenderer);
 
     /*CTexture* pTexture = CTexture::Create(CP_AFTER_TRANSFORM,
@@ -56,5 +69,21 @@ HRESULT CMap::Initialize_Prototype()
 
 HRESULT CMap::Initialize()
 {
+    return S_OK;
+}
+
+HRESULT CMap::SetUp_Model(const char* pFilePath)
+{
+    _float4x4			TransformMatrix;
+    TransformMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(0.0f));
+
+    CModel* pModel = CModel::Create(CP_BEFORE_RENDERER, TYPE_NONANIM, pFilePath, TransformMatrix);
+    
+    if (!pModel)
+        return E_FAIL;
+
+    pModel->Initialize();
+    Add_Component(pModel);
+
     return S_OK;
 }

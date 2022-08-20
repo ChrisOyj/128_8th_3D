@@ -126,7 +126,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ThirdPartyLib/;../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Effects11d.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTKd.lib;assimp-vc143-mtd.lib</AdditionalDependencies>
+      <AdditionalDependencies>Effects11d.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTKd.lib;assimp-vc143-mtd.lib;DirectXTexd.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>
@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ThirdPartyLib/;../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Effects11.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTK.lib;assimp-vc143-mt.lib</AdditionalDependencies>
+      <AdditionalDependencies>Effects11.lib;%(AdditionalDependencies);fmodex64_vc.lib;d3d11.lib;dinput8.lib;dxguid.lib;DirectXTK.lib;DirectXTex.lib;assimp-vc143-mt.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>

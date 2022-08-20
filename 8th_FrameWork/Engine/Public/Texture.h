@@ -70,6 +70,7 @@ private:
 
 private:
 	HRESULT		SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iNumTextures);
+	HRESULT		CreateTGATextureFromFile(const _tchar* pTextureFilePath, ID3D11ShaderResourceView** ppOutSRV);
 
 };
 END

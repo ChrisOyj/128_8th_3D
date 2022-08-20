@@ -13,8 +13,7 @@ private:
 	virtual ~CModel();
 
 public:
-	static CModel* Create(_uint iGroupIdx, MODEL_TYPE eType, const char* pModelFilePath
-		, const char* pModelFileName, _float4x4 TransformMatrix);
+	static CModel* Create(_uint iGroupIdx, MODEL_TYPE eType, const char* pModelFilePath, _float4x4 TransformMatrix);
 
 public:
 	_uint Get_NumMeshContainers() const {
@@ -71,7 +70,7 @@ private:
 
 
 private:
-	HRESULT	SetUp_Model(MODEL_TYPE eType, const char* pModelFilePath, const char* pModelFileName, _float4x4 TransformMatrix);
+	HRESULT	SetUp_Model(MODEL_TYPE eType, const char* pModelFilePath, _float4x4 TransformMatrix);
 	HRESULT Create_MeshContainers();
 	HRESULT Create_Materials(const char* pModelFilePath);
 	HRESULT Create_HierarchyNodes(aiNode* pNode, class CHierarchyNode* pParent, _uint iDepth);

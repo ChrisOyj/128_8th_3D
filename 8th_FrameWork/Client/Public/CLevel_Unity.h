@@ -25,6 +25,7 @@ public:
 	virtual HRESULT Exit() override;
 
 private:
+	CGameObject* m_pTestObj = nullptr;
 };
 
 END

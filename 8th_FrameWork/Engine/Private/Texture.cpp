@@ -60,7 +60,8 @@ HRESULT CTexture::Add_Texture(const _tchar* pTextureFilePath)
 
 	if (!lstrcmp(szExt, TEXT(".dds")))
 		hr = DirectX::CreateDDSTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
-
+	else if (!lstrcmp(szExt, TEXT(".tga")))
+		hr = CreateTGATextureFromFile(szTextureFilePath, pSRV.GetAddressOf());
 	else
 		hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
@@ -148,7 +149,8 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 
 		if (!lstrcmp(szExt, TEXT(".dds")))
 			hr = DirectX::CreateDDSTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
-
+		else if (!lstrcmp(szExt, TEXT(".tga")))
+			hr = CreateTGATextureFromFile(szTextureFilePath, pSRV.GetAddressOf());
 		else
 			hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
@@ -161,6 +163,19 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 		m_SRVs.push_back(tDesc);
 
 	}
+
+	return S_OK;
+}
+
+HRESULT CTexture::CreateTGATextureFromFile(const _tchar* pTextureFilePath, ID3D11ShaderResourceView** ppOutSRV)
+{
+	ScratchImage	tScImage;
+	TexMetadata	tMetaData;
+	if (FAILED(DirectX::LoadFromTGAFile(pTextureFilePath, &tMetaData, tScImage)))
+		return E_FAIL;
+
+	if (FAILED(CreateShaderResourceView(PDEVICE, tScImage.GetImages(), tScImage.GetImageCount(), tMetaData, ppOutSRV)))
+		return E_FAIL;
 
 	return S_OK;
 }

@@ -166,6 +166,9 @@
     <Filter Include="03. Instances\02. GameObject\07. Terrain">
       <UniqueIdentifier>{7f6b8132-3a08-4709-a053-5fa44a00fd19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Instances\02. GameObject\06. Map\ObjectMap">
+      <UniqueIdentifier>{14a273c5-5407-43f5-87e4-e38769c2db91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -330,6 +333,9 @@
     <ClInclude Include="..\public\CMap.h">
       <Filter>03. Instances\02. GameObject\06. Map</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CObject_Map.h">
+      <Filter>03. Instances\02. GameObject\06. Map\ObjectMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -477,6 +483,9 @@
     </ClCompile>
     <ClCompile Include="..\private\CMap.cpp">
       <Filter>03. Instances\02. GameObject\06. Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CObject_Map.cpp">
+      <Filter>03. Instances\02. GameObject\06. Map\ObjectMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

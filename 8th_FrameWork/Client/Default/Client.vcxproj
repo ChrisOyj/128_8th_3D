@@ -196,6 +196,7 @@
     <ClInclude Include="..\public\CLoading_BG.h" />
     <ClInclude Include="..\public\CLoading_Turn.h" />
     <ClInclude Include="..\public\CMap.h" />
+    <ClInclude Include="..\public\CObject_Map.h" />
     <ClInclude Include="..\public\CPrototype_Factory.h" />
     <ClInclude Include="..\public\CScript_FollowCam.h" />
     <ClInclude Include="..\public\CScript_Logo.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="..\private\CLoading_BG.cpp" />
     <ClCompile Include="..\private\CLoading_Turn.cpp" />
     <ClCompile Include="..\private\CMap.cpp" />
+    <ClCompile Include="..\private\CObject_Map.cpp" />
     <ClCompile Include="..\private\CPrototype_Factory.cpp" />
     <ClCompile Include="..\private\CScript_FollowCam.cpp" />
     <ClCompile Include="..\private\CScript_Logo.cpp" />

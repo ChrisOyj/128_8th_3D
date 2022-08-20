@@ -89,9 +89,6 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	Out.vColor = vMtrlDiffuse * 0.3f + vMtrlDiffuse * fShade;
 
-	if (Out.vColor.a < 0.1f)
-		discard;
-
 	return Out;	
 }
 
@@ -101,7 +98,7 @@ technique11 DefaultTechnique
 	{
 		SetBlendState(BS_Default, float4(0.f, 0.f, 0.f, 1.f), 0xffffffff);
 		SetDepthStencilState(DSS_Default, 0);
-		SetRasterizerState(RS_None);
+		SetRasterizerState(RS_Default);
 
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;

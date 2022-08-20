@@ -17,6 +17,7 @@
 #include <DirectXTK/SpriteBatch.h>
 #include <DirectXTK/SpriteFont.h>
 #include <DirectXTK/ScreenGrab.h>
+#include <DirectXTex/DirectXTex.h>
 
 #include <DirectXCollision.h>
 
