@@ -14,13 +14,15 @@ class ENGINE_DLL CComponent abstract
 protected:
 	CComponent(_uint iGroupID);
 	virtual ~CComponent();
-
+	
 public:
 	virtual CComponent* Clone() PURE;
 
 public:
+	void	Set_Enable(_bool bEnable);
+
 	CGameObject*	Get_Owner() { return m_pOwner; }
-	void			Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
+	virtual void			Set_Owner(CGameObject* pOwner) { m_pOwner = pOwner; }
 	_uint			Get_GroupID() { return m_iGroupID; }
 	void			Set_GroupID(const _uint& iGroupID) { m_iGroupID = iGroupID; }
 
@@ -65,7 +67,6 @@ private:
 
 private:
 	void	Set_Dead() { if (m_bAlive)OnDead(); m_bAlive = false; }
-	void	Set_Enable(_bool bEnable);
 	void	Destroy_Instance() { delete this; }
 
 

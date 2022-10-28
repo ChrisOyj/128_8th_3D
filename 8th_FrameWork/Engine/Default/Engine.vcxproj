@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -121,6 +122,7 @@
       <AdditionalIncludeDirectories>../Public/</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,12 @@
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,6 +150,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../Public/</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,28 +163,54 @@
     <PostBuildEvent>
       <Command>call ../../UpdateLib.bat</Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Animation.cpp" />
     <ClCompile Include="..\Private\Camera.cpp" />
     <ClCompile Include="..\Private\Camera_Manager.cpp" />
+    <ClCompile Include="..\private\CAnimator.cpp" />
+    <ClCompile Include="..\private\CCell.cpp" />
     <ClCompile Include="..\private\CCollider_Box.cpp" />
     <ClCompile Include="..\Private\CCollider_Sphere.cpp" />
     <ClCompile Include="..\private\CComponent_Manager.cpp" />
+    <ClCompile Include="..\private\CFrustum_Manager.cpp" />
     <ClCompile Include="..\Private\Channel.cpp" />
+    <ClCompile Include="..\private\CInstanceMesh.cpp" />
+    <ClCompile Include="..\private\CLight.cpp" />
+    <ClCompile Include="..\private\CLight_Manager.cpp" />
     <ClCompile Include="..\private\CMesh.cpp" />
     <ClCompile Include="..\private\CMesh_Cube.cpp" />
     <ClCompile Include="..\private\CMesh_Rect.cpp" />
     <ClCompile Include="..\private\CMesh_Terrain.cpp" />
     <ClCompile Include="..\private\CModel_Renderer.cpp" />
+    <ClCompile Include="..\private\CNavigation.cpp" />
     <ClCompile Include="..\Private\Collider.cpp" />
     <ClCompile Include="..\Private\Collision_Manager.cpp" />
     <ClCompile Include="..\Private\Component.cpp" />
+    <ClCompile Include="..\private\CRect_Instance.cpp" />
+    <ClCompile Include="..\private\CRenderTarget.cpp" />
+    <ClCompile Include="..\private\CResource.cpp" />
+    <ClCompile Include="..\private\CResource_Animation.cpp" />
+    <ClCompile Include="..\private\CResource_Bone.cpp" />
+    <ClCompile Include="..\private\CResource_Manager.cpp" />
+    <ClCompile Include="..\private\CResource_Material.cpp" />
+    <ClCompile Include="..\private\CResource_Mesh.cpp" />
     <ClCompile Include="..\private\CScriptable.cpp" />
     <ClCompile Include="..\private\CShader.cpp" />
     <ClCompile Include="..\private\CShader_Manager.cpp" />
+    <ClCompile Include="..\private\CTarget_Manager.cpp" />
     <ClCompile Include="..\private\CTimer.cpp" />
+    <ClCompile Include="..\private\CTri_Instance.cpp" />
     <ClCompile Include="..\Private\CustomFont.cpp" />
+    <ClCompile Include="..\private\CUtility_File.cpp" />
+    <ClCompile Include="..\Private\CUtility_Json.cpp" />
+    <ClCompile Include="..\Private\DebugDraw.cpp" />
     <ClCompile Include="..\Private\Engine_Struct.cpp" />
     <ClCompile Include="..\Private\Event_Manager.cpp" />
     <ClCompile Include="..\Private\Font_Manager.cpp" />
@@ -207,23 +242,43 @@
     <ClInclude Include="..\Public\Animation.h" />
     <ClInclude Include="..\Public\Camera.h" />
     <ClInclude Include="..\Public\Camera_Manager.h" />
+    <ClInclude Include="..\public\CAnimator.h" />
+    <ClInclude Include="..\public\CCell.h" />
     <ClInclude Include="..\public\CCollider_Box.h" />
     <ClInclude Include="..\public\CCollider_Sphere.h" />
     <ClInclude Include="..\public\CComponent_Manager.h" />
+    <ClInclude Include="..\public\CFrustum_Manager.h" />
     <ClInclude Include="..\Public\Channel.h" />
+    <ClInclude Include="..\public\CInstanceMesh.h" />
+    <ClInclude Include="..\public\CLight.h" />
+    <ClInclude Include="..\public\CLight_Manager.h" />
     <ClInclude Include="..\public\CMesh.h" />
     <ClInclude Include="..\public\CMesh_Cube.h" />
     <ClInclude Include="..\public\CMesh_Rect.h" />
     <ClInclude Include="..\public\CMesh_Terrain.h" />
     <ClInclude Include="..\public\CModel_Renderer.h" />
+    <ClInclude Include="..\public\CNavigation.h" />
     <ClInclude Include="..\Public\Collider.h" />
     <ClInclude Include="..\Public\Collision_Manager.h" />
     <ClInclude Include="..\Public\Component.h" />
+    <ClInclude Include="..\public\CRect_Instance.h" />
+    <ClInclude Include="..\public\CRenderTarget.h" />
+    <ClInclude Include="..\public\CResource.h" />
+    <ClInclude Include="..\public\CResource_Animation.h" />
+    <ClInclude Include="..\public\CResource_Bone.h" />
+    <ClInclude Include="..\public\CResource_Manager.h" />
+    <ClInclude Include="..\public\CResource_Material.h" />
+    <ClInclude Include="..\public\CResource_Mesh.h" />
     <ClInclude Include="..\public\CScriptable.h" />
     <ClInclude Include="..\public\CShader.h" />
     <ClInclude Include="..\public\CShader_Manager.h" />
+    <ClInclude Include="..\public\CTarget_Manager.h" />
     <ClInclude Include="..\public\CTimer.h" />
+    <ClInclude Include="..\public\CTri_Instance.h" />
     <ClInclude Include="..\Public\CustomFont.h" />
+    <ClInclude Include="..\public\CUtility_File.h" />
+    <ClInclude Include="..\Public\CUtility_Json.h" />
+    <ClInclude Include="..\Public\DebugDraw.h" />
     <ClInclude Include="..\Public\Delegate\Delegate.h" />
     <ClInclude Include="..\Public\Engine_Defines.h" />
     <ClInclude Include="..\Public\Engine_Enum.h" />
@@ -257,6 +312,12 @@
     <ClInclude Include="..\Public\Time_Manager.h" />
     <ClInclude Include="..\Public\Transform.h" />
     <ClInclude Include="..\Public\ZFrustum.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Blur.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Deferred.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Glow.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Shadow.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

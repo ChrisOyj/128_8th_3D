@@ -62,6 +62,9 @@ HRESULT CLevel_Loading::SetUp_Prototypes()
 
 HRESULT CLevel_Loading::Enter()
 {
+	GAMEINSTANCE->Stop_Sound((CHANNEL_GROUP)CHANNEL_BGM);
+
+
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CDarkScreen>(), GROUP_LOADING);
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_BG>(), GROUP_LOADING);
 	Ready_GameObject(CGameObject_Factory::Clone_GameObject<CLoading_Turn>(), GROUP_LOADING);
@@ -101,18 +104,6 @@ void CLevel_Loading::Late_Tick()
 
 HRESULT CLevel_Loading::Render()
 {
-	_tchar szTemp[MIN_STR];
-
-	if (true == CLoading_Manager::Get_Instance()->IsFinished())
-	{
-		swprintf_s(szTemp, L"로딩끝");
-	}
-	else
-		swprintf_s(szTemp, L"로딩중");
-
-
-	if (FAILED(CGameInstance::Get_Instance()->Render_Font(TEXT("Font_Arial"), szTemp, _float2(10.f, 10.f), _float4(1.f, 1.f, 1.f, 1.f))))
-		return E_FAIL;
 
 	return S_OK;
 }

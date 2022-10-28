@@ -18,6 +18,12 @@ HRESULT CComponent_Manager::Regist_Component(CComponent* pComponent, const _uint
 	if (iGroupIndex < 0 || iGroupIndex >= COM_GROUP_END)
 		return E_FAIL;
 
+	for (auto& elem : m_Components[iGroupIndex])
+	{
+		if (pComponent == elem)
+			return S_OK;
+	}
+
 	m_Components[iGroupIndex].push_back(pComponent);
 
 	return S_OK;
@@ -54,7 +60,8 @@ void CComponent_Manager::Late_Tick()
 	{
 		for (auto& pComponent : m_Components[i])
 		{
-			pComponent->Late_Tick();
+			if (pComponent->Is_Valid())
+				pComponent->Late_Tick();
 		}
 	}
 }

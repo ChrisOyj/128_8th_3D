@@ -69,10 +69,16 @@ public:
 public:
 
 	template<typename T>
-	T*			Add_Component(T* pComponent)
+	T*	Add_Component(T* pComponent)
 	{
 		pComponent->Set_Owner(this);
 		m_mapComponents[HASHCODE(T)].push_back(pComponent);
+
+
+		/*if (m_mapComponents.find(HASHCODE(T)) == m_mapComponents.end())
+			m_mapComponents.emplace(HASHCODE(T), list<CComponent*>());
+
+		m_mapComponents.find(HASHCODE(T))->second.push_back(pComponent);*/
 		return pComponent;
 
 	}
@@ -86,6 +92,8 @@ public:
 	CDelegate<CGameObject*, const _uint&>			CallBack_CollisionExit;
 	CDelegate<const _float4&, const _float4&>		CallBack_PickingEvent;
 	CDelegate<const _uint&>							CallBack_TimerEvent;
+	CDelegate<const _uint&>							CallBack_FadeInEvent;
+	CDelegate<const _uint&>							CallBack_FadeOutEvent;
 
 public: /* Event */
 	void				Call_Enable();

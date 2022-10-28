@@ -17,6 +17,12 @@
 #include <DirectXTK/SpriteBatch.h>
 #include <DirectXTK/SpriteFont.h>
 #include <DirectXTK/ScreenGrab.h>
+#include <DirectXTK/PrimitiveBatch.h>
+#include <DirectXTK/VertexTypes.h>
+#include <DirectXTK/Effects.h>
+#include <filesystem>
+
+
 #include <DirectXTex/DirectXTex.h>
 
 #include <DirectXCollision.h>
@@ -44,6 +50,11 @@ using namespace DirectX;
 #include <random>
 #include <typeinfo>
 #include <functional>
+
+#include "Json/json.hpp"
+#include <fstream>
+
+using json = nlohmann::json;
 
 #include <io.h>
 #include "fmod/fmod.h"

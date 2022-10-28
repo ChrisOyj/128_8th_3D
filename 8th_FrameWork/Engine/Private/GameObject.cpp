@@ -25,6 +25,13 @@ CGameObject::CGameObject(const CGameObject & Prototype)
 			CComponent* pCloneComponent = pComponent->Clone();
 			pCloneComponent->Set_Owner(this);
 			m_mapComponents[elem.first].push_back(pCloneComponent);
+
+			/*if (m_mapComponents.find(elem.first) == m_mapComponents.end())
+			{
+				m_mapComponents.emplace(elem.first, list<CComponent*>());
+			}
+
+			m_mapComponents.find(elem.first)->second.push_back(pCloneComponent);*/
 		}
 	}
 

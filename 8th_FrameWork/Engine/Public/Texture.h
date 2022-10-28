@@ -15,6 +15,7 @@ struct TEXTUREDESC
 class ENGINE_DLL CTexture
 	: public CComponent
 {
+	friend class CRender_Manager;
 	DECLARE_PROTOTYPE(CTexture);
 	friend class CModel;
 
@@ -27,9 +28,10 @@ public:
 
 public:
 	void	Set_CurTextureIndex(const _uint& iIndex) { 
-		if (iIndex < 0 || iIndex >= m_SRVs.size())
+		if (iIndex >= m_SRVs.size())
 		{
-			Call_MsgBox(L"Out of Range on Set_CurTextureIndex : CTexture");
+			m_iCurTextureIndex = (_uint)m_SRVs.size() - 1;
+			return;
 		}
 		m_iCurTextureIndex = iIndex;
 	}
@@ -37,9 +39,10 @@ public:
 	_uint	Get_TextureSize() { return (_uint)m_SRVs.size(); }
 	vector<TEXTUREDESC>& Get_vecTexture() { return m_SRVs; }
 	HRESULT Set_ShaderResourceView(class CShader* pShader, const char* pConstantName);
+	void	Set_ShaderResource(class CShader* pShader, const char* pConstantName, _uint iIdx);
 
 public:
-	HRESULT	Add_Texture(const _tchar* pTextureFilePath);
+	HRESULT	Add_Texture(const _tchar* pTextureFilePath, _bool bFront = false);
 	void	Pop_Texture();
 
 public:

@@ -49,6 +49,8 @@ public:
 
 public:
 	static vector<CGameObject*>	Create_vecUI(wstring strFileTagKey);
+
+	static vector<CDefault_UI*>	Create_vecUI_Reverse(wstring strFileTagKey);
 };
 
 END

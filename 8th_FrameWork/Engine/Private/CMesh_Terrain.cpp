@@ -1,5 +1,6 @@
 #include "CMesh_Terrain.h"
 
+#include "GameInstance.h"
 
 CMesh_Terrain::CMesh_Terrain(_uint iGroupIdx)
 	: CMesh(iGroupIdx)
@@ -8,6 +9,7 @@ CMesh_Terrain::CMesh_Terrain(_uint iGroupIdx)
 
 CMesh_Terrain::~CMesh_Terrain()
 {
+	SAFE_DELETE_ARRAY(m_pVerticesColor);
 }
 
 CMesh_Terrain* CMesh_Terrain::Create(_uint iGroupIdx, const _tchar* pHeightMapFilePath)
@@ -48,6 +50,41 @@ CMesh_Terrain* CMesh_Terrain::Create(_uint iGroupIdx, _uint iNumVerticesX, _uint
 	}
 
 	return pInstance;
+}
+
+void CMesh_Terrain::Map_Vertex(_uint iIndex, _float4 vPosition, _float4 vColor)
+{
+	if (iIndex >= m_iNumVertices)
+		return;
+
+	m_pVerticesPos[iIndex] = _float3(vPosition.XMLoad().m128_f32);
+
+	D3D11_MAPPED_SUBRESOURCE		SubResource;
+
+
+	DEVICE_CONTEXT->Map(m_pVB.Get(), 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &SubResource);
+
+	((VTXNORTEX*)SubResource.pData)[iIndex].vPosition = m_pVerticesPos[iIndex];
+	((VTXNORTEX*)SubResource.pData)[iIndex].vColor = vColor;
+
+	DEVICE_CONTEXT->Unmap(m_pVB.Get(), 0);
+}
+
+void CMesh_Terrain::ReMap_Vertices()
+{
+	D3D11_MAPPED_SUBRESOURCE		SubResource;
+
+	DEVICE_CONTEXT->Map(m_pVB.Get(), 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &SubResource);
+
+	for (_uint i = 0; i < m_iNumVertices; ++i)
+	{
+		((VTXNORTEX*)SubResource.pData)[i].vPosition = m_pVerticesPos[i];
+		((VTXNORTEX*)SubResource.pData)[i].vColor = m_pVerticesColor[i];
+	}
+
+	DEVICE_CONTEXT->Unmap(m_pVB.Get(), 0);
+
+
 }
 
 HRESULT CMesh_Terrain::Initialize_Prototype()
@@ -97,7 +134,7 @@ HRESULT CMesh_Terrain::SetUp_HeightMap(const _tchar* pHeightMapFilePath)
 		{
 			_uint	iIndex = i * m_iNumVerticesX + j;
 
-			pVertices[iIndex].vPosition = _float3(j, (pPixel[iIndex] & 0x000000ff) / 10.f, (_float)i);
+			pVertices[iIndex].vPosition = _float3((_float)j, (pPixel[iIndex] & 0x000000ff) / 10.f, (_float)i);
 			pVertices[iIndex].vNormal = _float3(0.0f, 0.0f, 0.f);
 			pVertices[iIndex].vTexUV = _float2(j / (m_iNumVerticesX - 1.f), i / (m_iNumVerticesZ - 1.f));
 		}
@@ -223,8 +260,10 @@ HRESULT CMesh_Terrain::SetUp_Terrain(_uint iNumVerticesX, _uint iNumVerticesZ)
 	m_iNumVertexBuffers = 1;
 
 
-
+	m_pVerticesPos = new _float3[m_iNumVertices];
+	m_pVerticesColor = new _float4[m_iNumVertices];
 	VTXNORTEX* pVertices = new VTXNORTEX[m_iNumVertices];
+	ZeroMemory(pVertices, sizeof(VTXNORTEX) * m_iNumVertices);
 
 	for (_uint i = 0; i < m_iNumVerticesZ; ++i)
 	{
@@ -232,9 +271,10 @@ HRESULT CMesh_Terrain::SetUp_Terrain(_uint iNumVerticesX, _uint iNumVerticesZ)
 		{
 			_uint	iIndex = i * m_iNumVerticesX + j;
 
-			pVertices[iIndex].vPosition = _float3(j, 0.f, i);
+			pVertices[iIndex].vPosition = m_pVerticesPos[iIndex] = _float3((_float)j, 0.f, (_float)i);
 			pVertices[iIndex].vNormal = _float3(0.0f, 0.0f, 0.f);
 			pVertices[iIndex].vTexUV = _float2(j / (m_iNumVerticesX - 1.f), i / (m_iNumVerticesZ - 1.f));
+			pVertices[iIndex].vColor = m_pVerticesColor[iIndex] = _float4(0.f, 1.f, 0.f, 1.f);
 		}
 	}
 
@@ -247,7 +287,7 @@ HRESULT CMesh_Terrain::SetUp_Terrain(_uint iNumVerticesX, _uint iNumVerticesZ)
 	m_eIndexFormat = DXGI_FORMAT_R32_UINT;
 	m_eToplogy = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-
+	m_pIndices = new FACEINDICES32[m_iNumPrimitive];
 	FACEINDICES32* pIndices = new FACEINDICES32[m_iNumPrimitive];
 	ZeroMemory(pIndices, sizeof(FACEINDICES32) * m_iNumPrimitive);
 
@@ -302,6 +342,8 @@ HRESULT CMesh_Terrain::SetUp_Terrain(_uint iNumVerticesX, _uint iNumVerticesZ)
 		}
 	}
 
+	memcpy(m_pIndices, pIndices, sizeof(FACEINDICES32) * m_iNumPrimitive);
+
 	for (_uint i = 0; i < m_iNumVertices; ++i)
 		XMStoreFloat3(&pVertices[i].vNormal, XMVector3Normalize(XMLoadFloat3(&pVertices[i].vNormal)));
 
@@ -324,10 +366,10 @@ HRESULT CMesh_Terrain::SetUp_Terrain(_uint iNumVerticesX, _uint iNumVerticesZ)
 
 	ZeroMemory(&m_BufferDesc, sizeof(D3D11_BUFFER_DESC));
 	m_BufferDesc.ByteWidth = m_iStride * m_iNumVertices;
-	m_BufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	m_BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	m_BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	m_BufferDesc.StructureByteStride = m_iStride;
-	m_BufferDesc.CPUAccessFlags = 0;
+	m_BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	m_BufferDesc.MiscFlags = 0;
 
 	ZeroMemory(&m_SubResourceData, sizeof(D3D11_SUBRESOURCE_DATA));

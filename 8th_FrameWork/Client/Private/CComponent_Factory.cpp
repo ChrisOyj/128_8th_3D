@@ -26,6 +26,8 @@ CComponent* CComponent_Factory::Clone_Component(CGameObject* pOwner, _hashcode h
 		return nullptr;
 	}
 
+	pComponent->Set_Owner(pOwner);
+
 	if (FAILED(pComponent->Initialize()))
 	{
 		Call_MsgBox(L"Failed to Initialize : CComponent_Factory");

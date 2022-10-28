@@ -62,6 +62,35 @@ HRESULT CWindow_Select::Render()
 		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_UI);
 	}
 
+	if (ImGui::Button("MAP_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_MAP);
+	}
+
+	if (ImGui::Button("TEST_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_TEST);
+	}
+
+	if (ImGui::Button("NAVI_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_NAVI);
+	}
+
+	if (ImGui::Button("CINEMA_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_CINEMA);
+	}
+
+	if (ImGui::Button("BOSS_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_BOSS);
+	}
+
+	if (ImGui::Button("EFFECT_TOOL"))
+	{
+		CImGui_Manager::Get_Instance()->Turn_Window(CImGui_Manager::IMGUI_EFFECT);
+	}
 	__super::End();
 
 	return S_OK;

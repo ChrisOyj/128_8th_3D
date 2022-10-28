@@ -15,7 +15,8 @@
 #include "CPrototype_Factory.h"
 
 #include "ImGui_Manager.h"
-
+#include "CState_Manager.h"
+#include "CEffects_Factory.h"
 #include "Transform.h"
 
 
@@ -32,6 +33,7 @@ CMainApp::~CMainApp()
 
 HRESULT CMainApp::Initialize()
 {
+
 	m_pGameInstance = CGameInstance::Get_Instance();
 
 	if (nullptr == m_pGameInstance)
@@ -52,13 +54,20 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(CLoading_Manager::Get_Instance()->Initialize()))
 		return E_FAIL;
 
-	if (FAILED(CUser::Get_Instance()->Initialize()))
-		return E_FAIL;
-
 	if (FAILED(SetUp_Statics()))
 		return E_FAIL;
 
-	if (FAILED(CLoading_Manager::Get_Instance()->Reserve_Load_Level(LEVEL_UNITY)))
+	if (FAILED(CState_Manager::Get_Instance()->Initialize()))
+		return E_FAIL;
+
+	if (FAILED(CLoading_Manager::Get_Instance()->Reserve_Load_Level(LEVEL_LOGO)))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Load_SoundFile(L"../bin/resources/sounds/ingame")))
+		return E_FAIL;
+
+
+	if (FAILED(m_pGameInstance->Load_SoundFile(L"../bin/resources/sounds/ui")))
 		return E_FAIL;
 
 	return S_OK;
@@ -66,6 +75,11 @@ HRESULT CMainApp::Initialize()
 
 HRESULT CMainApp::Progress()
 {
+	if (KEY(F9, TAP))
+	{
+		CLoading_Manager::Get_Instance()->Reserve_Load_Level(LEVEL_UNITY);
+	}
+
 	if (FAILED(CLoading_Manager::Get_Instance()->Load_Level()))
 	{
 		Call_MsgBox(L"Failed to Load_Level : CLoading_Manager");
@@ -92,8 +106,9 @@ HRESULT CMainApp::Render()
 	if (!m_pGameInstance->Can_Update())
 		return S_OK;
 
-	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.f, 0.f, 1.f, 1.f))))
+	if (FAILED(m_pGameInstance->Clear_BackBuffer_View(_float4(0.9f, 0.9f, 0.9f, 1.f))))
 		return E_FAIL;
+
 	if (FAILED(m_pGameInstance->Clear_DepthStencil_View()))
 		return E_FAIL;
 
@@ -109,9 +124,14 @@ HRESULT CMainApp::Render()
 
 void CMainApp::Release()
 {
+	CEffects_Factory::Get_Instance()->Destroy_Instance();
+
 	CLoading_Manager::Get_Instance()->Destroy_Instance();
 	CUser::Get_Instance()->Destroy_Instance();
+#ifdef _DEBUG
 	CImGui_Manager::Get_Instance()->Destroy_Instance();
+#endif
+	CState_Manager::Get_Instance()->Destroy_Instance();
 	SAFE_DESTROY(m_pGameInstance);
 
 }
@@ -129,8 +149,8 @@ HRESULT CMainApp::SetUp_Engine()
 
 	SOUNDDESC	SoundDesc;
 	SoundDesc.iChannelNumbers[CHANNEL_BGM] = 1;
-	SoundDesc.iChannelNumbers[CHANNEL_PLAYER] = 5;
-	SoundDesc.iChannelNumbers[CHANNEL_ENVIRONMENT] = 8;
+	SoundDesc.iChannelNumbers[CHANNEL_UI] = 4;
+	SoundDesc.iChannelNumbers[CHANNEL_ENVIRONMENT] = 9;
 	SoundDesc.iChannelNumbers[CHANNEL_EFFECTS] = 13;
 	SoundDesc.iChannelNumbers[CHANNEL_VOICE] = 5;
 
@@ -179,6 +199,24 @@ HRESULT CMainApp::SetUp_ShaderFiles()
 		return E_FAIL;
 
 	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxModel.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxAnimModel.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxInstance.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxRectInstance.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxTriInstance.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxModelEffects.hlsl")))
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Load_EffectFile(L"../bin/shaderfiles/Shader_VtxDecalCube.hlsl")))
 		return E_FAIL;
 
 	return S_OK;

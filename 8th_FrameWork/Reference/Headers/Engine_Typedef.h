@@ -38,6 +38,11 @@ namespace Engine
 			: XMFLOAT4X4()
 		{}
 
+		XMFLOAT4X4_DERIVED(XMMATRIX mat)
+		{
+			XMStoreFloat4x4(this, mat);
+		}
+
 		XMMATRIX XMLoad()
 		{
 			return XMLoadFloat4x4(this);
@@ -100,6 +105,11 @@ namespace Engine
 			: XMFLOAT4()
 		{}
 
+		XMFLOAT4_DERIVED(XMVECTOR vVector)
+		{
+			XMStoreFloat4(this, vVector);
+		}
+
 		XMFLOAT4_DERIVED(const _float& _x,
 			const _float& _y,
 			const _float& _z,
@@ -134,9 +144,10 @@ namespace Engine
 		XMFLOAT4_DERIVED operator + (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
+			_float fTemp = w;
 
 			vOutput = XMLoad() + XMLoadFloat4(&_other);
-
+			vOutput.w = fTemp;
 			return vOutput;
 		}
 
@@ -154,8 +165,10 @@ namespace Engine
 		XMFLOAT4_DERIVED operator - (const XMFLOAT4& _other)
 		{
 			XMFLOAT4_DERIVED	vOutput;
+			_float fTemp = w;
 
 			vOutput = XMLoad() - XMLoadFloat4(&_other);
+			vOutput.w = fTemp;
 
 			return vOutput;
 		}
@@ -215,7 +228,9 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator += (const XMFLOAT4& _other)
 		{
+			_float fTemp = w;
 			*this = XMLoad() + XMLoadFloat4(&_other);
+			w = fTemp;
 
 			return *this;
 		}
@@ -231,8 +246,9 @@ namespace Engine
 
 		XMFLOAT4_DERIVED& operator -= (const XMFLOAT4& _other)
 		{
+			_float fTemp = w;
 			*this = XMLoad() - XMLoadFloat4(&_other);
-
+			w = fTemp;
 			return *this;
 		}
 
@@ -294,11 +310,11 @@ namespace Engine
 		}
 
 		/* transform */
-		XMFLOAT4_DERIVED operator * (const XMFLOAT4X4& _otherMatrix)
+		XMFLOAT4_DERIVED MultiplyCoord (const XMFLOAT4X4& _otherMatrix)
 		{
 			FXMVECTOR	vec = XMLoad();
 
-			XMVECTOR	vTransform = XMVector4Transform(vec, XMLoadFloat4x4(&_otherMatrix));
+			XMVECTOR	vTransform = XMVector3TransformCoord(vec, XMLoadFloat4x4(&_otherMatrix));
 
 			XMFLOAT4_DERIVED	vResult;
 
@@ -307,17 +323,17 @@ namespace Engine
 			return vResult;
 		}
 
-		XMFLOAT4_DERIVED& operator *= (const XMFLOAT4X4& _otherMatrix)
+		XMFLOAT4_DERIVED MultiplyNormal (const XMFLOAT4X4& _otherMatrix)
 		{
 			XMVECTOR	vec = XMLoad();
 
-			XMVECTOR	vTransform = XMVector4Transform(vec, XMLoadFloat4x4(&_otherMatrix));
+			XMVECTOR	vTransform = XMVector3TransformNormal(vec, XMLoadFloat4x4(&_otherMatrix));
 
 			XMFLOAT4_DERIVED	vResult;
 
 			XMStoreFloat4(&vResult, vTransform);
 
-			return *this = vResult;
+			return vResult;
 		}
 
 
@@ -325,7 +341,7 @@ namespace Engine
 		{
 			FXMVECTOR	vec = XMLoad();
 
-			return XMVector4Length(vec).m128_f32[0];
+			return XMVector3Length(vec).m128_f32[0];
 		}
 
 		_float	Dot(const XMFLOAT4& _other)
@@ -333,7 +349,7 @@ namespace Engine
 			FXMVECTOR	Myvec = XMLoad();
 			FXMVECTOR	Othervec = XMLoadFloat4(&_other);
 
-			return XMVector4Dot(Myvec, Othervec).m128_f32[0];
+			return XMVector3Dot(Myvec, Othervec).m128_f32[0];
 		}
 
 		XMFLOAT4_DERIVED	Cross(const XMFLOAT4& _other)
@@ -352,13 +368,12 @@ namespace Engine
 		XMFLOAT4_DERIVED& Normalize()
 		{
 			FXMVECTOR	Myvec = XMLoad();
-
-			FXMVECTOR	vNormalize = XMVector4Normalize(Myvec);
+			FXMVECTOR	vNormalize = XMVector3Normalize(Myvec);
 
 			XMFLOAT4_DERIVED	vResult;
 
 			XMStoreFloat4(&vResult, vNormalize);
-
+			vResult.w = 0.f;
 			return *this = vResult;
 		}
 

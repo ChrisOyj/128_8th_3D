@@ -27,7 +27,11 @@ private:
 public:
 	HRESULT		Initialize();
 	void		Tick();
+	void		Clear_All();
+
+#ifdef _DEBUG
 	HRESULT		Render();
+#endif
 
 public:
 	HRESULT	Regist_Collider(CCollider* pCollider, const _uint& _iGroupIndex);
@@ -38,6 +42,8 @@ private:
 
 	_uint m_arrCheck[COL_END];
 	map<_ulonglong, _bool> m_mapColInfo;
+
+	_bool	m_bRender = false;
 
 private:
 	void Collider_GroupUpdate(const _uint& _eLeft, const _uint& _eRight);

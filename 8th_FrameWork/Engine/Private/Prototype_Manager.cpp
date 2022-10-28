@@ -45,6 +45,16 @@ CComponent* CPrototype_Manager::Clone_Component(_hashcode hcClassName)
 	return iter->second->Clone();
 }
 
+HRESULT CPrototype_Manager::Add_GameObject_Prototype(CGameObject* pGameObject, _hashcode _hcCode)
+{
+	if (Find_GameObject_Prototype(_hcCode))
+		return E_FAIL;
+
+	m_GameObject_Prototypes.emplace(_hcCode, pGameObject);
+
+	return S_OK;
+}
+
 void CPrototype_Manager::Delete_GameObject_Prototypes()
 {
 	for (auto elemPair : m_GameObject_Prototypes)
@@ -59,6 +69,16 @@ void CPrototype_Manager::Delete_Component_Prototypes()
 		SAFE_DESTROY(elemPair.second);
 
 	m_Component_Prototypes.clear();
+}
+
+CGameObject* CPrototype_Manager::Find_GameObject_Prototype(_hashcode _hcCode)
+{
+	auto iter = m_GameObject_Prototypes.find(_hcCode);
+
+	if (iter == m_GameObject_Prototypes.end())
+		return nullptr;
+
+	return iter->second;
 }
 
 void CPrototype_Manager::Release()

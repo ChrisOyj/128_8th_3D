@@ -13,9 +13,14 @@
 #include "CMesh_Terrain.h"
 #include "Model.h"
 #include "CMap.h"
+#include "CGround.h"
 
 #include "CComponent_Factory.h"
 #include "CPrototype_Factory.h"
+
+#include "CUtility_Json.h"
+
+#include "CWindow_Map.h"
 
 
 
@@ -29,13 +34,13 @@ CObject_Map::~CObject_Map()
 {
 }
 
-CObject_Map* CObject_Map::Create(const char* pFolderPath)
+CObject_Map* CObject_Map::Create(const _tchar* pJsonFileName)
 {
     CObject_Map* pInstance = new CObject_Map;
 
-    if (FAILED(pInstance->SetUp_ObjectsMap(pFolderPath)))
+    if (FAILED(pInstance->SetUp_ObjectsMap(pJsonFileName)))
     {
-        Call_MsgBox(L"Failed to SetUp_Model : CObject_Map");
+        Call_MsgBox(L"Failed to SetUp_ObjectsMap : CObject_Map");
         SAFE_DELETE(pInstance);
         return nullptr;
     }
@@ -60,27 +65,63 @@ HRESULT CObject_Map::Initialize()
     return S_OK;
 }
 
-HRESULT CObject_Map::SetUp_ObjectsMap(const char* pFilePath)
+HRESULT CObject_Map::Start()
 {
-    for (filesystem::recursive_directory_iterator FileIter(pFilePath);
-        FileIter != filesystem::end(FileIter); ++FileIter)
+    __super::Start();
+
+    for (auto& elem : m_vecGameObjects)
+        CREATE_GAMEOBJECT(elem, GROUP_DECORATION);
+
+    return S_OK;
+}
+
+HRESULT CObject_Map::SetUp_ObjectsMap(const _tchar* pJsonFileName)
+{
+    json MapJson;
+    if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(pJsonFileName).c_str(), & MapJson)))
+        return E_FAIL;
+
+    for (auto iter = MapJson.begin(); iter != MapJson.end(); iter++)
     {
-        const filesystem::directory_entry& entry = *FileIter;
+        CGameObject* pGameObject = nullptr;
 
-        if (entry.is_directory())
-            continue;
+        json ObjJson = *iter;
 
-        wstring wstrPath = entry.path().relative_path();
-        string strFullPath;
-        strFullPath.assign(wstrPath.begin(), wstrPath.end());
+        TOOL_MAP_TYPE eType = ObjJson["eClassType"];
+        wstring wstrFilePath = ObjJson["wstrFilePath"];
+        
+        switch (eType)
+        {
+        case Client::TOOL_MAP_PROP:
+            pGameObject = CMap::Create(wstrFilePath);
 
-        CMap* pMap = CMap::Create(strFullPath.c_str());
+            break;
+        case Client::TOOL_MAP_DEFAULT:
+            pGameObject = CMap::Create(wstrFilePath);
+            break;
+        case Client::TOOL_MAP_GROUND:
+            pGameObject = CGround::Create(wstrFilePath);
+            break;
 
-        if (!pMap)
-            continue;
+        case Client::TOOL_MAP_END:
+            break;
 
-        pMap->Initialize();
-        Add_Child(pMap);
+        default:
+            break;
+        }
+
+        if (!pGameObject)
+            return E_FAIL;
+
+
+        if (FAILED(pGameObject->Initialize()))
+        {
+            return E_FAIL;
+        }
+
+        pGameObject->Get_Transform()->Get_Transform().matMyWorld = CUtility_Json::Get_MatrixFromJson(ObjJson["worldMatrix"]);
+
+        m_vecGameObjects.push_back(pGameObject);
     }
 
     return S_OK;

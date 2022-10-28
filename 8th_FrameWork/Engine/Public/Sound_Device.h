@@ -16,7 +16,9 @@ public:
 	HRESULT		Release();
 
 public:
-	void		Load_SoundFile();
+	HRESULT		Load_SoundFile(wstring wstrFolderPath);
+
+	HRESULT		Group_Sounds(wstring wstrKey);
 
 	void		Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIndex, _float fVolumeRatio = 1.f);
 	void		Play_BGM(const _tchar* strSoundKey);
@@ -29,7 +31,7 @@ public:
 	void		Set_ChannelVolume(CHANNEL_GROUP eID, const _uint& iChannelIndex, _float fVolume);
 
 private:
-	map <_hashcode, FMOD_SOUND*> m_mapSound;
+	map <_hashcode, list<FMOD_SOUND*>> m_mapSound;
 
 	vector<FMOD_CHANNEL*>	m_pChannelArr[CH_GROUP_END];
 	_uint					m_iChannelNumbers[CH_GROUP_END];

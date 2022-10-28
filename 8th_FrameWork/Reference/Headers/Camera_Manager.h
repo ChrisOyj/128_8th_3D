@@ -26,6 +26,7 @@ public:
 
 public:
 	HRESULT	SetUp_ShaderResources(_bool Ortho = false);
+	HRESULT	SetUp_ShaderResources(_uint iShaderIndex, _bool Ortho = false);
 
 public:
 	HRESULT	Initialize(const GRAPHICDESC& GraphicDesc);
@@ -34,7 +35,7 @@ public:
 public:
 	CCamera*	Change_Camera(wstring strKey);
 	void		Add_Camera(wstring strKey, CCamera* pCamera);
-
+	CCamera* Find_Camera(wstring strKey);
 private:
 	VIEW_TRANSFORM			m_tView;
 	PROJ_TRANSFORM			m_tProj;

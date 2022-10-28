@@ -15,6 +15,8 @@ private:
 
 public:
 	_double	Get_DT();
+	_float	Get_RealFDT();
+	void	Set_TimeSpeed(_float fSpeed) { m_fTimeSpeed = fSpeed; };
 	void	Set_FPSUpdateTime(_double dTime) { m_dFPSUpdateTime = dTime; }
 
 	_double	Get_FPSLimitTime()				{ return m_dFPSLimitTime; }
@@ -42,6 +44,8 @@ private:
 	_double			m_dAcc = 0.; 
 	_uint			m_iCallCount = 0;
 	_uint			m_iFPS = 0;
+
+	_float			m_fTimeSpeed = 1.f;
 };
 
 }

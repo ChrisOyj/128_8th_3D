@@ -13,15 +13,16 @@ private:
 	virtual ~CMap();
 
 public:
-	static CMap* Create(const char* pFilePath);
+	static CMap* Create(wstring wstrFilePath);
 
 public:
 	// CGameObject을(를) 통해 상속됨
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize() override;
+	virtual HRESULT Start() override;
 
 private:
-	HRESULT		SetUp_Model(const char* pFilePath);
+	HRESULT		SetUp_Model(wstring wstrFilePath);
 
 };
 END

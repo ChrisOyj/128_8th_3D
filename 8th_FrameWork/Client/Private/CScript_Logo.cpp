@@ -9,6 +9,8 @@
 #include "CUtility_Transform.h"
 #include "Loading_Manager.h"
 
+#include "CFader.h"
+
 CScript_Logo::CScript_Logo(_uint iGroupIdx)
 	: CScriptable(iGroupIdx)
 {
@@ -46,6 +48,10 @@ HRESULT CScript_Logo::Initialize()
 
 void CScript_Logo::Tick()
 {
+	if (KEY(ENTER, TAP))
+	{
+		GET_COMPONENT_FROM(m_pOwner, CFader)->Get_FastTime() *= 2.f;
+	}
 }
 
 void CScript_Logo::Late_Tick()

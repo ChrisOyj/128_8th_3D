@@ -8,7 +8,11 @@ CShader_Manager::CShader_Manager()
 {}
 
 CShader_Manager::~CShader_Manager()
-{}
+{
+	_long dwcnt = 0;
+	for (auto& elem : m_vecEffects)
+		dwcnt = elem.Reset();
+}
 
 HRESULT CShader_Manager::Load_EffectFile(const _tchar * pFilePath)
 {

@@ -58,6 +58,7 @@ HRESULT CDarkScreen::SetUp_Components(const _float4& vStartPosition, const _floa
 		L"../bin/resources/textures/Black.png", 1);
 
 	Add_Component(pTexture);
+	m_pChildren.clear();
 
 	return S_OK;
 }

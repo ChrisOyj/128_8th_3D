@@ -260,6 +260,28 @@ void CWindow_UI::Show_UITab()
 			m_iCurrentIdx = 9999;
 		}
 	}
+
+	if (ImGui::Button("CLONE_UI"))
+	{
+		if (m_iCurrentIdx < m_vecUI.size())
+		{
+			CDefault_UI* pUI = m_vecUI[m_iCurrentIdx].pUI->Clone();
+			CREATE_GAMEOBJECT(pUI, GROUP_UI);
+			m_vecUI[m_iCurrentIdx].bSelected = false;
+
+			UI_ITEM	tItem;
+			tItem.pUI = pUI;
+			tItem.bSelected = false;
+			strcpy_s(tItem.szBuf, m_vecUI[m_iCurrentIdx].szBuf);
+			m_vecUI.push_back(tItem);
+
+			m_iCurrentIdx = (_int)m_vecUI.size() - 1;
+			m_vecUI[m_iCurrentIdx].bSelected = true;
+		}
+	}
+
+
+
 	if (m_iCurrentIdx != 9999)
 	{
 		if (ImGui::InputText("UI_NAME", m_vecUI[m_iCurrentIdx].szBuf, sizeof(m_vecUI[m_iCurrentIdx].szBuf), ImGuiInputTextFlags_EnterReturnsTrue))
@@ -511,14 +533,33 @@ void CWindow_UI::Show_Transform(_uint iIndex)
 
 	_float4 vNormalUp = _float4(0.f, 1.f, 0.f, 0.f);
 
-	vNormalRight *= matRot;
-	vNormalUp *= matRot;
+	vNormalRight = vNormalRight.MultiplyNormal(matRot);
+	vNormalUp = vNormalUp.MultiplyNormal(matRot);
+
+	if (KEY(UP, TAP))
+	{
+		vOrthoPos.y -= 1.f;
+	}
+	if (KEY(DOWN, TAP))
+	{
+		vOrthoPos.y += 1.f;
+	}
+	if (KEY(LEFT, TAP))
+	{
+		vOrthoPos.x -= 1.f;
+	}
+	if(KEY(RIGHT, TAP))
+	{
+		vOrthoPos.x += 1.f;
+	}
+
 
 	vPos = CFunctor::OrthoToRealPosition(vOrthoPos);
 	pTransform->Set_World(WORLD_POS, vPos);
 	pTransform->Set_World(WORLD_RIGHT, vNormalRight);
 	pTransform->Set_World(WORLD_UP, vNormalUp);
 	pTransform->Set_Scale(vScale);
+
 
 }
 
@@ -549,8 +590,7 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 
 	if (ImGui::CollapsingHeader("- Textures List -"))
 	{
-		if (ImGui::Button("Add Texture") || 
-			ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+		if (ImGui::Button("Add Texture_Back"))
 		{
 			if (FAILED(pTexture->Add_Texture(m_CurSelectedTextureFilePath.c_str())))
 			{
@@ -559,6 +599,34 @@ void CWindow_UI::Show_Texture(_uint iIndex)
 			}
 
 			pTexture->Set_CurTextureIndex(pTexture->Get_TextureSize() - 1);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Add Texture_Insert"))
+		{
+			if (FAILED(pTexture->Add_Texture(m_CurSelectedTextureFilePath.c_str(), true)))
+			{
+				Call_MsgBox(L"Failed to Add_Texture : CWindow_UI");
+				return;
+			}
+
+			pTexture->Set_CurTextureIndex(pTexture->Get_TextureSize() - 1);
+		}
+
+		if (ImGui::Button("Delete Texture"))
+		{
+			vector<TEXTUREDESC>& vecTex = pTexture->Get_vecTexture();
+			_uint iCurIdx = pTexture->Get_CurTextureIndex();
+			auto iter = vecTex.begin();
+			for (_uint i = 0; i < iCurIdx; ++i)
+				++iter;
+
+			iter = vecTex.erase(iter);
+
+			if (iCurIdx == vecTex.size() - 1)
+				pTexture->Set_CurTextureIndex(iCurIdx - 1);
+
 		}
 
 		ImGui::SameLine();
@@ -627,6 +695,75 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 
 	FADEDESC& tFadeDesc = GET_UICOMPONENT(CFader)->Get_FadeDesc();
 
+	if (ImGui::CollapsingHeader("- FadeIn Flag -"))
+	{
+		const static _uint iFlagCnt = 4;
+		static _bool	bFlagSelect[iFlagCnt] = {};
+
+		if (ImGui::Selectable("IN_FADE_TIME", &bFlagSelect[0]))
+		{
+			if (tFadeDesc.bFadeInFlag & FADE_TIME)
+			{
+				bFlagSelect[0] = true;
+				tFadeDesc.bFadeInFlag &= ~FADE_TIME;
+			}
+			else
+			{
+				bFlagSelect[0] = false;
+				tFadeDesc.bFadeInFlag |= FADE_TIME;
+			}
+
+		}
+
+		if (ImGui::Selectable("IN_FADE_KEY", &bFlagSelect[1]))
+		{
+			if (tFadeDesc.bFadeInFlag & FADE_KEY)
+			{
+				tFadeDesc.bFadeInFlag &= ~FADE_KEY;
+			}
+			else
+			{
+				tFadeDesc.bFadeInFlag |= FADE_KEY;
+			}
+		}
+
+		if (ImGui::Selectable("IN_FADE_COL", &bFlagSelect[2]))
+		{
+			if (tFadeDesc.bFadeInFlag & FADE_COL)
+			{
+				tFadeDesc.bFadeInFlag &= ~FADE_COL;
+			}
+			else
+			{
+				tFadeDesc.bFadeInFlag |= FADE_COL;
+			}
+		}
+
+		if (ImGui::Selectable("IN_FADE_TEMP", &bFlagSelect[3]))
+		{
+			if (tFadeDesc.bFadeInFlag & FADE_TEMP)
+			{
+				tFadeDesc.bFadeInFlag &= ~FADE_TEMP;
+			}
+			else
+			{
+				tFadeDesc.bFadeInFlag |= FADE_TEMP;
+			}
+		}
+
+		memset(bFlagSelect, 0, sizeof(_bool) * 4);
+
+		if (tFadeDesc.bFadeInFlag & FADE_TIME)
+			bFlagSelect[0] = true;
+		if (tFadeDesc.bFadeInFlag & FADE_KEY)
+			bFlagSelect[1] = true;
+		if (tFadeDesc.bFadeInFlag & FADE_COL)
+			bFlagSelect[2] = true;
+		if (tFadeDesc.bFadeInFlag & FADE_TEMP)
+			bFlagSelect[3] = true;
+
+	}
+
 	if (ImGui::CollapsingHeader("- FadeOut Flag -"))
 	{
 		const static _uint iFlagCnt = 4;
@@ -634,69 +771,69 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 
 		if (ImGui::Selectable("FADE_TIME", &bFlagSelect[0]))
 		{
-			if (tFadeDesc.bFadeFlag & FADE_TIME)
+			if (tFadeDesc.bFadeOutFlag & FADE_TIME)
 			{
 				bFlagSelect[0] = true;
-				tFadeDesc.bFadeFlag &= ~FADE_TIME;
+				tFadeDesc.bFadeOutFlag &= ~FADE_TIME;
 			}
 			else
 			{
 				bFlagSelect[0] = false;
-				tFadeDesc.bFadeFlag |= FADE_TIME;
+				tFadeDesc.bFadeOutFlag |= FADE_TIME;
 			}
 
 		}
 
 		if (ImGui::Selectable("FADE_KEY", &bFlagSelect[1]))
 		{
-			if (tFadeDesc.bFadeFlag & FADE_KEY)
+			if (tFadeDesc.bFadeOutFlag & FADE_KEY)
 			{
-				tFadeDesc.bFadeFlag &= ~FADE_KEY;
+				tFadeDesc.bFadeOutFlag &= ~FADE_KEY;
 			}
 			else
 			{
-				tFadeDesc.bFadeFlag |= FADE_KEY;
+				tFadeDesc.bFadeOutFlag |= FADE_KEY;
 			}
 		}
 
 		if (ImGui::Selectable("FADE_COL", &bFlagSelect[2]))
 		{
-			if (tFadeDesc.bFadeFlag & FADE_COL)
+			if (tFadeDesc.bFadeOutFlag & FADE_COL)
 			{
-				tFadeDesc.bFadeFlag &= ~FADE_COL;
+				tFadeDesc.bFadeOutFlag &= ~FADE_COL;
 			}
 			else
 			{
-				tFadeDesc.bFadeFlag |= FADE_COL;
+				tFadeDesc.bFadeOutFlag |= FADE_COL;
 			}
 		}
 
 		if (ImGui::Selectable("FADE_TEMP", &bFlagSelect[3]))
 		{
-			if (tFadeDesc.bFadeFlag & FADE_TEMP)
+			if (tFadeDesc.bFadeOutFlag & FADE_TEMP)
 			{
-				tFadeDesc.bFadeFlag &= ~FADE_TEMP;
+				tFadeDesc.bFadeOutFlag &= ~FADE_TEMP;
 			}
 			else
 			{
-				tFadeDesc.bFadeFlag |= FADE_TEMP;
+				tFadeDesc.bFadeOutFlag |= FADE_TEMP;
 			}
 		}
 
 		memset(bFlagSelect, 0, sizeof(_bool) * 4);
 
-		if (tFadeDesc.bFadeFlag & FADE_TIME)
+		if (tFadeDesc.bFadeOutFlag & FADE_TIME)
 			bFlagSelect[0] = true;
-		if (tFadeDesc.bFadeFlag & FADE_KEY)
+		if (tFadeDesc.bFadeOutFlag & FADE_KEY)
 			bFlagSelect[1] = true;
-		if (tFadeDesc.bFadeFlag & FADE_COL)
+		if (tFadeDesc.bFadeOutFlag & FADE_COL)
 			bFlagSelect[2] = true;
-		if (tFadeDesc.bFadeFlag & FADE_TEMP)
+		if (tFadeDesc.bFadeOutFlag & FADE_TEMP)
 			bFlagSelect[3] = true;
 
 	}
 
-	if (ImGui::CollapsingHeader("- FadeOut Key -"))
+	if (ImGui::CollapsingHeader("- Fade Key -"))
 	{
 		static _bool	bKeyInputStart = false;
 
@@ -725,7 +862,6 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 	{
 		static _bool	bSelect[FADEDESC::FADEOUT_END] = {};
 
-
 		if (ImGui::Selectable("DELETE", &bSelect[FADEDESC::FADEOUT_DELETE]))
 		{
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DELETE;
@@ -742,21 +878,49 @@ void CWindow_UI::Show_Fader(_uint iIndex)
 		{
 			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
 		}
+		if (ImGui::Selectable("NONE", &bSelect[FADEDESC::FADEOUT_NONE]))
+		{
+			tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_NONE;
+		}
 
 		memset(bSelect, 0, sizeof(_bool)* FADEDESC::FADEOUT_END);
 		bSelect[tFadeDesc.eFadeOutType] = true;
 
 	}
+	if (ImGui::CollapsingHeader("- Fade Style -"))
+	{
+		static _bool	bSelect[FADEDESC::FADE_STYLE_END] = {};
 
+		if (ImGui::Selectable("Style_Default", &bSelect[FADEDESC::FADE_STYLE_DEFAULT]))
+		{
+			tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_DEFAULT;
+		}
+		if (ImGui::Selectable("Style_Move", &bSelect[FADEDESC::FADE_STYLE_MOVE]))
+		{
+			tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_MOVE;
+		}
+		if (ImGui::Selectable("Style_ScaleUp", &bSelect[FADEDESC::FADE_STYLE_SCALEUP]))
+		{
+			tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_SCALEUP;
+		}
+		if (ImGui::Selectable("Style_ScaleDown", &bSelect[FADEDESC::FADE_STYLE_SCALEDOWN]))
+		{
+			tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_SCALEDOWN;
+		}
+
+		memset(bSelect, 0, sizeof(_bool) * FADEDESC::FADE_STYLE_END);
+		bSelect[tFadeDesc.eFadeStyle] = true;
+
+	}
 	if (ImGui::CollapsingHeader("- Variables -"))
 	{
 		ImGui::SliderFloat("Alpha", &tFadeDesc.fAlpha, 0.f, 1.f);
 
 		ImGui::InputFloat("FadeIn Time", &tFadeDesc.fFadeInTime);
+		ImGui::InputFloat("FadeInStart Time", &tFadeDesc.fFadeInStartTime);
 
 		ImGui::InputFloat("FadeOut Time", &tFadeDesc.fFadeOutTime);
-
-		ImGui::InputFloat("FadeDelay Time", &tFadeDesc.fFadeOutStartTime);
+		ImGui::InputFloat("FadeOutStart Time", &tFadeDesc.fFadeOutStartTime);
 	}
 
 

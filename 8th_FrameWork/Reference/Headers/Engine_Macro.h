@@ -12,6 +12,12 @@
 		Instance = nullptr;\
 		}\
 
+#define	SAFE_DELETE_ARRAY(Instance) if (Instance)\
+		{\
+		delete[] Instance;\
+		Instance = nullptr;\
+		}\
+
 #define	SAFE_DESTROY(Instance) if (Instance)\
 		{\
 		Instance->Destroy_Instance();\
@@ -48,6 +54,7 @@
 
 #define DT	CGameInstance::Get_Instance()->Get_DT()
 #define fDT	(float)CGameInstance::Get_Instance()->Get_DT()
+#define RealfDT	CGameInstance::Get_Instance()->Get_RealFDT()
 
 #define KEY(key, state) CGameInstance::Get_Instance()->Get_KeyState(KEY::key) == KEY_STATE::state
 #define MOUSE_MOVE(mousemove) CGameInstance::Get_Instance()->Get_DIMouseMoveState(mousemove)
@@ -72,13 +79,23 @@
 #define		MAX_VERTEX_ELEMENT			65
 #define		ZERO_VECTOR				_float4(0.f, 0.f, 0.f, 1.f)
 
+#define		SATURATE(floatValue) min(max(0.f, floatValue), 1.f)
+
 // ====================== Shader Flag ============================
 
-#define		SH_DEFAULT		0
-#define		SH_BLUR			0x001
-#define		SH_CARTOON		0x002
-#define		SH_OUTLINE		0x004
-#define		SH_GLOW			0x008
+#define		SH_LIGHT_DEFAULT		_float4(1.f, 0.f, 0.f, 0.f)
+#define		SH_LIGHT_NONE		_float4(0.f, 0.f, 0.f, 0.f)
+#define		SH_LIGHT_NOSPEC		_float4(0.95f, 0.f, 0.f, 0.f)
+#define		SH_LIGHT_NOOUTLINE		_float4(0.75f, 0.f, 0.f, 0.f)
+#define		SH_LIGHT_NOCARTOON		_float4(0.65f, 0.f, 0.f, 0.f)
+#define		SH_LIGHT_BUILDINGCARTOON		_float4(0.85f, 0.f, 0.f, 0.f)
+
+#define		SH_EFFECT_DEFAULT		_float4(1.f, 1.f, 0.f, 1.f)
+#define		SH_EFFECT_NOGLOW		_float4(0.95f, 1.f, 0.f, 1.f)
+#define		SH_EFFECT_NOBLOOM		_float4(1.f, 0.95f, 0.f, 1.f)
+#define		SH_EFFECT_NONE		_float4(0.f, 0.f, 0.f, 0.f)
+
+
 
 // ==============================================================
 

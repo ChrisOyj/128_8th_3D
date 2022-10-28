@@ -61,6 +61,14 @@ HRESULT CCamera_Manager::SetUp_ShaderResources(_bool Ortho)
 	{
 		matView = m_tView.matView;
 		matProj = m_tProj.matProj;
+
+		_float4 vCamPos = Get_ViewPos();
+
+		/*if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(4, "g_vCamPosition", &vCamPos, sizeof(_float4))))
+			return E_FAIL;*/
+
+		/*if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(4, "g_vCamPosition", &vCamPos, sizeof(_float4))))
+			return E_FAIL;*/
 	}
 
 	matView.Transpose();
@@ -69,7 +77,43 @@ HRESULT CCamera_Manager::SetUp_ShaderResources(_bool Ortho)
 	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue_All("g_ViewMatrix", (&matView), sizeof(_float4x4))))
 		return E_FAIL;
 
-	return CShader_Manager::Get_Instance()->Set_RawValue_All("g_ProjMatrix", (&matProj), sizeof(_float4x4));
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue_All("g_ProjMatrix", (&matProj), sizeof(_float4x4))))
+		return E_FAIL;
+
+	
+
+	return S_OK;
+}
+
+HRESULT CCamera_Manager::SetUp_ShaderResources(_uint iShaderIndex, _bool Ortho)
+{
+	_float4x4	matView, matProj;
+
+	if (Ortho)
+	{
+		matView = m_matOrthoView;
+		matProj = m_matOrthoProj;
+	}
+	else
+	{
+		matView = m_tView.matView;
+		matProj = m_tProj.matProj;
+
+		_float4 vCamPos = Get_ViewPos();
+	}
+
+	matView.Transpose();
+	matProj.Transpose();
+
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(iShaderIndex, "g_ViewMatrix", (&matView), sizeof(_float4x4))))
+		return E_FAIL;
+
+	if (FAILED(CShader_Manager::Get_Instance()->Set_RawValue(iShaderIndex, "g_ProjMatrix", (&matProj), sizeof(_float4x4))))
+		return E_FAIL;
+
+
+
+	return S_OK;
 }
 
 HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)
@@ -80,9 +124,9 @@ HRESULT CCamera_Manager::Initialize(const GRAPHICDESC& GraphicDesc)
 
 	m_fAspect = (_float)GraphicDesc.iWinCX / (_float)GraphicDesc.iWinCY;
 
-	m_tProj.matProj = XMMatrixPerspectiveFovLH(XMConvertToRadians(90.f),
+	m_tProj.matProj = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.f),
 		m_fAspect,
-		1.f, 1000.0f);
+		1.f, 1500.0f);
 
 	m_tView.matView = XMMatrixLookAtLH(Pos.XMLoad(), ZeroVector.XMLoad(), m_tView.vUp.XMLoad());
 
@@ -111,8 +155,12 @@ CCamera * CCamera_Manager::Change_Camera(wstring strKey)
 
 
 	if (m_pCurCam)
+	{
 		DISABLE_GAMEOBJECT(m_pCurCam);
+	}
+
 	
+
 	ENABLE_GAMEOBJECT(iter->second);
 	m_pCurCam = iter->second;
 	Make_ViewProj();
@@ -132,6 +180,11 @@ void CCamera_Manager::Add_Camera(wstring strKey, CCamera * pCamera)
 
 	m_mapCam.emplace(Convert_ToHash(strKey), pCamera);
 	//DISABLE_GAMEOBJECT(pCamera);
+}
+
+CCamera* CCamera_Manager::Find_Camera(wstring strKey)
+{
+	return m_mapCam.find(Convert_ToHash(strKey))->second;
 }
 
 void CCamera_Manager::Make_ViewMatrix()

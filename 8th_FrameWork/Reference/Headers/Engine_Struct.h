@@ -8,6 +8,7 @@ namespace Engine
 		_float4		vScale;
 		_float4x4		matMyWorld;
 		_float4x4		matWorld;
+		_float4x4		matBonus;
 
 	}TRANSFORM;
 
@@ -56,7 +57,10 @@ namespace Engine
 
 	typedef struct tagModelMaterial
 	{
-		class CTexture* pTextures[AI_TEXTURE_TYPE_MAX];
+		class CTexture* pTextures[AI_TEXTURE_TYPE_MAX] = {};
+		_float4			vColor;
+		_uint			iType;
+		string			strName;
 	}MODEL_MATERIAL;
 
 	typedef struct tagVertex_Normal_Texture
@@ -64,11 +68,12 @@ namespace Engine
 		XMFLOAT3		vPosition;
 		XMFLOAT3		vNormal;
 		XMFLOAT2		vTexUV;
+		XMFLOAT4		vColor;
 	}VTXNORTEX;
 
 	typedef struct ENGINE_DLL tagVertex_Normal_Texture_Declaration
 	{
-		static const unsigned int		iNumElements = 3;
+		static const unsigned int		iNumElements = 4;
 		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
 	} VTXNORTEX_DECLARATION;
 
@@ -83,6 +88,65 @@ namespace Engine
 		static const unsigned int		iNumElements = 2;
 		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
 	} VTXTEX_DECLARATION;
+
+	typedef struct tagVertex_Point
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vPSize;
+	}VTXPOINT;
+
+	typedef struct tagVertex_Instance
+	{
+		XMFLOAT4			vRight;
+		XMFLOAT4			vUp;
+		XMFLOAT4			vLook;
+		XMFLOAT4			vTranslation;
+	}VTXINSTANCE;
+
+	typedef struct tagVertexRect_Instance
+	{
+		XMFLOAT4			vRight;
+		XMFLOAT4			vUp;
+		XMFLOAT4			vLook;
+		XMFLOAT4			vTranslation;
+		XMFLOAT4			vColor;
+	}VTXRECTINSTANCE;
+
+	typedef struct tagVertex_Default
+	{
+		XMFLOAT3		vPosition;
+	}VTXDEFAULT;
+
+	typedef struct tagVertexTri_Instance
+	{
+		XMFLOAT3		vPosition[3];
+		XMFLOAT4		vColor;
+	}VTXTRIINSTANCE;
+
+	typedef struct ENGINE_DLL tagVertex_Point_Instance_Declaration
+	{
+		static const unsigned int		iNumElements = 6;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	}VTXPOINT_INSTANCE_DECLARATION;
+
+	typedef struct ENGINE_DLL tagVertex_Model_Instance_Declaration
+	{
+		static const unsigned int		iNumElements = 8;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXMODEL_INSTANCE_DECLARATION;
+
+	typedef struct ENGINE_DLL tagVertex_Rect_Instance_Declaration
+	{
+		static const unsigned int		iNumElements = 7;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXRECT_INSTANCE_DECLARATION;
+
+	typedef struct ENGINE_DLL tagVertex_Tri_Instance_Declaration
+	{
+		static const unsigned int		iNumElements = 5;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXTRI_INSTANCE_DECLARATION;
+
 
 	typedef struct tagVertex_Model
 	{
@@ -120,12 +184,30 @@ namespace Engine
 		XMFLOAT3		vTexUV;
 	}VTXCUBETEX;
 
+	typedef struct tagVertex_DecalCube
+	{
+		tagVertex_DecalCube()
+		{}
+
+		tagVertex_DecalCube(_float f1, _float f2, _float f3, _float f4, _float f5)
+			: vPosition(f1, f2, f3)
+			, vTexUV(f1, f2)
+		{}
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vTexUV;
+	}VTXDECALCUBE;
+
 	typedef struct ENGINE_DLL tagVertex_Cube_Texture_Declaration
 	{
 		static const unsigned int		iNumElements = 2;
 		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
 	} VTXCUBETEX_DECLARATION;
 
+	typedef struct ENGINE_DLL tagVertex_DecalCube_Declaration
+	{
+		static const unsigned int		iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXDECALCUBE_DECLARATION;
 
 	//typedef		struct tag_Vertex_Normal
 	//{
@@ -242,7 +324,55 @@ namespace Engine
 		_uint _1, _2, _3;
 	};
 
-	
+	typedef struct tagKeyFrame
+	{
+		XMFLOAT3		vScale;
+		XMFLOAT4		vRotation;
+		XMFLOAT3		vPosition;
+		float			fTime;
+	} KEYFRAME;
 
+	struct BONE_DATA
+	{
+		char		szName[MIN_STR] = "";
+		_float4x4	OffsetMatrix;
+	};
 
+	struct CHANNEL_DESC
+	{
+		string	strName;
+		_uint	iNumKeyFrames = 0;
+		KEYFRAME* pKeyFrames = nullptr;
+	};
+
+	struct ANIM_DESC
+	{
+		_uint	iNumChannels = 0;
+		_float	fDuration = 0.f;
+		_float	fTickPerSecond = 0.f;
+		CHANNEL_DESC* pChannels = nullptr;
+	};
+
+	typedef struct tagLightDesc
+	{
+		enum TYPE { TYPE_DIRECTIONAL, TYPE_POINT, TYPE_END };
+
+		TYPE			eType = TYPE_END;
+
+		XMFLOAT4		vDirection;
+
+		XMFLOAT4		vPosition;
+		float			fRange;
+
+		XMFLOAT4		vDiffuse;
+		XMFLOAT4		vAmbient;
+		XMFLOAT4		vSpecular;
+
+		//라이트 수명
+		float			fLightAcc = 0.f;
+		float			fLightTime = 999999.f;
+		class CGameObject* pOwner = nullptr;
+		XMFLOAT4		vOffset = { 0.f, 0.f, 0.f, 1.f };
+
+	}LIGHTDESC;
 }

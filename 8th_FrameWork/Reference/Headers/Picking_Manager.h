@@ -4,7 +4,7 @@
 BEGIN(Engine)
 
 class CGameObject;
-class CRenderer;
+class CMesh;
 
 class CPicking_Manager
 {
@@ -18,25 +18,22 @@ public:
 	HRESULT	Initialize(const GRAPHICDESC&	tGraphicDesc);
 
 public:
-	void	Add_Renderer(CRenderer* pRenderer, _float fDistanceToPlayer);
+	void	Regist_Mesh(CMesh* pMesh, _float fDistanceToPlayer);
 	void	Execute_Picking();
+	void	Compute_WorldRay();
 
 public:
-	_bool	Is_3DPicked(CRenderer* pRenderer, _float4*	pOut, _float4* pOutNormal = nullptr);
-	_bool	Is_OnMouseRay(CRenderer* pRenderer);
+	_bool	Is_Picked(CMesh* pRenderer, _float4*	pOut, _float4* pOutNormal = nullptr);
 
 private:
-	HWND	m_hWnd;
-	list<pair<_float, CRenderer*>>	m_PickingRenderers;
-
+	list<pair<_float, CMesh*>>	m_PickingMeshes;
 	GRAPHICDESC		m_GraphicDesc;
 
-	_float4			m_vRayDir;
-	_float4			m_vRayPos;
+	_float3			m_vRayDir;
+	_float3			m_vRayPos;
 
 private:
 	void	Sort_Lists();
-	void	Compute_WorldRay();
 	void	Picking();
 };
 

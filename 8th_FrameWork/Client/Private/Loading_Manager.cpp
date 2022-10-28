@@ -5,6 +5,9 @@
 #include "CLevel_Unity.h"
 #include "CLevel_Logo.h"
 #include "CLevel_MainMenu.h"
+#include "CLevel_Stage1.h"
+#include "CLevel_Stage2.h"
+
 #include "GameInstance.h"
 
 #include "CShader.h"
@@ -47,9 +50,10 @@ HRESULT CLoading_Manager::Initialize()
 	}
 
 	m_arrLevels[LEVEL_LOADING] = CLevel_Loading::Create();
-	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
 	m_arrLevels[LEVEL_LOGO] = CLevel_Logo::Create();
-	m_arrLevels[LEVEL_MAINMENU] = CLevel_MainMenu::Create();
+	m_arrLevels[LEVEL_UNITY] = CLevel_Unity::Create();
+	m_arrLevels[LEVEL_STAGE1] = CLevel_Stage1::Create();
+	m_arrLevels[LEVEL_STAGE2] = CLevel_Stage2::Create();
 
 	
 
@@ -79,12 +83,15 @@ HRESULT CLoading_Manager::Load_Level()
 	m_bReservation = false;
 
 	/* Delete all Objects except Statics */
+
 	for (_uint i = 0; i < GR_END; ++i)
 	{
 		CGameInstance::Get_Instance()->Delete_Objects(i);
 	}
 
 	CGameInstance::Get_Instance()->Clear_All_Components();
+	GAMEINSTANCE->Clear_Enable_Events();
+	GAMEINSTANCE->Clear_Lights();
 	//CGameInstance::Get_Instance()->Delete_GameObject_Prototypes();
 
 	m_bFinish = false;

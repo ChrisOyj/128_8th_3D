@@ -53,6 +53,7 @@ public:
 	void	Change_Level(CLevel* pLevel);
 
 	void	Clear_All_Event();
+	void	Clear_Enable_Events();
 
 private:
 	void	Add_Event(const EVENT_TYPE& eEven, const DWORD_PTR& lParam = 0, const DWORD_PTR& wParam = 0);

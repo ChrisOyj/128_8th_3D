@@ -21,6 +21,8 @@ public:
 	static CRenderer* Create(_uint iGroupID, const RENDER_GROUP& eRenderGroup, const _uint& iCurPass, const _float4& vOffsetPos = _float4(0.f, 0.f, 0.f, 1.f));
 
 public:
+	CShader* Get_ShaderCom() { return m_pShaderCom; }
+
 	void		Set_RenderGroup(RENDER_GROUP	eRenderGroup) { m_eRenderGroup = eRenderGroup; }
 	void		Set_Pass(const _uint& iCurPass) { m_iCurPass = iCurPass; }
 
@@ -37,14 +39,15 @@ public:
 	virtual void		Tick() override;
 	virtual void		Late_Tick() override;
 	virtual HRESULT		Render();
+	virtual HRESULT		Bake_Shadow(_float4x4 ViewMatrix);
 
 protected:
 	CShader*					m_pShaderCom = nullptr;
 	CMesh*						m_pMeshCom = nullptr;
-	CTexture*					m_pTextureCom = nullptr;
+	list<CTexture*>				m_pTextureList;
 
 	_uint						m_iCurPass = 0;
-
+	_uint						m_iShadowPass = 0;
 	RENDER_GROUP				m_eRenderGroup;
 	_float4						m_vOffsetPos;
 	_float4						m_vFinalPos;

@@ -1,5 +1,6 @@
 #include "..\Public\Collision_Manager.h"
 
+#include "GameInstance.h"
 #include "CCollider_Box.h"
 #include "CCollider_Sphere.h"
 #include "GameObject.h"
@@ -44,7 +45,6 @@ void CCollision_Manager::Tick()
 			if (!(*iter)->Is_Valid())
 			{
 				iter = m_pColliderList[i].erase(iter);
-				++iter;
 			}
 			else
 				++iter;
@@ -55,11 +55,38 @@ void CCollision_Manager::Tick()
 
 
 }
+void CCollision_Manager::Clear_All()
+{
+	for (_uint i = 0; i < COL_END; ++i)
+	{
+		m_pColliderList[i].clear();
+	}
+}
+#ifdef _DEBUG
 
 HRESULT CCollision_Manager::Render()
 {
+	if (KEY(F6, TAP))
+	{
+		m_bRender = !m_bRender;
+	}
+
+	if (!m_bRender)
+		return S_OK;
+
+	for (_uint i = 0; i < COL_END; ++i)
+	{
+		for (auto& pCollider : m_pColliderList[i])
+		{
+			if (FAILED(pCollider->Render()))
+				return E_FAIL;
+		}
+	}
+	
 	return S_OK;
 }
+#endif
+
 _bool CCollision_Manager::Is_OBBtoSphereCollision(CCollider* _pOBB, CCollider* _pSphere)
 {
 	COL_INFO_BOX LeftInfo = ((CCollider_Box*)_pOBB)->Get_ColInfo();
@@ -103,7 +130,9 @@ HRESULT CCollision_Manager::Is_InIndex(const _uint& iIdx)
 
 _float4 CCollision_Manager::Compute_ColPosition(CCollider* _pLeft, CCollider* _pRight)
 {
-	return _float4();
+	return (static_cast<CCollider_Sphere*>(_pLeft)->Get_ColInfo().vFinalPos +
+		static_cast<CCollider_Sphere*>(_pRight)->Get_ColInfo().vFinalPos)
+		* 0.5f;
 }
 
 map<_ulonglong, bool>::iterator CCollision_Manager::Find_PrevColInfo(const _uint& _iLeftID, const _uint& _iRightID)
@@ -172,11 +201,10 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 
 		for (auto RightIter = RightList.begin(); RightIter != RightList.end(); ++RightIter)
 		{
-			CGameObject* pRightOwner = (*LeftIter)->Get_Owner();
+			CGameObject* pRightOwner = (*RightIter)->Get_Owner();
 
 			if ((*LeftIter) == (*RightIter)) // 나 자신과 충돌 방지
 			{
-				++RightIter;
 				continue;
 			}
 
@@ -188,6 +216,8 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 				{
 					pLeftOwner->CallBack_CollisionExit(pRightOwner, _eRight);
 					pRightOwner->CallBack_CollisionExit(pLeftOwner, _eLeft);
+					(*LeftIter)->Set_Col(false);
+					(*RightIter)->Set_Col(false);
 
 					iter->second = false;
 				}
@@ -202,6 +232,8 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 					{
 						pLeftOwner->CallBack_CollisionExit(pRightOwner, _eRight);
 						pRightOwner->CallBack_CollisionExit(pLeftOwner, _eLeft);
+						(*LeftIter)->Set_Col(false);
+						(*RightIter)->Set_Col(false);
 
 						iter->second = false;
 					}
@@ -219,6 +251,8 @@ void CCollision_Manager::Collider_GroupUpdate(const _uint& _eLeft, const _uint& 
 
 						pLeftOwner->CallBack_CollisionEnter(pRightOwner, _eRight, vColPosition);
 						pRightOwner->CallBack_CollisionEnter(pLeftOwner, _eLeft, vColPosition);
+						(*LeftIter)->Set_Col(true);
+						(*RightIter)->Set_Col(true);
 
 						iter->second = true;
 					}

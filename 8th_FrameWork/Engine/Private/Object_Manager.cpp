@@ -71,7 +71,8 @@ void CObject_Manager::LateTick_GameObjects()
 	{
 		for (auto& pGameObject : m_pGameObjects[i])
 		{
-			pGameObject->Late_Tick();
+			if (pGameObject->Is_Valid())
+				pGameObject->Late_Tick();
 		}
 	}
 }

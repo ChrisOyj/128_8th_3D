@@ -29,9 +29,9 @@ HRESULT CSkyBox::Initialize_Prototype()
     Add_Component(pRenderer);
     
     CTexture* pTexture = CTexture::Create(CP_AFTER_TRANSFORM,
-        L"../bin/resources/textures/skybox/sky_%d.dds", 4);
+        L"../bin/resources/textures/skybox/MySkyBox_%d.dds", 5);
     pTexture->Initialize();
-    pTexture->Set_CurTextureIndex(3);
+    pTexture->Set_CurTextureIndex(2);
     Add_Component(pTexture);
 
     return S_OK;
@@ -44,6 +44,16 @@ HRESULT CSkyBox::Initialize()
 
 void CSkyBox::My_Tick()
 {
+    if (KEY(K, TAP))
+    {
+        static _uint g_iIdx = 0;
+        GET_COMPONENT(CTexture)->Set_CurTextureIndex(g_iIdx++);
+    }
+    if (KEY(L, TAP))
+    {
+        static _uint g_iIdx = 0;
+        GET_COMPONENT(CTexture)->Set_CurTextureIndex(g_iIdx--);
+    }
 }
 
 void CSkyBox::My_LateTick()

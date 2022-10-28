@@ -12,7 +12,7 @@ CTexture::CTexture(_uint iGroupIdx)
 
 CTexture::~CTexture()
 {
-
+	Release();
 }
 CTexture* CTexture::Create(_uint iGroupIdx, const _tchar* pTextureFilePath, const _uint& iNumTextures)
 {
@@ -43,7 +43,15 @@ HRESULT CTexture::Set_ShaderResourceView(CShader* pShader, const char* pConstant
 	return pShader->Set_ShaderResourceView(pConstantName, m_SRVs[m_iCurTextureIndex].pSRV);
 }
 
-HRESULT CTexture::Add_Texture(const _tchar* pTextureFilePath)
+void CTexture::Set_ShaderResource(CShader* pShader, const char* pConstantName, _uint iIdx)
+{
+	if (iIdx >= m_SRVs.size())
+		return;
+
+	pShader->Set_ShaderResourceView(pConstantName, m_SRVs[iIdx].pSRV);
+}
+
+HRESULT CTexture::Add_Texture(const _tchar* pTextureFilePath, _bool bFront)
 {
 	TEXTUREDESC	tDesc;
 
@@ -66,12 +74,26 @@ HRESULT CTexture::Add_Texture(const _tchar* pTextureFilePath)
 		hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
 	if (FAILED(hr))
-		return E_FAIL;
+	{
+		//Call_MsgBox(L"Cant Find Texture");
+		hr = DirectX::CreateWICTextureFromFile(PDEVICE, L"../bin/resources/textures/white.png", nullptr, pSRV.GetAddressOf());
+	}
+		
 
 	tDesc.pSRV = pSRV;
 	tDesc.strFilePath = szTextureFilePath;
 
-	m_SRVs.push_back(tDesc);
+	if (bFront && !m_SRVs.empty())
+	{
+		auto iter = m_SRVs.begin();
+
+		for (_uint i = 0; i < m_iCurTextureIndex; ++i)
+			++iter;
+
+		m_SRVs.insert(iter, tDesc);
+	}
+	else
+		m_SRVs.push_back(tDesc);
 
 	return S_OK;
 }
@@ -125,6 +147,10 @@ HRESULT CTexture::Initialize()
 
 void CTexture::Release()
 {
+	for (auto& elem : m_SRVs)
+	{
+		elem.pSRV.Reset();
+	}
 }
 
 HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iNumTextures)
@@ -132,6 +158,8 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 	_tchar		szTextureFilePath[MAX_PATH] = TEXT("");
 
 	m_SRVs.reserve(iNumTextures);
+
+	
 
 	for (_uint i = 0; i < iNumTextures; ++i)
 	{
@@ -155,7 +183,10 @@ HRESULT CTexture::SetUp_Textures(const _tchar* pTextureFilePath, const _uint& iN
 			hr = DirectX::CreateWICTextureFromFile(PDEVICE, szTextureFilePath, nullptr, pSRV.GetAddressOf());
 
 		if (FAILED(hr))
-			return E_FAIL;
+		{
+			//Call_MsgBox(L"Cant Find Texture");
+			hr = DirectX::CreateWICTextureFromFile(PDEVICE, L"../bin/resources/textures/white.png", nullptr, pSRV.GetAddressOf());
+		}
 
 		tDesc.pSRV = pSRV;
 		tDesc.strFilePath = szTextureFilePath;

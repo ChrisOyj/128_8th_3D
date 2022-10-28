@@ -21,6 +21,7 @@ HRESULT CCamera_Free::Initialize_Prototype()
 	CScript_Freecam* pScriptable = CScript_Freecam::Create(CP_AFTER_TRANSFORM);
 	pScriptable->Set_Owner(this);
 	Add_Component(pScriptable);
+	m_tProj.fFOV = XMConvertToRadians(55.f);
 
 
 	return S_OK;

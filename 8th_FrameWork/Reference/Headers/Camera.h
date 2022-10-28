@@ -11,7 +11,7 @@ protected:
 	virtual ~CCamera();
 
 public:
-	const PROJ_TRANSFORM& Get_Proj() { return m_tProj; }
+	PROJ_TRANSFORM& Get_Proj() { return m_tProj; }
 
 	// CGameObject을(를) 통해 상속됨
 protected:

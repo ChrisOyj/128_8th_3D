@@ -1,4 +1,5 @@
 #include "../Public/Sound_Device.h"
+#include "GameInstance.h"
 
 IMPLEMENT_SINGLETON(CSound_Device)
 
@@ -27,12 +28,10 @@ HRESULT CSound_Device::Initialize(const SOUNDDESC& tSoundDesc)
 		{
 			m_pChannelArr[i].push_back(nullptr);
 		}
+		m_iChannelNumbers[i] = tSoundDesc.iChannelNumbers[i];
 	}
 
 	Set_Volume(0.5f);
-
-
-	Load_SoundFile();
 
 	return S_OK;
 }
@@ -41,7 +40,10 @@ HRESULT CSound_Device::Release()
 {
 	for (auto& Mypair : m_mapSound)
 	{
-		FMOD_RESULT fHr = FMOD_Sound_Release(Mypair.second);
+		for (auto& elem : Mypair.second)
+		{
+			FMOD_RESULT fHr = FMOD_Sound_Release(elem);
+		}
 	}
 
 	m_mapSound.clear();
@@ -53,110 +55,43 @@ HRESULT CSound_Device::Release()
 }
 
 
-void CSound_Device::Load_SoundFile()
+HRESULT CSound_Device::Load_SoundFile(wstring wstrFolderPath)
 {
-	// _finddata_t : <io.h>에서 제공하며 파일 정보를 저장하는 구조체
-	_finddata_t fd;
-	// _findfirst : <io.h>에서 제공하며 사용자가 설정한 경로 내에서 가장 첫 번째 파일을 찾는 함수
-	INT_PTR handle = _findfirst("../Bin/Resources/Sound/GamePlay/*.*", &fd);
+	//1. 폴더를 읽고
+	//2. 그안에 머 나오면 뒤에서 _이거찾아서 잘라서 저장
+	//3. 
 
-	if (handle == -1)
-		return;
-
-	int iResult = 0;
-
-	char szCurPath[128] = "../Bin/Resources/Sound/GamePlay/";
-	char szFullPath[128] = "";
-
-	while (iResult != -1)
+	for (filesystem::directory_iterator FileIter(wstrFolderPath.c_str());
+		FileIter != filesystem::end(FileIter); ++FileIter)
 	{
-		strcpy_s(szFullPath, szCurPath);
+		const filesystem::directory_entry& entry = *FileIter;
 
-		strcat_s(szFullPath, fd.name);
+		wstring wstrPath = entry.path().relative_path();
+		string strFullPath;
+		strFullPath.assign(wstrPath.begin(), wstrPath.end());
+
+		_int iFind = (_int)strFullPath.rfind("\\") + 1;
+		string strFileName = strFullPath.substr(iFind, strFullPath.length() - iFind);
+
+		iFind = (_int)strFileName.rfind("_");
+		strFileName = strFileName.substr(0, iFind);
+
+		wstring wstrFileName(strFileName.begin(), strFileName.end());
+
 		FMOD_SOUND* pSound = nullptr;
+		FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem, strFullPath.c_str(), FMOD_HARDWARE, 0, &pSound);
 
-		FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem, szFullPath, FMOD_HARDWARE, 0, &pSound);
-
-		if (eRes == FMOD_OK)
-		{
-			int iLength = (int)strlen(fd.name) + 1;
-
-			TCHAR* pSoundKey = new TCHAR[iLength];
-			ZeroMemory(pSoundKey, sizeof(TCHAR) * iLength);
-
-			// 아스키 코드 문자열을 유니코드 문자열로 변환시켜주는 함수
-			MultiByteToWideChar(CP_ACP, 0, fd.name, iLength, pSoundKey, iLength);
-
-			_hashcode hcCode = Convert_ToHash(pSoundKey);
-
-			m_mapSound.emplace(hcCode, pSound);
-		}
-		//_findnext : <io.h>에서 제공하며 다음 위치의 파일을 찾는 함수, 더이상 없다면 -1을 리턴
-		iResult = _findnext(handle, &fd);
-	}
-
-
-	_findclose(handle);
-
-	{
-		// _finddata_t : <io.h>에서 제공하며 파일 정보를 저장하는 구조체
-		_finddata_t fd;
-		// _findfirst : <io.h>에서 제공하며 사용자가 설정한 경로 내에서 가장 첫 번째 파일을 찾는 함수
-		INT_PTR handle = _findfirst("../Bin/Resources/Sound/UI/*.*", &fd);
-
-		if (handle == -1)
-			return;
-
-		int iResult = 0;
-
-		char szCurPath[128] = "../Bin/Resources/Sound/UI/";
-		char szFullPath[128] = "";
-
-		while (iResult != -1)
-		{
-			strcpy_s(szFullPath, szCurPath);
-
-			// "../ Sound/Success.wav"
-			strcat_s(szFullPath, fd.name);
-
-			//wstring strFilePath = CPathMgr::Get_Instance()->Get_ContentPath();
-			//strFilePath += fd.name;
-
-			FMOD_SOUND* pSound = nullptr;
-
-			FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem, szFullPath, FMOD_HARDWARE, 0, &pSound);
-
-			if (eRes == FMOD_OK)
-			{
-				int iLength = (int)strlen(fd.name) + 1;
-
-				TCHAR* pSoundKey = new TCHAR[iLength];
-				ZeroMemory(pSoundKey, sizeof(TCHAR) * iLength);
-
-				// 아스키 코드 문자열을 유니코드 문자열로 변환시켜주는 함수
-				MultiByteToWideChar(CP_ACP, 0, fd.name, iLength, pSoundKey, iLength);
-
-				_hashcode hcCode = Convert_ToHash(pSoundKey);
-
-				m_mapSound.emplace(hcCode, pSound);
-			}
-			//_findnext : <io.h>에서 제공하며 다음 위치의 파일을 찾는 함수, 더이상 없다면 -1을 리턴
-			iResult = _findnext(handle, &fd);
-		}
-
-		_findclose(handle);
-
+		m_mapSound[Convert_ToHash(wstrFileName)].push_back(pSound);
 	}
 
 	FMOD_System_Update(m_pSystem);
 
+	return S_OK;
 }
 
 void CSound_Device::Play_BGM(const TCHAR* strSoundKey)
 {
-	map<_hashcode, FMOD_SOUND*>::iterator iter;
-
-	iter = m_mapSound.find(Convert_ToHash(strSoundKey));
+	auto iter = m_mapSound.find(Convert_ToHash(strSoundKey));
 
 	if (iter == m_mapSound.end())
 	{
@@ -164,16 +99,20 @@ void CSound_Device::Play_BGM(const TCHAR* strSoundKey)
 		return;
 	}
 
-	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[CH_BGM].front());
+	FMOD_SOUND* pSound = iter->second.front();
+
+	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, pSound, FALSE, &m_pChannelArr[CH_BGM].front());
 	FMOD_Channel_SetMode(m_pChannelArr[CH_BGM].front(), FMOD_LOOP_NORMAL);
 	FMOD_System_Update(m_pSystem);
+
+	iter->second.pop_front();
+	iter->second.push_back(pSound);
 }
 
 void CSound_Device::Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIndex, _float fVolumeRatio)
 {
-	map<_hashcode, FMOD_SOUND*>::iterator iter;
 
-	iter = m_mapSound.find(Convert_ToHash(strSoundKey));
+	auto iter = m_mapSound.find(Convert_ToHash(strSoundKey));
 
 	if (iter == m_mapSound.end())
 	{
@@ -185,9 +124,12 @@ void CSound_Device::Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIn
 
 	_uint iCurChannel = m_iCurChannelIndex[iGroupIndex];
 
-	if (FMOD_Channel_IsPlaying(m_pChannelArr[iGroupIndex][iCurChannel], &bPlay))
+	FMOD_SOUND* pSound = iter->second.front();
+
+
+	//if (FMOD_Channel_IsPlaying(m_pChannelArr[iGroupIndex][iCurChannel], &bPlay))
 	{
-		FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[iGroupIndex][iCurChannel]);
+		FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, pSound, FALSE, &m_pChannelArr[iGroupIndex][iCurChannel]);
 		Set_ChannelVolume(iGroupIndex, iCurChannel, m_fChannelVolume[iGroupIndex] * fVolumeRatio);
 	}
 
@@ -195,6 +137,10 @@ void CSound_Device::Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIn
 
 	if (m_iCurChannelIndex[iGroupIndex] >= m_iChannelNumbers[iGroupIndex])
 		m_iCurChannelIndex[iGroupIndex] = 0;
+
+
+	iter->second.pop_front();
+	iter->second.push_back(pSound);
 }
 
 void CSound_Device::Stop_Sound(CHANNEL_GROUP eType)
@@ -235,6 +181,10 @@ void CSound_Device::Set_Volume(_float fVolume)
 
 void CSound_Device::Set_ChannelVolume(CHANNEL_GROUP eID, _float fVolume)
 {
+	m_fChannelVolume[eID] = fVolume;
+
+
+
 	for (_uint i = 0; i < m_iChannelNumbers[eID]; ++i)
 	{
 		FMOD_Channel_SetVolume(m_pChannelArr[eID][i], fVolume);

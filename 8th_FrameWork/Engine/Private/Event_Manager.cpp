@@ -110,6 +110,19 @@ void CEvent_Manager::Clear_All_Event()
 	m_vecDeadComponents.clear();
 }
 
+void CEvent_Manager::Clear_Enable_Events()
+{
+	for (auto iter = m_vecEvent.begin(); iter != m_vecEvent.end();)
+	{
+		if ((*iter).eEven == EVENT_DISABLE_OBJECT || (*iter).eEven == EVENT_ENABLE_OBJECT)
+		{
+			iter = m_vecEvent.erase(iter);
+		}
+		else
+			++iter;
+	}
+}
+
 void CEvent_Manager::Add_Event(const EVENT_TYPE & eEven, const DWORD_PTR & lParam, const DWORD_PTR & wParam)
 {
 	m_vecEvent.push_back(EVENT(eEven, lParam, wParam));
@@ -148,7 +161,7 @@ void CEvent_Manager::Execute(const EVENT & tEvent)
 	case EVENT_CREATE_STATIC:
 	{
 		CGameObject* pGameObject = (CGameObject*)(tEvent.lParam);
-		_hashcode	iObjectID = static_cast<_uint>(tEvent.wParam);
+		_hashcode	iObjectID =(_hashcode)(tEvent.wParam);
 		CObject_Manager::Get_Instance()->Add_StaticObject(pGameObject, iObjectID);
 		if (FAILED(pGameObject->Start()))
 		{

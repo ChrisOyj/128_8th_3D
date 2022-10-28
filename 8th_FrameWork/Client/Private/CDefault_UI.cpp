@@ -43,6 +43,11 @@ CDefault_UI* CDefault_UI::Clone_WithJson(wstring strFileKey)
 	return pInstance;
 }
 
+void CDefault_UI::Reset_UI()
+{
+	GET_COMPONENT(CFader)->Get_FadeState();
+}
+
 HRESULT CDefault_UI::Initialize_Prototype()
 {
 	Add_Component(CComponent_Factory::Clone_Component<CShader>(this));
@@ -96,8 +101,10 @@ HRESULT CDefault_UI::Initialize()
 
 void CDefault_UI::OnEnable()
 {
+	__super::OnEnable();
 }
 
 void CDefault_UI::OnDisable()
 {
+	__super::OnDisable();
 }

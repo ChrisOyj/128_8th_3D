@@ -20,7 +20,7 @@ public:
 	static CTransform* Create(_uint iGroupID);
 
 public:
-	TRANSFORM&	Get_Transform()		{ return m_tTransform;}
+	TRANSFORM&			Get_Transform()		{ return m_tTransform;}
 	_float4x4			Get_WorldMatrix(const _byte& matrixFlag = 0);
 	_float4				Get_World(WORLD eType);
 	_float4				Get_MyWorld(WORLD eType);
@@ -31,6 +31,7 @@ public:
 	void				Set_MyMatrix(_float4x4 matWorld);
 	void				Set_Look(const _float4& vLook);
 	void				Set_Right(const _float4& vRight);
+	void				Set_Up(const _float4& vUp);
 	void				Set_Rect();
 
 	void				Set_Scale(const _float4& vScale);
@@ -42,6 +43,9 @@ public:
 
 public:
 	virtual void		OnCollisionEnter(CGameObject* pGameObject, const _uint& iColType, _float4 vColPoint) override;
+
+public:
+	void				Set_LerpLook(_float4 vLook, _float fMaxLerpTime);
 
 public:
 	// CComponent을(를) 통해 상속됨
@@ -62,5 +66,11 @@ public:
 private:
 	TRANSFORM	m_tTransform;
 	_byte		m_cParentFlag = 0;
+
+	_bool		m_bLerp = false;
+	_float		m_fTimeAcc = 0.f;
+	_float		m_fLerpTime = 0.f;
+	_float4		m_vOriginLook;
+	_float4		m_vTargetLook;
 };
 END

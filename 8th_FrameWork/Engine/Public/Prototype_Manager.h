@@ -59,6 +59,8 @@ public:
 		return S_OK;
 	}
 
+	HRESULT	Add_GameObject_Prototype(class CGameObject* pGameObject, _hashcode _hcCode);
+
 
 	template <typename T>
 	T* Clone_Component()
@@ -102,6 +104,7 @@ public:
 public:
 	void	Delete_GameObject_Prototypes();
 	void	Delete_Component_Prototypes();
+	CGameObject* Find_GameObject_Prototype(_hashcode _hcCode);
 
 private:
 	map<_hashcode, CGameObject*>	m_GameObject_Prototypes;

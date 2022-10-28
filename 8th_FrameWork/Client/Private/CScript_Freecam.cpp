@@ -43,7 +43,16 @@ HRESULT CScript_Freecam::Initialize()
 
 void CScript_Freecam::Tick()
 {
-	OnMouseMove();
+	if (!m_bUnityLevel && KEY(TAB, TAP))
+		m_bTurnOn = !m_bTurnOn;
+
+	if (!m_bTurnOn)
+		return;
+
+
+	if (KEY(RBUTTON, HOLD))
+		OnMouseMove();
+
 	Key_Input();
 }
 
@@ -62,7 +71,7 @@ void CScript_Freecam::Key_Input()
 	_float4 vPos = m_pOwner->Get_Transform()->Get_MyWorld(WORLD_POS);
 	_float4 vDir = _float4(0.f, 0.f, 0.f, 0.f);
 
-	_float fSpeed = 20.f;
+	_float fSpeed = 5.f;
 
 	if (KEY(W, HOLD))
 	{
@@ -90,7 +99,11 @@ void CScript_Freecam::Key_Input()
 	}
 	if (KEY(LSHIFT, HOLD))
 	{
-		fSpeed *= 2.f;
+		fSpeed = 40.f;
+	}
+	if (KEY(Z, HOLD))
+	{
+		fSpeed = 1.f;
 	}
 
 	vPos += vDir * fSpeed * fDT;

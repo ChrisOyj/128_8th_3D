@@ -22,9 +22,6 @@
     <Filter Include="04. Module\01. Utility">
       <UniqueIdentifier>{9f9b5dab-e6d0-40d6-ac81-1007a6b63467}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Module\01. Utility\Utility_Json">
-      <UniqueIdentifier>{7cb4f949-8cd1-461e-a24e-40a2e09bff27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances">
       <UniqueIdentifier>{f9a7ca65-19b2-4707-8baf-8704fbfefdd0}</UniqueIdentifier>
     </Filter>
@@ -81,9 +78,6 @@
     </Filter>
     <Filter Include="03. Instances\01. Level\00. Level_Loading">
       <UniqueIdentifier>{01e49f4a-6746-4eab-bb07-8420e38cdb08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Design\04. MouseChecker">
-      <UniqueIdentifier>{54e2a38a-0c99-4cae-a4de-26bf532447e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Instances\03. Component\03. Fader">
       <UniqueIdentifier>{e3a093a7-6adb-430e-8b7c-0c0af79af8b6}</UniqueIdentifier>
@@ -169,6 +163,612 @@
     <Filter Include="03. Instances\02. GameObject\06. Map\ObjectMap">
       <UniqueIdentifier>{14a273c5-5407-43f5-87e4-e38769c2db91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map">
+      <UniqueIdentifier>{80230aad-dac2-4b82-8d5a-46867b66966f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module\01. Utility\Utility_FBX">
+      <UniqueIdentifier>{5a4a31ca-7950-4919-84ae-f29078a68ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\06. Map\Ground">
+      <UniqueIdentifier>{052c34bb-7079-4431-917a-bc0049c87a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\04. Blender">
+      <UniqueIdentifier>{69c16133-e2f2-4f71-82a4-384016dd8dc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map\Map_Sample">
+      <UniqueIdentifier>{8cc614dc-dcbe-4189-935b-448369ca8b12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_MainStart">
+      <UniqueIdentifier>{3a154d80-8f48-4162-9e19-8e08dec8347c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\05. Level_Cutomizing">
+      <UniqueIdentifier>{a29322b0-15fc-4216-8f63-aa578e1df4d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow">
+      <UniqueIdentifier>{ed564246-0b71-4222-80d5-234ab55d6787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow\01. Customizing_RoleWIndow">
+      <UniqueIdentifier>{47454d68-5647-401b-85c0-47b9065ae28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\02. Unit\CustomizingPreview">
+      <UniqueIdentifier>{e24876a0-aec1-4e83-8d2f-f122ec2b7c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\02. Unit\01. Unit_Player">
+      <UniqueIdentifier>{659a517b-cef6-4e2e-b776-15f7a0f36309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\06. Level_Stage1">
+      <UniqueIdentifier>{9b911161-07c6-41c4-a6c4-5af04253b75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager">
+      <UniqueIdentifier>{38d41e3d-6060-431b-a68c-f9ef961b2c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States">
+      <UniqueIdentifier>{5abfb749-92c2-4174-8c66-26c7adeb52a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Follow">
+      <UniqueIdentifier>{59fd093f-66ff-47c2-871b-ded9a455c954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\05. Window_Test">
+      <UniqueIdentifier>{823a72e4-6037-4552-9340-07115859abea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\06. Window_Navi">
+      <UniqueIdentifier>{355a1a2b-65aa-4231-a572-d6e9a1de6367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\06. CrossHair">
+      <UniqueIdentifier>{c7a30390-c88e-4010-8d2a-615f431d53fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect">
+      <UniqueIdentifier>{394425bb-c3e9-44b4-a0b1-6780ecfb8107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\01. WireKunai">
+      <UniqueIdentifier>{5b6130c5-8298-408a-b4d8-90fdba5ab67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\01. WireKunai\Wire">
+      <UniqueIdentifier>{f22b0521-97b1-442a-b4c1-cde3e355ca0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\01. Level\07. Level_Stage2">
+      <UniqueIdentifier>{badc4802-b8d7-4376-a8cb-d3895426272b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\06. Map\InstancingMap">
+      <UniqueIdentifier>{b1be2aa8-a66b-49b4-8340-862cc3b601b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base">
+      <UniqueIdentifier>{974c3454-2fa5-4cb7-b211-724ec8776417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\07. Wire">
+      <UniqueIdentifier>{dba913f7-f40e-43bc-b656-cb3e54278bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\07. Wire\WireDash">
+      <UniqueIdentifier>{b0353aa8-9d3e-4bd4-84b3-d29b44582e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\01. Idle">
+      <UniqueIdentifier>{55da9af3-4a32-4e5f-8d7e-d33016b948e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Player">
+      <UniqueIdentifier>{ecacf648-1230-410e-b07a-102c9b08b1b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\02. Walk">
+      <UniqueIdentifier>{17531df1-0f88-45e9-bd64-7b623a29e3f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Player">
+      <UniqueIdentifier>{75d509a2-5de4-4aa6-8943-71cfffa80012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_End_Player">
+      <UniqueIdentifier>{3365e6b1-cd7f-4e50-a214-cfea8c78041d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\03. Run">
+      <UniqueIdentifier>{566e59f4-c9e8-4640-b005-342949f6afff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\03. Run\Run_Player">
+      <UniqueIdentifier>{08a9b458-5439-4cea-8c9a-832a3daa215c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\03. Run\Run_End_Player">
+      <UniqueIdentifier>{2c7b8b3c-fd4e-49c3-b3d0-9b602152f367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump">
+      <UniqueIdentifier>{6fe46d6e-28c6-4b54-8641-c1a9ac6741f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player">
+      <UniqueIdentifier>{10ed3b1d-ef29-447e-9653-cdddb8659c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player">
+      <UniqueIdentifier>{dc0d24c6-efbf-4196-84b5-51ad18bafd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player">
+      <UniqueIdentifier>{d98e0458-0ff5-42a8-ae16-f9d1c7668f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_Player">
+      <UniqueIdentifier>{a3736fd3-682d-43c3-a026-08b8af4800da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish">
+      <UniqueIdentifier>{aa6e1e87-b0f1-4b71-be04-71396ad73db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash">
+      <UniqueIdentifier>{e3dcaf13-f50b-4e21-b356-b2ea0921f967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\AirDash">
+      <UniqueIdentifier>{5dd94912-c9b2-4b1a-ba5d-7ddcaccb03ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\AIrDashEnd">
+      <UniqueIdentifier>{74dcb0d8-076a-473a-9328-e5836edc4f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\AirDashStart">
+      <UniqueIdentifier>{37619f25-1100-4037-b6df-9cfab4ee3adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\06. ChakraJump">
+      <UniqueIdentifier>{bf43914d-f785-4b09-982a-ce991c3eef5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Start">
+      <UniqueIdentifier>{f70db95d-0fee-442a-802c-a30e92326494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Loop">
+      <UniqueIdentifier>{a9a0abb8-4a14-47d6-87ea-50f719811d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_End">
+      <UniqueIdentifier>{bb3692d5-fc6b-46ac-a0ee-36b5bae2e160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack">
+      <UniqueIdentifier>{1cb838ea-86d1-40ea-988f-08713d4e68f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\07. Window_Anim">
+      <UniqueIdentifier>{f2183c11-d2fb-49a4-8fe9-512cfde9f651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand">
+      <UniqueIdentifier>{093c103b-7197-4765-9e47-30c304153333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1">
+      <UniqueIdentifier>{fdaeefaf-8936-4855-bf09-c36d407c02ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2">
+      <UniqueIdentifier>{6320a730-66f7-4a0a-bec4-58625fa9ad22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3">
+      <UniqueIdentifier>{75c60c0b-e84b-4bff-8ec7-41d29b5ee3a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4">
+      <UniqueIdentifier>{8be6322f-152b-4837-bb20-d64b1c2360ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\05. HandAttack_5">
+      <UniqueIdentifier>{6e6c8991-0321-40c3-848c-9a00796525ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\02. Unit\02. Unit_Enemy">
+      <UniqueIdentifier>{46706add-059b-4dc9-85f4-3b9dc215298a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Enemy">
+      <UniqueIdentifier>{aa77a551-c363-47ef-b195-7b7a1d9d7156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\07. TargetCursor">
+      <UniqueIdentifier>{f76dbddb-4fce-4354-9128-82b2117fd3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\04. Guard">
+      <UniqueIdentifier>{a5445eac-3515-4e6d-94bb-41f05e9caa6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten">
+      <UniqueIdentifier>{c62874b4-1e1b-47ba-ae93-77fc23355137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\01. Hit_Ground">
+      <UniqueIdentifier>{27bf594d-ab93-46bd-8757-499d06d8d2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\02. Blasted">
+      <UniqueIdentifier>{4178a541-6236-464e-9138-81bf4c40d12b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\06. HandAttack_Dash">
+      <UniqueIdentifier>{68c40804-33f5-4139-b0fa-9fba1d10c06d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\07. HandAttack_Power">
+      <UniqueIdentifier>{f656a559-5d68-4a6f-b1bc-42d3a252c8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\03. Hit_Air">
+      <UniqueIdentifier>{f4f4b66f-f20d-430b-a008-d9f98dcefc5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player\Fall_Enemy">
+      <UniqueIdentifier>{cc05024b-8864-444b-83be-55aec23e05bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player\Land_Enemy">
+      <UniqueIdentifier>{1cd48d5a-b33c-4196-b4be-eaac781bb986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\08. HandAerialAttack_1">
+      <UniqueIdentifier>{841bd85a-0fc7-4d3a-a778-00aea210f1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\09. HandAerialAttack_2">
+      <UniqueIdentifier>{7e554d4d-756c-4136-926c-9372afe2f893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\10. HandAerialAttack_3">
+      <UniqueIdentifier>{0aa56e55-65f9-4941-ac79-ded866e98894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4">
+      <UniqueIdentifier>{99893ee0-c875-45a8-a031-c60334a482e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI">
+      <UniqueIdentifier>{cbdcd9fa-7131-4c39-a73d-c59bb124bb2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Time">
+      <UniqueIdentifier>{ca41390f-3e18-4188-99cb-4aecccb37481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Combo">
+      <UniqueIdentifier>{0d5b2608-d93a-4930-9116-80398029e11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Skill">
+      <UniqueIdentifier>{fe34179c-5ebe-49d1-990e-3f538ae10fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_HUD">
+      <UniqueIdentifier>{7bc9fc39-97fd-4a69-867f-7b43d9e9b1ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\02. ChakraJump_Guide">
+      <UniqueIdentifier>{72e73160-0497-4065-b1c1-3b7fa0fea5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\04. Hit_Fall">
+      <UniqueIdentifier>{7086efd8-9fe8-4588-bc8b-aaae4c0fdc89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\08. Down">
+      <UniqueIdentifier>{ae748724-b3c2-4f5e-a0ad-ba1119620a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\08. Down\GetUp">
+      <UniqueIdentifier>{b618b215-02ae-4236-98b0-435b6f82a20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\08. Down\WallHit">
+      <UniqueIdentifier>{9653781b-edb0-45c9-8eec-c6b8872baa14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\WallHitEnd">
+      <UniqueIdentifier>{55a5126e-11cb-42bb-96f3-9688cf6f24cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\09. EnemyHPBar">
+      <UniqueIdentifier>{2744887a-6dd4-42f7-b2c8-af1672421947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\05. Death_Enemy">
+      <UniqueIdentifier>{a6d5a9cc-b33e-42ea-a102-bb1e8f84b406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1\Enemy">
+      <UniqueIdentifier>{d1da75fe-f08b-4527-8ae3-53b42fee20f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\EnemyBase">
+      <UniqueIdentifier>{9f831128-90fd-4af1-bd8b-29d964c2054f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\Player">
+      <UniqueIdentifier>{0d95e0a9-4154-4fe4-8fa6-a88491e6f848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2\Enemy">
+      <UniqueIdentifier>{16552e97-c696-4140-b19f-cb0955e0ff59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3\ENemy">
+      <UniqueIdentifier>{16664461-66f0-4c5f-8638-65a77d80010e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4\Enemy">
+      <UniqueIdentifier>{42c67e29-6628-4f97-b4f7-7ee1f81aac60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\04. Guard\GuardHit">
+      <UniqueIdentifier>{6f519bd5-c22c-457e-bbb7-eb47c25e6216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\03. Guard">
+      <UniqueIdentifier>{98756700-eed0-4736-b971-5daf15f39824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\04. Line">
+      <UniqueIdentifier>{46b2a3c7-9a95-4415-9403-a18d06310b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge">
+      <UniqueIdentifier>{a8ab76f4-68c3-4be5-8662-fc328fa037bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\02. Abstract_Factory\Effects_Factory">
+      <UniqueIdentifier>{436171af-21e9-47fa-a99b-dda41cc50f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\05. DodgeWood">
+      <UniqueIdentifier>{1442ae2a-954c-491c-8c7d-5c9698d6bf4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\03. Run\Run_Enemy">
+      <UniqueIdentifier>{d7b4c0bb-d22c-41a0-96ce-1d24f4007ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player\Jump_Enemy">
+      <UniqueIdentifier>{d910bc24-049f-4574-b5f2-f84d68068935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\Enemy">
+      <UniqueIdentifier>{3ea82bb0-4253-4695-8320-0e703eb487c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\04. Guard\Enemy">
+      <UniqueIdentifier>{e4f2d63c-4331-4e9c-a461-faba1638c651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\04. Guard\Enemy\GuardHit">
+      <UniqueIdentifier>{dafe5c2e-3be3-4473-a9ae-5e8e0e0e75c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4\Enemy">
+      <UniqueIdentifier>{48c3dc10-bf46-4445-b886-2301e813fb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge\Enemy">
+      <UniqueIdentifier>{b9eb9d02-024a-4fcb-958b-4309e214e945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\03. Camera\Camera_Cinema">
+      <UniqueIdentifier>{02c2bb0f-612a-4b0b-83f0-113f112e1002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\08. Window_Cinema">
+      <UniqueIdentifier>{efeb0cd9-02e6-483e-b559-42d10e9ade60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen\FadeDark">
+      <UniqueIdentifier>{bc358742-a1ad-4b48-9d79-68c2b6a8bc7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Intro">
+      <UniqueIdentifier>{912bd698-1aa0-4487-afc6-ed54e0d7d27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\09. Pose">
+      <UniqueIdentifier>{41c40faf-e2fd-4701-90b4-0aa4e60de9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword">
+      <UniqueIdentifier>{851e163b-e6bb-449c-8d5b-0f4ad181301e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\01. NSAttack_1">
+      <UniqueIdentifier>{d3573f93-5336-449a-830f-1a9aa2869af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\02. NSAttack_2">
+      <UniqueIdentifier>{f40f6fa7-a0f6-4673-bb11-687d6c7747cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\03. NSAttack_3">
+      <UniqueIdentifier>{4ed5b0e8-7622-4430-86b3-486b42c8db52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\04. NSAttack_4">
+      <UniqueIdentifier>{91d2c060-fbcb-4859-bbf8-8523cc4e924b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\05. NSAerialAttack_1">
+      <UniqueIdentifier>{88ebf5cc-56e4-4181-b176-b1c07923f1b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\06. NSAerialAttack_2">
+      <UniqueIdentifier>{38af183e-e3d4-4740-9b13-1ea573c78df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\NinzaSword\07. NSAerialAttack_3">
+      <UniqueIdentifier>{a93d84e2-611a-4a60-9a4e-1b773c65d1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Throw">
+      <UniqueIdentifier>{ac6e4c0c-2387-46b9-bda1-6db286fb7882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\06. Kunai">
+      <UniqueIdentifier>{2d281477-357d-4eae-88a9-7334894d3d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Throw\Enemy">
+      <UniqueIdentifier>{fa902118-612c-4d97-a5c6-9e9f673feff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\07. Windmill">
+      <UniqueIdentifier>{02bb62fd-6c0b-42c0-9599-2efa4b9d5607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Enemy">
+      <UniqueIdentifier>{a63999eb-ad0c-490e-a6e5-bad27af645ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\08. Goal">
+      <UniqueIdentifier>{44ec681b-1640-409f-a418-4da48d84cf00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\10. TargetObject">
+      <UniqueIdentifier>{c2af075c-9ce4-402c-b90b-127c43c5f639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special">
+      <UniqueIdentifier>{3a9568d2-d5a5-446e-ad21-06162df7dc6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\10. Appearance">
+      <UniqueIdentifier>{d72b37c1-7309-4a01-a9c8-d8264fba35e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish\Enemy">
+      <UniqueIdentifier>{b95ce3ff-0f6c-4ec5-8030-fd7a625856e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\01. Boss">
+      <UniqueIdentifier>{d13e1da4-2eeb-421d-8925-6bb586f29d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget">
+      <UniqueIdentifier>{3f411b6f-dabf-4dce-8d05-12dca1e7bcff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget\Fall">
+      <UniqueIdentifier>{d6968a54-135a-481c-81a0-01b19db5a9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget\GoTarget">
+      <UniqueIdentifier>{6f86d3e5-30fb-48d0-b799-1b39081ec68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget\Land">
+      <UniqueIdentifier>{82e91ebb-5064-4845-8370-9a34aeff3e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJump">
+      <UniqueIdentifier>{65c6b50e-664b-4f98-a6e5-54d9e66e8f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJumpEnd">
+      <UniqueIdentifier>{87fa7513-6383-4b0a-ba50-4ae2a9be8a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\09. Window_Boss">
+      <UniqueIdentifier>{87077f2e-ff1d-4d60-8462-3ee60ec82089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\11. CinemaDark">
+      <UniqueIdentifier>{531a12c3-0a84-4ec5-b626-04111f0c8736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\01. UI\01. Custom_UI\11. BossHpBar">
+      <UniqueIdentifier>{d2e36096-e18e-4c58-b828-5e263dc7138f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\01. Scriptable\Script_FollowCamNavi">
+      <UniqueIdentifier>{5d60d228-0793-4b02-9e0a-c69986aad02f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\00. InstancingEffects">
+      <UniqueIdentifier>{6df6a76b-ea57-487b-b0d9-00b353c6518c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\09. Text">
+      <UniqueIdentifier>{fdbf4b53-9672-4bde-9ca6-15497d70bda3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill">
+      <UniqueIdentifier>{21ddc080-d3c8-4b04-b218-cee7a237a9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane">
+      <UniqueIdentifier>{17f3fe6a-2fe8-4d97-9fb5-289b98921335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Attack">
+      <UniqueIdentifier>{e2549e2a-acd8-4ae4-821e-628a8e0a3747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\00. InstancingEffects\RectEffects">
+      <UniqueIdentifier>{38a16d3e-fe06-4041-994c-0ff9a1653155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\05. TrailBuffer">
+      <UniqueIdentifier>{6f53b573-925a-4eac-ae6c-0f9507bf0b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\05. ImGui_Manager\ImGui_Window\10. Window_Effect">
+      <UniqueIdentifier>{79159a33-0692-4b9d-8a55-adedf12596b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\10. ScreenEffect">
+      <UniqueIdentifier>{24b7d7c8-d99c-40b3-8bad-096c437267f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\11. TrailEffect">
+      <UniqueIdentifier>{ffc61bcd-a5af-46d5-a603-feae81e3e850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\12. DefaultEffect">
+      <UniqueIdentifier>{bdd237d5-2d07-41ab-a3f7-6234bcb2fb3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\13. GroundBreak">
+      <UniqueIdentifier>{b91cbee2-a831-49c8-8785-3ab9d3a46c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan">
+      <UniqueIdentifier>{aeb523f2-80b4-4141-890f-2801b969a581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Run">
+      <UniqueIdentifier>{e06883f3-1d61-4b00-a073-264c29c94bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Attack">
+      <UniqueIdentifier>{749c97e9-1293-471a-b59e-d120383fa3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori">
+      <UniqueIdentifier>{f6a3a3aa-813b-4191-b0d8-31695c32750e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Run">
+      <UniqueIdentifier>{8267e785-a173-46f6-8cc2-cc8ad079120a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Attack">
+      <UniqueIdentifier>{535902c1-df30-4e7a-883f-4cf1401727ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\04. Fireball">
+      <UniqueIdentifier>{94a1a4d3-d396-48e1-8c34-341c505b6c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\05. LaughingMonk">
+      <UniqueIdentifier>{335b784c-9cd9-4669-8063-a95a44aa7cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\14. WoodHand">
+      <UniqueIdentifier>{f8741bcd-a13d-4626-a259-11f02baced5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\15. FireBall">
+      <UniqueIdentifier>{4d3186ee-6a43-4e18-bef5-4b5eb50126ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\16. Decal">
+      <UniqueIdentifier>{9ad9cd9b-b31f-4328-a978-20e7dcaf3b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\17. LaughingMonk">
+      <UniqueIdentifier>{587ccb41-c634-40cf-8cd8-68258a77fcd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\18. WoodWall">
+      <UniqueIdentifier>{c8391ebd-eff5-4317-acae-db5e1e358a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\06. DomedWall">
+      <UniqueIdentifier>{fe44a911-7968-45d2-ace6-78e6a4847b47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Enemy">
+      <UniqueIdentifier>{7afd103c-f1d0-44e4-a230-887c0cc66642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\07. RasenSuriken">
+      <UniqueIdentifier>{76009530-b27a-47b9-b90f-8ecb5a24f3c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\19. RasenShuriken">
+      <UniqueIdentifier>{5ef4c942-0fdb-4925-85b8-676fce2b33a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\21. RasenShurikenBomb">
+      <UniqueIdentifier>{e3da6287-d759-48be-b628-4a82274058eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\08. Kamui">
+      <UniqueIdentifier>{bff1488a-be58-49da-b5e3-33bb6b571244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\22. EightGatesDragon">
+      <UniqueIdentifier>{1469320b-833a-4280-8fa7-7339b3a0c5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\20. KamuiEffect">
+      <UniqueIdentifier>{709dc369-b1aa-4a55-a610-51d79f54dd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\23. EightGatesEffects">
+      <UniqueIdentifier>{ff73fcee-9090-4c3f-9fcf-b656c1350647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_NightGuy">
+      <UniqueIdentifier>{1f9b5224-cc91-4648-a6f2-f876580e0da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\03. Run\Run_NightGuy">
+      <UniqueIdentifier>{c1b99290-b8c0-4c48-8eab-aff7b9d01f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_NightGuy">
+      <UniqueIdentifier>{cdad2531-deed-4474-839a-c5656bee7ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_NightGuy">
+      <UniqueIdentifier>{713d3c30-35bb-473b-95d3-f33b1ddb2c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_NightGuy">
+      <UniqueIdentifier>{c4e7d6e1-5ef8-4cd2-a435-31929f8a7bb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Land_NightGuy">
+      <UniqueIdentifier>{3009f761-bb41-415e-bbaf-e52811b627c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\05. Dash\Dash_NightGuy">
+      <UniqueIdentifier>{1f4e584f-b234-4e2c-99aa-acbc6b79c36b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_NightGuy">
+      <UniqueIdentifier>{26e572cb-a5e2-40ac-ab72-3df0c00be92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_NightGuy">
+      <UniqueIdentifier>{7d8dac1f-846c-40d1-8839-446d97a85d49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy">
+      <UniqueIdentifier>{6d171fef-4a3c-41ab-82fd-a7c7a9dca678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy\NightGuy">
+      <UniqueIdentifier>{cb81d488-9f1b-4420-8e97-eabffad34ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\09. EightGates">
+      <UniqueIdentifier>{d5e9b07f-98b3-49fe-94df-768a32caa2cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\10. BossFire">
+      <UniqueIdentifier>{19e78586-2a90-40a8-9a42-ecd61dd5434a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\11. BossChidori">
+      <UniqueIdentifier>{58898a33-51b7-4acb-b67c-09583a13ff97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\24. EveElephant">
+      <UniqueIdentifier>{4d551218-1c46-4bfb-a047-c3cf742141f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\06. Kunai\BossKunai">
+      <UniqueIdentifier>{2a6f16bf-20b4-4648-8b98-8016669e7914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\25. BossAura">
+      <UniqueIdentifier>{3aa44005-bef7-48c7-865a-8ff106467947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\12. BossKoto">
+      <UniqueIdentifier>{67d75a93-dbee-4f3e-a5d9-1788cfa20130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\26. BoneChakra">
+      <UniqueIdentifier>{8fd2e563-f4d2-43f8-88ab-b342e42f177d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\06. Death_Boss">
+      <UniqueIdentifier>{69d86744-fdde-430b-ad11-d4d80e376363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\27. Burger">
+      <UniqueIdentifier>{8d9550f3-90fa-4f2a-a5f8-15dd864c367d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\13. WaterPrison">
+      <UniqueIdentifier>{45078755-b987-488e-a0be-e41e5a4951a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\14. SharkBomb">
+      <UniqueIdentifier>{820d1c0f-8d11-45ea-918b-795e7834b806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\06. Map\Lantern">
+      <UniqueIdentifier>{343f3179-52f8-4b77-87c3-c442593bf1b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player">
+      <UniqueIdentifier>{a6f91682-aafa-459e-8a74-0cf6b889923b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player\Enemy">
+      <UniqueIdentifier>{358a5794-07d0-4e7e-bfbb-4615122d0c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\03. Beaten\07. Struggle">
+      <UniqueIdentifier>{eed30535-e6b6-49cd-811b-f00619f96fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\28. SharkBomb">
+      <UniqueIdentifier>{860c2722-ed12-4309-9fb9-0dd2ee2fb104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\02. GameObject\08. Effect\29. WaterUlt">
+      <UniqueIdentifier>{00d7d4bf-5c9a-49d3-a553-50dd37304d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Design\06. State_Manager\States\02. Attack\Skill\15. WaterFall">
+      <UniqueIdentifier>{4fac79a2-baeb-483e-b190-b9fd85af16fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -203,9 +803,6 @@
     </ClInclude>
     <ClInclude Include="..\public\Functor.h">
       <Filter>04. Module\00. Functor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\CUtility_Json.h">
-      <Filter>04. Module\01. Utility\Utility_Json</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Loading_Manager.h">
       <Filter>02. Design\01. Loading_Manager</Filter>
@@ -336,6 +933,624 @@
     <ClInclude Include="..\public\CObject_Map.h">
       <Filter>03. Instances\02. GameObject\06. Map\ObjectMap</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CWindow_Map.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUnit.h">
+      <Filter>03. Instances\02. GameObject\02. Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUtility_FBX.h">
+      <Filter>04. Module\01. Utility\Utility_FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGround.h">
+      <Filter>03. Instances\02. GameObject\06. Map\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBlender.h">
+      <Filter>03. Instances\03. Component\04. Blender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CMap_Sample.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map\Map_Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CScript_MainStart.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_MainStart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Customizing.h">
+      <Filter>03. Instances\01. Level\05. Level_Cutomizing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCustomizingPreview.h">
+      <Filter>03. Instances\02. GameObject\02. Unit\CustomizingPreview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRoleWindow_Customizing.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow\01. Customizing_RoleWIndow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRoleWindow.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUnit_Player.h">
+      <Filter>03. Instances\02. GameObject\02. Unit\01. Unit_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Stage1.h">
+      <Filter>03. Instances\01. Level\06. Level_Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CState.h">
+      <Filter>02. Design\06. State_Manager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CState_Manager.h">
+      <Filter>02. Design\06. State_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CIdle_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWalk_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWalk_End_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_End_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCamera_Follow.h">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Follow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRun_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRun_End_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_End_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CJump_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFall_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLand_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDoubleJump_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDash_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Test.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\05. Window_Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Navi.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\06. Window_Navi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJump_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAirDash_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AirDash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAirDashEnd.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AIrDashEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAirDashStart_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AirDashStart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCJ_Start_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Start</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCJ_Loop_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCJ_End_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_End</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWire_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\07. Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJumpEnd_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCrossHair.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\06. CrossHair</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWireDash_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\07. Wire\WireDash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWireKunai.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWire.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLevel_Stage2.h">
+      <Filter>03. Instances\01. Level\07. Level_Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CInstancingMap.h">
+      <Filter>03. Instances\02. GameObject\06. Map\InstancingMap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGuard_Player.h">
+      <Filter>02. Design\06. State_Manager\States\04. Guard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_1.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CHandAttack_2.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CHandAttack_3.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CHandAttack_4.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CHandAttack_5.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\05. HandAttack_5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUnit_Enemy.h">
+      <Filter>03. Instances\02. GameObject\02. Unit\02. Unit_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CIdle_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTargetCursor.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\07. TargetCursor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Ground.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\01. Hit_Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Ground_Player.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\01. Hit_Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBlasted_Ground.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\02. Blasted</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CState_Attack.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLockedCursor.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\07. TargetCursor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_Dash.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\06. HandAttack_Dash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_Power.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\07. HandAttack_Power</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Air.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\03. Hit_Air</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFall_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player\Fall_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLand_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player\Land_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAerialAttack_1.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\08. HandAerialAttack_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAerialAttack_2.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\09. HandAerialAttack_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAerialAttack_3.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\10. HandAerialAttack_3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAerialAttack_4.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CInGameUI.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUI_Time.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUI_Skill.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUI_HUD.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CChakraJump_Guide.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\02. ChakraJump_Guide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Fall.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\04. Hit_Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDown_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGetUp_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\GetUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallHit_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallHitEnd_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\WallHitEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUI_Combo.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Combo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEnemyHPBar.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\09. EnemyHPBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDeath_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\05. Death_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_1_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CState_Attack_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\EnemyBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBlasted_Ground_Player.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\02. Blasted</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Air_Player.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\03. Hit_Air</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHit_Fall_Player.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\04. Hit_Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallHit_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDown_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGetUp_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\GetUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_2_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_3_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3\ENemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAttack_4_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGuardHit_Player.h">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\GuardHit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGuard.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\03. Guard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CKOLine.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\04. Line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDodge_Player.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEffects_Factory.h">
+      <Filter>02. Design\02. Abstract_Factory\Effects_Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDodgeWood.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\05. DodgeWood</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRun_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CJump_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player\Jump_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDash_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGuard_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGuardHit_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\Enemy\GuardHit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CHandAerialAttack_4_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDodge_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCamera_Cinema.h">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Cinema.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\08. Window_Cinema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFadeDark.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen\FadeDark</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUI_Intro.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CPose.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\09. Pose</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNinzaSword_Attack.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNSAttack_1.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\01. NSAttack_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CNSAttack_3.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\03. NSAttack_3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CNSAttack_2.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\02. NSAttack_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CNSAttack_4.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\04. NSAttack_4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNSAerialAttack_1.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\05. NSAerialAttack_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNSAerialAttack_3.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\07. NSAerialAttack_3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNSAerialAttack_2.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\06. NSAerialAttack_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CThrow_Player.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Throw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CKunai.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\06. Kunai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CThrow_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Throw\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindmill.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\07. Windmill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWalk_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGoal.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\08. Goal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTargetObject.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\10. TargetObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGoTarget.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\GoTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJump_Go.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFall_Go.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJumpEnd_Go.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJumpEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLand_Go.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAppearance.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\10. Appearance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJump_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWallJumpEnd_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CState_Boss.h">
+      <Filter>02. Design\06. State_Manager\States\05. Special\01. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Boss.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\09. Window_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCinemaDark.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\11. CinemaDark</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossHpBar.h">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\11. BossHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CScript_CamNavi.h">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FollowCamNavi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CInstancingEffects.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\00. InstancingEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEffect_Text.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\09. Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLeafHurricane.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLeafHurricane_Attack.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRectEffects.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\00. InstancingEffects\RectEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTrailBuffer.h">
+      <Filter>03. Instances\03. Component\05. TrailBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWindow_Effect.h">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\10. Window_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CScreenEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\10. ScreenEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTrailEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\11. TrailEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDefault_Effect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\12. DefaultEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CGroundBreak.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\13. GroundBreak</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasengan.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasengan_Run.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasengan_Attack.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CChidori.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CChidori_Attack.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CChidori_Run.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFireBall.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\04. Fireball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLaughingMonk.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\05. LaughingMonk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWoodHand.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\14. WoodHand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFireBallEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\15. FireBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDecalEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\16. Decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWoodHand_R.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\14. WoodHand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLaughingMonkEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\17. LaughingMonk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWoodWall.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\18. WoodWall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDomedWall.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\06. DomedWall</Filter>
+    </ClInclude>
+    <ClInclude Include="CDomedWall_End.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\06. DomedWall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLeafHurricane_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLeafHurricane_Attack_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasenSuriken.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\07. RasenSuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasenShurikenEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\19. RasenShuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRasenShurikenBomb.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\21. RasenShurikenBomb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CKamui.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\08. Kamui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CKamuiEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\20. KamuiEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEightGates.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\09. EightGates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEightGatesDragon.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\22. EightGatesDragon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEightGatesEffects.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\23. EightGatesEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CIdle_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CDash_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dash_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CLand_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CJump_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CRun_End_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CRun_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CWallJump_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CWallJumpEnd_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CWalk_End_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CWalk_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CDoubleJump_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CFall_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAttack_1_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAttack_2_NightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CEveElephant.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\24. EveElephant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNightGuy.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy\NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNightGuy_Run.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy\NightGuy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRaijinKunai.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossFire.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\10. BossFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossChidori.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\11. BossChidori</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossKunai.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\06. Kunai\BossKunai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossAura.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\25. BossAura</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBossKoto.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\12. BossKoto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBoneChakra.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\26. BoneChakra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CDeath_Boss.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\06. Death_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CBurger.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\27. Burger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWaterPrison.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\13. WaterPrison</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CSharkBomb.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\14. SharkBomb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CStruggle_Enemy.h">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\07. Struggle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CSharkBombEffect.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\28. SharkBomb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CWaterUlt.h">
+      <Filter>03. Instances\02. GameObject\08. Effect\29. WaterUlt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\WaterFall.h">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\15. WaterFall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -354,9 +1569,6 @@
     </ClCompile>
     <ClCompile Include="..\private\Functor.cpp">
       <Filter>04. Module\00. Functor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\CUtility_Json.cpp">
-      <Filter>04. Module\01. Utility\Utility_Json</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Loading_Manager.cpp">
       <Filter>02. Design\01. Loading_Manager</Filter>
@@ -487,6 +1699,624 @@
     <ClCompile Include="..\private\CObject_Map.cpp">
       <Filter>03. Instances\02. GameObject\06. Map\ObjectMap</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\CWindow_Map.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUnit.cpp">
+      <Filter>03. Instances\02. GameObject\02. Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUtility_FBX.cpp">
+      <Filter>04. Module\01. Utility\Utility_FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGround.cpp">
+      <Filter>03. Instances\02. GameObject\06. Map\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBlender.cpp">
+      <Filter>03. Instances\03. Component\04. Blender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CMap_Sample.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\04. Window_Map\Map_Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScript_MainStart.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_MainStart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Customizing.cpp">
+      <Filter>03. Instances\01. Level\05. Level_Cutomizing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCustomizingPreview.cpp">
+      <Filter>03. Instances\02. GameObject\02. Unit\CustomizingPreview</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRoleWindow_Customizing.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow\01. Customizing_RoleWIndow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRoleWindow.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\05. RoleWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUnit_Player.cpp">
+      <Filter>03. Instances\02. GameObject\02. Unit\01. Unit_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Stage1.cpp">
+      <Filter>03. Instances\01. Level\06. Level_Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CState.cpp">
+      <Filter>02. Design\06. State_Manager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CState_Manager.cpp">
+      <Filter>02. Design\06. State_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CIdle_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWalk_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWalk_End_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_End_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCamera_Follow.cpp">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Follow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRun_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRun_End_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_End_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CJump_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFall_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLand_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDoubleJump_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDash_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Test.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\05. Window_Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Navi.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\06. Window_Navi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJump_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAirDash_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AirDash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAirDashEnd.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AIrDashEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAirDashStart_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\AirDashStart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCJ_Start_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Start</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCJ_Loop_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCJ_End_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\06. ChakraJump\CJ_End</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWire_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\07. Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJumpEnd_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCrossHair.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\06. CrossHair</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWireDash_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\07. Wire\WireDash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWireKunai.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWire.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLevel_Stage2.cpp">
+      <Filter>03. Instances\01. Level\07. Level_Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CInstancingMap.cpp">
+      <Filter>03. Instances\02. GameObject\06. Map\InstancingMap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGuard_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\04. Guard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_1.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CHandAttack_2.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CHandAttack_3.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CHandAttack_4.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CHandAttack_5.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\05. HandAttack_5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUnit_Enemy.cpp">
+      <Filter>03. Instances\02. GameObject\02. Unit\02. Unit_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CIdle_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTargetCursor.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\07. TargetCursor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Ground.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\01. Hit_Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Ground_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\01. Hit_Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBlasted_Ground.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\02. Blasted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CState_Attack.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLockedCursor.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\07. TargetCursor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_Dash.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\06. HandAttack_Dash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_Power.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\07. HandAttack_Power</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Air.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\03. Hit_Air</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFall_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_Player\Fall_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLand_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_Player\Land_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAerialAttack_1.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\08. HandAerialAttack_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAerialAttack_2.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\09. HandAerialAttack_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAerialAttack_3.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\10. HandAerialAttack_3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAerialAttack_4.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CInGameUI.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUI_Time.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUI_Skill.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUI_HUD.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CChakraJump_Guide.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\02. ChakraJump_Guide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Fall.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\04. Hit_Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDown_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGetUp_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\GetUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallHit_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallHitEnd_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\WallHitEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUI_Combo.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEnemyHPBar.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\09. EnemyHPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDeath_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\05. Death_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_1_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\01. HandAttack_1\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CState_Attack_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\EnemyBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBlasted_Ground_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\02. Blasted</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Air_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\03. Hit_Air</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHit_Fall_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\04. Hit_Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallHit_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\WallHit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDown_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGetUp_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\08. Down\GetUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_2_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\02. HandAttack_2\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_3_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\03, HandAttack_3\ENemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAttack_4_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\04. HandAttack_4\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGuardHit_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\GuardHit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGuard.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\03. Guard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CKOLine.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\04. Line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDodge_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEffects_Factory.cpp">
+      <Filter>02. Design\02. Abstract_Factory\Effects_Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDodgeWood.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\05. DodgeWood</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRun_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CJump_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_Player\Jump_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDash_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGuard_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGuardHit_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\04. Guard\Enemy\GuardHit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CHandAerialAttack_4_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Hand\11. HandAerialAttack_4\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDodge_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dodge\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCamera_Cinema.cpp">
+      <Filter>03. Instances\02. GameObject\03. Camera\Camera_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Cinema.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\08. Window_Cinema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFadeDark.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\04. DarkScreen\FadeDark</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUI_Intro.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\08. InGameUI\UI_Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CPose.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\09. Pose</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNinzaSword_Attack.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNSAttack_1.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\01. NSAttack_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CNSAttack_2.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\02. NSAttack_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CNSAttack_3.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\03. NSAttack_3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CNSAttack_4.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\04. NSAttack_4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNSAerialAttack_1.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\05. NSAerialAttack_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNSAerialAttack_3.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\07. NSAerialAttack_3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNSAerialAttack_2.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\NinzaSword\06. NSAerialAttack_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CThrow_Player.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Throw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CKunai.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\06. Kunai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CThrow_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Throw\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindmill.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\07. Windmill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWalk_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGoal.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\08. Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTargetObject.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\10. TargetObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGoTarget.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\GoTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJump_Go.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFall_Go.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJumpEnd_Go.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\WallJumpEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLand_Go.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\02. GoTarget\Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAppearance.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\10. Appearance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJump_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_Player\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWallJumpEnd_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJumpFinish\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CState_Boss.cpp">
+      <Filter>02. Design\06. State_Manager\States\05. Special\01. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Boss.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\09. Window_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCinemaDark.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\11. CinemaDark</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossHpBar.cpp">
+      <Filter>03. Instances\02. GameObject\01. UI\01. Custom_UI\11. BossHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScript_CamNavi.cpp">
+      <Filter>03. Instances\03. Component\01. Scriptable\Script_FollowCamNavi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CInstancingEffects.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\00. InstancingEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEffect_Text.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\09. Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLeafHurricane.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLeafHurricane_Attack.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRectEffects.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\00. InstancingEffects\RectEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTrailBuffer.cpp">
+      <Filter>03. Instances\03. Component\05. TrailBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWindow_Effect.cpp">
+      <Filter>02. Design\05. ImGui_Manager\ImGui_Window\10. Window_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CScreenEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\10. ScreenEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTrailEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\11. TrailEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDefault_Effect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\12. DefaultEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CGroundBreak.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\13. GroundBreak</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasengan.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasengan_Run.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasengan_Attack.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\02. Rasengan\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CChidori.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CChidori_Attack.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CChidori_Run.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\03. Chidori\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFireBall.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\04. Fireball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLaughingMonk.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\05. LaughingMonk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWoodHand.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\14. WoodHand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFireBallEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\15. FireBall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDecalEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\16. Decal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWoodHand_R.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\14. WoodHand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLaughingMonkEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\17. LaughingMonk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWoodWall.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\18. WoodWall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDomedWall.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\06. DomedWall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDomedWall_End.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\06. DomedWall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLeafHurricane_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLeafHurricane_Attack_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\01. LeafHurricane\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasenSuriken.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\07. RasenSuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasenShurikenEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\19. RasenShuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRasenShurikenBomb.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\21. RasenShurikenBomb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CKamui.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\08. Kamui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CKamuiEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\20. KamuiEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEightGates.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\09. EightGates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEightGatesDragon.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\22. EightGatesDragon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEightGatesEffects.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\23. EightGatesEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CIdle_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\01. Idle\Idle_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CRun_End_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CRun_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\03. Run\Run_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CWalk_End_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CWalk_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\02. Walk\Walk_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CWallJumpEnd_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CWallJump_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\WallJump_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CFall_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Fall_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CLand_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Land_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CDash_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\05. Dash\Dash_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CDoubleJump_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\DoubleJump_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CJump_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\01. Base\04. Jump\Jump_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAttack_1_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAttack_2_NightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CEveElephant.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\24. EveElephant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNightGuy.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy\NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNightGuy_Run.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Attack_NightGuy\NightGuy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRaijinKunai.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\01. WireKunai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossFire.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\10. BossFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossChidori.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\11. BossChidori</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossKunai.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\06. Kunai\BossKunai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossAura.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\25. BossAura</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBossKoto.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\12. BossKoto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBoneChakra.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\26. BoneChakra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CDeath_Boss.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\06. Death_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CBurger.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\27. Burger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWaterPrison.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\13. WaterPrison</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CSharkBomb.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\14. SharkBomb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CStruggle_Enemy.cpp">
+      <Filter>02. Design\06. State_Manager\States\03. Beaten\07. Struggle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CSharkBombEffect.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\28. SharkBomb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CWaterUlt.cpp">
+      <Filter>03. Instances\02. GameObject\08. Effect\29. WaterUlt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\WaterFall.cpp">
+      <Filter>02. Design\06. State_Manager\States\02. Attack\Skill\15. WaterFall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -504,6 +2334,27 @@
       <Filter>05. ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxModel.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxAnimModel.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxInstance.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxPointInstance.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxRectInstance.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxTriInstance.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxModelEffects.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxDecalCube.hlsl">
       <Filter>05. ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

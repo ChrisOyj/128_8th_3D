@@ -12,9 +12,9 @@ void CUtility_Transform::Turn_ByAngle(CTransform* pTransform, _float4 vAxis, _fl
 
 	matRot = XMMatrixRotationAxis(vAxis.XMLoad(), ToRadian(fAngle));
 
-	vLook *= matRot;
-	vRight *= matRot;
-	vUp *= matRot;
+	vLook = vLook.MultiplyNormal(matRot);
+	vRight = vRight.MultiplyNormal(matRot);
+	vUp = vUp.MultiplyNormal(matRot);
 
 	pTransform->Set_World(WORLD_LOOK, vLook.Normalize());
 	pTransform->Set_World(WORLD_RIGHT, vRight.Normalize());

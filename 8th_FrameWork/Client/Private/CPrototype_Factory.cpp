@@ -9,6 +9,7 @@
 #include "Transform.h"
 #include "Physics.h"
 #include "CFader.h"
+#include "CCollider_Sphere.h"
 
 #include "CSkyBox.h"
 
@@ -26,12 +27,15 @@ HRESULT CPrototype_Factory::SetUp_DefaultComponents()
 		return E_FAIL;
 
 	FADEDESC    tFadeDesc;
-	tFadeDesc.bFadeFlag = FADE_NONE;
-	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DELETE;
+	tFadeDesc.bFadeInFlag = FADE_NONE;
+	tFadeDesc.bFadeOutFlag = FADE_NONE;
+	tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_DEFAULT;
+	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_DISABLE;
 	tFadeDesc.fAlpha = 1.f;
 	tFadeDesc.eKeyType = KEY::ENTER;
 	tFadeDesc.fFadeOutTime = 1.f;
 	tFadeDesc.fFadeInTime = 1.f;
+	tFadeDesc.fFadeInStartTime = 1.f;
 	tFadeDesc.fFadeOutStartTime = 1.f;
 
 	CFader* pFader = CFader::Create(CP_AFTER_TRANSFORM, tFadeDesc);
@@ -66,6 +70,11 @@ HRESULT CPrototype_Factory::SetUp_DefaultComponents()
 
 	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(
 		CTexture::Create(CP_BEFORE_RENDERER, L"../bin/resources/textures/ui/Jusin_0.png", 1)))
+		)
+		return E_FAIL;
+
+	if (FAILED(CGameInstance::Get_Instance()->Add_Component_Prototype(
+		CCollider_Sphere::Create(CP_AFTER_TRANSFORM, 1.f, COL_DEFAULT, _float4(0.f, 0.f, 0.f, 1.f), DEFAULT_TRANS_MATRIX)))
 		)
 		return E_FAIL;
 

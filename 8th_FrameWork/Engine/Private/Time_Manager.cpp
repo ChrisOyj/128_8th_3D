@@ -32,7 +32,12 @@ _double CTime_Manager::Get_DT()
 	// 하지만 제한을 걸어야 하므로 1/60 을 리턴.
 	//return (m_dDT < m_dFPSLimitTime) ? m_dFPSLimitTime : m_dDT;
 
-	return m_dDT;
+	return m_dDT * m_fTimeSpeed;
+}
+
+_float CTime_Manager::Get_RealFDT()
+{
+	return _float(m_dDT);
 }
 
 

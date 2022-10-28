@@ -1,9 +1,18 @@
+#define		MAX_CASCADE_NUM		3
+
 
 sampler DefaultSampler = sampler_state
 {
 	filter = min_mag_mip_linear;
 	AddressU = wrap;
 	AddressV = wrap;
+};
+
+sampler ShadowSampler = sampler_state
+{
+	filter = MIN_MAG_LINEAR_MIP_POINT;
+	AddressU = clamp;
+	AddressV = clamp;
 };
 
 sampler PointSampler = sampler_state
@@ -80,6 +89,13 @@ RasterizerState RS_Sky
 RasterizerState RS_None
 {
 	FillMode = solid;
+	CullMode = none;
+	FrontCounterClockwise = false;
+};
+
+RasterizerState RS_WireFrame
+{
+	FillMode = wireframe;
 	CullMode = none;
 	FrontCounterClockwise = false;
 };

@@ -13,6 +13,8 @@ class CDefault_UI
 	DECLARE_PROTOTYPE(CDefault_UI);
 	DECLARE_GAMEOBJECT(CDefault_UI);
 
+	friend class CRoleWindow;
+
 protected:
 	CDefault_UI();
 	virtual ~CDefault_UI();
@@ -22,7 +24,8 @@ public:
 
 public:
 	wstring	Get_FileKey() { return m_strFileKey; }
-	void Set_FileKey(wstring strFileKey) { m_strFileKey = strFileKey; }
+	void	Set_FileKey(wstring strFileKey) { m_strFileKey = strFileKey; }
+	void	Reset_UI();
 
 public:
 	// CGameObject을(를) 통해 상속됨

@@ -21,17 +21,22 @@ public:
 private:
 	CShader(_uint iGroupIdx);
 	CShader(const CShader& _origin);
-	virtual ~CShader() = default;
+	virtual ~CShader();
+
+	friend class CRender_Manager;
 
 public:
 	static CShader* Create(_uint iGroupIdx, const _uint& iShaderFileIdx,
+		const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
+
+	static CShader* Create(const _tchar* pFilePath,
 		const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 public:
 	_uint	Get_ShaderFileIndex() { return m_iShaderFileIdx; }
 
 public:
-	virtual HRESULT SetUp_ShaderResources(const _uint& iPassIndex, CTexture* pTextureCom);
+	virtual HRESULT SetUp_ShaderResources(CTexture* pTextureCom, const char* pConstantName);
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -46,6 +51,7 @@ public:
 
 public:
 	CDelegate<CShader*, const char*>	CallBack_SetRawValues;
+	CDelegate<const char*, CTexture*>	CallBack_SetSRVs;
 
 private:
 	ComPtr<ID3DX11Effect>			m_pEffect = nullptr;
@@ -64,6 +70,7 @@ private:
 	virtual	void	Release() override;
 
 	HRESULT			SetUp_Shader(const _uint& iShaderFileIdx, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
+	HRESULT			SetUp_Shader(const _tchar* pFilePath, const D3D11_INPUT_ELEMENT_DESC* pElements, _uint iNumElement);
 
 
 

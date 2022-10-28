@@ -55,12 +55,15 @@ HRESULT CLoading_BG::SetUp_Components(const _float4& vStartPosition)
 	Add_Component(pTexture);
 
 	FADEDESC	tFadeDesc;
-	tFadeDesc.bFadeFlag = FADE_TIME;
+	tFadeDesc.bFadeInFlag = FADE_TIME;
+	tFadeDesc.bFadeOutFlag = FADE_TIME;
 	tFadeDesc.eKeyType = KEY::ENTER;
 	tFadeDesc.fAlpha = 0.f;
 	tFadeDesc.fFadeInTime = 1.5f;
 	tFadeDesc.fFadeOutTime = 1.5f;
+	tFadeDesc.fFadeInStartTime = 0.f;
 	tFadeDesc.fFadeOutStartTime = 4.f;
+	tFadeDesc.eFadeStyle = FADEDESC::FADE_STYLE_DEFAULT;
 	tFadeDesc.eFadeOutType = FADEDESC::FADEOUT_RANDOMTEXTURE;
 	pFader->Get_FadeDesc() = tFadeDesc;
 

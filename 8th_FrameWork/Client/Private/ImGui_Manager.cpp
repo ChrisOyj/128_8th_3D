@@ -10,6 +10,12 @@
 #include "CWindow_Default.h"
 #include "CWindow_UI.h"
 #include "CWindow_Select.h"
+#include "CWindow_Map.h"
+#include "CWindow_Test.h"
+#include "CWindow_Navi.h"
+#include "CWindow_Cinema.h"
+#include "CWindow_Boss.h"
+#include "CWindow_Effect.h"
 
 
 IMPLEMENT_SINGLETON(CImGui_Manager)
@@ -21,6 +27,32 @@ CImGui_Manager::CImGui_Manager()
 CImGui_Manager::~CImGui_Manager()
 {
 	Release();
+}
+
+void CImGui_Manager::SetUp_TestWindow(CUnit* pPlayer, CScript_FollowCam* pFollowCamCom)
+{
+	static_cast<CWindow_Test*>(m_arrWindows[IMGUI_TEST])->SetUp_TestWindow(pPlayer, pFollowCamCom);
+}
+
+void CImGui_Manager::SetUp_CinemaWindow(CCamera_Cinema* pCinema)
+{
+	static_cast<CWindow_Cinema*>(m_arrWindows[IMGUI_CINEMA])->SetUp_CinemaWindow(pCinema);
+
+}
+
+void CImGui_Manager::Set_SkillCam(CCamera_Cinema* pCinema)
+{
+	static_cast<CWindow_Cinema*>(m_arrWindows[IMGUI_CINEMA])->Set_SkillCam(pCinema);
+}
+
+void CImGui_Manager::SetUp_BossWindow(CState_Boss* pState)
+{
+	static_cast<CWindow_Boss*>(m_arrWindows[IMGUI_BOSS])->Set_State(pState);
+}
+
+void CImGui_Manager::SetUp_Dragon(CEffect* pDragon)
+{
+	static_cast<CWindow_Test*>(m_arrWindows[IMGUI_TEST])->Set_Dragon(pDragon);
 }
 
 void CImGui_Manager::Enable_Window(IMGUI_WINDOW_TYPE eType, _bool bEnable)
@@ -59,12 +91,25 @@ HRESULT CImGui_Manager::Initialize()
 	m_arrWindows[IMGUI_DEFAULT] = CWindow_Default::Create();
 	m_arrWindows[IMGUI_SELECT] = CWindow_Select::Create();
 	m_arrWindows[IMGUI_UI] = CWindow_UI::Create();
+	m_arrWindows[IMGUI_MAP] = CWindow_Map::Create();
+	m_arrWindows[IMGUI_TEST] = CWindow_Test::Create();
+	m_arrWindows[IMGUI_NAVI] = CWindow_Navi::Create();
+	m_arrWindows[IMGUI_CINEMA] = CWindow_Cinema::Create();
+	m_arrWindows[IMGUI_BOSS] = CWindow_Boss::Create();
+	m_arrWindows[IMGUI_EFFECT] = CWindow_Effect::Create();
 
 	return S_OK;
 }
 
 void CImGui_Manager::Tick()
 {
+	for (_uint i = 0; i < IMGUI_END; ++i)
+	{
+		if (m_arrWindows[i]->Is_Enable())
+		{
+			m_arrWindows[i]->Tick();
+		}
+	}
 }
 
 HRESULT CImGui_Manager::Render(void)

@@ -169,6 +169,7 @@ HRESULT CGraphic_Device::Ready_DepthStencilRenderTargetView(_uint iWinCX, _uint 
 	TextureDesc.CPUAccessFlags = 0;
 	TextureDesc.MiscFlags = 0;
 
+
 	if (FAILED(m_pDevice->CreateTexture2D(&TextureDesc, nullptr, pDepthStencilTexture.GetAddressOf())))
 		return E_FAIL;
 

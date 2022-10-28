@@ -17,6 +17,10 @@
 #include "CComponent_Manager.h"
 #include "CShader_Manager.h"
 #include "Font_Manager.h"
+#include "CResource_Manager.h"
+#include "CFrustum_Manager.h"
+#include "CTarget_Manager.h"
+#include "CLight_Manager.h"
 
 //매니져 매니저..
 
@@ -56,6 +60,9 @@ public: /* For. Input_Device */
 	_long	Get_DIMouseMoveState(MOUSEMOVE eMouseMove);
 
 public: /* For. Sound_Device */
+	HRESULT		Load_SoundFile(wstring wstrFolderPath);
+
+
 	void		Play_Sound(const _tchar* strSoundKey, CHANNEL_GROUP iGroupIndex, _float fVolumeRatio = 1.f);
 	void		Play_Sound_Rand(const _tchar* strSoundKey, const _uint& iRandCnt, CHANNEL_GROUP iGroupIndex, _float fVolumeRatio = 1.f);
 	void		Play_BGM(const _tchar* strSoundKey);
@@ -72,10 +79,19 @@ public: /* For. Time_Manager */
 	_double		Get_FPSLimitTime();
 	void		Set_FPSLimitTIme(_double dTime);
 	_bool		Can_Update();
+	_float	Get_RealFDT();
+	void	Set_TimeSpeed(_float fSpeed);
 
 public: /* For. Key_Manager */
 	KEY_STATE	Get_KeyState(KEY _key);
 	vector<CKey_Manager::tKeyInfo>& Get_KeyList();
+
+public: /* For. Collision_Manager */
+	HRESULT Check_Group(const _uint& _eLeft, const _uint& _eRight);
+
+
+public:	/* For. Render_Manager */
+	void	Bake_StaticShadow(vector <CGameObject*>& MapList, _float fDistance);
 
 public:	/* For. Object_Manager */
 	template <typename T>
@@ -83,19 +99,28 @@ public:	/* For. Object_Manager */
 	{
 		return m_pObjectManager->Get_StaticObj<T>();
 	}
-	list<CGameObject*>&		Get_ObjGroup(const _uint& iGroupIdx);
+	list<CGameObject*>& Get_ObjGroup(const _uint& iGroupIdx);
 	void					Delete_Objects(const _uint& iGroupIdx);
 
 public:
 	void					Clear_All_Components();
 
+public: /* For Picking_Manager */
+	void	Compute_WorldRay();
+	void	Regist_Mesh(class CMesh* pMesh, _float fDistanceToPlayer);
+	_bool	Is_Picked(CMesh* pRenderer, _float4* pOut, _float4* pOutNormal = nullptr);
+
 
 
 public: /* For. Camera_Manager */
 	void		Add_Camera(wstring strKey, CCamera* pCamera);
-	CCamera*	Change_Camera(wstring strKey);
-	CCamera*	Get_CurCam();
+	CCamera* Change_Camera(wstring strKey);
+	CCamera* Get_CurCam();
 	_float4		Get_ViewPos();
+	_float4x4	Get_CurProjMatrix();
+	_float4x4	Get_CurViewMatrix();
+	CCamera* Find_Camera(wstring strKey);
+
 
 public: /* For. Event_Manager */
 	void	Delete_GameObject(CGameObject* pGameObject);
@@ -114,11 +139,13 @@ public: /* For. Event_Manager */
 	void	Change_Level(CLevel* pLevel);
 
 	void	Clear_All_Event();
+	void	Clear_Enable_Events();
 
 
 public: /* For. Prototype_Manager */
 	CGameObject* Clone_GameObject(_hashcode	hcClassName);
 	CComponent* Clone_Component(_hashcode	hcClassName);
+	HRESULT	Add_GameObject_Prototype(CGameObject* pGameObject, _hashcode _hcCode);
 
 
 	template <typename T>
@@ -166,7 +193,28 @@ public: /* For. Font_Manager */
 
 public: /* For. Shader_Manager */
 	HRESULT		Load_EffectFile(const _tchar* pFilePath);
+	HRESULT		Set_RawValue(const _uint& iIndex, const char* pConstantName, void* pData, _uint iDataSize);
+	HRESULT		Set_RawValue_All(const char* pConstantName, void* pData, _uint iDataSize);
 
+public:/* For. Resource_Manager */
+	MODEL_DATA* Get_ModelData(wstring wstrFilePath, MODEL_TYPE eType);
+	CResource* Get_Resource(wstring wstrResourceKey);
+
+public:/* For. Frustum_Manager */
+	_bool isIn_Frustum_InWorldSpace(_vector vWorldPoint, _float fRange = 0.f);
+	_bool isIn_Frustum_InLocalSpace(_vector vLocalPoint, _float fRange = 0.f);
+	void Transform_ToLocalSpace(_matrix WorldMatrixInv);
+
+public: /*For Light_Manager */
+	HRESULT Add_Light(const LIGHTDESC& LightDesc);
+	void Pop_Light();
+	HRESULT Load_Lights(wstring wstrPath);
+	const LIGHTDESC* Get_LightDesc(_uint iIndex);
+	void	Clear_Lights();
+
+public: /* For.Target_Manager */
+	ComPtr<ID3D11ShaderResourceView> Get_RenderTarget_SRV(wstring pTargetTag);
+	class CShader* Get_DeferredShader();
 
 private:
 	CGraphic_Device* m_pGraphicDevice = nullptr;
@@ -185,8 +233,11 @@ private:
 	CPicking_Manager* m_pPickingManager = nullptr;
 	CPrototype_Manager* m_pPrototypeManager = nullptr;
 	CShader_Manager* m_pShaderManager = nullptr;
-	
+	CResource_Manager* m_pResourceManager = nullptr;
 	CFont_Manager* m_pFontManager = nullptr;
+	CFrustum_Manager* m_pFrustumManager = nullptr;
+	CTarget_Manager* m_pTargetManager = nullptr;
+	CLight_Manager* m_pLightManager = nullptr;
 
 private:
 	HRESULT	Initialize();

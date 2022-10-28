@@ -142,20 +142,83 @@
     <Filter Include="03. Instances\03. Component\12. Model">
       <UniqueIdentifier>{a54ca1e4-80a4-4c01-80e3-41d7223e5b3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\03. Component\12. Model\Animation">
-      <UniqueIdentifier>{ad2ab720-5658-4cfc-a226-0696c6191b76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Instances\03. Component\12. Model\HierarchyNode">
-      <UniqueIdentifier>{78e788fa-f309-4269-a3a5-0ce0d951cc1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\03. Component\12. Model\MeshContainer">
       <UniqueIdentifier>{099a2702-7ce0-4df7-9c22-116ca2ae1476}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Instances\03. Component\12. Model\Animation\Channel">
-      <UniqueIdentifier>{bb0eabb5-2363-4908-859d-f71919ffbff7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Instances\03. Component\03. Renderer\ModelRenderer">
       <UniqueIdentifier>{fed8ab0e-4765-4b10-abd9-ef6ef36be140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\13. Animator">
+      <UniqueIdentifier>{4fbf980e-2481-41fe-ab9d-6ff5f1399b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\13. Animator\Channel">
+      <UniqueIdentifier>{bb0eabb5-2363-4908-859d-f71919ffbff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\13. Animator\Animation">
+      <UniqueIdentifier>{5e14632f-015e-4505-a6ad-49ade90337ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\13. Animator\HierarchyNode">
+      <UniqueIdentifier>{78e788fa-f309-4269-a3a5-0ce0d951cc1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager\Resource">
+      <UniqueIdentifier>{9664e320-8fb7-49b5-9920-f7f18d3e8d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager\Resource\Material">
+      <UniqueIdentifier>{67def036-40e1-471b-b274-72d87d001865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module">
+      <UniqueIdentifier>{232f7c63-7508-44d2-a243-f283d2d00d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module\Utility_Json">
+      <UniqueIdentifier>{994fa894-c048-49fe-81f4-41f18838088a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager\Resource\Bone">
+      <UniqueIdentifier>{58eebaf9-b284-421d-9d6b-b978dfb58f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager\Resource\Animaiton">
+      <UniqueIdentifier>{f95e393f-d2ee-4f33-9dd4-da8c08d313b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Module\Utility_FIle">
+      <UniqueIdentifier>{168a635d-71a3-42e7-88cb-c9ef7a5f5959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\14. Navigation">
+      <UniqueIdentifier>{9456356e-c69a-4532-9c7a-2ab630b23879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\14. Navigation\Cell">
+      <UniqueIdentifier>{6463e0de-ec3d-44fc-b805-3dd467385986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\16. Frustum_Manager">
+      <UniqueIdentifier>{dab84daf-9ed6-4494-a148-4db6288340a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\12. Model\InstanceMesh">
+      <UniqueIdentifier>{c0fe3166-fa84-403b-b97f-9e57bf092ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\02. Collider\DebugDraw">
+      <UniqueIdentifier>{7d7f1397-7680-4540-8e5e-223fa2a0ddb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\17. Target_Manager">
+      <UniqueIdentifier>{5461e2e0-d126-489a-9e34-8d935ed1fe57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\17. Target_Manager\Target">
+      <UniqueIdentifier>{e0f0c301-539b-4971-b804-69d5c2251057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\18. Light_Manager">
+      <UniqueIdentifier>{166b324b-c8e6-47e2-89e5-1cee349c884f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\18. Light_Manager\Light">
+      <UniqueIdentifier>{a0bbf830-f3d8-4c8d-b4fe-f050434cb489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. ShaderFiles">
+      <UniqueIdentifier>{98610f33-de31-49c9-b823-8d518729a585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Singleton\02. Design\09. Resource_Manager\Resource\Mesh">
+      <UniqueIdentifier>{3c5b9688-adce-4002-94de-6add929e8dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\10. Mesh\11. RectInstance">
+      <UniqueIdentifier>{4551933f-af5f-4bd9-8ec0-15f9110cb2c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Instances\03. Component\10. Mesh\Mesh_TriInstance">
+      <UniqueIdentifier>{27ab2f4e-de1d-4ac6-b701-c07de5f305b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -283,19 +346,79 @@
       <Filter>03. Instances\03. Component\12. Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Channel.cpp">
-      <Filter>03. Instances\03. Component\12. Model\Animation\Channel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Animation.cpp">
-      <Filter>03. Instances\03. Component\12. Model\Animation</Filter>
+      <Filter>03. Instances\03. Component\13. Animator\Channel</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\HIerarchyNode.cpp">
-      <Filter>03. Instances\03. Component\12. Model\HierarchyNode</Filter>
+      <Filter>03. Instances\03. Component\13. Animator\HierarchyNode</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\MeshContainer.cpp">
       <Filter>03. Instances\03. Component\12. Model\MeshContainer</Filter>
     </ClCompile>
     <ClCompile Include="..\private\CModel_Renderer.cpp">
       <Filter>03. Instances\03. Component\03. Renderer\ModelRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource_Manager.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Animation.cpp">
+      <Filter>03. Instances\03. Component\13. Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CAnimator.cpp">
+      <Filter>03. Instances\03. Component\13. Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource_Material.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CUtility_Json.cpp">
+      <Filter>04. Module\Utility_Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource_Bone.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource_Mesh.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CResource_Animation.cpp">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Animaiton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CUtility_File.cpp">
+      <Filter>04. Module\Utility_FIle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CNavigation.cpp">
+      <Filter>03. Instances\03. Component\14. Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CCell.cpp">
+      <Filter>03. Instances\03. Component\14. Navigation\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CFrustum_Manager.cpp">
+      <Filter>02. Singleton\02. Design\16. Frustum_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CInstanceMesh.cpp">
+      <Filter>03. Instances\03. Component\12. Model\InstanceMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\DebugDraw.cpp">
+      <Filter>03. Instances\03. Component\02. Collider\DebugDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRenderTarget.cpp">
+      <Filter>02. Singleton\02. Design\17. Target_Manager\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLight_Manager.cpp">
+      <Filter>02. Singleton\02. Design\18. Light_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTarget_Manager.cpp">
+      <Filter>02. Singleton\02. Design\17. Target_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CLight.cpp">
+      <Filter>02. Singleton\02. Design\18. Light_Manager\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CRect_Instance.cpp">
+      <Filter>03. Instances\03. Component\10. Mesh\11. RectInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CTri_Instance.cpp">
+      <Filter>03. Instances\03. Component\10. Mesh\Mesh_TriInstance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -444,13 +567,10 @@
       <Filter>03. Instances\03. Component\12. Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Channel.h">
-      <Filter>03. Instances\03. Component\12. Model\Animation\Channel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Animation.h">
-      <Filter>03. Instances\03. Component\12. Model\Animation</Filter>
+      <Filter>03. Instances\03. Component\13. Animator\Channel</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\HIerarchyNode.h">
-      <Filter>03. Instances\03. Component\12. Model\HierarchyNode</Filter>
+      <Filter>03. Instances\03. Component\13. Animator\HierarchyNode</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\MeshContainer.h">
       <Filter>03. Instances\03. Component\12. Model\MeshContainer</Filter>
@@ -458,5 +578,82 @@
     <ClInclude Include="..\public\CModel_Renderer.h">
       <Filter>03. Instances\03. Component\03. Renderer\ModelRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\CResource_Manager.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Animation.h">
+      <Filter>03. Instances\03. Component\13. Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CAnimator.h">
+      <Filter>03. Instances\03. Component\13. Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CResource.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CResource_Material.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CUtility_Json.h">
+      <Filter>04. Module\Utility_Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CResource_Bone.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Bone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CResource_Mesh.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CResource_Animation.h">
+      <Filter>02. Singleton\02. Design\09. Resource_Manager\Resource\Animaiton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CUtility_File.h">
+      <Filter>04. Module\Utility_FIle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CNavigation.h">
+      <Filter>03. Instances\03. Component\14. Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CCell.h">
+      <Filter>03. Instances\03. Component\14. Navigation\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CFrustum_Manager.h">
+      <Filter>02. Singleton\02. Design\16. Frustum_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CInstanceMesh.h">
+      <Filter>03. Instances\03. Component\12. Model\InstanceMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\DebugDraw.h">
+      <Filter>03. Instances\03. Component\02. Collider\DebugDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRenderTarget.h">
+      <Filter>02. Singleton\02. Design\17. Target_Manager\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLight_Manager.h">
+      <Filter>02. Singleton\02. Design\18. Light_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTarget_Manager.h">
+      <Filter>02. Singleton\02. Design\17. Target_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CLight.h">
+      <Filter>02. Singleton\02. Design\18. Light_Manager\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CRect_Instance.h">
+      <Filter>03. Instances\03. Component\10. Mesh\11. RectInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CTri_Instance.h">
+      <Filter>03. Instances\03. Component\10. Mesh\Mesh_TriInstance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Deferred.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Blur.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Glow.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Shadow.hlsl">
+      <Filter>05. ShaderFiles</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

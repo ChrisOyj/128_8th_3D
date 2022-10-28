@@ -19,8 +19,9 @@ class CFader
 public:
 	enum FADE_STATE
 	{
+		FADEINREADY,
 		FADEIN,
-		FADEDELAY,
+		FADEOUTREADY,
 		FADEOUT,
 	};
 
@@ -36,14 +37,24 @@ public:
 
 public:
 	FADEDESC& Get_FadeDesc() { return m_tFadeDesc; }
+	FADE_STATE&	Get_FadeState() { return m_eState; }
+	_float& Get_FastTime() { return m_fFastTime; }
+	void	Set_FadeMessage() { m_bFadeMessage = true; }
+	void	No_FadeMessage() { m_bFadeMessage = false; }
 
 public:
 	virtual void	Set_ShaderResource(CShader* pShader, const char* pConstantName) override;
 
 public:
+	void			Force_KeyInput() { m_bKeyInput = true; }
+	void			Re_FadeIn();
+	void			Re_FadeOut();
+
+public:
 	// CComponent을(를) 통해 상속
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize() override;
+	virtual void Start() override;
 	virtual void Tick() override;
 	virtual void Late_Tick() override;
 	virtual void Release() override;
@@ -53,13 +64,25 @@ public:
 
 private:
 	FADEDESC	m_tFadeDesc;
-	FADE_STATE	m_eState = FADEIN;
+	FADE_STATE	m_eState = FADEINREADY;
 	_float		m_fTimeAcc = 0.f;
+	_float		m_fFastTime = 1.f;
+
+	_float4		m_vTargetPos;
+	_float		m_fOffsetX = 0.f;
+	_float4		m_vOriginScale;
+	_float		m_fOffsetScale = 1.f;
+
+	_bool		m_bKeyInput = false;
+	_bool		m_bFadeMessage = false;
 
 private:
+	void	FadeReady();
 	void	FadeIn();
 	void	FadeDelay();
 	void	FadeOut();
+
+	void	OnFadeStyle(_bool bFadeOut);
 
 private:
 	void	Change_State(FADE_STATE eState);

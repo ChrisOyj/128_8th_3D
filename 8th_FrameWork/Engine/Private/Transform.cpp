@@ -49,6 +49,11 @@ _float4x4	CTransform::Get_WorldMatrix(const _byte& matrixFlag)
 		(*((_float4*)&WorldMat.m[WORLD_LOOK])) = _float4(0.f, 0.f, 1.f);
 	}
 
+	if (matrixFlag & MARTIX_NOTRANS)
+	{
+		(*((_float4*)&WorldMat.m[WORLD_POS])) = _float4(0.f, 0.f, 0.f);
+	}
+
 	if (matrixFlag & MATRIX_IDENTITY)
 	{
 		WorldMat.Identity();
@@ -127,6 +132,26 @@ void CTransform::Set_Right(const _float4& vRight)
 	Set_World(WORLD_UP, vUp.Normalize());
 }
 
+void CTransform::Set_Up(const _float4& vUp)
+{
+	_float4 _vUp = vUp;
+	Set_World(WORLD_UP, _vUp.Normalize());
+
+	_float4 vLook = { 0.f, 0.f, 1.f, 0.f };
+
+	if (vUp.z < 1.1f && vUp.z > 0.9f)
+		vLook = _float4(0.f, 1.f, 1.f, 0.f);
+	else if (vUp.z > -1.1f && vUp.z < -0.9f)
+		vLook = _float4(0.f, 1.f, 1.f, 0.f);
+
+	vLook.Normalize();
+	_float4 vRight = _vUp.Cross(vLook);
+	Set_World(WORLD_RIGHT, vRight.Normalize());
+
+	vLook = vRight.Cross(_vUp);
+	Set_World(WORLD_LOOK, vLook.Normalize());
+}
+
 void CTransform::Set_Rect()
 {
 	_float4	vRight;
@@ -154,7 +179,7 @@ void	CTransform::Set_Scale(const _float4& vScale)
 
 void CTransform::Set_Y(const _float& fY)
 {
-	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_POS])).y *= m_tTransform.vScale.z;
+	(*((_float4*)&m_tTransform.matMyWorld.m[WORLD_POS])).y = fY;
 }
 
 void CTransform::Set_ShaderResource(CShader* pShader, const char* pConstantName)
@@ -168,12 +193,38 @@ void CTransform::OnCollisionEnter(CGameObject* pGameObject, const _uint& iColTyp
 {
 }
 
+void CTransform::Set_LerpLook(_float4 vLook, _float fMaxLerpTime)
+{
+	m_bLerp = true;
+	m_vOriginLook = Get_World(WORLD_LOOK);
+	m_vTargetLook = vLook.Normalize();
+
+	m_fTimeAcc = 0.f;
+
+	m_fLerpTime = fMaxLerpTime;
+
+	_float fRatio;
+	fRatio = m_vOriginLook.Dot(m_vTargetLook);
+	fRatio *= -1.f;
+	fRatio += 1.f;
+	fRatio *= 0.5f;
+
+	m_fLerpTime *= fRatio;
+
+	//-1에서 1사이로 값이 나옴
+	//-1일 때 1이 되어야함
+	//1일 때 0이 되어야함
+
+
+}
+
 
 HRESULT CTransform::Initialize_Prototype()
 {
 	m_tTransform.vScale = _float4(1.f, 1.f, 1.f, 1.f);
 	m_tTransform.matMyWorld.Identity();
 	m_tTransform.matWorld.Identity();
+	m_tTransform.matBonus.Identity();
 
 	return S_OK;
 }
@@ -187,7 +238,11 @@ void CTransform::Start()
 {
 	__super::Start();
 
-	
+	list<CComponent*>	pShdaerlist = m_pOwner->Get_Component<CShader>();
+	if (pShdaerlist.empty())
+		return;
+	static_cast<CShader*>(pShdaerlist.front())->CallBack_SetRawValues +=
+		bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
 
 }
 
@@ -199,6 +254,25 @@ void CTransform::Tick()
 
 void CTransform::Late_Tick()
 {
+	if (m_bLerp)
+	{
+		m_fTimeAcc += fDT;
+
+		if (m_fTimeAcc > m_fLerpTime)
+		{
+			m_bLerp = false;
+			Set_Look(m_vTargetLook);
+		}
+		else
+		{
+			_float fRatio = m_fTimeAcc / m_fLerpTime;
+			_float4 vLook = XMVectorLerp(m_vOriginLook.XMLoad(), m_vTargetLook.XMLoad(), fRatio);
+			Set_Look(vLook);
+		}
+	}
+	
+
+
 	Make_WorldMatrix();
 }
 
@@ -209,27 +283,10 @@ void CTransform::Release()
 void CTransform::OnEnable()
 {
 	__super::OnEnable();
-
-	m_pOwner->CallBack_CollisionEnter +=
-		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
-
-	list<CComponent*>	pShdaerlist = m_pOwner->Get_Component<CShader>();
-		if (pShdaerlist.empty())
-			return;
-			static_cast<CShader*>(pShdaerlist.front())->CallBack_SetRawValues +=
-			bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "g_WorldMatrix");
-
-	//BIND_SHADERRESOURCES(CTransform, "g_WorldMatrix");
 }
 
 void CTransform::OnDisable()
 {
-	//pShader->CallBack_SetRawValues -= bind(&CTransform::Set_ShaderResource, this, placeholders::_1, "matWorld");
-
-	m_pOwner->CallBack_CollisionEnter -=
-		bind(&CTransform::OnCollisionEnter, this, placeholders::_1, placeholders::_2, placeholders::_3);
-
-	REMOVE_SHADERRESOURCES(CTransform, "g_WorldMatrix");
 }
 
 void CTransform::Make_WorldMatrix()
@@ -243,7 +300,7 @@ void CTransform::Make_WorldMatrix()
 	if (pParent)
 		parentMat = pParent->Get_Transform()->Get_WorldMatrix(m_cParentFlag);
 
-	m_tTransform.matWorld = m_tTransform.matMyWorld * parentMat;
+	m_tTransform.matWorld = m_tTransform.matMyWorld * parentMat * m_tTransform.matBonus;
 
 }
 

@@ -7,11 +7,18 @@ class ENGINE_DLL CMesh abstract
 {
 protected:
 	CMesh(_uint iGroupIdx);
+	//CMesh(const CMesh& origin);
 	virtual ~CMesh();
 
 public:
 	_uint		Get_MeshType() { return m_iMeshType; }
 	void		Set_MeshType(_uint iMeshType) { m_iMeshType = iMeshType; }
+
+	_uint		Get_NumPrimitive() { return m_iNumPrimitive; }
+	_uint		Get_NumVertices() { return m_iNumVertices; }
+	_float3*	Get_VerticesPos() { return m_pVerticesPos; }
+	_uint		Get_IndexSize() { return m_eIndexFormat == DXGI_FORMAT_R16_UINT ? 2 : 4; }
+	virtual _uint3 Get_Indices(_uint iIndex) const PURE;
 
 public:
 	// CComponent을(를) 통해 상속됨
@@ -42,6 +49,9 @@ protected:
 	DXGI_FORMAT						m_eIndexFormat;
 	D3D11_PRIMITIVE_TOPOLOGY		m_eToplogy;
 	_uint							m_iMeshType = 0;
+
+	_float3*						m_pVerticesPos = nullptr;
+	void*							m_pIndices = nullptr;
 
 protected:
 	HRESULT Create_VertexBuffer();

@@ -22,6 +22,8 @@ public:
 	const CRITICAL_SECTION&	Get_CS() { return m_CriticalSection; }
 	bool					IsFinished() { return m_bFinish; }
 	CLevel* Get_Level(LEVEL_TYPE_CLIENT eType) { return m_arrLevels[eType]; }
+	void	Set_Level(CLevel* pLevel, LEVEL_TYPE_CLIENT eType) { m_arrLevels[eType] = pLevel; }
+	LEVEL_TYPE_CLIENT	Get_LoadLevel() { return m_eLoadID; }
 
 public:
 	HRESULT					Initialize();
