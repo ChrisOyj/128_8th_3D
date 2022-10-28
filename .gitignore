@@ -94,8 +94,7 @@ StyleCopReport.xml
 *.scc
 *.fbx
 *.FBX
-*.dat
-*.bin
+
 
 # Chutzpah Test files
 _Chutzpah*
