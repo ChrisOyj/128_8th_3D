@@ -52,10 +52,7 @@ HRESULT CDeath_Enemy::Initialize()
 
 void CDeath_Enemy::Enter(CUnit* pOwner, CAnimator* pAnimator)
 {
-    if (PLAYER->Is_NinzaSword())
-        CFunctor::Play_Sound(L"Eff_KO_Sword", CHANNEL_EFFECTS, pOwner->Get_Transform()->Get_World(WORLD_POS));
-    else
-        CFunctor::Play_Sound(L"Eff_KO_Hand", CHANNEL_EFFECTS, pOwner->Get_Transform()->Get_World(WORLD_POS));
+    
 
     CEffects_Factory::Get_Instance()->Create_ScreenEffects(pOwner);
 

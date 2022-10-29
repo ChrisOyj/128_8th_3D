@@ -46,7 +46,11 @@ void CNSAttack_4::OnCollisionEnter(CGameObject* pOtherObj, const _uint& eColType
     if (eColType == COL_ENEMYHITBOX)
     {
         if (m_bSecondExcuted)
+        {
+            CFunctor::Play_Sound(L"Eff_KO_Sword", CHANNEL_EFFECTS, pOtherObj->Get_Transform()->Get_World(WORLD_POS));
             CUser::Get_Instance()->Get_FollowCam()->Start_LerpType(CScript_FollowCam::CAMERA_LERP_FINISHATTACK);
+
+        }
     }
     __super::OnCollisionEnter(pOtherObj, eColType, vColPos);
 

@@ -17,6 +17,9 @@ public:
 	static CHit_Ground* Create();
 
 public:
+	HIT_TYPE	Get_Type() { return m_eHitType; }
+
+public:
 	void	On_HitGround(HIT_TYPE eType, _float4 vLook, _float4 vDir, _float fSpeed, _float fJumpPower, _float fDamage);
 	void	On_HitGround(HIT_TYPE eType, _float fSpeed, _float fJumpPower, _float fDamage);
 	void	On_HitGround(_float4 vLook, _float4 vDir);

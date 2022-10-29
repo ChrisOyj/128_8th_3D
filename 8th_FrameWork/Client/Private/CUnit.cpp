@@ -37,8 +37,10 @@
 #include "CTrailBuffer.h"
 #include "CTrailEffect.h"
 
-#include "CBoneChakra.h"
+#include "CHit_Ground.h"
 
+#include "CBoneChakra.h"
+#include "CUnit_Player.h"
 CUnit::CUnit()
 {
 }
@@ -104,6 +106,17 @@ void CUnit::On_PlusHp(_float fHp)
 
 void CUnit::On_Die()
 {
+	if (m_eCurState == STATE_HIT_GROUND_ENEMY && static_cast<CHit_Ground*>(m_pCurState)->Get_Type() < CHit_Ground::SPINBLOW)
+	{
+		if (PLAYER->Is_NinzaSword())
+			CFunctor::Play_Sound(L"Eff_KO_Sword", CHANNEL_EFFECTS, m_pTransform->Get_World(WORLD_POS));
+		else
+			CFunctor::Play_Sound(L"Eff_KO_Hand", CHANNEL_EFFECTS, m_pTransform->Get_World(WORLD_POS));
+	}
+	
+
+
+
 	Enter_State(STATE_DEATH_ENEMY);
 
 	for (_uint i = 0; i < PARTS_END; ++i)

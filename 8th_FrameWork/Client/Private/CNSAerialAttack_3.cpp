@@ -50,7 +50,7 @@ void CNSAerialAttack_3::OnCollisionEnter(CGameObject* pOtherObj, const _uint& eC
     {
         CUser::Get_Instance()->Get_FollowCam()->Start_LerpType(CScript_FollowCam::CAMERA_LERP_FINISHATTACKDOWN);
         CEffects_Factory::Get_Instance()->Create_ScreenEffects(pOtherObj);
-        CFunctor::Play_Sound(L"Eff_Hit_Kunai", CHANNEL_EFFECTS, PLAYER->Get_Transform()->Get_World(WORLD_POS));
+        CFunctor::Play_Sound(L"Eff_KO_Sword", CHANNEL_EFFECTS, pOtherObj->Get_Transform()->Get_World(WORLD_POS));
 
     }
 }

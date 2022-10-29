@@ -49,7 +49,7 @@ void CHandAerialAttack_4::OnCollisionEnter(CGameObject* pOtherObj, const _uint& 
     {
         CUser::Get_Instance()->Get_FollowCam()->Start_LerpType(CScript_FollowCam::CAMERA_LERP_FINISHATTACKDOWN);
         CEffects_Factory::Get_Instance()->Create_ScreenEffects(pOtherObj);
-        CFunctor::Play_Sound(L"Eff_Hit_Hand", CHANNEL_EFFECTS, PLAYER->Get_Transform()->Get_World(WORLD_POS));
+        CFunctor::Play_Sound(L"Eff_KO_Hand", CHANNEL_EFFECTS, pOtherObj->Get_Transform()->Get_World(WORLD_POS));
 
     }
 
