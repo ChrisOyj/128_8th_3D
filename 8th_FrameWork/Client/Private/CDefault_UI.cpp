@@ -69,6 +69,7 @@ HRESULT CDefault_UI::Initialize()
 
 	json	UIJson;
 
+
 	if (FAILED(CUtility_Json::Load_Json(CUtility_Json::Complete_Path(m_strFileKey).c_str(), &UIJson)))
 		return S_OK;
 

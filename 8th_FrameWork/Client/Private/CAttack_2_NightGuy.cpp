@@ -25,6 +25,9 @@
 #include "CEveElephant.h"
 
 #include "CCollider_Sphere.h"
+
+#include "Functor.h"
+
 CAttack_2_NightGuy::CAttack_2_NightGuy()
 {
 }
@@ -143,6 +146,10 @@ STATE_TYPE CAttack_2_NightGuy::Check_Condition(CUnit* pOwner, CAnimator* pAnimat
 
 void CAttack_2_NightGuy::OnExecute(CUnit* pOwner, CAnimator* pAnimator)
 {
+	CFunctor::Play_Sound(L"Eff_EveElephant", CHANNEL_EFFECTS, pOwner->Get_Transform()->Get_World(WORLD_POS));
+	CFunctor::Play_Sound(L"Voice_Man_StrongAttack", CHANNEL_VOICE, pOwner->Get_Transform()->Get_World(WORLD_POS));
+
+
 	CUser::Get_Instance()->Get_FollowCam()->Start_ShakingCamera(0.1f, 0.3f);
 	static_cast<CHit_Ground*>(CState_Manager::Get_Instance()->Get_State(STATE_HIT_GROUND_ENEMY))->On_HitGround(
 		CHit_Ground::SPINBLOW, 13.f, 10.f, 10.f);
